@@ -3,18 +3,18 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-    URL_HOME
-} from './../../shared/constants/urls/urlConstants';
+import { URL_HOME } from './../../shared/constants/urls/urlConstants';
+import { URL_LOGIN } from './../../shared/constants/urls/urlConstants';
+import { URL_REGISTER } from './../../shared/constants/urls/urlConstants';
 
 const Navbar = () => {
     return (
         <Disclosure as="nav" className="top-0 fixed z-50 w-full bg-white shadow-md">
             {({ open }) => (
                 <>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                        <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-                            <div>
+                    <div>
+                        <div className="flex justify-between row items-center py-6 md:justify-start md:space-x-10">
+                            <div className="NavBar">
                                 <Link to={URL_HOME}>
                                     <img
                                         className="h-8 w-auto sm:h-10 cursor-pointer"
@@ -24,6 +24,10 @@ const Navbar = () => {
                                         height={60}
                                     />
                                 </Link>
+                            </div>
+                            <div className="direction">
+                                <Link to={URL_REGISTER}>S'enregistrer</Link>
+                                <Link to={URL_LOGIN}>Se connecter</Link>
                             </div>
 
                             <div className="-mr-2 flex md:hidden">
@@ -47,7 +51,6 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
-
                 </>
             )}
         </Disclosure>
@@ -55,4 +58,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

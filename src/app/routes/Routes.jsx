@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import * as URL from '../shared/constants/urls/urlConstants';
 import { customHistory } from '../shared/services/historyServices';
 import HomeView from '../views/HomeView';
+import LoginView from '../views/LoginView';
+import RegisterView from '../views/RegisterView';
 
 /**
  * Routes of the application
@@ -15,6 +17,8 @@ const Routes = () => {
     return (
         <Switch history={customHistory}>
             <Route exact path={URL.URL_HOME} component={HomeView} />
+            <Route exact path={URL.URL_LOGIN} component={LoginView} />
+            <Route exact path={URL.URL_REGISTER} component={RegisterView} />
         </Switch>
     );
 };
