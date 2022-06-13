@@ -14,20 +14,24 @@ const Navbar = () => {
                 <>
                     <div>
                         <div className="flex justify-between row items-center py-6 md:justify-start md:space-x-10">
-                            <div className="NavBar">
-                                <Link to={URL_HOME}>
-                                    <img
-                                        className="h-8 w-auto sm:h-10 cursor-pointer"
-                                        src="https://insy2s.com/insy2s/images/Logo-insy2s-INLINE-2021.svg"
-                                        alt=""
-                                        width={200}
-                                        height={60}
-                                    />
-                                </Link>
-                            </div>
-                            <div className="direction">
-                                <Link to={URL_REGISTER}>S'enregistrer</Link>
-                                <Link to={URL_LOGIN}>Se connecter</Link>
+                            <div className="Nav">
+                                <div className="NavBar">
+                                    <Link to={URL_HOME}>
+                                        <img
+                                            className="h-8 w-auto sm:h-10 cursor-pointer"
+                                            src="https://insy2s.com/insy2s/images/Logo-insy2s-INLINE-2021.svg"
+                                            alt=""
+                                            width={200}
+                                            height={60}
+                                        />
+                                    </Link>
+                                </div>
+                                <div className="direction">
+                                    <Link to={URL_REGISTER}>S'enregistrer</Link>
+                                </div>
+                                <div className="direction">
+                                    <Link to={URL_LOGIN}>Se connecter</Link>
+                                </div>
                             </div>
 
                             <div className="-mr-2 flex md:hidden">
