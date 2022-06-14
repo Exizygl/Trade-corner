@@ -1,9 +1,10 @@
 import React from 'react';
+import RegisterComponents from '../components/layouts/RegisterComponents';
 
 const RegisterView = () => {
     return (
         <div>
-            <h2>Test</h2>
+            <RegisterComponents />
         </div>
     );
 };
