@@ -23,7 +23,7 @@ const RegisterComponents = () => {
     return (
         <div>
             <h1>Inscription</h1>
-            <form>
+            <form className="Register">
                 <div>
                     <label htmlFor="pseudo">Nom d'utilisateur : </label>
                     <input type="text" name="pseudo" id="pseudo" value={pseudo} />
