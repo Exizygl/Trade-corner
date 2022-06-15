@@ -53,35 +53,75 @@ const RegisterComponents = () => {
                 </div>
 
                 <div className="register2">
-                    <input type="text" name="pseudo" id="pseudo" value={pseudo} />
-                    <input type="text" name="surName" id="surName" value={surName} />
+                    <input
+                        type="text"
+                        name="pseudo"
+                        id="pseudo"
+                        value={pseudo}
+                        onChange={formik.handleChange}
+                    />
+                    <input
+                        type="text"
+                        name="surName"
+                        id="surName"
+                        value={surName}
+                        onChange={formik.handleChange}
+                    />
                     <input
                         type="text"
                         name="firstName"
                         id="firstName"
                         value={firstName}
+                        onChange={formik.handleChange}
                     />
-                    <input type="email" name="email" id="email" value={email} />
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={email}
+                        onChange={formik.handleChange}
+                    />
                     <input
                         type="tel"
                         name="phoneNumber"
                         id="phoneNumber"
                         value={phoneNumber}
+                        onChange={formik.handleChange}
                     />
-                    <input type="text" name="adress" id="adress" value={adress} />
-                    <input type="number" name="number" id="number" value={zipcode} />
-                    <input type="text" name="ville" id="ville" value={ville} />
+                    <input
+                        type="text"
+                        name="adress"
+                        id="adress"
+                        value={adress}
+                        onChange={formik.handleChange}
+                    />
+                    <input
+                        type="number"
+                        name="number"
+                        id="number"
+                        value={zipcode}
+                        onChange={formik.handleChange}
+                    />
+                    <input
+                        type="text"
+                        name="ville"
+                        id="ville"
+                        value={ville}
+                        onChange={formik.handleChange}
+                    />
                     <input
                         type="password"
                         name="password"
                         id="password"
                         value={password}
+                        onChange={formik.handleChange}
                     />
                     <input
                         type="password"
                         name="passwordConfirmation"
                         id="passwordConfirmation"
                         value={passwordConfirmation}
+                        onChange={formik.handleChange}
                     />
                 </div>
             </form>
