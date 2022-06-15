@@ -29,6 +29,7 @@ const RegisterComponents = () => {
         zipcode,
         ville,
         password,
+        passwordConfirmation,
         cgu,
     } = formik.values;
 
@@ -38,25 +39,28 @@ const RegisterComponents = () => {
             <form className="Register">
                 <div className="label">
                     <label htmlFor="pseudo">Nom d'utilisateur : </label>
-                    <label htmlFor="firstName">Prénom : </label>
                     <label htmlFor="surName">Nom : </label>
+                    <label htmlFor="firstName">Prénom : </label>
                     <label htmlFor="email">Email : </label>
                     <label htmlFor="phoneNumber">Numéro de téléphone : </label>
                     <label htmlFor="adress">Adresse postale : </label>
                     <label htmlFor="zipcode">Code postale : </label>
                     <label htmlFor="ville">Ville : </label>
                     <label htmlFor="password">Mot de passe : </label>
+                    <label htmlFor="passwordConfirmation">
+                        Mot de passe de confirmation :
+                    </label>
                 </div>
 
                 <div className="register2">
                     <input type="text" name="pseudo" id="pseudo" value={pseudo} />
+                    <input type="text" name="surName" id="surName" value={surName} />
                     <input
                         type="text"
                         name="firstName"
                         id="firstName"
                         value={firstName}
                     />
-                    <input type="text" name="surName" id="surName" value={surName} />
                     <input type="email" name="email" id="email" value={email} />
                     <input
                         type="tel"
@@ -72,6 +76,12 @@ const RegisterComponents = () => {
                         name="password"
                         id="password"
                         value={password}
+                    />
+                    <input
+                        type="password"
+                        name="passwordConfirmation"
+                        id="passwordConfirmation"
+                        value={passwordConfirmation}
                     />
                 </div>
             </form>
