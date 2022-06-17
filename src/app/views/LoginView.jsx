@@ -1,10 +1,11 @@
 import { Formik } from 'formik';
 import React from 'react';
+import Login from '../components/layouts/Login';
 
 const LoginView = () => {
     return (
         <div>
-            <h2>test</h2>
+            <Login />
         </div>
     );
 };

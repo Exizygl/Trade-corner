@@ -123,6 +123,7 @@ const Register = () => {
                             id="password"
                             value={password}
                             onChange={formik.handleChange}
+                            required
                         />
 
                         <label htmlFor="passwordConfirmation">
@@ -134,10 +135,18 @@ const Register = () => {
                             id="passwordConfirmation"
                             value={passwordConfirmation}
                             onChange={formik.handleChange}
+                            required
                         />
                     </div>
                     <div>
-                        <input type="checkbox" name="cgu" id="cgu" />
+                        <input
+                            type="checkbox"
+                            name="cgu"
+                            id="cgu"
+                            value={cgu}
+                            onClick={formik.handleChange}
+                            required
+                        />
                         <label className="cgu" htmlFor="cgu">
                             J'accepte{' '}
                             <a href="#" _target="blank">
