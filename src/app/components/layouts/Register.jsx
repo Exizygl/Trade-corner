@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { register } from '../../api/backend/requestApi'
 
 const Register = () => {
     const initialValues = {
@@ -16,6 +17,10 @@ const Register = () => {
     };
     const formik = useFormik({
         initialValues,
+        onSubmit: values => {
+            console.log(values);
+            register(values)
+          },
     });
 
     const {
@@ -34,7 +39,7 @@ const Register = () => {
     return (
         <div>
             <div className="global">
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                     <legend className="titre">Inscription</legend>
                     <div>
                         <label htmlFor="pseudo">Pseudonyme : </label>
