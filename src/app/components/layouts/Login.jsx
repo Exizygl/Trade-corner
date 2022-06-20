@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import { login } from '../../api/backend/requestApi'
 
 const Login = () => {
     const initialValues = {
@@ -8,6 +9,10 @@ const Login = () => {
     };
     const formik = useFormik({
         initialValues,
+        onSubmit: values => {
+            console.log(values);
+            login(values)
+          },
     });
 
     const { email, password } = formik.values;
@@ -15,7 +20,7 @@ const Login = () => {
     return (
         <div>
             <div className="global2">
-                <form className="login">
+                <form className="login" onSubmit={formik.handleSubmit}>
                     <legend className="titre">Connexion</legend>
 
                     <label htmlFor="email">Adresse email électronique</label>
