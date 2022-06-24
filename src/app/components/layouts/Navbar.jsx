@@ -26,9 +26,7 @@ const Navbar = () => {
                                         />
                                     </Link>
                                 </div>
-                                <div className="direction">
-                                    <Link to={URL_REGISTER}>S'enregistrer</Link>
-                                </div>
+
                                 <div className="direction">
                                     <Link to={URL_LOGIN}>Se connecter</Link>
                                 </div>
