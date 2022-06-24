@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { register } from '../../api/backend/requestApi'
+import { register } from '../../api/backend/requestApi';
 
 const Register = () => {
     const initialValues = {
@@ -13,14 +13,13 @@ const Register = () => {
         ville: '',
         password: '',
         passwordConfirmation: '',
-        gcu: false,
     };
     const formik = useFormik({
         initialValues,
-        onSubmit: values => {
+        onSubmit: (values) => {
             console.log(values);
-            register(values)
-          },
+            register(values);
+        },
     });
 
     const {
@@ -33,7 +32,6 @@ const Register = () => {
         ville,
         password,
         passwordConfirmation,
-        cgu,
     } = formik.values;
 
     return (
@@ -142,22 +140,6 @@ const Register = () => {
                             onChange={formik.handleChange}
                             required
                         />
-                    </div>
-                    <div>
-                        <input
-                            type="checkbox"
-                            name="cgu"
-                            id="cgu"
-                            value={cgu}
-                            onClick={formik.handleChange}
-                            required
-                        />
-                        <label className="cgu" htmlFor="cgu">
-                            J'accepte{' '}
-                            <a href="#" _target="blank">
-                                les conditions d'utilisations.
-                            </a>{' '}
-                        </label>
                     </div>
 
                     <div className="submit">
