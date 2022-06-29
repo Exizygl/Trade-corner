@@ -21,7 +21,7 @@ const contextClass = {
  * @author Peter Mollet
  */
 const RoutesWithNavigation = () => {
-  
+
     return (
         <BrowserRouter>
             <div className="h-full flex flex-col bg-gray-100 cursor-default">
