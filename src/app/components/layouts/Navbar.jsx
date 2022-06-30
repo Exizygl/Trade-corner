@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { URL_HOME } from './../../shared/constants/urls/urlConstants';
 import { URL_LOGIN } from './../../shared/constants/urls/urlConstants';
 import { URL_REGISTER } from './../../shared/constants/urls/urlConstants';
+import { URL_ADMIN } from './../../shared/constants/urls/urlConstants';
+import { URL_USER } from './../../shared/constants/urls/urlConstants';
 
 const Navbar = () => {
     return (
@@ -27,8 +29,11 @@ const Navbar = () => {
                                     </Link>
                                 </div>
 
-                                <div className="direction">
-                                    <Link to={URL_LOGIN}>Se connecter</Link>
+                                <div className="">
+                                    <Link to={URL_LOGIN} className="ml-3">Se connecter</Link>
+                                    <Link to={URL_REGISTER}className="ml-3">S'enregistrer</Link>
+                                    <Link to={URL_USER}className="ml-3">Profil</Link>
+                                    <Link to={URL_ADMIN}className="ml-3">Administration</Link>
                                 </div>
                             </div>
 
