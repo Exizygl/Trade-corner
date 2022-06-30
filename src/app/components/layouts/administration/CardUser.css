@@ -1,0 +1,19 @@
+.cardPerso {
+    width : 160px;
+    height: 200px;
+    text-align: center;
+}
+
+.cardPerso p {
+    font-size : 80%;
+}
+
+.cardPerso .truc {
+    height : 130px;
+}
+
+.cardPerso img {
+    object-fit: cover;
+   height: 100%;
+   width: 100%;
+}

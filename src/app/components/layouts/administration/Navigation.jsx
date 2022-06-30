@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { URL_ADMIN_DemandesCom, URL_ADMIN_ListUsers, URL_ADMIN } from '../shared/constants/urls/urlConstants';
+import { URL_ADMIN_DemandesCom, URL_ADMIN_ListUsers, URL_ADMIN } from '../../../shared/constants/urls/urlConstants';
 
 export default function Navigation() {
   return (

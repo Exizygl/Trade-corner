@@ -1,5 +1,6 @@
 import React from 'react';
-import Navigation from '../../Navigation';
+import Navigation from './Navigation';
+import CardUser from './CardUser';
 
 export default function Administration() {
   return (
@@ -16,6 +17,7 @@ export default function Administration() {
             <h3>Liste des utilisateurs</h3>
             {/* Liste utilisateurs */}
             <p>Vous n'avez pas de demandes en attente.</p>
+            <CardUser/>
         </div> 
 
     </div>
