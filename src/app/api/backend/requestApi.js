@@ -4,8 +4,8 @@ export const register = (values) => {
     apiBackEnd.post('user/register', values);
 };
 
-export const login = (values) => {
-    apiBackEnd.post('user/login', values);
+export const authenticate = (values) => {
+   return apiBackEnd.post('user/login', values);
 };
 
 export const getAllUser = () => {

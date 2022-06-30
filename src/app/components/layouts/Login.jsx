@@ -1,8 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { login } from '../../api/backend/requestApi';
+import { authenticate } from '../../api/backend/requestApi';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../shared/redux-store/authenticationSlice';
+import { isAuthenticated } from '../../shared/services/accountServices';
+import { useHistory } from 'react-router-dom';
+import { URL_HOME } from './../../shared/constants/urls/urlConstants';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const initialValues = {
         email: '',
         password: '',
@@ -10,8 +17,24 @@ const Login = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            console.log(values);
-            login(values);
+
+
+            authenticate(values).then((res) => {
+
+                if (res.data.errors) {
+                    console.log("res.data =>", res.data.errors)
+                }
+                if (res.status === 200 && res.data.message.user.id_token) {
+                    dispatch(signIn(res.data.message.user));
+                    if (isAuthenticated()) {
+                        history.push(URL_HOME)
+                    };
+                }
+            })
+                .catch((e) => {
+                    console.log("e", e)
+
+                });
         },
     });
 

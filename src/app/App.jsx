@@ -1,6 +1,8 @@
 import React from 'react';
 import RoutesWithNavigation from './routes/RoutesWithNavigation';
 
+import { store } from './shared/redux-store/store';
+import { Provider } from 'react-redux';
 
 /**
  * Component APP
@@ -10,7 +12,9 @@ import RoutesWithNavigation from './routes/RoutesWithNavigation';
  */
 const App = () => {
     return (
-        <RoutesWithNavigation />
+        <Provider store={store}>
+            <RoutesWithNavigation />
+        </Provider>
     );
 };
 

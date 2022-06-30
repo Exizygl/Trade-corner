@@ -33,20 +33,34 @@ export function hasRole(role) {
  * @return {boolean} true if user is authenticated
  * @author Peter Mollet
  */
+
+export function isUserId() {
+    const token = getToken();
+    if (token) {
+        const payload = getPayloadToken();
+        return payload.id
+    } else return false
+}
+
+
 export function isAuthenticated() {
     try {
         const token = getToken();
         //  console.log('token', token);
         const payload = getPayloadToken();
+
         // console.log('payload', payload);
-        const roles = payload.auth.split(',');
+        const roles = payload.role;
+
         // console.log('roles', roles);
         const expirationDate = payload.exp;
+
         // console.log('expiration', expirationDate);
-        const login = payload.sub;
+        const login = payload.pseudo;
+
         //console.log('login', login);
         const dateNow = new Date();
-        return token && roles.length > 0 && login && expirationDate < dateNow.getTime();
+        return token && (roles === 0 || roles === 1 || roles === 2) && login && expirationDate < dateNow.getTime();
     } catch {
         //  console.log('CATCH FALSE');
         return false;
