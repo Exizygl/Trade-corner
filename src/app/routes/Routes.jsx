@@ -7,6 +7,7 @@ import HomeView from '../views/HomeView';
 import LoginView from '../views/LoginView';
 import RegisterView from '../views/RegisterView';
 import UserView from '../views/UserView';
+import AdministrationView from '../views/AdministrationView';
 
 /**
  * Routes of the application
@@ -21,6 +22,7 @@ const Routes = () => {
             <Route exact path={URL.URL_LOGIN} component={LoginView} />
             <Route exact path={URL.URL_REGISTER} component={RegisterView} />
             <Route exact path={URL.URL_USER} component={UserView} />
+            <Route exact path={URL.URL_ADMINISTRATION} component={AdministrationView} />
         </Switch>
     );
 };
