@@ -26,8 +26,8 @@ const Routes = () => {
             <Route exact path={URL.URL_REGISTER} component={RegisterView} />
             <Route exact path={URL.URL_USER} component={UserView} />
             <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
-            <Route exact path={URL.URL_ADMIN_ListUsers} component={ListUsersView} />
-            <Route exact path={URL.URL_ADMIN_DemandesCom} component={DemandesComView} />
+            <Route exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} />
+            <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
 
             <Route
                 exact

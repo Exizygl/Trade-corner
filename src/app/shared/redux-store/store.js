@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import authenticationReducer from './authenticationSlice';
+import administrationReducer from './administrationSlice';
 
 /**
  * To configure the store redux.
@@ -9,6 +10,7 @@ import authenticationReducer from './authenticationSlice';
  */
 export const store = configureStore({
     reducer: {
-        auth: authenticationReducer
+        auth: authenticationReducer,
+        adm : administrationReducer,
     },
 });
