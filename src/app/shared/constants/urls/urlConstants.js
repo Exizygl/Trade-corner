@@ -7,3 +7,4 @@ export const URL_USER = '/user';
 export const URL_ADMIN = '/administration';
 export const URL_ADMIN_ListUsers = '/administration/utilisateurs';
 export const URL_ADMIN_DemandesCom = '/administration/demandes';
+export const URL_MODIFYACCOUNT = '/modify+';

@@ -5,6 +5,7 @@ import * as URL from '../shared/constants/urls/urlConstants';
 import { customHistory } from '../shared/services/historyServices';
 import HomeView from '../views/HomeView';
 import LoginView from '../views/LoginView';
+import ModifyAccountView from '../views/ModifyAccountView';
 import RegisterView from '../views/RegisterView';
 import UserView from '../views/UserView';
 import AdministrationView from '../views/administration/AdministrationView';
@@ -28,6 +29,11 @@ const Routes = () => {
             <Route exact path={URL.URL_ADMIN_ListUsers} component={ListUsersView} />
             <Route exact path={URL.URL_ADMIN_DemandesCom} component={DemandesComView} />
 
+            <Route
+                exact
+                path={URL.URL_MODIFYACCOUNT + ':typeModification'}
+                component={ModifyAccountView}
+            />
         </Switch>
     );
 };
