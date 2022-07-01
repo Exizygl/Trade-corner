@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function CardUser() {
 
-  const data=1;
-
+//const data=1;
 //const userName = useSelector(state => state.adm.users[{data}].name);
 //const userRole = useSelector(state => state.adm.users[{data}].role);
 
