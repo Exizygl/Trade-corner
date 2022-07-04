@@ -16,3 +16,7 @@ export const getAllUser = () => {
 export const userInfo = (id) => {
     return apiBackEnd.get('user/' + id);
 };
+
+export const userInfoUpdate = (id, values) => {
+    return apiBackEnd.get('user/' + id, values);
+};

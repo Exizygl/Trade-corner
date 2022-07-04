@@ -1,6 +1,9 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { userInfoUpdate } from '../../api/backend/requestApi';
+
 
 const ModifyAccount = () => {
     const initialValues = {
@@ -8,6 +11,8 @@ const ModifyAccount = () => {
     };
 
     var typeInput = '';
+    
+    const id = useSelector((state) => state.auth.user.id);
 
     const { typeModification } = useParams();
     var textLabel = '';
@@ -15,21 +20,25 @@ const ModifyAccount = () => {
         case 'pseudo':
             textLabel = 'Nouveau pseudonyme';
             typeInput = 'text';
+            initialValues.valueName = 'pseudo';
             break;
 
         case 'email':
             textLabel = 'Nouvelle adresse e-mail';
             typeInput = 'email';
+            initialValues.valueName = 'email';
             break;
 
         case 'phone':
             textLabel = 'Nouveau numéro de téléphone';
             typeInput = 'phone';
+            initialValues.valueName = 'phone';
             break;
 
         case 'name':
             textLabel = 'Nouveau nom';
             typeInput = 'text';
+            initialValues.valueName = 'name';
             break;
 
         case 'password':
@@ -37,6 +46,7 @@ const ModifyAccount = () => {
             initialValues.oldPassword = '';
             initialValues.repeatNewPassword = '';
             typeInput = 'password';
+            initialValues.valueName = 'password';
             break;
 
         case 'adress':
@@ -44,20 +54,20 @@ const ModifyAccount = () => {
             initialValues.zipcode = '';
             initialValues.ville = '';
             typeInput = 'text';
+            initialValues.valueName = 'adress';
             break;
     }
 
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            console.log(values.valueChange);
-            if (values.oldPassword) {
-                console.log(values.oldPassword);
-            }
+
+            userInfoUpdate(id, values);
+            
         },
     });
 
-    const { valueChange, oldPassword, repeatNewPassword, zipcode, ville } = formik.values;
+    const { valueChange, oldPassword, repeatNewPassword, zipcode, ville, valueName } = formik.values;
 
     const additionalField = (type) => {
         if (type == 'adress') {
@@ -125,6 +135,13 @@ const ModifyAccount = () => {
                             Modifier votre {typeModification}
                         </legend>
 
+                        <input
+                                type="hidden"
+                                name="valueName"
+                                value={valueName}
+                                onChange={formik.handleChange}
+                                required
+                            />
                         <label htmlFor="email">{textLabel}</label>
                         <div>
                             <input
@@ -137,7 +154,7 @@ const ModifyAccount = () => {
                         </div>
                         {additionalField(typeModification)}
                         <div className="submit2">
-                            <button type="submit">Se connecter</button>
+                            <button type="submit">Modifier</button>
                         </div>
                     </form>
                 </div>

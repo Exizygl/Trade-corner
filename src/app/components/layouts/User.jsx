@@ -1,45 +1,14 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
-import { userInfo } from '../../api/backend/requestApi';
-import { connexion } from '../../shared/components/Redux-store/actions';
+//import { connexion } from '../../shared/components/Redux-store/actions';
 import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 
-
-
-
-
 const User = () => {
-    const user = useSelector(state => state.userInfo)
-    const dispatch = useDispatch();
-
-    const getInfo = () => {
-        const id = '62bc1f02d33f072a04c24342';
-        userInfo(id).then((response) => {
-            console.log(response.data);
-            dispatch(
-                connexion(
-                    response.data.id,
-                    response.data.role,
-                    response.data.Avatar,
-                    response.data.pseudo,
-                    response.data.name,
-                    response.data.email,
-                    response.data.phoneNumber,
-                    response.data.adress,
-                    response.data.zipcode,
-                    response.data.ville,
-                ),
-            );
-        });
-    };
-
-    useEffect(() => {
-        getInfo();
-    }, []);
+    const user = useSelector((state) => state.auth.user);
+    console.log(user);
 
     return (
         <div className="flex mt-12">
@@ -81,7 +50,7 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
-                        <img src={user.avatar} alt="" />
+                        <img src={user.Avatar} alt="" />
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'avatar'}>
