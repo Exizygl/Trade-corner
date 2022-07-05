@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
+import SubmitRegisterModal from './modal/SubmitRegisterModal';
 
 const Register = () => {
+    const [successSubmitModal, setSuccessSubmitModal] = useState("");
+
+    const closeModal = () => {
+        setSuccessSubmitModal("")
+    };
+
     const initialValues = {
         pseudo: '',
         name: '',
@@ -17,8 +24,12 @@ const Register = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            console.log(values);
-            register(values);
+            register(values).then((res) => {
+                if (res.data.message.user) {
+                    setSuccessSubmitModal(<SubmitRegisterModal user={res.data.message.user} closeModal={() => closeModal()} />)
+                }
+            })
+                .catch(() => console.log("erreur register"));
         },
     });
 
@@ -147,6 +158,7 @@ const Register = () => {
                     </div>
                 </form>
             </div>
+            {successSubmitModal}
         </div>
     );
 };
