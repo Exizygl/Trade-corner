@@ -10,8 +10,6 @@ import PreviewListUsers from './PreviewListUsers';
 
 export default function Administration() {
 
-const [usersState, setUsersState] = useState(false);
-
 const users = useSelector(state => state.adm.users); //je pointe sur le tableau user dans le store
 const dispatch = useDispatch();
 
@@ -25,7 +23,8 @@ useEffect( () => {
           let name= res.data[i].name;
           let id = res.data[i]._id;
           let role = res.data[i].role;
-          let user = {name : name, id: id, role : role};
+          let avatar = res.data[i].Avatar;
+          let user = {name : name, id: id, role : role, avatar :  avatar};
           usersTemp.push(user);      //j'ai récup les données que je voulais
         };    
         dispatch(setListUsers(usersTemp));//je transfere le tableau au store

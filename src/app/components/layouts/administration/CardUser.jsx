@@ -11,12 +11,13 @@ export default function CardUser(props) {
 let role = "";
 if (props.role === 0)
 { role = "utilisateur normal"};
+console.log("avatar = " + props.avatar);
 
 
   return (
     <div className=" cardPerso shadow-2xl border-solid border-2 ">
         <div className="illus">
-            <img src="https://media.anakinworld.com/uploads/entries/original/dup-personnage-leia-organa-solo.jpg" alt="" className=""/>
+            <img src={props.avatar} alt="" className=""/>
         </div>
      <div>
         <p> Nom de l'utilisateur : {props.name} </p>

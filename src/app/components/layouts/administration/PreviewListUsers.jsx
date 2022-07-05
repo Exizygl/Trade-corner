@@ -20,7 +20,8 @@ export default function PreviewListUsers() {
                 let name= res.data[i].name;
                 let id = res.data[i]._id;
                 let role = res.data[i].role;
-                let user = {name : name, id: id, role : role};
+                let avatar = res.data[i].Avatar;
+                let user = {name : name, id: id, role : role, avatar : avatar};
                 usersTemp.push(user);
               };    
               setState (state => ({
@@ -39,7 +40,7 @@ export default function PreviewListUsers() {
     <div>
         <div className="flex  flex-row ml-12 flex-wrap">
             {state.usersPreview.map( user => 
-            <CardUser key = {user.id} name = {user.name} role = {user.role} />
+             <Link to={`/administration/user/${user.id}`} key={user.id} ><CardUser key = {user.id} name = {user.name} role = {user.role} avatar = {user.avatar}/></Link>
             )}
         </div>
         <p>
