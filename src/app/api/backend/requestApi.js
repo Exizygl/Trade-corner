@@ -16,6 +16,6 @@ export const userInfo = (id) => {
     return apiBackEnd.get('user/' + id);
 };
 
-export const userInfoUpdate = (id, values) => {
-    return apiBackEnd.get('user/' + id, values);
+export const userInfoUpdate = (values) => {
+    return apiBackEnd.post('user/update', values);
 };
