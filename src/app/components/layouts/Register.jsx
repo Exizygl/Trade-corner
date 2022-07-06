@@ -1,11 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
-import { isEmail, isLength, isMatch } from '../../utils/Validation';
+import SubmitRegisterModal from './modal/SubmitRegisterModal';
 
 const Register = () => {
+    const [successSubmitModal, setSuccessSubmitModal] = useState('');
+
+    const closeModal = () => {
+        setSuccessSubmitModal('');
+    };
+
     const initialValues = {
         pseudo: '',
         name: '',
@@ -20,8 +24,18 @@ const Register = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            console.log(values);
-            register(values);
+            register(values)
+                .then((res) => {
+                    if (res.data.message.user) {
+                        setSuccessSubmitModal(
+                            <SubmitRegisterModal
+                                user={res.data.message.user}
+                                closeModal={() => closeModal()}
+                            />,
+                        );
+                    }
+                })
+                .catch(() => console.log('erreur register'));
         },
     });
 
@@ -36,38 +50,6 @@ const Register = () => {
         password,
         passwordConfirmation,
     } = formik.values;
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (isEmpty(name) || isEmpty(password))
-            return setUser({ ...user, err: 'Please fill in all fields.', success: '' });
-
-        if (!isEmail(email))
-            return setUser({ ...user, err: 'Invalid emails.', success: '' });
-
-        if (isLength(password))
-            return setUser({
-                ...user,
-                err: 'Password must be at least 6 characters.',
-                success: '',
-            });
-
-        if (!isMatch(password, cf_password))
-            return setUser({ ...user, err: 'Password did not match.', success: '' });
-
-        try {
-            const res = await axios.post('/user/register', {
-                name,
-                email,
-                password,
-            });
-
-            setUser({ ...user, err: '', success: res.data.msg });
-        } catch (err) {
-            err.response.data.msg &&
-                setUser({ ...user, err: err.response.data.msg, success: '' });
-        }
-    };
 
     return (
         <div>
@@ -181,13 +163,8 @@ const Register = () => {
                         <button type="submit">Créer mon compte</button>
                     </div>
                 </form>
-                <div className="sign">
-                    <p>
-                        Vous avez déjà un compte ? Appuyez ici pour{' '}
-                        <a href="./login">Se connecter</a>
-                    </p>
-                </div>
             </div>
+            {successSubmitModal}
         </div>
     );
 };
