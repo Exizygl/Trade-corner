@@ -66,7 +66,7 @@ const User = () => {
                         <div>{user.name}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'nom'}>
+                        <Link to={URL_MODIFYACCOUNT + 'name'}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -76,10 +76,36 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Adresse</div>
-                        <div>{user.adress} {user.zipcode} {user.ville}</div>
+                        <div>{user.adress}</div>
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'adress'}>
+                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                                Modifier
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+                <div className="flex pl-4 py-2 justify-between border-b-4">
+                    <div className="flex flex-col space-y-2">
+                        <div className="font-semibold">Code postal</div>
+                        <div>{user.zipcode}</div>
+                    </div>
+                    <div className="pr-4 py-2">
+                        <Link to={URL_MODIFYACCOUNT + 'zipcode'}>
+                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                                Modifier
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+                <div className="flex pl-4 py-2 justify-between border-b-4">
+                    <div className="flex flex-col space-y-2">
+                        <div className="font-semibold">Ville</div>
+                        <div>{user.zipcode}</div>
+                    </div>
+                    <div className="pr-4 py-2">
+                        <Link to={URL_MODIFYACCOUNT + 'ville'}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>

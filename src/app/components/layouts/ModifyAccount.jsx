@@ -12,7 +12,7 @@ const ModifyAccount = () => {
 
     var typeInput = '';
     
-    const id = useSelector((state) => state.auth.user.id);
+    const id = useSelector((state) => state.auth.user._id);
 
     const { typeModification } = useParams();
     var textLabel = '';
@@ -56,46 +56,40 @@ const ModifyAccount = () => {
             typeInput = 'text';
             initialValues.valueName = 'adress';
             break;
+        
+            case 'ville':
+            textLabel = 'Nouvelle ville';
+            initialValues.zipcode = '';
+            initialValues.ville = '';
+            typeInput = 'text';
+            initialValues.valueName = 'vimme';
+            break;
+        
+            case 'zipcode':
+            textLabel = 'Nouveau code postal';
+            typeInput = 'text';
+            initialValues.valueName = 'zipcode';
+            break;
+            case 'avatar':
+            textLabel = 'Nouvelle avatar';
+            typeInput = 'text';
+            initialValues.valueName = 'Avatar';
+            break;
     }
 
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-
-            userInfoUpdate(id, values);
             
+            userInfoUpdate(values);
         },
     });
 
-    const { valueChange, oldPassword, repeatNewPassword, zipcode, ville, valueName } = formik.values;
+    const { valueChange, oldPassword, repeatNewPassword, valueName } = formik.values;
 
     const additionalField = (type) => {
-        if (type == 'adress') {
-            return (
-                <div>
-                    <label htmlFor="zipcode">Code postal</label>
-                    <div>
-                        <input
-                            type="text"
-                            name="zipcode"
-                            value={zipcode}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
-                    <label htmlFor="ville">Ville</label>
-                    <div>
-                        <input
-                            type="text"
-                            name="ville"
-                            value={ville}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
-                </div>
-            );
-        } else if (type == 'password') {
+       
+        if (type == 'password') {
             return (
                 <div>
                     <label htmlFor="repeatNewPassword">
