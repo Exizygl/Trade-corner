@@ -2,6 +2,7 @@ export const URL_HOME = '/';
 export const URL_LOGIN = '/login';
 export const URL_REGISTER = '/register';
 export const URL_USER = '/user';
+export const URL_LOGOUT = '/';
 
 //routes accessibles aux administrateurs
 export const URL_ADMIN = '/administration';
