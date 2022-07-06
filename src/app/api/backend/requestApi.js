@@ -1,8 +1,12 @@
 import apiBackEnd from './api.Backend';
 
 export const register = (values) => {
-    apiBackEnd.post('user/register', values);
+   return apiBackEnd.post('user/register', values);
 };
+
+export function confirmRegistration(values) {
+    return apiBackEnd.put('user/confirm', values);
+}
 
 export const authenticate = (values) => {
    return apiBackEnd.post('user/login', values);

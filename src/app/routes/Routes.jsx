@@ -11,6 +11,7 @@ import UserView from '../views/UserView';
 import AdministrationView from '../views/administration/AdministrationView';
 import ListUsersView from '../views/administration/ListUsersView';
 import DemandesComView from '../views/administration/DemandesComView';
+import ConfirmRegisterView from '../views/ConfirmRegisterView';
 
 /**
  * Routes of the application
@@ -28,7 +29,7 @@ const Routes = () => {
             <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
             <Route exact path={URL.URL_ADMIN_ListUsers} component={ListUsersView} />
             <Route exact path={URL.URL_ADMIN_DemandesCom} component={DemandesComView} />
-
+            <Route path={URL.URL_CONFIRM_REGISTER} component={ConfirmRegisterView} />
             <Route
                 exact
                 path={URL.URL_MODIFYACCOUNT + ':typeModification'}

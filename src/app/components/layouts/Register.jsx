@@ -68,6 +68,7 @@ const Register = () => {
                 setUser({ ...user, err: err.response.data.msg, success: '' });
         }
     };
+
     return (
         <div>
             <div className="global">

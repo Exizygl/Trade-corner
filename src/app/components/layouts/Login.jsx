@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { authenticate } from '../../api/backend/requestApi';
+import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../shared/redux-store/authenticationSlice';
 import { isAuthenticated } from '../../shared/services/accountServices';
@@ -8,6 +9,10 @@ import { useHistory } from 'react-router-dom';
 import { URL_HOME } from './../../shared/constants/urls/urlConstants';
 
 const Login = () => {
+
+    const [errorLog, setErrorLog] = useState(false);
+    const [msgError, setMsgError] = useState("");
+
     const dispatch = useDispatch();
     const history = useHistory();
     const initialValues = {
@@ -22,7 +27,7 @@ const Login = () => {
             authenticate(values).then((res) => {
 
                 if (res.data.errors) {
-                    console.log("res.data =>", res.data.errors)
+                    setMsgError(res.data.errors)
                 }
                 if (res.status === 200 && res.data.message.user.id_token) {
                     dispatch(signIn(res.data.message.user));
@@ -33,7 +38,7 @@ const Login = () => {
             })
                 .catch((e) => {
                     console.log("e", e)
-
+                    setErrorLog(true)
                 });
         },
     });
@@ -71,6 +76,9 @@ const Login = () => {
                     <div className="submit2">
                         <button type="submit">Se connecter</button>
                     </div>
+                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="Login/Password incorrect(s)" />}
+                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Login/Email incorrect(s)" />}
+                    {(errorLog && msgError.isValid) && <ErrorMessSmall middle message="Login/Valider le mail de confirmation" />}
                 </form>
                 <div className="sign">
                     <p>
