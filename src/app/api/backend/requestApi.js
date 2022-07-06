@@ -16,6 +16,7 @@ export const getAllUser = () => {
     return apiBackEnd.get('user');
 };
 
+
 export const userInfo = (id) => {
     return apiBackEnd.get('user/' + id);
 };
