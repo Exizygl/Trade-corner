@@ -46,7 +46,6 @@ const Navbar = () => {
                                     <Link to={URL_ADMIN} className="ml-3">
                                         Administration
                                     </Link>
-                                    li
                                 </div>
                             </div>
 
