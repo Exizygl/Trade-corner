@@ -24,3 +24,12 @@ export const userInfo = (id) => {
 export const userInfoUpdate = (values) => {
     return apiBackEnd.post('user/update', values);
 };
+
+export const userDelete = (values) => {
+    return apiBackEnd.post('user/delete', values);
+};
+
+export const userDeleteInfo = (values) => {
+    return apiBackEnd.post('deleteUser/create', values);
+};
+

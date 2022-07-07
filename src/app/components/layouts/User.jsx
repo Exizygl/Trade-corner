@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { userInfo } from '../../api/backend/requestApi';
 
 //import { connexion } from '../../shared/components/Redux-store/actions';
-import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
+import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
 
 
@@ -165,9 +165,11 @@ const User = () => {
                         <div className="font-semibold">Supprimer le compte</div>
                     </div>
                     <div className="pr-4 py-2">
+                    <Link to={URL_DELETE}>
                         <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                             Supprimer
                         </button>
+                        </Link>
                     </div>
                 </div>
             </div>
