@@ -1,14 +1,36 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
+import { userInfo } from '../../api/backend/requestApi';
 
 //import { connexion } from '../../shared/components/Redux-store/actions';
 import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
+import { updateUser } from '../../shared/redux-store/authenticationSlice';
+
+
+
 
 const User = () => {
-    const user = useSelector((state) => state.auth.user);
-    console.log(user);
+    const userId = useSelector((state) => state.auth.user);
+   
+    const dispatch = useDispatch()
+
+
+    useEffect( () => {
+    userInfo(userId._id).then (
+        function (res) {
+            if (res.status === 200) 
+                {   
+                    
+                     dispatch(updateUser(res.data));
+                    
+                     
+                }}) ;
+            }, []);
+        const user = useSelector((state) => state.auth.user);
+    
 
     return (
         <div className="flex mt-12">

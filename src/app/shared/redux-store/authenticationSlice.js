@@ -29,10 +29,14 @@ export const authenticationSlice = createSlice({
             state.isLogged = false;
             state.userId = false;
         },
+        updateUser: (state, action) => {
+           
+            state.user = action.payload
+        },
     },
 });
 
-export const { signIn, signOut } = authenticationSlice.actions;
+export const { signIn, signOut, updateUser} = authenticationSlice.actions;
 
 export const selectIsLogged = (state) => state.auth.isLogged;
 
