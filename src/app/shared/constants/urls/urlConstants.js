@@ -5,6 +5,7 @@ export const URL_CONFIRM_REGISTER = '/confirm-register/';
 export const URL_USER = '/user';
 export const URL_LOGOUT = '/';
 export const URL_MODIFYACCOUNT = '/modify+';
+export const URL_DELETE = '/delete';
 
 //routes accessibles aux administrateurs
 export const URL_ADMIN = '/administration';

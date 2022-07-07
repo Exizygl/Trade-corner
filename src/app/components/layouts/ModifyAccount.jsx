@@ -1,17 +1,29 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { userInfoUpdate } from '../../api/backend/requestApi';
+import { userInfo, userInfoUpdate } from '../../api/backend/requestApi';
+import { useHistory } from 'react-router-dom';
+import { URL_HOME, URL_LOGIN } from '../../shared/constants/urls/urlConstants';
+
+
+import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
+
+
 
 
 const ModifyAccount = () => {
+
+    const dispatch = useDispatch();
+
+    const history = useHistory();
     const initialValues = {
         valueChange: '',
     };
 
     var typeInput = '';
-    
+
     const id = useSelector((state) => state.auth.user._id);
 
     const { typeModification } = useParams();
@@ -42,7 +54,7 @@ const ModifyAccount = () => {
             break;
 
         case 'password':
-            textLabel = 'Nouveau mot de passe';
+            textLabel = 'Confirmation du nouveau mot de passe';
             initialValues.oldPassword = '';
             initialValues.repeatNewPassword = '';
             typeInput = 'password';
@@ -56,21 +68,21 @@ const ModifyAccount = () => {
             typeInput = 'text';
             initialValues.valueName = 'adress';
             break;
-        
-            case 'ville':
+
+        case 'ville':
             textLabel = 'Nouvelle ville';
             initialValues.zipcode = '';
             initialValues.ville = '';
             typeInput = 'text';
-            initialValues.valueName = 'vimme';
+            initialValues.valueName = 'ville';
             break;
-        
-            case 'zipcode':
+
+        case 'zipcode':
             textLabel = 'Nouveau code postal';
             typeInput = 'text';
             initialValues.valueName = 'zipcode';
             break;
-            case 'avatar':
+        case 'avatar':
             textLabel = 'Nouvelle avatar';
             typeInput = 'text';
             initialValues.valueName = 'Avatar';
@@ -80,36 +92,61 @@ const ModifyAccount = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            
-            userInfoUpdate(values);
+
+            userInfoUpdate(values).then(() => {
+
+
+                userInfo(id).then(
+                    function (res) {
+                        if (res.status === 200) {
+
+                            dispatch(updateUser(res.data));
+
+
+                        }
+                    });
+
+
+
+
+                if (values.valueName == "password" || values.valueName == "email") {
+                    dispatch(signOut());
+                    history.push(URL_LOGIN);
+                } else {
+                    history.push(URL_HOME);
+                }
+
+            });
+
         },
     });
 
     const { valueChange, oldPassword, repeatNewPassword, valueName } = formik.values;
 
     const additionalField = (type) => {
-       
+
         if (type == 'password') {
             return (
                 <div>
+
+                    <label htmlFor="oldPassword">Ancien mot de passe</label>
+                    <div>
+                        <input
+                            type="password"
+                            name="oldPassword"
+                            value={oldPassword}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                    </div>
                     <label htmlFor="repeatNewPassword">
-                        Confirmation du nouveau mot de passe
+                        Nouveau mot de passe
                     </label>
                     <div>
                         <input
                             type="password"
                             name="repeatNewPassword"
                             value={repeatNewPassword}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
-                    <label htmlFor="oldPassword">Anciant mot de passe</label>
-                    <div>
-                        <input
-                            type="password"
-                            name="oldPassword"
-                            value={oldPassword}
                             onChange={formik.handleChange}
                             required
                         />
@@ -130,12 +167,13 @@ const ModifyAccount = () => {
                         </legend>
 
                         <input
-                                type="hidden"
-                                name="valueName"
-                                value={valueName}
-                                onChange={formik.handleChange}
-                                required
-                            />
+                            type="hidden"
+                            name="valueName"
+                            value={valueName}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                        {additionalField(typeModification)}
                         <label htmlFor="email">{textLabel}</label>
                         <div>
                             <input
@@ -146,7 +184,6 @@ const ModifyAccount = () => {
                                 required
                             />
                         </div>
-                        {additionalField(typeModification)}
                         <div className="submit2">
                             <button type="submit">Modifier</button>
                         </div>
