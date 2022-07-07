@@ -47,13 +47,13 @@ const Navbar = () => {
                                     <Link to={URL_REGISTER} className="ml-3">
                                         S'enregistrer
                                     </Link>
-                                    <Link
-                                        to={URL_LOGOUT}
-                                        className="ml-3"
-                                        onClick={handleLogout}
+                                    <button
+                                        className="ml-8 btn btn-green"
+                                        onClick={() => dispatch(signOut())}
                                     >
-                                        Se déconnecter
-                                    </Link>
+                                        {' '}
+                                        Se déconnecter{' '}
+                                    </button>
                                     <Link to={URL_USER} className="ml-3">
                                         Profil
                                     </Link>
