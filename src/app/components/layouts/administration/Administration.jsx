@@ -48,7 +48,6 @@ console.log("users : " + JSON.stringify(users));
         </div> 
         <div className= "border-solid border-2 basis-4/6 "> 
             <h2>Panneau d'administration</h2>
-            <p>branche DeleteUserByAdmin</p>
             <h3>Liste des utilisateurs</h3>
             { <PreviewListUsers/> }
             {/* barre de recherche */}

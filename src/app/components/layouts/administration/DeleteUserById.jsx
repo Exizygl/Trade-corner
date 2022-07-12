@@ -1,36 +1,60 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import {useEffect,useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { userInfo } from '../../../api/backend/requestApi';
 
 // import { userDelete, userDeleteInfo } from '../../api/backend/requestApi';
-import { useHistory } from 'react-router-dom';
-// import { URL_HOME } from '../../shared/constants/urls/urlConstants';
-// import { signOut } from '../../shared/redux-store/authenticationSlice';
-
-
+import { useHistory, useParams, Link} from 'react-router-dom';
+import { URL_ADMIN_LISTUSERS } from '../../../shared/constants/urls/urlConstants';
 
 
 const DeleteUser = () => {
 
-    const dispatch = useDispatch();
-    const history = useHistory();
-    // const id = useSelector((state) => state.auth.user._id);
+    // const dispatch = useDispatch();
+    // const history = useHistory();
     const initialValues = {
-        password: ''
+        password: '',
+        userId:''
     };
+    const [userState, setUserState] = useState({});
+
+     //récupération de l'id
+     const {id} = useParams(); // renvoie une paire clef/valeur  
+ 
+     //recupération des infos sur l'utilisateur
+ 
+    useEffect( () => {
+      userInfo({id}.id)
+     .then (
+         function (res) {
+             if (res.status === 200) 
+                 {   let user = {
+                     id: res.data._id,
+                     role : res.data.role, 
+                     name : res.data.name, 
+                     };
+                     setUserState(user);
+                 } 
+             else {
+                 alert("l'utilisateur n'a pas été retrouvé");
+             }
+         }
+         
+       )
+     }, []);
+ 
 
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-           userDelete(values).then(
-                function (res){
-                    if (res.status === 200) {
-                        // dispatch(signOut());
-                        // history.push(URL_HOME);
-                    }
-                }
-            )
+            alert("utilisateur supprimé : " + JSON.stringify(values) + "avec l'id : " + userState.id);
+        //    userDelete(values).then(
+        //         function (res){
+        //             if (res.status === 200) { 
+        //             }
+        //         }
+        //     )
         }
     });
 
@@ -45,9 +69,10 @@ const DeleteUser = () => {
                     <legend className="titre">
                         Suppression du compte
                     </legend>
-                    <p>Vous vous apprettez à supprimer le compte de. Etes vous sûr de vouloir continuer ? </p>
+                    <p>Vous vous apprêtez à supprimer le compte de {userState.name}, qui a le rôle {userState.role}.<br/>
+                     Etes vous sûr de vouloir continuer ? <br/><br/></p>
 
-                    <label htmlFor="email">Mot de passe</label>
+                    <label htmlFor="mot de passe">Retapez votre mot de passe</label>
                     <div>
                         <input
                             type="password"
@@ -57,9 +82,8 @@ const DeleteUser = () => {
                             required
                         />
                     </div>
-                    <div className="submit2">
-                        <button type="submit">Suppression</button>
-                    </div>
+                       <div> <button type="submit" className="text-red-700 font-semibold border p-2 m-2">Supprimer l'utilisateur</button> <Link to={`/administration/user/${id}`}><button className="border p-2">Annuler</button></Link>
+                       </div>
                 </form>
             </div>
         </div>

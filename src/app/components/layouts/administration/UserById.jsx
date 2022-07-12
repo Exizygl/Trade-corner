@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { URL_MODIFYACCOUNT } from '../../../shared/constants/urls/urlConstants';
 import { userInfo } from '../../../api/backend/requestApi';
+import Navigation from './Navigation';
 
 
 export default function UserById() {
@@ -11,8 +12,9 @@ export default function UserById() {
     const [userState, setUserState] = useState({});
 
     //récupération de l'id
-    const {id} = useParams();    
-    console.log("id" + JSON.stringify({id}.id));
+    const {id} = useParams(); // renvoie une paire clef/valeur  
+    console.log("use parem result : " + JSON.stringify({id})) ;
+    console.log("param" + JSON.stringify({id}.id));
 
 
     //recupération des infos sur l'utilisateur
@@ -56,14 +58,9 @@ export default function UserById() {
 
     return (
         <div className="flex mt-12">
-            <nav className="flex flex-col w-1/5 ml-12 bg-white">
-                <div href="" className="py-2 hover:bg-gray-100 w-full text-center">
-                    Information
-                </div>
-                <div href="" className="py-2 hover:bg-gray-100 w-full text-center">
-                    Commandes
-                </div>
-            </nav>
+            <div className = "border-solid border-2 basis-2/6">
+            <Navigation/>
+        </div>
 
             <div className="flex flex-col w-2/5 ml-12 bg-white">
 
@@ -182,8 +179,8 @@ export default function UserById() {
                         <div className="font-semibold">Supprimer le compte de cet utilisateur</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to = {`/administration/delete/${user.id}`}>
-                        <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                        <Link to = {`/administration/delete/${userState.id}`}>
+                        <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
                             Supprimer
                         </button>
                         </Link>
