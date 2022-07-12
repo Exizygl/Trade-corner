@@ -44,7 +44,7 @@ const ModifyAccount = () => {
         case 'phone':
             textLabel = 'Nouveau numéro de téléphone';
             typeInput = 'phone';
-            initialValues.valueName = 'phone';
+            initialValues.valueName = 'phoneNumber';
             break;
 
         case 'name':
@@ -79,7 +79,7 @@ const ModifyAccount = () => {
 
         case 'zipcode':
             textLabel = 'Nouveau code postal';
-            typeInput = 'text';
+            typeInput = 'number';
             initialValues.valueName = 'zipcode';
             break;
         case 'avatar':
