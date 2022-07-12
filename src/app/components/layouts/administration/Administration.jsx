@@ -65,7 +65,3 @@ console.log("users : " + JSON.stringify(users));
     </div>
   )
 }
-
-// { {state.adm.usersmap( user => 
-//   <CardUser key = {user.id} name = {user.name} />
-//  )} }

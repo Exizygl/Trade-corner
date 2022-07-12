@@ -35,6 +35,7 @@ const Routes = () => {
             <Route exact path={URL.URL_LOGIN} component={LoginView} />
             <Route exact path={URL.URL_REGISTER} component={RegisterView} />
             <Route path={URL.URL_CONFIRM_REGISTER} component={ConfirmRegisterView} />
+            
             {/*routes pour le profil */}
             <Route exact path={URL.URL_USER} component={UserView} />
             <Route path={URL.URL_DELETE} component={UserDeleteView} />
