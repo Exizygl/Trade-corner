@@ -12,3 +12,5 @@ export const URL_ADMIN = '/administration';
 export const URL_ADMIN_LISTUSERS = '/administration/utilisateurs';
 export const URL_ADMIN_DEMANDESCOM = '/administration/demandes';
 export const URL_USER_BYID = '/administration/user/';
+export const URL_DELETE_USER_BYID = '/administration/delete/';
+

@@ -2,8 +2,8 @@ import React from 'react';
 import {useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
-import { userInfo } from '../../api/backend/requestApi';
+import { URL_MODIFYACCOUNT } from '../../../shared/constants/urls/urlConstants';
+import { userInfo } from '../../../api/backend/requestApi';
 
 
 export default function UserById() {
@@ -13,8 +13,6 @@ export default function UserById() {
     //récupération de l'id
     const {id} = useParams();    
     console.log("id" + JSON.stringify({id}.id));
-
-    
 
 
     //recupération des infos sur l'utilisateur
@@ -184,9 +182,11 @@ export default function UserById() {
                         <div className="font-semibold">Supprimer le compte de cet utilisateur</div>
                     </div>
                     <div className="pr-4 py-2">
+                        <Link to = {`/administration/delete/${user.id}`}>
                         <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                             Supprimer
                         </button>
+                        </Link>
                     </div>
                 </div>
             </div>
