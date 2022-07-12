@@ -14,23 +14,23 @@ import { updateUser } from '../../shared/redux-store/authenticationSlice';
 
 const User = () => {
     const userId = useSelector((state) => state.auth.user);
-   
+
     const dispatch = useDispatch()
 
 
-    useEffect( () => {
-    userInfo(userId._id).then (
-        function (res) {
-            if (res.status === 200) 
-                {   
-                    
-                     dispatch(updateUser(res.data));
-                    
-                     
-                }}) ;
-            }, []);
-        const user = useSelector((state) => state.auth.user);
-    
+    useEffect(() => {
+        userInfo(userId._id).then(
+            function (res) {
+                if (res.status === 200) {
+
+                    dispatch(updateUser(res.data));
+
+
+                }
+            });
+    }, []);
+    const user = useSelector((state) => state.auth.user);
+
 
     return (
         <div className="flex mt-12">
@@ -98,7 +98,7 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Adresse</div>
-                        <div>{user.adress}</div>
+                        <div>{user.adress} {user.zipcode} {user.ville}</div>
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'adress'}>
@@ -108,32 +108,7 @@ const User = () => {
                         </Link>
                     </div>
                 </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Code postal</div>
-                        <div>{user.zipcode}</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'zipcode'}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Ville</div>
-                        <div>{user.zipcode}</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'ville'}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
-                </div>
+
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Téléphone</div>
@@ -165,10 +140,10 @@ const User = () => {
                         <div className="font-semibold">Supprimer le compte</div>
                     </div>
                     <div className="pr-4 py-2">
-                    <Link to={URL_DELETE}>
-                        <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-                            Supprimer
-                        </button>
+                        <Link to={URL_DELETE}>
+                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                                Supprimer
+                            </button>
                         </Link>
                     </div>
                 </div>

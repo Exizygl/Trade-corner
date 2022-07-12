@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -14,7 +14,8 @@ import { signOut, updateUser } from '../../shared/redux-store/authenticationSlic
 
 
 const ModifyAccount = () => {
-
+    const [errorLog, setErrorLog] = useState(false);
+    const [msgError, setMsgError] = useState("");
     const dispatch = useDispatch();
 
     const history = useHistory();
@@ -62,26 +63,13 @@ const ModifyAccount = () => {
             break;
 
         case 'adress':
-            textLabel = 'Nouvelle adresse';
-            initialValues.zipcode = '';
-            initialValues.ville = '';
-            typeInput = 'text';
-            initialValues.valueName = 'adress';
-            break;
-
-        case 'ville':
-            textLabel = 'Nouvelle ville';
+            textLabel = 'Nouvelle Ville';
             initialValues.zipcode = '';
             initialValues.ville = '';
             typeInput = 'text';
             initialValues.valueName = 'ville';
             break;
 
-        case 'zipcode':
-            textLabel = 'Nouveau code postal';
-            typeInput = 'number';
-            initialValues.valueName = 'zipcode';
-            break;
         case 'avatar':
             textLabel = 'Nouvelle avatar';
             typeInput = 'text';
@@ -98,12 +86,20 @@ const ModifyAccount = () => {
 
                 userInfo(id).then(
                     function (res) {
+                        
+                        if (res.data.errors) {
+                            setMsgError(res.data.errors)
+                        }
                         if (res.status === 200) {
 
                             dispatch(updateUser(res.data));
 
 
                         }
+                    })
+                    .catch((e) => {
+                        console.log("e", e)
+                        setErrorLog(true)
                     });
 
 
@@ -121,7 +117,7 @@ const ModifyAccount = () => {
         },
     });
 
-    const { valueChange, oldPassword, repeatNewPassword, valueName } = formik.values;
+    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress} = formik.values;
 
     const additionalField = (type) => {
 
@@ -147,6 +143,37 @@ const ModifyAccount = () => {
                             type="password"
                             name="repeatNewPassword"
                             value={repeatNewPassword}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                    </div>
+                </div>
+            );
+
+        }
+
+        if (type == 'adress') {
+            return (
+                <div>
+
+                    <label htmlFor="adress">Nouvelle Adresse</label>
+                    <div>
+                        <input
+                            type="text"
+                            name="adress"
+                            value={adress}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                    </div>
+                    <label htmlFor="zipcode">
+                        Nouveau code postal
+                    </label>
+                    <div>
+                        <input
+                            type="number"
+                            name="zipcode"
+                            value={zipcode}
                             onChange={formik.handleChange}
                             required
                         />
@@ -184,9 +211,15 @@ const ModifyAccount = () => {
                                 required
                             />
                         </div>
+                        
                         <div className="submit2">
                             <button type="submit">Modifier</button>
                         </div>
+                        {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
+                        {(errorLog && msgError.password) && <ErrorMessSmall middle message="L'ancien mot de passe ne correspond pas" />}
+                        {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email déjà prit" />}
+                        {(errorLog && msgError.pseudo) && <ErrorMessSmall middle message="Pseudo déjà prit" />}
+                        {(errorLog && msgError.zipcode) && <ErrorMessSmall middle message="Code postal trop long" />}
                     </form>
                 </div>
             }
