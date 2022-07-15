@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { userDelete, userDeleteInfo } from '../../api/backend/requestApi';
+import { userDelete } from '../../api/backend/requestApi';
 import { useHistory } from 'react-router-dom';
 import { URL_HOME } from '../../shared/constants/urls/urlConstants';
 
@@ -34,14 +34,14 @@ const DeleteUser = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-           
+
             userDelete(values).then(
-                function (res){
-                if (res.status === 200) {
-                    dispatch(signOut());
-                    history.push(URL_HOME);
+                function (res) {
+                    if (res.status === 200) {
+                        dispatch(signOut());
+                        history.push(URL_HOME);
+                    }
                 }
-            }
 
             )
         }

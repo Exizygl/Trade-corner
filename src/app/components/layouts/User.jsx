@@ -1,36 +1,14 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userInfo } from '../../api/backend/requestApi';
-
 //import { connexion } from '../../shared/components/Redux-store/actions';
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
-import { updateUser } from '../../shared/redux-store/authenticationSlice';
 
 
 
 
 const User = () => {
-    const userId = useSelector((state) => state.auth.user);
-   
-    const dispatch = useDispatch()
-
-
-    useEffect( () => {
-    userInfo(userId._id).then (
-        function (res) {
-            if (res.status === 200) 
-                {   
-                    
-                     dispatch(updateUser(res.data));
-                    
-                     
-                }}) ;
-            }, []);
-        const user = useSelector((state) => state.auth.user);
-    
+    const user = useSelector((state) => state.auth.user);
 
     return (
         <div className="flex mt-12">
@@ -72,7 +50,8 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
-                        <img src={user.Avatar} alt="" />
+                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                            <p> Aucune image </p>}
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'avatar'}>
@@ -165,10 +144,10 @@ const User = () => {
                         <div className="font-semibold">Supprimer le compte</div>
                     </div>
                     <div className="pr-4 py-2">
-                    <Link to={URL_DELETE}>
-                        <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
-                            Supprimer
-                        </button>
+                        <Link to={URL_DELETE}>
+                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                                Supprimer
+                            </button>
                         </Link>
                     </div>
                 </div>
