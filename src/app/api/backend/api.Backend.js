@@ -30,7 +30,6 @@ apiBackEnd.interceptors.request.use((request) => {
  */
 apiBackEnd.interceptors.response.use(
     (response) => {
-        console.log(response);
         return response;
     },
     (error) => {

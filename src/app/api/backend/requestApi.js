@@ -41,3 +41,6 @@ export const getAllUser = () => {
 export const deleteUserById = (values) =>{
     return apiBackEnd.put('admin/delete', values);
 };
+export function uploadUserImage(values) {
+    return apiBackEnd.post('user/upload-image', values);
+}
