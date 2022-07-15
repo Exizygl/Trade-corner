@@ -1,15 +1,16 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import {useEffect,useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userInfo } from '../../../api/backend/requestApi';
 import { deleteUserById } from '../../../api/backend/requestApi';
 
 // import { userDelete, userDeleteInfo } from '../../api/backend/requestApi';
 import { useHistory, useParams, Link} from 'react-router-dom';
 
-
 const DeleteUser = () => {
+
+    const userId = useSelector(state => state.auth.userId);
 
     // const dispatch = useDispatch();
     // const history = useHistory();
@@ -17,15 +18,25 @@ const DeleteUser = () => {
     const {id} = useParams(); // renvoie une paire clef/valeur  
     const initialValues = {
         password: '',
-        userId:{id}.id,
+        userToDeleteId:{id}.id,
+        userId: userId,
     };
     const [userState, setUserState] = useState({});
 
      //recupération des infos sur l'utilisateur
- 
+      //je pointe sur le tableau user dans le store
+    //  -------- Methode 2 ----------
+    //  useEffect( ()=> {
+    //     const users = useSelector(state => state.adm.users);
+    //     const userFound = users.find( user => user.id === {id}.id );
+    //     console.log("userFound : " + JSON.stringify(userFound));
+    //     setUserState(userFound);
+    //  }, []) 
+         
+    // -------- Methode 1 ----------
     useEffect( () => {
         // à modifier en recuperant info dans le store state.adm.users
-      userInfo({id}.id)
+        userInfo({id}.id)
      .then (
          function (res) {
              if (res.status === 200) 
@@ -34,15 +45,13 @@ const DeleteUser = () => {
                      role : res.data.role, 
                      name : res.data.name, 
                      };
-                     setUserState(user);
+                     setUserState(user); 
                  } 
              else {
                  alert("l'utilisateur n'a pas été retrouvé");
              }
-         }
-         
-       )
-     }, []);
+         }) 
+      }, []);
  
 
     const formik = useFormik({
@@ -52,7 +61,8 @@ const DeleteUser = () => {
             deleteUserById(values)
             .then (function (res) {
                 if (res.status === 200)
-                {console.log("ça a marché")}
+                {console.log("ça a marché");
+            console.log("message : " + JSON.stringify(res.message))}
                 else {
                     console.log("probléme")
                     console.log("erreur = " + JSON.stringify(res.error));
