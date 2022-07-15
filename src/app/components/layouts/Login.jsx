@@ -25,7 +25,7 @@ const Login = () => {
 
 
             authenticate(values).then((res) => {
-
+                console.log(res);
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }

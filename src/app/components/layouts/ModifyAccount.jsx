@@ -9,6 +9,7 @@ import PreviewUserImage from '../layouts/PreviewUserImage';
 import { findImageExtension, validImageSize } from '../../shared/components/utils-components/FormData';
 import { userInfo, userInfoUpdate, uploadUserImage } from '../../api/backend/requestApi';
 import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
+import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 
@@ -19,6 +20,9 @@ const ModifyAccount = () => {
     const [errorSizeImage, setErrorSizeImage] = useState("");
     const [errorExtensionImage, setErrorExtensionImage] = useState("");
 
+    // state pour la gestion d'erreur
+    const [errorLog, setErrorLog] = useState(false);
+    const [msgError, setMsgError] = useState("");
     const dispatch = useDispatch();
 
     const history = useHistory();
@@ -45,6 +49,7 @@ const ModifyAccount = () => {
     var typeInput = '';
 
 
+    //récupération du parramètre et modification de la page en fonction
     const { typeModification } = useParams();
 
     var textLabel = '';
@@ -64,7 +69,7 @@ const ModifyAccount = () => {
         case 'phone':
             textLabel = 'Nouveau numéro de téléphone';
             typeInput = 'phone';
-            initialValues.valueName = 'phone';
+            initialValues.valueName = 'phoneNumber';
             break;
 
         case 'name':
@@ -82,34 +87,59 @@ const ModifyAccount = () => {
             break;
 
         case 'adress':
-            textLabel = 'Nouvelle adresse';
-            initialValues.zipcode = '';
-            initialValues.ville = '';
-            typeInput = 'text';
-            initialValues.valueName = 'adress';
-            break;
-
-        case 'ville':
-            textLabel = 'Nouvelle ville';
+            textLabel = 'Nouvelle Ville';
             initialValues.zipcode = '';
             initialValues.ville = '';
             typeInput = 'text';
             initialValues.valueName = 'ville';
             break;
 
-        case 'zipcode':
-            textLabel = 'Nouveau code postal';
-            typeInput = 'text';
-            initialValues.valueName = 'zipcode';
-            break;
     }
 
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            userInfoUpdate(values);
+
+            userInfoUpdate(values).then((res) => {
+
+                //récupèration des erreurs
+                if (res.data.errors) {
+                    setMsgError(res.data.errors)
+                }
+
+                //Modification et redirection
+                if (res.status === 200 && !res.data.errors) {
+                    userInfo(userId).then(
+
+                        function (res) {
+
+                            dispatch(updateUser(res.data));
+
+                            if (values.valueName == "password" || values.valueName == "email") {
+                                dispatch(signOut());
+                                history.push(URL_LOGIN);
+                            } else {
+                                history.push(URL_HOME);
+                            }
+
+
+                        })
+
+
+
+                }
+
+
+
+            })
+
+            setErrorLog(true)
+
+
         },
     });
+
+    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress } = formik.values;
 
     const formikImage = useFormik({
         initialValues: { avatar: '' },
@@ -151,8 +181,8 @@ const ModifyAccount = () => {
 
     }
 
-    const { valueChange, oldPassword, repeatNewPassword, valueName } = formik.values;
 
+    // Champ additionnels pour la modification de mot de passe et adresse
     const additionalField = (type) => {
 
         if (type == 'password') {
@@ -185,71 +215,109 @@ const ModifyAccount = () => {
             );
 
         }
+
+        if (type == 'adress') {
+            return (
+                <div>
+
+                    <label htmlFor="adress">Nouvelle Adresse</label>
+                    <div>
+                        <input
+                            type="text"
+                            name="adress"
+                            value={adress}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                    </div>
+                    <label htmlFor="zipcode">
+                        Nouveau code postal
+                    </label>
+                    <div>
+                        <input
+                            type="number"
+                            name="zipcode"
+                            value={zipcode}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                    </div>
+                </div>
+            );
+
+        }
     };
 
     return (
         <div>
-            {
-                <div className="global2">
-                    {typeModification != "avatar" && <form className="login" onSubmit={formik.handleSubmit}>
+
+            <div className="global2">
+                {typeModification != "avatar" && <form className="login" onSubmit={formik.handleSubmit}>
+                    <legend className="titre">
+                        Modifier votre {typeModification}
+                    </legend>
+
+                    <input
+                        type="hidden"
+                        name="valueName"
+                        value={valueName}
+                        onChange={formik.handleChange}
+                        required
+                    />
+                    {additionalField(typeModification)}
+                    <label htmlFor="email">{textLabel}</label>
+                    <div>
+                        <input
+                            type={typeInput}
+                            name="valueChange"
+                            value={valueChange}
+                            onChange={formik.handleChange}
+                            required
+                        />
+                    </div>
+
+                    <div className="submit2">
+                        <button type="submit">Modifier</button>
+                    </div>
+                    {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
+                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="L'ancien mot de passe ne correspond pas" />}
+                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email déjà prit" />}
+                    {(errorLog && msgError.pseudo) && <ErrorMessSmall middle message="Pseudo déjà prit" />}
+                    {(errorLog && msgError.zipcode) && <ErrorMessSmall middle message="Code postal trop long" />}
+                </form>
+                }
+
+                {
+                    typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
+                        {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                            <p> Aucune image </p>}
                         <legend className="titre">
                             Modifier votre {typeModification}
                         </legend>
 
-                        <input
-                            type="hidden"
-                            name="valueName"
-                            value={valueName}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                        {additionalField(typeModification)}
-                        <label htmlFor="email">{textLabel}</label>
+
+                        <label htmlFor="email">Avatar</label>
                         <div>
                             <input
-                                type={typeInput}
-                                name="valueChange"
-                                value={valueChange}
-                                onChange={formik.handleChange}
+                                id="avatar"
+                                type="file"
+                                name="avatar"
+                                accept='images/*'
+                                onChange={(e) => loadImage(e)}
                                 required
                             />
+                            {userImageValue && <div> <p>Image chargé</p> <PreviewUserImage file={userImageValue} /> </div>}
+                            {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
+                            {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
+
                         </div>
                         <div className="submit2">
-                            <button type="submit">Modifier</button>
+                            <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
                         </div>
-                    </form >}
+                    </form>
+                }
+            </div>
 
-                    {
-                        typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
-                            {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
-                                <p> Aucune image </p>}
-                            <legend className="titre">
-                                Modifier votre {typeModification}
-                            </legend>
-
-
-                            <label htmlFor="email">Avatar</label>
-                            <div>
-                                <input
-                                    id="avatar"
-                                    type="file"
-                                    name="avatar"
-                                    accept='images/*'
-                                    onChange={(e) => loadImage(e)}
-                                    required
-                                />
-                                {userImageValue && <div> <p>Image chargé</p> <PreviewUserImage file={userImageValue} /> </div>}
-                                {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
-                                {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
-
-                            </div>
-                            <div className="submit2">
-                                <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
-                            </div>
-                        </form>
-                    }
-                </div >
-            }
         </div >
     );
 };
