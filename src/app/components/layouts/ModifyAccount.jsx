@@ -15,6 +15,7 @@ import ErrorMessSmall from '../../shared/components/form-and-error-components/Er
 
 
 const ModifyAccount = () => {
+    // state pour la gestion d'erreur
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState("");
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const ModifyAccount = () => {
 
     const id = useSelector((state) => state.auth.user._id);
 
+    //récupération du parramètre et modification de la page en fonction
     const { typeModification } = useParams();
     var textLabel = '';
     switch (typeModification) {
@@ -84,10 +86,12 @@ const ModifyAccount = () => {
 
             userInfoUpdate(values).then((res) => {
                 
+                //récupèration des erreurs
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }
 
+                //Modification et redirection
                 if (res.status === 200 && !res.data.errors) {
                     userInfo(id).then(
                         
@@ -121,6 +125,8 @@ const ModifyAccount = () => {
 
     const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress } = formik.values;
 
+
+    // Champ additionnels pour la modification de mot de passe et adresse
     const additionalField = (type) => {
 
         if (type == 'password') {

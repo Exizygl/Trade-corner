@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userInfo } from '../../api/backend/requestApi';
 
-//import { connexion } from '../../shared/components/Redux-store/actions';
+
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
 
