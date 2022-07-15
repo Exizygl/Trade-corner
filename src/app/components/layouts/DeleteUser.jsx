@@ -1,19 +1,22 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { userDelete, userDeleteInfo } from '../../api/backend/requestApi';
+import { userDelete } from '../../api/backend/requestApi';
 import { useHistory } from 'react-router-dom';
 import { URL_HOME } from '../../shared/constants/urls/urlConstants';
 
 
 import { signOut } from '../../shared/redux-store/authenticationSlice';
+import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 
 
 const DeleteUser = () => {
+    const [errorLog, setErrorLog] = useState(false);
+    const [msgError, setMsgError] = useState("");
 
     const dispatch = useDispatch();
 
@@ -34,16 +37,22 @@ const DeleteUser = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-           
-            userDelete(values).then(
-                function (res){
-                if (res.status === 200) {
+
+            userDelete(values).then((res) => {
+                if (res.data.errors) {
+                    setMsgError(res.data.errors)
+                }
+
+                if (res.status === 200 && !res.data.errors) {
                     dispatch(signOut());
                     history.push(URL_HOME);
-                }
-            }
 
-            )
+                }
+
+
+            })
+            setErrorLog(true)
+
         }
 
     });
@@ -74,6 +83,7 @@ const DeleteUser = () => {
                         <div className="submit2">
                             <button type="submit">Suppression</button>
                         </div>
+                        {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Le mot de passe ne correspond pas" />}
                     </form>
                 </div>
             }

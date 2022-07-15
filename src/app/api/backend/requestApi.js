@@ -32,7 +32,6 @@ export const userDelete = (values) => {
     return apiBackEnd.post('user/delete', values);
 };
 
-export const userDeleteInfo = (values) => {
-    return apiBackEnd.post('deleteUser/create', values);
-};
-
+export function uploadUserImage(values) {
+    return apiBackEnd.post('user/upload-image', values);
+}
