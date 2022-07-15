@@ -9,6 +9,7 @@ import { URL_HOME, URL_LOGIN } from '../../shared/constants/urls/urlConstants';
 
 
 import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
+import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 
@@ -81,43 +82,44 @@ const ModifyAccount = () => {
         initialValues,
         onSubmit: (values) => {
 
-            userInfoUpdate(values).then(() => {
-
-
-                userInfo(id).then(
-                    function (res) {
-                        
-                        if (res.data.errors) {
-                            setMsgError(res.data.errors)
-                        }
-                        if (res.status === 200) {
-
-                            dispatch(updateUser(res.data));
-
-
-                        }
-                    })
-                    .catch((e) => {
-                        console.log("e", e)
-                        setErrorLog(true)
-                    });
-
-
-
-
-                if (values.valueName == "password" || values.valueName == "email") {
-                    dispatch(signOut());
-                    history.push(URL_LOGIN);
-                } else {
-                    history.push(URL_HOME);
+            userInfoUpdate(values).then((res) => {
+                
+                if (res.data.errors) {
+                    setMsgError(res.data.errors)
                 }
 
-            });
+                if (res.status === 200 && !res.data.errors) {
+                    userInfo(id).then(
+                        
+                        function (res) {
+                            
+                            dispatch(updateUser(res.data));
+
+                            if (values.valueName == "password" || values.valueName == "email") {
+                                dispatch(signOut());
+                                 history.push(URL_LOGIN);
+                            } else {
+                                 history.push(URL_HOME);
+                            }
+
+
+                        })
+                        
+
+
+                }
+
+
+
+            })
+            
+                setErrorLog(true)
+            
 
         },
     });
 
-    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress} = formik.values;
+    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress } = formik.values;
 
     const additionalField = (type) => {
 
@@ -211,7 +213,7 @@ const ModifyAccount = () => {
                                 required
                             />
                         </div>
-                        
+
                         <div className="submit2">
                             <button type="submit">Modifier</button>
                         </div>
