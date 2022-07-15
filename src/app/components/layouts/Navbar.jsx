@@ -2,25 +2,17 @@ import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Logout } from '../../api/backend/requestApi';
+import { useDispatch } from 'react-redux';
 import { URL_HOME } from './../../shared/constants/urls/urlConstants';
 import { URL_LOGIN } from './../../shared/constants/urls/urlConstants';
 import { URL_REGISTER } from './../../shared/constants/urls/urlConstants';
 import { URL_ADMIN } from './../../shared/constants/urls/urlConstants';
 import { URL_USER } from './../../shared/constants/urls/urlConstants';
 import { URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
+import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
 
 const Navbar = () => {
-    const handleLogout = async () => {
-        try {
-            await axios.get({ Logout });
-            localStorage.removeItem('firstLogin');
-            window.location.href = '/';
-        } catch (err) {
-            window.location.href = '/';
-        }
-    };
-
+    const dispatch = useDispatch();
     return (
         <Disclosure as="nav" className="top-0 fixed z-50 w-full bg-white shadow-md">
             {({ open }) => (
@@ -47,12 +39,14 @@ const Navbar = () => {
                                     <Link to={URL_REGISTER} className="ml-3">
                                         S'enregistrer
                                     </Link>
-                                    <Link
-                                        to={URL_LOGOUT}
-                                        className="ml-3"
-                                        onClick={handleLogout}
-                                    >
-                                        Se déconnecter
+                                    <Link to={URL_LOGOUT}>
+                                        <button
+                                            className="ml-8 btn btn-green"
+                                            onClick={() => dispatch(signOut())}
+                                        >
+                                            {' '}
+                                            Sign out{' '}
+                                        </button>
                                     </Link>
                                     <Link to={URL_USER} className="ml-3">
                                         Profil
