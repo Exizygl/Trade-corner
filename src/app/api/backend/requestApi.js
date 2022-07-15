@@ -24,3 +24,7 @@ export const userInfo = (id) => {
 export const userInfoUpdate = (values) => {
     return apiBackEnd.post('user/update', values);
 };
+
+export function uploadUserImage(values) {
+    return apiBackEnd.post('user/upload-image', values);
+}

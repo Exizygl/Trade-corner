@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 
 //import { connexion } from '../../shared/components/Redux-store/actions';
@@ -8,7 +7,6 @@ import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 
 const User = () => {
     const user = useSelector((state) => state.auth.user);
-    console.log(user);
 
     return (
         <div className="flex mt-12">
@@ -50,7 +48,8 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
-                        <img src={user.Avatar} alt="" />
+                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                            <p> Aucune image </p>}
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'avatar'}>
