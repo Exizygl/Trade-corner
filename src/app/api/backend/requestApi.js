@@ -16,9 +16,6 @@ export const Logout = () => {
     return apiBackEnd.get('user/');
 };
 
-export const getAllUser = () => {
-    return apiBackEnd.get('user');
-};
 
 export const userInfo = (id) => {
     return apiBackEnd.get('user/' + id);
@@ -32,6 +29,18 @@ export const userDelete = (values) => {
     return apiBackEnd.post('user/delete', values);
 };
 
+export const userDeleteInfo = (values) => {
+    return apiBackEnd.post('deleteUser/create', values);
+};
+
+// requete d'admin uniquement
+export const getAllUser = () => {
+    return apiBackEnd.get('user');
+};
+
+export const deleteUserById = (values) =>{
+    return apiBackEnd.put('admin/delete', values);
+};
 export function uploadUserImage(values) {
     return apiBackEnd.post('user/upload-image', values);
 }
