@@ -10,7 +10,7 @@ export const isLength = (password) => {
     return false;
 };
 
-export const isMatch = (password, cf_password) => {
-    if (password === cf_password) return true;
+export const isMatch = (password, passwordConfirmation) => {
+    if (password === passwordConfirmation) return true;
     return false;
 };

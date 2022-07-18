@@ -34,7 +34,6 @@ export default function PreviewListUsers() {
         ,[]
       );
 
-      console.log("userPreview" + JSON.stringify(state.usersPreview));
 
   return (
     <div>
