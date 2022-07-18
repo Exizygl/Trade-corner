@@ -39,7 +39,6 @@ const Navbar = () => {
                                     <Link to={URL_REGISTER} className="ml-3">
                                         S'enregistrer
                                     </Link>
-<<<<<<< HEAD
                                     <Link to={URL_LOGOUT}>
                                         <button
                                             className="ml-8 btn btn-green"
@@ -49,15 +48,6 @@ const Navbar = () => {
                                             Sign out{' '}
                                         </button>
                                     </Link>
-=======
-                                    <button
-                                        className="ml-8 btn btn-green"
-                                        onClick={() => dispatch(signOut())}
-                                    >
-                                        {' '}
-                                        Se déconnecter{' '}
-                                    </button>
->>>>>>> Jordan
                                     <Link to={URL_USER} className="ml-3">
                                         Profil
                                     </Link>
