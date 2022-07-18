@@ -23,22 +23,17 @@ useEffect( () => {
           let name= res.data[i].name;
           let id = res.data[i]._id;
           let role = res.data[i].role;
-          let avatar = res.data[i].Avatar;
-          let user = {name : name, id: id, role : role, avatar :  avatar};
+          let imageProfilUrl = res.data[i].imageProfilUrl;
+          let user = {name : name, id: id, role : role, imageProfilUrl :  imageProfilUrl};
           usersTemp.push(user);      //j'ai récup les données que je voulais
         };    
         dispatch(setListUsers(usersTemp));//je transfere le tableau au store
       }
     }
   )
-// .then (() => {setUsersState(true);
-// console.log(usersState)})
 }
   ,[]
 )
-console.log("users : " + JSON.stringify(users));
-
-
 
 
   return (
@@ -58,9 +53,6 @@ console.log("users : " + JSON.stringify(users));
             <h3>Liste des demandes</h3>
             {/* Liste demandes */}
             <p>Vous n'avez pas de demandes en attente.</p>
-            {/* {users && users[0].name} */}
-            
-            {/* <button onClick={handleClick}>Button</button> */}
         </div> 
     </div>
   )

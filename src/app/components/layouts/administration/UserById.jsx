@@ -1,7 +1,6 @@
-import React from 'react';
-import {useEffect,useState} from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import React, {useEffect,useState} from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import { URL_MODIFYACCOUNT } from '../../../shared/constants/urls/urlConstants';
 import { userInfo } from '../../../api/backend/requestApi';
 import Navigation from './Navigation';
@@ -13,9 +12,6 @@ export default function UserById() {
 
     //récupération de l'id
     const {id} = useParams(); // renvoie une paire clef/valeur  
-    console.log("use parem result : " + JSON.stringify({id})) ;
-    console.log("param" + JSON.stringify({id}.id));
-
 
     //recupération des infos sur l'utilisateur
 
@@ -28,7 +24,7 @@ export default function UserById() {
                     id: res.data._id,
                     role : res.data.role, 
                     name : res.data.name, 
-                    avatar : res.data.Avatar, 
+                    imageProfilUrl : res.data.imageProfilUrl, 
                     pseudo : res.data.pseudo, 
                     email : res.data.email, 
                     phoneNumber : res.data.phoneNumber, 
@@ -46,7 +42,6 @@ export default function UserById() {
       )
     }, []);
 
-    console.log("état du state " +JSON.stringify(userState));
 
     function renderRole(){
         if(userState.role === 0){
@@ -109,11 +104,17 @@ export default function UserById() {
                         </Link>
                     </div>
                 </div>
+
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
-                        <img src={userState.avatar} alt="" />
-                    </div>
+                        {userState.imageProfilUrl ? <div>
+                            <img src={`http://localhost:8080/static/` + userState.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} />
+                            </div> :
+                        <p> Aucune image </p>}
+                    </div>    
+                
+
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'avatar'}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">

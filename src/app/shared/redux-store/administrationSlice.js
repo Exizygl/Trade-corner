@@ -2,9 +2,6 @@ import {createSlice} from '@reduxjs/toolkit';
 
 
 const initialState = {
-   //valeurs en dures pour test 
-    //users : [{name : "Leia", role : "Sénatrice"}],
-
     //initialisation normale
     users : [],
 };

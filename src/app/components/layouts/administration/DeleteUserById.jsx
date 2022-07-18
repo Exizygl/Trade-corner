@@ -1,19 +1,20 @@
 import { useFormik } from 'formik';
-import React from 'react';
-import {useEffect,useState} from 'react';
+import React , {useEffect,useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams, Link} from 'react-router-dom';
+
 import { userInfo } from '../../../api/backend/requestApi';
 import { deleteUserById } from '../../../api/backend/requestApi';
+import { URL_ADMIN } from '../../../shared/constants/urls/urlConstants';
 
-// import { userDelete, userDeleteInfo } from '../../api/backend/requestApi';
-import { useHistory, useParams, Link} from 'react-router-dom';
 
 const DeleteUser = () => {
 
     const userId = useSelector(state => state.auth.userId);
 
     // const dispatch = useDispatch();
-    // const history = useHistory();
+    const history = useHistory();
+    
      //récupération de l'id
     const {id} = useParams(); // renvoie une paire clef/valeur  
     const initialValues = {
@@ -57,24 +58,18 @@ const DeleteUser = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-            alert("utilisateur supprimé : " + JSON.stringify(values) + "avec l'id : " + userState.id);
             deleteUserById(values)
             .then (function (res) {
                 if (res.status === 200)
-                {console.log("ça a marché");
-            console.log("message : " + JSON.stringify(res.message))}
+                {alert("l'utilisateur a bien été supprimé" + res.data);
+                history.push(URL_ADMIN);
+            //redirection
+                }
                 else {
-                    console.log("probléme")
-                    console.log("erreur = " + JSON.stringify(res.error));
+                    if (res.status === 201)
+                    {  alert ("erreur = " + res.data.error );}
                 }
             })
-
-        //    userDelete(values).then(
-        //         function (res){
-        //             if (res.status === 200) { 
-        //             }
-        //         }
-        //     )
         }
     });
 

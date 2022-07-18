@@ -45,7 +45,7 @@ const Routes = () => {
                 component={ModifyAccountView}
             />
             {/* routes administrateur */}
-             <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
+            <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
             <Route exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} />
             <Route exact path={URL.URL_USER_BYID + ':id'} component={UserByIdView} />
             <Route exact path={URL.URL_DELETE_USER_BYID + ':id'} component={DeleteUserByIdView} />
