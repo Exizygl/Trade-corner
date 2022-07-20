@@ -45,10 +45,17 @@ export default function UserById() {
 
 
     function renderRole(){
-        if(userState.role === 0){
-            return (<div> Utilisateur normal</div>)
+        switch(userState.role) {
+            case 0 :
+            return (<div> Utilisateur normal</div>);
+            break;
+            case 1 : 
+            return (<div> Vendeur </div>);
+            break;
+            case 2 : 
+            return (<div> Administrateur</div>);
+            break;
         }
-        else {return (<div> Autre utilisateur</div>) }
     };
 
 
@@ -82,7 +89,7 @@ export default function UserById() {
                         {renderRole()}
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT_BYID + 'pseudo'+`/${userState.id}`}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
                             <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
                                 Modifier
                             </button>
@@ -130,7 +137,7 @@ export default function UserById() {
                         <div>{userState.name}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT_BYID + 'nom'+`/${userState.id}`}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'name'+`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>

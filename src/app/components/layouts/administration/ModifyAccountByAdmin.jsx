@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { userInfo, userInfoUpdate, uploadUserImage } from '../../../api/backend/requestApi';
+import { userInfo, updateUserById, uploadUserImage } from '../../../api/backend/requestApi';
 
 import PreviewUserImage from '../../layouts/PreviewUserImage';
 import { signOut, updateUser } from '../../../shared/redux-store/authenticationSlice';
-import { URL_HOME, URL_LOGIN } from '../../../shared/constants/urls/urlConstants';
+import { URL_HOME, URL_LOGIN, URL_ADMIN_LISTUSERS } from '../../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
@@ -27,32 +27,32 @@ const ModifyAccountByAdmin = () => {
 
     const history = useHistory();
 
-    const callGetUser = (userId) => {
-        userInfo(userId)
-            .then((res) => {
-                if (res.status === 200 && res.data) {
-                    setUser(res.data)
-                }
-            })
-            .catch((e) => console.log(e));
-    }
+    // const callGetUser = (userId) => {
+    //     userInfo(userId)
+    //         .then((res) => {
+    //             if (res.status === 200 && res.data) {
+    //                 setUser(res.data)
+    //             }
+    //         })
+    //         .catch((e) => console.log(e));
+    // }
 
-    useEffect(() => {
-        callGetUser(userId)
-    }, [])
-
-
-    const initialValues = {
-        valueChange: '',
-    };
-
-    var typeInput = '';
-
+    // useEffect(() => {
+    //     callGetUser(userId)
+    // }, [])
 
     //récupération du parramètre et modification de la page en fonction
     const { typeModification, id} = useParams();
-    
+
+    const initialValues = {
+        valueChange: '',
+        userToUpdate: id,
+        userId: userId,
+    };
+
+    var typeInput = '';
     var textLabel = '';
+
     switch (typeModification) {
         case 'pseudo':
             textLabel = 'Nouveau pseudonyme';
@@ -100,11 +100,16 @@ const ModifyAccountByAdmin = () => {
         initialValues,
         onSubmit: (values) => {
 
-            userInfoUpdate(values).then((res) => {
+            updateUserById(values).then((res) => {
+
 
                 //récupèration des erreurs
+
+                if (res.status === 201) {
+                    console.log("erreur reçue : " + JSON.stringify(res.data.error))
+                }
                 if (res.data.errors) {
-                    setMsgError(res.data.errors)
+                    setMsgError(res.data.errors); 
                 }
 
                 //Modification et redirection
@@ -112,34 +117,23 @@ const ModifyAccountByAdmin = () => {
                     userInfo(userId).then(
 
                         function (res) {
+                            //dispatch(updateUser(res.data));
+                            if (values.valueName == "password" || values.valueName == "email")
+                             {                                //dispatch(signOut());
+                                alert("le " + values.valueName + " de l'utilisateur a bien été changé. Veuillez lui transmettre son nouveau " + values.valuesName);
+                                history.push(URL_ADMIN_LISTUSERS);
 
-                            dispatch(updateUser(res.data));
-
-                            if (values.valueName == "password" || values.valueName == "email") {
-                                dispatch(signOut());
-                                history.push(URL_LOGIN);
-                            } else {
+                            } else { 
                                 history.push(URL_HOME);
                             }
-
-
                         })
-
-
-
                 }
-
-
-
             })
-
             setErrorLog(true)
-
-
         },
     });
 
-    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress } = formik.values;
+    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress} = formik.values;
 
     const formikImage = useFormik({
         initialValues: { avatar: '' },
@@ -188,17 +182,6 @@ const ModifyAccountByAdmin = () => {
         if (type == 'password') {
             return (
                 <div>
-
-                    <label htmlFor="oldPassword">Ancien mot de passe</label>
-                    <div>
-                        <input
-                            type="password"
-                            name="oldPassword"
-                            value={oldPassword}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
                     <label htmlFor="repeatNewPassword">
                         Nouveau mot de passe
                     </label>
@@ -213,14 +196,12 @@ const ModifyAccountByAdmin = () => {
                     </div>
                 </div>
             );
-
         }
 
         if (type == 'adress') {
             return (
                 <div>
-
-                    <label htmlFor="adress">Nouvelle Adresse</label>
+                   <label htmlFor="adress">Nouvelle Adresse</label>
                     <div>
                         <input
                             type="text"
@@ -244,16 +225,41 @@ const ModifyAccountByAdmin = () => {
                     </div>
                 </div>
             );
-
         }
     };
 
     return (
         <div>
-
             <div className="global2">
-                {typeModification != "avatar" && <form className="login" onSubmit={formik.handleSubmit}>
-                    {/* <h1>modification par un admin</h1> */}
+                {typeModification === "role" && <form className="login" onSubmit={formik.handleSubmit}>
+                <legend className="titre">
+                     Modifier le {typeModification}
+                </legend>
+
+                <select name="role"
+                value={valueName}
+                onChange={formik.handleChange}>
+
+                    <option value="" label="Selectionner un role">
+                        Selectionner un role{" "}
+                    </option>
+                    <option value="0" label="utilisateur normal">
+                        utilisateur normal
+                    </option>
+                    <option value="1" label="vendeur">
+                        Utilisateur- vendeur
+                    </option>
+                    <option value="2" label="administrateur">
+                        administrateur
+                    </option>
+                </select>
+                <div className="submit2">
+                    <button type="submit">Modifier</button>
+                </div>   
+                </form>
+                }
+
+                {typeModification != "avatar" && typeModification != "role" && <form className="login" onSubmit={formik.handleSubmit}>
                     <legend className="titre">
                         Modifier le {typeModification}
                     </legend>
@@ -266,7 +272,7 @@ const ModifyAccountByAdmin = () => {
                         required
                     />
                     {additionalField(typeModification)}
-                    <label htmlFor="email">{textLabel}</label>
+                    <label htmlFor="password">{textLabel}</label>
                     <div>
                         <input
                             type={typeInput}
@@ -288,8 +294,7 @@ const ModifyAccountByAdmin = () => {
                 </form>
                 }
 
-                {
-                    typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
+                {typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
                         {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
                             <p> Aucune image </p>}
                         <legend className="titre">
@@ -315,10 +320,9 @@ const ModifyAccountByAdmin = () => {
                         <div className="submit2">
                             <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
                         </div>
-                    </form>
+                </form>
                 }
             </div>
-
         </div >
     );
 };
