@@ -284,6 +284,7 @@ const ModifyAccount = () => {
                     {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email déjà prit" />}
                     {(errorLog && msgError.pseudo) && <ErrorMessSmall middle message="Pseudo déjà prit" />}
                     {(errorLog && msgError.zipcode) && <ErrorMessSmall middle message="Code postal trop long" />}
+                    {(errorLog && msgError.city) && <ErrorMessSmall middle message="La ville ne peut pas contenir de chiffre" />}
                 </form>
                 }
 

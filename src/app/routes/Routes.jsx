@@ -15,6 +15,8 @@ import DemandesComView from '../views/administration/DemandesComView';
 import ConfirmRegisterView from '../views/ConfirmRegisterView';
 
 import UserDeleteView from '../views/UserDeleteView';
+import ForgottenPasswordView from '../views/forgottenPasswordView';
+import PasswordChangeView from '../views/PasswordChangeView';
 
 /**
  * Routes of the application
@@ -36,6 +38,8 @@ const Routes = () => {
             <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
             <Route path={URL.URL_CONFIRM_REGISTER} component={ConfirmRegisterView} />
             <Route path={URL.URL_DELETE} component={UserDeleteView} />
+            <Route path={URL.URL_FORGOTTENPASSWORD} component={ForgottenPasswordView} />
+            <Route path={URL.URL_PASSWORDCHANGE} component={PasswordChangeView} />
             <Route
                 exact
                 path={URL.URL_MODIFYACCOUNT + ':typeModification'}

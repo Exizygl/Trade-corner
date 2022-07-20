@@ -17,6 +17,7 @@ export default function PreviewListUsers() {
             if (res.status === 200) {
               let usersTemp = [];
               for (let i=0; i<4; i++) { //pour la preview on récupére les 4 premiers utilisateurs
+                console.log(res.data[i].name)
                 let name= res.data[i].name;
                 let id = res.data[i]._id;
                 let role = res.data[i].role;

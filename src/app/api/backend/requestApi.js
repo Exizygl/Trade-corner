@@ -35,3 +35,12 @@ export const userDelete = (values) => {
 export function uploadUserImage(values) {
     return apiBackEnd.post('user/upload-image', values);
 }
+
+export const forgottenPassword = (values) => {
+    return apiBackEnd.post('user/forgotten-password', values);
+}
+
+export const passwordChange = (values) => {
+    return apiBackEnd.post('user/password-change', values);
+}
+
