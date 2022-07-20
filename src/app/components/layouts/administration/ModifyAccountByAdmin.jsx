@@ -60,6 +60,12 @@ const ModifyAccountByAdmin = () => {
             initialValues.valueName = 'pseudo';
             break;
 
+        case 'role':
+            // textLabel = 'Nouveau role';
+            // typeInput = 'text';
+            initialValues.valueName = 'role';
+            break;
+
         case 'email':
             textLabel = 'Nouvelle adresse e-mail';
             typeInput = 'email';
@@ -236,8 +242,16 @@ const ModifyAccountByAdmin = () => {
                      Modifier le {typeModification}
                 </legend>
 
-                <select name="role"
-                value={valueName}
+                <input
+                        type="hidden"
+                        name="valueName"
+                        value={valueName}
+                        onChange={formik.handleChange}
+                        required
+                    />
+
+                <select name="valueChange"
+                value={valueChange}
                 onChange={formik.handleChange}>
 
                     <option value="" label="Selectionner un role">
