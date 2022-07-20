@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { userInfo, userInfoUpdate, uploadUserImage } from '../../api/backend/requestApi';
+import { userInfo, userInfoUpdate, uploadUserImage } from '../../../api/backend/requestApi';
 
-import PreviewUserImage from '../layouts/PreviewUserImage';
-import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
-import { URL_HOME, URL_LOGIN } from '../../shared/constants/urls/urlConstants';
-import { findImageExtension, validImageSize } from '../../shared/components/utils-components/FormData';
-import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
+import PreviewUserImage from '../../layouts/PreviewUserImage';
+import { signOut, updateUser } from '../../../shared/redux-store/authenticationSlice';
+import { URL_HOME, URL_LOGIN } from '../../../shared/constants/urls/urlConstants';
+import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
+import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 
-const ModifyAccount = () => {
+const ModifyAccountByAdmin = () => {
     const userId = useSelector((state) => state.auth.user._id);
     const [user, setUser] = useState("");
     const [userImageValue, setUserImageValue] = useState("");
@@ -50,8 +50,8 @@ const ModifyAccount = () => {
 
 
     //récupération du parramètre et modification de la page en fonction
-    const { typeModification } = useParams();
-
+    const { typeModification, id} = useParams();
+    
     var textLabel = '';
     switch (typeModification) {
         case 'pseudo':
@@ -253,8 +253,9 @@ const ModifyAccount = () => {
 
             <div className="global2">
                 {typeModification != "avatar" && <form className="login" onSubmit={formik.handleSubmit}>
+                    {/* <h1>modification par un admin</h1> */}
                     <legend className="titre">
-                        Modifier votre {typeModification}
+                        Modifier le {typeModification}
                     </legend>
 
                     <input
@@ -292,7 +293,7 @@ const ModifyAccount = () => {
                         {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
                             <p> Aucune image </p>}
                         <legend className="titre">
-                            Modifier votre {typeModification}
+                            Modifier le champ  {typeModification}
                         </legend>
 
 
@@ -306,7 +307,7 @@ const ModifyAccount = () => {
                                 onChange={(e) => loadImage(e)}
                                 required
                             />
-                            {userImageValue && <div> <p>Image chargé</p> <PreviewUserImage file={userImageValue} /> </div>}
+                            {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
                             {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
                             {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
 
@@ -322,4 +323,4 @@ const ModifyAccount = () => {
     );
 };
 
-export default ModifyAccount;
+export default ModifyAccountByAdmin;
