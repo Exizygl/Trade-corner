@@ -12,6 +12,8 @@ import ConfirmRegisterView from '../views/ConfirmRegisterView';
 import UserView from '../views/UserView';
 import ModifyAccountView from '../views/ModifyAccountView';
 import UserDeleteView from '../views/UserDeleteView';
+import ForgottenPasswordView from '../views/forgottenPasswordView';
+import PasswordChangeView from '../views/PasswordChangeView';
 
 
 //import administration
@@ -40,6 +42,8 @@ const Routes = () => {
             {/*routes pour le profil */}
             <Route exact path={URL.URL_USER} component={UserView} />
             <Route path={URL.URL_DELETE} component={UserDeleteView} />
+            <Route path={URL.URL_FORGOTTENPASSWORD} component={ForgottenPasswordView} />
+            <Route path={URL.URL_PASSWORDCHANGE} component={PasswordChangeView} />
             <Route
                 exact
                 path={URL.URL_MODIFYACCOUNT + ':typeModification'}

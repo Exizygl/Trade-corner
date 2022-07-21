@@ -85,6 +85,9 @@ const Login = () => {
                         Pas de compte ? Appuyez ici pour{' '}
                         <a href="./register">S'enregistrer</a>
                     </p>
+                    <p>
+                        <a href="./forgotten-password">Mot de passe oublié</a>
+                    </p>
                 </div>
             </div>
         </div>
