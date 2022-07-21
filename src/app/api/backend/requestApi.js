@@ -54,3 +54,11 @@ export const updateUserById = (values) => {
 export function uploadUserImageById(values) {
     return apiBackEnd.post('admin/upload-image', values);
 }
+
+export const forgottenPassword = (values) => {
+    return apiBackEnd.post('user/forgotten-password', values);
+};
+
+export const passwordChange = (values) => {
+    return apiBackEnd.post('user/password-change', values);
+};

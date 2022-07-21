@@ -15,10 +15,13 @@ import ErrorMessSmall from '../../../shared/components/form-and-error-components
 const ModifyAccountByAdmin = () => {
     const userId = useSelector((state) => state.auth.user._id);
 
-    const [user, setUser] = useState("");
+    const [userToModify, setUserToModify] = useState(""); // utile pour la modification d'avatar
     const [userImageValue, setUserImageValue] = useState("");
     const [errorSizeImage, setErrorSizeImage] = useState("");
     const [errorExtensionImage, setErrorExtensionImage] = useState("");
+
+    //récupération du parramètre et modification de la page en fonction
+    const { typeModification, id} = useParams();
 
     // state pour la gestion d'erreur
     const [errorLog, setErrorLog] = useState(false);
@@ -27,15 +30,31 @@ const ModifyAccountByAdmin = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const callGetUser = (id) => {
+        userInfo(id)
+            .then((res) => {
+                if (res.status === 200 && res.data) {
+                    setUserToModify(res.data)
+                }
+            })
+            .catch((e) => console.log(e));
+    }
 
-    //récupération du parramètre et modification de la page en fonction
-    const { typeModification, id} = useParams();
+    useEffect(() => {
+        callGetUser(id)
+    }, [])
+
+
+//<-----Initialisation des valeurs pour coordonnées ----->
+
 
     const initialValues = {
         valueChange: '',
         userToUpdate: id,
         userId: userId,
     };
+
+//<----- valueName en fonction du type de modification ---->
 
     var typeInput = '';
     var textLabel = '';
@@ -48,8 +67,8 @@ const ModifyAccountByAdmin = () => {
             break;
 
         case 'role':
-            // textLabel = 'Nouveau role';
-            // typeInput = 'text';
+            textLabel = 'Nouveau role';
+            //typeInput = 'text';
             initialValues.valueName = 'role';
             break;
 
@@ -89,6 +108,7 @@ const ModifyAccountByAdmin = () => {
 
     }
 
+    // <----- gestion du formulaire ----->
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -124,7 +144,9 @@ const ModifyAccountByAdmin = () => {
         },
     });
 
-    const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress} = formik.values;
+    const { valueChange, repeatNewPassword, valueName, zipcode, adress} = formik.values;
+
+    // <----- gestion du formulaire avatar ----->
 
     const formikImage = useFormik({
         initialValues: { userToUpdate: id,
@@ -138,14 +160,12 @@ const ModifyAccountByAdmin = () => {
     const handleImageUser = (values) => {
 
         const formData = new FormData()
-
         formData.append('avatar', values.avatar);
-        //formData.append('userToUpdate', values.userToUpodate);
-
-        const imageUser = formData.get('avatar');
+        formData.append('userToUpdate',id);
+ 
         uploadUserImageById(formData)
             .then((res) => {
-                //callGetUser(userId)
+                callGetUser(id);
                 console.log(res)
             })
     }
@@ -225,6 +245,36 @@ const ModifyAccountByAdmin = () => {
     return (
         <div>
             <div className="global2">
+
+                {typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
+                            {userToModify.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + userToModify.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                                <p> Aucune image </p>}
+                            <legend className="titre">
+                                Modifier le champ  {typeModification}
+                            </legend>
+
+
+                            <label htmlFor="email">Avatar</label>
+                            <div>
+                                <input
+                                    id="avatar"
+                                    type="file"
+                                    name="avatar"
+                                    accept='images/*'
+                                    onChange={(e) => loadImage(e)}
+                                    required
+                                />
+                                {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
+                                {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
+                                {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
+
+                            </div>
+                            <div className="submit2">
+                                <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                            </div>
+                    </form>
+                }
+
                 {typeModification === "role" && <form className="login" onSubmit={formik.handleSubmit}>
                 <legend className="titre">
                      Modifier le {typeModification}
@@ -293,35 +343,6 @@ const ModifyAccountByAdmin = () => {
                     {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email déjà prit" />}
                     {(errorLog && msgError.pseudo) && <ErrorMessSmall middle message="Pseudo déjà prit" />}
                     {(errorLog && msgError.zipcode) && <ErrorMessSmall middle message="Code postal trop long" />}
-                </form>
-                }
-
-                {typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
-                        {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
-                            <p> Aucune image </p>}
-                        <legend className="titre">
-                            Modifier le champ  {typeModification}
-                        </legend>
-
-
-                        <label htmlFor="email">Avatar</label>
-                        <div>
-                            <input
-                                id="avatar"
-                                type="file"
-                                name="avatar"
-                                accept='images/*'
-                                onChange={(e) => loadImage(e)}
-                                required
-                            />
-                            {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
-                            {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
-                            {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
-
-                        </div>
-                        <div className="submit2">
-                            <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
-                        </div>
                 </form>
                 }
             </div>
