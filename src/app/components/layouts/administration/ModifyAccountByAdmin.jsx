@@ -6,8 +6,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { userInfo, updateUserById, uploadUserImage } from '../../../api/backend/requestApi';
 
 import PreviewUserImage from '../../layouts/PreviewUserImage';
-import { signOut, updateUser } from '../../../shared/redux-store/authenticationSlice';
-import { URL_HOME, URL_LOGIN, URL_ADMIN_LISTUSERS } from '../../../shared/constants/urls/urlConstants';
+import { URL_HOME, URL_ADMIN_LISTUSERS, URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
@@ -15,6 +14,7 @@ import ErrorMessSmall from '../../../shared/components/form-and-error-components
 
 const ModifyAccountByAdmin = () => {
     const userId = useSelector((state) => state.auth.user._id);
+
     const [user, setUser] = useState("");
     const [userImageValue, setUserImageValue] = useState("");
     const [errorSizeImage, setErrorSizeImage] = useState("");
@@ -23,23 +23,10 @@ const ModifyAccountByAdmin = () => {
     // state pour la gestion d'erreur
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState("");
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
     const history = useHistory();
 
-    // const callGetUser = (userId) => {
-    //     userInfo(userId)
-    //         .then((res) => {
-    //             if (res.status === 200 && res.data) {
-    //                 setUser(res.data)
-    //             }
-    //         })
-    //         .catch((e) => console.log(e));
-    // }
-
-    // useEffect(() => {
-    //     callGetUser(userId)
-    // }, [])
 
     //récupération du parramètre et modification de la page en fonction
     const { typeModification, id} = useParams();
@@ -108,7 +95,6 @@ const ModifyAccountByAdmin = () => {
 
             updateUserById(values).then((res) => {
 
-
                 //récupèration des erreurs
 
                 if (res.status === 201) {
@@ -123,14 +109,13 @@ const ModifyAccountByAdmin = () => {
                     userInfo(userId).then(
 
                         function (res) {
-                            //dispatch(updateUser(res.data));
                             if (values.valueName == "password" || values.valueName == "email")
-                             {                                //dispatch(signOut());
-                                alert("le " + values.valueName + " de l'utilisateur a bien été changé. Veuillez lui transmettre son nouveau " + values.valuesName);
+                             {  alert("le " + values.valueName + " de l'utilisateur a bien été changé. Veuillez lui transmettre son nouveau " + values.valuesName);
                                 history.push(URL_ADMIN_LISTUSERS);
 
                             } else { 
-                                history.push(URL_HOME);
+                                alert ("Modification pris en compte"),
+                                history.push(URL_USER_BYID+id);
                             }
                         })
                 }
