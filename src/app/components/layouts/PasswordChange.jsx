@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { passwordChange } from '../../api/backend/requestApi';
 import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
-import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { URL_LOGIN } from '../../shared/constants/urls/urlConstants';
+
 
 const PasswordChange = () => {
 
-    var { token } = useParams();
+    const history = useHistory();
 
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState("");
@@ -15,7 +17,7 @@ const PasswordChange = () => {
     const initialValues = {
         password: '',
         passwordRepeat: '',
-        emailCrypt: token
+        email: window.location.href.substr(-64)
     };
     const formik = useFormik({
         initialValues,
@@ -28,6 +30,7 @@ const PasswordChange = () => {
                     setMsgError(res.data.errors)
                 }
                 if (res.status === 200 && !res.data.errors) {
+                    history.push(URL_LOGIN);
                     
                     
                 }
@@ -39,7 +42,7 @@ const PasswordChange = () => {
         },
     });
 
-    const { password , passwordRepeat, emailCrypt } = formik.values;
+    const { password , passwordRepeat, email } = formik.values;
 
     return (
         <div>
@@ -49,8 +52,8 @@ const PasswordChange = () => {
 
                     <input
                         type="hidden"
-                        name="emailCrypt"
-                        value={emailCrypt}
+                        name="email"
+                        value={email}
                         onChange={formik.handleChange}
                         required
                     />
@@ -79,7 +82,10 @@ const PasswordChange = () => {
                     <div className="submit2">
                         <button type="submit">Envoie</button>
                     </div>
-                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email incorrect(s)" />}
+                    
+                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Lien non valide" />}
+                    {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
+                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="Les mots de passes doit avoir au moins 6 caractères minimun" />}
                    
                 </form>
             </div>

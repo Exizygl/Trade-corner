@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { forgottenPassword } from '../../api/backend/requestApi';
 import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
+import SubmitForgottenPasswordModal from './modal/SubmitForgottenPasswordModal';
+
 
 const ForgottenPassword = () => {
 
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState("");
 
-    
+    const [successSubmitModal, setSuccessSubmitModal] = useState('');
+
+    const closeModal = () => {
+        setSuccessSubmitModal('');
+    };
     const initialValues = {
         email: '',
     };
@@ -23,7 +29,12 @@ const ForgottenPassword = () => {
                     setMsgError(res.data.errors)
                 }
                 if (res.status === 200 && !res.data.errors) {
-                    
+                    setSuccessSubmitModal(
+                        <SubmitForgottenPasswordModal
+                            
+                            closeModal={() => closeModal()}
+                        />,
+                    );
                     
                 }
             })
@@ -60,6 +71,7 @@ const ForgottenPassword = () => {
                    
                 </form>
             </div>
+            {successSubmitModal}
         </div>
     );
 };
