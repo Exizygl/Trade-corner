@@ -18,6 +18,7 @@ import UserDeleteView from '../views/UserDeleteView';
 import AdministrationView from '../views/administration/AdministrationView';
 import ListUsersView from '../views/administration/ListUsersView';
 import UserByIdView from '../views/administration/UserByIdView';
+import ModifyAccountByAdminView from '../views/administration/ModifyAccountByAdminView';
 import DemandesComView from '../views/administration/DemandesComView';
 import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
 
@@ -48,6 +49,11 @@ const Routes = () => {
             <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
             <Route exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} />
             <Route exact path={URL.URL_USER_BYID + ':id'} component={UserByIdView} />
+            <Route
+                exact
+                path={URL.URL_MODIFYACCOUNT_BYID + ':typeModification' + '/' + ':id'}
+                component={ModifyAccountByAdminView}
+            />
             <Route exact path={URL.URL_DELETE_USER_BYID + ':id'} component={DeleteUserByIdView} />
             <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
         </Switch>

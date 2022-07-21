@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { URL_MODIFYACCOUNT } from '../../../shared/constants/urls/urlConstants';
+import { URL_MODIFYACCOUNT_BYID } from '../../../shared/constants/urls/urlConstants';
 import { userInfo } from '../../../api/backend/requestApi';
 import Navigation from './Navigation';
 
@@ -12,6 +12,7 @@ export default function UserById() {
 
     //récupération de l'id
     const {id} = useParams(); // renvoie une paire clef/valeur  
+    const URL_DELETE = '/administration/delete/${userState.id}'
 
     //recupération des infos sur l'utilisateur
 
@@ -44,10 +45,17 @@ export default function UserById() {
 
 
     function renderRole(){
-        if(userState.role === 0){
-            return (<div> Utilisateur normal</div>)
+        switch(userState.role) {
+            case 0 :
+            return (<div> Utilisateur normal</div>);
+            break;
+            case 1 : 
+            return (<div> Vendeur </div>);
+            break;
+            case 2 : 
+            return (<div> Administrateur</div>);
+            break;
         }
-        else {return (<div> Autre utilisateur</div>) }
     };
 
 
@@ -65,7 +73,7 @@ export default function UserById() {
                         <div>{userState.pseudo}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'pseudo'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'pseudo'+`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -81,7 +89,7 @@ export default function UserById() {
                         {renderRole()}
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'pseudo'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
                             <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
                                 Modifier
                             </button>
@@ -97,7 +105,7 @@ export default function UserById() {
                         <div>{userState.email}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'email'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'email'+`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -116,7 +124,7 @@ export default function UserById() {
                 
 
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'avatar'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'avatar'+`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -129,7 +137,7 @@ export default function UserById() {
                         <div>{userState.name}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'nom'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'name'+`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -142,7 +150,7 @@ export default function UserById() {
                         <div>{userState.adress} {userState.zipcode} {userState.ville}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'adress'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'adress'+`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -155,7 +163,7 @@ export default function UserById() {
                         <div>{userState.phoneNumber}</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'phone'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID + 'phone' +`/${userState.id}`}>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>
@@ -168,7 +176,7 @@ export default function UserById() {
                         <div>**********</div>
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'password'}>
+                        <Link to={URL_MODIFYACCOUNT_BYID +'password' +`/${userState.id}` }>
                             <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
                                 Modifier
                             </button>

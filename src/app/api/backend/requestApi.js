@@ -25,6 +25,11 @@ export const userInfoUpdate = (values) => {
     return apiBackEnd.post('user/update', values);
 };
 
+export function uploadUserImage(values) {
+    return apiBackEnd.post('user/upload-image', values);
+}
+
+
 export const userDelete = (values) => {
     return apiBackEnd.post('user/delete', values);
 };
@@ -41,6 +46,11 @@ export const getAllUser = () => {
 export const deleteUserById = (values) =>{
     return apiBackEnd.put('admin/delete', values);
 };
-export function uploadUserImage(values) {
-    return apiBackEnd.post('user/upload-image', values);
+
+export const updateUserById = (values) => {
+    return apiBackEnd.put('admin/update', values);
+};
+
+export function uploadUserImageById(values) {
+    return apiBackEnd.post('admin/upload-image', values);
 }
