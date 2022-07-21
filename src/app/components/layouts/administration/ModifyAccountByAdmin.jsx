@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
 import { userInfo, updateUserById, uploadUserImageById } from '../../../api/backend/requestApi';
 
@@ -269,8 +269,9 @@ const ModifyAccountByAdmin = () => {
                                 {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
 
                             </div>
-                            <div className="submit2">
-                                <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                            <div>
+                                <button className="submit2" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                                <Link to={`/administration/user/${id}`}><button className="submit2">Annuler</button></Link>
                             </div>
                     </form>
                 }
@@ -305,8 +306,9 @@ const ModifyAccountByAdmin = () => {
                         administrateur
                     </option>
                 </select>
-                <div className="submit2">
-                    <button type="submit">Modifier</button>
+                <div>
+                    <button type="submit" className= "submit2">Modifier</button>
+                    <Link to={`/administration/user/${id}`}><button className="submit2">Annuler</button></Link>
                 </div>   
                 </form>
                 }
@@ -335,9 +337,11 @@ const ModifyAccountByAdmin = () => {
                         />
                     </div>
 
-                    <div className="submit2">
-                        <button type="submit">Modifier</button>
+                    <div>
+                        <button type="submit" className= "submit2">Modifier</button>
+                        <Link to={`/administration/user/${id}`}><button className="submit2">Annuler</button></Link>
                     </div>
+                    
                     {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
                     {(errorLog && msgError.password) && <ErrorMessSmall middle message="L'ancien mot de passe ne correspond pas" />}
                     {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email déjà prit" />}
