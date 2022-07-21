@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { userInfo, updateUserById, uploadUserImage } from '../../../api/backend/requestApi';
+import { userInfo, updateUserById, uploadUserImageById } from '../../../api/backend/requestApi';
 
 import PreviewUserImage from '../../layouts/PreviewUserImage';
-import { URL_HOME, URL_ADMIN_LISTUSERS, URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
+import { URL_ADMIN_LISTUSERS, URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
@@ -127,8 +127,10 @@ const ModifyAccountByAdmin = () => {
     const { valueChange, oldPassword, repeatNewPassword, valueName, zipcode, adress} = formik.values;
 
     const formikImage = useFormik({
-        initialValues: { avatar: '' },
+        initialValues: { userToUpdate: id,
+            avatar: '' },
         onSubmit: (values) => {
+            console.log("valeurs : "+JSON.stringify(values));
             handleImageUser(values);
         },
     });
@@ -137,12 +139,13 @@ const ModifyAccountByAdmin = () => {
 
         const formData = new FormData()
 
-        formData.append('avatar', values.avatar)
+        formData.append('avatar', values.avatar);
+        //formData.append('userToUpdate', values.userToUpodate);
 
-        const imageUser = formData.get('avatar')
-        uploadUserImage(formData)
+        const imageUser = formData.get('avatar');
+        uploadUserImageById(formData)
             .then((res) => {
-                callGetUser(userId)
+                //callGetUser(userId)
                 console.log(res)
             })
     }

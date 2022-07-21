@@ -50,3 +50,7 @@ export const deleteUserById = (values) =>{
 export const updateUserById = (values) => {
     return apiBackEnd.put('admin/update', values);
 };
+
+export function uploadUserImageById(values) {
+    return apiBackEnd.post('admin/upload-image', values);
+}
