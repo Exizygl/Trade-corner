@@ -86,6 +86,10 @@ const Register = () => {
                             id="phoneNumber"
                             value={phoneNumber}
                             onChange={formik.handleChange}
+                            pattern="[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}"
+                            minlength="9"
+                            maxlength="14"
+                            placeholder="00.00.00.00.00"
                             required
                         />
                     </div>

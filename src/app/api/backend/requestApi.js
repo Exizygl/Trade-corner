@@ -16,7 +16,6 @@ export const Logout = () => {
     return apiBackEnd.get('user/');
 };
 
-
 export const userInfo = (id) => {
     return apiBackEnd.get('user/' + id);
 };
@@ -28,7 +27,6 @@ export const userInfoUpdate = (values) => {
 export function uploadUserImage(values) {
     return apiBackEnd.post('user/upload-image', values);
 }
-
 
 export const userDelete = (values) => {
     return apiBackEnd.post('user/delete', values);
@@ -43,7 +41,7 @@ export const getAllUser = () => {
     return apiBackEnd.get('user');
 };
 
-export const deleteUserById = (values) =>{
+export const deleteUserById = (values) => {
     return apiBackEnd.put('admin/delete', values);
 };
 

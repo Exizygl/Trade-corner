@@ -28,11 +28,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
  * 
  */
 export const store = configureStore({
-    reducer: {
-        auth: authenticationReducer,
-        adm : administrationReducer,
-        pers : persistedReducer,// reducers persisté
-    },
+    reducer: persistedReducer,// reducers persisté
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
