@@ -41,7 +41,7 @@ const Navbar = () => {
                                     </Link>
                                     <Link to={URL_LOGOUT}>
                                         <button
-                                            className="ml-8 btn btn-green"
+                                            className="ml-3"
                                             onClick={() => dispatch(signOut())}
                                         >
                                             {' '}

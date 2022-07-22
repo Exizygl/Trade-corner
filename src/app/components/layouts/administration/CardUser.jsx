@@ -24,7 +24,7 @@ switch(props.role) {
         {props.imageProfilUrl ?
           <img src={`http://localhost:8080/static/` + props.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} />
           :
-          <p> Aucune image </p>
+          <img src={`http://localhost:8080/static/default.jpg`} className='m-auto' alt="preview" width={200} height={200} />
         }
       </div>
       <div>
