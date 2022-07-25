@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
 import SubmitRegisterModal from './modal/SubmitRegisterModal';
+import * as yup from 'yup';
 
 const Register = () => {
-    const [successSubmitModal, setSuccessSubmitModal] = useState('');
+    // Variable
 
+    const [successSubmitModal, setSuccessSubmitModal] = useState('');
     const closeModal = () => {
         setSuccessSubmitModal('');
     };
+
+    // Formik and YUP
 
     const initialValues = {
         pseudo: '',
@@ -21,154 +25,73 @@ const Register = () => {
         password: '',
         passwordConfirmation: '',
     };
-    const formik = useFormik({
+
+    const { handleSubmit } = useFormik({
         initialValues,
-        onSubmit: (values) => {
-            register(values)
-                .then((res) => {
-                    if (res.data.message.user) {
-                        setSuccessSubmitModal(
-                            <SubmitRegisterModal
-                                user={res.data.message.user}
-                                closeModal={() => closeModal()}
-                            />,
-                        );
-                    }
-                })
-                .catch(() => console.log('erreur register'));
-        },
+        // validationSchema,
+        onSubmit,
     });
 
-    const {
-        pseudo,
-        name,
-        email,
-        phoneNumber,
-        adress,
-        zipcode,
-        ville,
-        password,
-        passwordConfirmation,
-    } = formik.values;
+    function onSubmit(formValues) {
+        console.log(formValues);
+    }
+    // Formulaire
 
     return (
-        <div>
-            <div className="global">
-                <form onSubmit={formik.handleSubmit}>
-                    <legend className="titre">Inscription</legend>
-                    <div>
-                        <label htmlFor="pseudo">Pseudonyme : </label>
-                        <input
-                            type="text"
-                            name="pseudo"
-                            id="pseudo"
-                            value={pseudo}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+        <div className="global">
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <h1>Inscription</h1>
+                </div>
 
-                    <div className="Information">
-                        <label htmlFor="name">Nom complet : </label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="surName"
-                            value={name}
-                            onChange={formik.handleChange}
-                            required
-                        />
+                <div>
+                    <label htmlFor="pseudo">Pseudonyme : </label>
+                    <input type="text" name="pseudo" id="pseudo" />
+                </div>
 
-                        <label htmlFor="phoneNumber">Numéro de téléphone : </label>
-                        <input
-                            type="tel"
-                            name="phoneNumber"
-                            id="phoneNumber"
-                            value={phoneNumber}
-                            onChange={formik.handleChange}
-                            pattern="[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}"
-                            minlength="9"
-                            maxlength="14"
-                            placeholder="00.00.00.00.00"
-                            required
-                        />
-                    </div>
+                <div className="Information">
+                    <label htmlFor="name">Nom complet : </label>
+                    <input type="text" name="name" id="surName" />
 
-                    <div>
-                        <label htmlFor="adress">Adresse postale : </label>
-                        <input
-                            type="text"
-                            name="adress"
-                            id="adress"
-                            value={adress}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+                    <label htmlFor="phoneNumber">Numéro de téléphone : </label>
+                    <input type="tel" name="phoneNumber" id="phoneNumber" />
+                </div>
 
-                    <div>
-                        <label htmlFor="ville">Ville : </label>
-                        <input
-                            type="text"
-                            name="ville"
-                            id="ville"
-                            value={ville}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                        <label htmlFor="zipcode">Code postale : </label>
-                        <input
-                            type="number"
-                            name="zipcode"
-                            id="zipcode"
-                            value={zipcode}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+                <div>
+                    <label htmlFor="adress">Adresse postale : </label>
+                    <input type="text" name="adress" id="adress" />
+                </div>
 
-                    <div>
-                        <label htmlFor="email">Adresse email électronique : </label>
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            value={email}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+                <div>
+                    <label htmlFor="ville">Ville : </label>
+                    <input type="text" name="ville" id="ville" />
+                    <label htmlFor="zipcode">Code postale : </label>
+                    <input type="number" name="zipcode" id="zipcode" />
+                </div>
 
-                    <div>
-                        <label htmlFor="password">Mot de passe : </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            value={password}
-                            onChange={formik.handleChange}
-                            required
-                        />
+                <div>
+                    <label htmlFor="email">Adresse email électronique : </label>
+                    <input type="email" name="email" id="email" />
+                </div>
 
-                        <label htmlFor="passwordConfirmation">
-                            Confirmation de mot de passe :{' '}
-                        </label>
-                        <input
-                            type="password"
-                            name="passwordConfirmation"
-                            id="passwordConfirmation"
-                            value={passwordConfirmation}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+                <div>
+                    <label htmlFor="password">Mot de passe : </label>
+                    <input type="password" name="password" id="password" />
 
-                    <div className="submit">
-                        <button type="submit">Créer mon compte</button>
-                    </div>
-                </form>
-            </div>
-            {successSubmitModal}
+                    <label htmlFor="passwordConfirmation">
+                        Confirmation de mot de passe :{' '}
+                    </label>
+                    <input
+                        type="password"
+                        name="passwordConfirmation"
+                        id="passwordConfirmation"
+                    />
+                </div>
+
+                <div className="submit">
+                    <button type="submit">Créer mon compte</button>
+                </div>
+            </form>
         </div>
     );
 };
