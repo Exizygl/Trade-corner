@@ -184,6 +184,7 @@ const Register = () => {
                             type="password"
                             name="password"
                             id="password"
+                            placeholder="Ex : Test123!"
                             value={values.password}
                             onChange={handleChange}
                             onBlur={handleBlur}
