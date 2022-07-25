@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 // Regex
 
-const regExPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+// const regExPassword = /^[a-zA-Z][0-9]{8,}$/;
 const regExNumberPhone =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,3})[ \\-]*)*?[0-9]{2,3}?[ \\-]*[0-9]{2,3}?$/;
 
@@ -15,8 +15,8 @@ export default Yup.object().shape({
         .required('Une adresse mail est requis !'),
     password: Yup.string()
         .required('Le champ mot de passe est requis !')
-        .min(8, 'Le mot de passe doit avoir au moins 8 caractères !')
-        .matches(regExPassword, 'Veuillez créer un mot de passe plus fort !'),
+        .min(8, 'Le mot de passe doit avoir au moins 8 caractères !'),
+    // .matches(regExPassword, 'Veuillez créer un mot de passe plus fort !'),
     passwordConfirmation: Yup.string()
         .required('Le champ de confirmation du mot de passe est requis !')
         .oneOf([Yup.ref('password'), null], 'Les mots de passes ne correspondent pas !'),
