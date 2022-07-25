@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 // Regex
 
-const regExPassword = /^(?=.$\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+const regExPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 const regExNumberPhone =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,3})[ \\-]*)*?[0-9]{2,3}?[ \\-]*[0-9]{2,3}?$/;
 
