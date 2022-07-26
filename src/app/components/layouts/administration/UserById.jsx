@@ -89,11 +89,12 @@ export default function UserById() {
                         {renderRole()}
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
+                        {userState.role != 2 && <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
                             <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
                                 Modifier
                             </button>
-                        </Link>
+                        </Link>}
+                        
                     </div>
                 </div>
  
