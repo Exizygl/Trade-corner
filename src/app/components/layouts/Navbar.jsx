@@ -3,12 +3,10 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { URL_HOME } from './../../shared/constants/urls/urlConstants';
-import { URL_LOGIN } from './../../shared/constants/urls/urlConstants';
-import { URL_REGISTER } from './../../shared/constants/urls/urlConstants';
-import { URL_ADMIN } from './../../shared/constants/urls/urlConstants';
-import { URL_USER } from './../../shared/constants/urls/urlConstants';
-import { URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
+import { URL_HOME, URL_LOGIN, URL_REGISTER,URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
+import { URL_USER, URL_ADMIN, URL_SELLER } from './../../shared/constants/urls/urlConstants';
+
+
 import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
 
 const Navbar = () => {
@@ -50,6 +48,9 @@ const Navbar = () => {
                                     </Link>
                                     <Link to={URL_USER} className="ml-3">
                                         Profil
+                                    </Link>
+                                    <Link to={URL_SELLER} className="ml-3">
+                                        Ma boutique
                                     </Link>
                                     <Link to={URL_ADMIN} className="ml-3">
                                         Administration

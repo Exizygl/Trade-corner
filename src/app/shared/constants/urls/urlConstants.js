@@ -17,3 +17,6 @@ export const URL_USER_BYID = '/administration/user/';
 export const URL_MODIFYACCOUNT_BYID = '/administration/modify+';
 export const URL_DELETE_USER_BYID = '/administration/delete/';
 
+//routes acessibles aux vendeurs
+export const URL_SELLER = '/maboutique';
+

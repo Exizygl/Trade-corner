@@ -24,6 +24,9 @@ import ModifyAccountByAdminView from '../views/administration/ModifyAccountByAdm
 import DemandesComView from '../views/administration/DemandesComView';
 import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
 
+//import vendeur
+import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
+
 
 /**
  * Routes of the application
@@ -60,6 +63,10 @@ const Routes = () => {
             />
             <Route exact path={URL.URL_DELETE_USER_BYID + ':id'} component={DeleteUserByIdView} />
             <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
+
+            {/* routes vendeurs */}
+            <Route exact path={URL.URL_SELLER} component={MaBoutiqueView} />
+
         </Switch>
     );
 };
