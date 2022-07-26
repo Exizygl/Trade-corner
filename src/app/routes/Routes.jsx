@@ -26,6 +26,11 @@ import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
 
 //import vendeur
 import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
+import ListProductsView from '../views/maBoutique/ListProductsView';
+import AddProductView from '../views/maBoutique/AddProductView';
+import CommandesView from '../views/maBoutique/CommandesView';
+import RetoursView from '../views/maBoutique/RetoursView';
+import HistoryView from '../views/maBoutique/HistoryView';
 
 
 /**
@@ -66,6 +71,11 @@ const Routes = () => {
 
             {/* routes vendeurs */}
             <Route exact path={URL.URL_SELLER} component={MaBoutiqueView} />
+            <Route exact path={URL.URL_SELLER_LISTPRODUCTS} component={ListProductsView} />
+            <Route exact path={URL.URL_SELLER_ADDPRODUCT} component={AddProductView} />
+            <Route exact path={URL.URL_SELLER_COMMANDES} component={CommandesView} />
+            <Route exact path={URL.URL_SELLER} component={RetoursView} />
+            <Route exact path={URL.URL_SELLER_HISTORY} component={HistoryView} />
 
         </Switch>
     );
