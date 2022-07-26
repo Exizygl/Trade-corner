@@ -15,11 +15,15 @@ import {
 
 import authenticationReducer from './authenticationSlice';
 import administrationReducer from './administrationSlice';
+import maBoutiqueReducer from './maBoutiqueSlice';
 
 //pour persister le store sur le localStorage
 const persistConfig = {key: 'user',storage,};
 
-const reducers = combineReducers({ auth: authenticationReducer, adm : administrationReducer,}); //on doit combiner les reducers pour les mettre sur le LS
+const reducers = combineReducers({ 
+        auth: authenticationReducer, 
+        adm : administrationReducer,
+        store : maBoutiqueReducer}); //on doit combiner les reducers pour les mettre sur le LS
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 /**

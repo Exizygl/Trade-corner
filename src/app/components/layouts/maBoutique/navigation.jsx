@@ -10,7 +10,7 @@ export default function Navigation() {
             Ma Boutique
             </Link>
             <Link to={URL_SELLER_LISTPRODUCTS} className="py-2 hover:bg-gray-100 w-full text-center">
-            Mes Produits
+            Mes Produits modifié
             </Link>
             <Link to={URL_SELLER_ADDPRODUCT} className="py-2 hover:bg-gray-100 w-full text-center">
             Ajouter un produit
