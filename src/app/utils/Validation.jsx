@@ -42,5 +42,7 @@ export default Yup.object().shape({
 
     phoneNumber: Yup.string()
         .required('Un numéro de téléphone est requis !')
-        .matches(regExNumberPhone, 'Le numéro de téléphone est invalide !'),
+        .matches(regExNumberPhone, 'Le numéro de téléphone est invalide !')
+        .min(9, 'Le numéro de télphone doit comporter au minimum 9 numéros')
+        .max(11, 'Le numéro de télphone doit comporter au maximum 11 numéros'),
 });

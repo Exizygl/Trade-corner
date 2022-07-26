@@ -147,7 +147,7 @@ const Register = () => {
 
                         <label htmlFor="zipcode">Code postale : </label>
                         <input
-                            type="number"
+                            type="text"
                             name="zipcode"
                             id="zipcode"
                             value={values.zipcode}
