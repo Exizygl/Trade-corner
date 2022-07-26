@@ -14,7 +14,6 @@ export default function MaBoutique() {
         </div> 
         <div className= "border-solid border-2 basis-4/6 "> 
             <h2>Ma Boutique</h2>
-            <h3>Liste des utilisateurs</h3>
         </div> 
     </div>
   )

@@ -25,7 +25,7 @@ import DemandesComView from '../views/administration/DemandesComView';
 import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
 
 //import vendeur
-import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
+ import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
 import ListProductsView from '../views/maBoutique/ListProductsView';
 import AddProductView from '../views/maBoutique/AddProductView';
 import CommandesView from '../views/maBoutique/CommandesView';
@@ -74,7 +74,7 @@ const Routes = () => {
             <Route exact path={URL.URL_SELLER_LISTPRODUCTS} component={ListProductsView} />
             <Route exact path={URL.URL_SELLER_ADDPRODUCT} component={AddProductView} />
             <Route exact path={URL.URL_SELLER_COMMANDES} component={CommandesView} />
-            <Route exact path={URL.URL_SELLER} component={RetoursView} />
+            <Route exact path={URL.URL_SELLER_RETOURS} component={RetoursView} />
             <Route exact path={URL.URL_SELLER_HISTORY} component={HistoryView} />
 
         </Switch>
