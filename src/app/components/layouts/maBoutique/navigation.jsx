@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {URL_SELLER, URL_SELLER_ADDPRODUCT, URL_SELLER_LISTPRODUCTS, URL_SELLER_COMMANDES, URL_SELLER_RETOURS, URL_SELLER_HISTORY} from '../../../shared/constants/urls/urlConstants';
+import {URL_SELLER, URL_SELLER_ADDPRODUCT, URL_SELLER_LISTPRODUCTS, 
+  URL_SELLER_COMMANDES, URL_SELLER_RETOURS, URL_SELLER_HISTORY} from '../../../shared/constants/urls/urlConstants';
 
 export default function Navigation() {
   return (
     <nav className="flex flex-col justify-between bg-white h-900">
         <div className="flex flex-col">
             <Link to={URL_SELLER} className="py-2 hover:bg-gray-100 w-full text-center">
-            Ma Boutique
+            Ma boutique
             </Link>
             <Link to={URL_SELLER_LISTPRODUCTS} className="py-2 hover:bg-gray-100 w-full text-center">
-            Mes Produits modifié
+            Mes produits
             </Link>
             <Link to={URL_SELLER_ADDPRODUCT} className="py-2 hover:bg-gray-100 w-full text-center">
             Ajouter un produit
