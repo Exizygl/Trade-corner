@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
-import validationSchema from '../../utils/Validation'; //validation YUP
+// import validationRegister from '../../utils/Validation'; //validation YUP
 import SubmitRegisterModal from './modal/SubmitRegisterModal';
+import { validationRegister } from '../../utils/Validation';
 
 const Register = () => {
     // Variable
@@ -29,7 +30,7 @@ const Register = () => {
     const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
         useFormik({
             initialValues,
-            validationSchema,
+            validationRegister,
             onSubmit,
         });
 
