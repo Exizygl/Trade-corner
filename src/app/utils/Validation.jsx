@@ -15,7 +15,7 @@ export default Yup.object().shape({
         .required('Un pseudonyme est requis !')
         .min(3, 'Le pseudonyme doit avoir au moins 3 caractères !'),
 
-    name: Yup.string().required('Votre nom et prénom est requis !'),
+    name: Yup.string().required('Votre nom et prénom sont requis !'),
 
     email: Yup.string()
         .email('Veuillez saisir une adresse mail valide !')
@@ -35,10 +35,10 @@ export default Yup.object().shape({
 
     password: Yup.string()
         .required('Le champ mot de passe est requis !')
-        .min(8, 'Le mot de passe doit avoir au moins 8 caractères !')
+        //.min(8, 'Le mot de passe doit avoir au moins 8 caractères !')
         .matches(
-            regExPassword,
-            'Veuillez créer un mot de passe plus fort ! 1 Majuscule, 1 Minuscule, 1 chiffre, 1 Caractère',
+            //regExPassword,
+            'Veuillez créer un mot de passe plus fort ! 1 Majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial',
         ),
 
     passwordConfirmation: Yup.string()
@@ -48,6 +48,6 @@ export default Yup.object().shape({
     phoneNumber: Yup.string()
         .required('Un numéro de téléphone est requis !')
         .matches(regExNumberPhone, 'Le numéro de téléphone est invalide !')
-        .min(9, 'Le numéro de télphone doit comporter au minimum 9 numéros')
-        .max(11, 'Le numéro de télphone doit comporter au maximum 11 numéros'),
+        .min(9, 'Le numéro de téléphone doit comporter au minimum 9 numéros')
+        .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });

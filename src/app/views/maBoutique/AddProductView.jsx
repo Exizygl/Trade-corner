@@ -1,11 +1,10 @@
 import React from 'react';
-import MaBoutique from '../../components/layouts/maBoutique/MaBoutique';
+import AddProduct from '../../components/layouts/maBoutique/AddProduct';
 
 const AddProductView = () => {
     return (
         <div>
-            <h4>AddProductsView</h4>
-            <MaBoutique />
+            <AddProduct />
         </div>
     );
 };
