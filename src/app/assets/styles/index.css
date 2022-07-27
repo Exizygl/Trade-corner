@@ -4,6 +4,7 @@
 @import url(./components/btn.css);
 @import url(./components/input.css);
 @import url(./components/navbar.scss);
+@import url(./components/register.css);
 @import url(./components/connexion.scss);
 
 @tailwind utilities;
