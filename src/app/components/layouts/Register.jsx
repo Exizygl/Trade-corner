@@ -27,20 +27,12 @@ const Register = () => {
         passwordConfirmation: '',
     };
 
-    const {
-        handleSubmit,
-        values,
-        touched,
-        isValid,
-        handleChange,
-        handleBlur,
-        resetForm,
-        errors,
-    } = useFormik({
-        initialValues,
-        validationSchema,
-        onSubmit,
-    });
+    const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
+        useFormik({
+            initialValues,
+            validationSchema,
+            onSubmit,
+        });
 
     function onSubmit(formValues) {
         console.log(formValues);
