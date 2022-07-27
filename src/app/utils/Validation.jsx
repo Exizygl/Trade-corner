@@ -6,27 +6,32 @@ const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 const regExNumberPhone =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,3})[ \\-]*)*?[0-9]{2,3}?[ \\-]*[0-9]{2,3}?$/;
 const regExEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const regExVille = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
+
+// Validation par YUP
 
 export default Yup.object().shape({
     pseudo: Yup.string()
-        .required('Le pseudo est requis !')
+        .required('Un pseudonyme est requis !')
         .min(3, 'Le pseudonyme doit avoir au moins 3 caractères !'),
 
     name: Yup.string().required('Votre nom et prénom est requis !'),
 
     email: Yup.string()
         .email('Veuillez saisir une adresse mail valide !')
-        .required('Une adresse mail est requis !')
+        .required('Une adresse mail est requise !')
         .matches(regExEmail, 'Veuillez entrer une adresse mail valide !'),
 
-    adress: Yup.string().required('Une adresse postal est requis !'),
+    adress: Yup.string().required('Une adresse postal est requise !'),
 
     zipcode: Yup.string()
-        .required('Un code postal est requis')
+        .required('Un code postal est requis !')
         .min(4, 'le code postal doit comporter au minimum 4 caractères')
         .max(7, 'Le code postal doit comporter au maximum 7 caractères'),
 
-    ville: Yup.string().required('Une ville est requis'),
+    ville: Yup.string()
+        .required('Une ville est requise !')
+        .matches(regExVille, 'Veuillez entrer une ville valide'),
 
     password: Yup.string()
         .required('Le champ mot de passe est requis !')
