@@ -21,7 +21,9 @@ const User = () => {
             function (res) {
                 if (res.status === 200) {
 
+
                     dispatch(updateUser(res.data));
+
 
 
                 }
@@ -68,7 +70,7 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
-                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200}/></div> :
                             <p> Aucune image </p>}
                     </div>
                     <div className="pr-4 py-2">

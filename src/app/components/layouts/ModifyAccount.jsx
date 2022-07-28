@@ -1,13 +1,13 @@
 import { useFormik } from 'formik';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
 import { userInfo, userInfoUpdate, uploadUserImage } from '../../api/backend/requestApi';
 
 import PreviewUserImage from '../layouts/PreviewUserImage';
 import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
-import { URL_HOME, URL_LOGIN } from '../../shared/constants/urls/urlConstants';
+import { URL_HOME, URL_LOGIN, URL_USER } from '../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
 
@@ -119,7 +119,7 @@ const ModifyAccount = () => {
                                 dispatch(signOut());
                                 history.push(URL_LOGIN);
                             } else {
-                                history.push(URL_HOME);
+                                history.push(URL_USER);
                             }
 
 
@@ -276,8 +276,12 @@ const ModifyAccount = () => {
                         />
                     </div>
 
-                    <div className="submit2">
-                        <button type="submit">Modifier</button>
+                    
+                        
+                  
+                    <div>
+                        <button type="submit" className='submit2'>Modifier</button>
+                        <Link to={URL_USER}><button className="submit2">Annuler</button></Link>
                     </div>
                     {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
                     {(errorLog && msgError.password) && <ErrorMessSmall middle message="L'ancien mot de passe ne correspond pas" />}
@@ -313,8 +317,9 @@ const ModifyAccount = () => {
                             {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>}
 
                         </div>
-                        <div className="submit2">
-                            <button type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                        <div>
+                            <Link to={URL_USER}><button className="submit2">Annuler</button></Link>
+                            <button className="submit2" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
                         </div>
                     </form>
                 }
