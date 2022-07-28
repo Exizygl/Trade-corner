@@ -9,6 +9,7 @@ import { validationAddProduct } from '../../../utils/Validation';
 import SubmitRegisterModal from '.././modal/SubmitRegisterModal';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
+import { addProduct } from '../../../api/backend/requestApi';
 
 
 export default function AddProduct() {
@@ -16,6 +17,26 @@ export default function AddProduct() {
 
 const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
 const dispatch = useDispatch();
+const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}, {name : 'categorie 3', id: 3}];
+
+// const loadImage = (e) => {
+
+//     const extension = findImageExtension(e.currentTarget.files[0].name)
+//     if (!extension) {
+//         setErrorExtensionImage(`L'extension d'image doit être jpg, jpeg ou png`)
+//     } else setErrorExtensionImage("");
+
+//     const imageSize = validImageSize(e.currentTarget.files[0].size)
+//     if (!imageSize) {
+//         setErrorSizeImage(`Le poids de l'image ne doit pas dépasser 200 Ko`)
+//     } else setErrorSizeImage("");
+
+//     if (extension && imageSize) {
+//         formikImage.setFieldValue('avatar', e.currentTarget.files[0])
+//     }
+// }
+
+// }
 
     // Variable
 
@@ -44,8 +65,11 @@ const dispatch = useDispatch();
         });
 
     function onSubmit(formValues) {
+        //const files = target.files;
+        //console.log("target.files = "+files);
         console.log("submit");
-        console.log(formValues);
+        console.log("formValues = " +JSON.stringify(formValues));
+        addProduct(formValues);
     }
 
 
@@ -80,6 +104,23 @@ const dispatch = useDispatch();
                     </div>
                 </div>
 
+                <label htmlFor="email">Photos</label>
+                            <div>
+                                <input
+                                    id="photos"
+                                    type="file"
+                                    name="photos"
+                                    accept='images/*'
+                                    multiple = "multiple"
+                                    value={values.photos}
+                                    onChange={handleChange}
+                                />
+                                {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
+                                {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
+                                {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>} */}
+
+                            </div>
+
 {/* catégorie du produit */}
                 <div>
                     <label htmlFor="category">Catégorie : </label>
@@ -88,8 +129,15 @@ const dispatch = useDispatch();
                     onChange={handleChange}>
                         <option value="" label="Choisir une catégorie">
                             Choisir une catégorie
-                        </option>   
+                        </option>
+                        {categories.map( category => 
+                    <option value={category.name} key = {category.id}> {category.name}</option>
+                    )}
                     </select>
+
+                    
+
+
                     <div>
                         {touched.category && errors.category ? (
                                         <small>{errors.category}</small>
@@ -190,4 +238,4 @@ const dispatch = useDispatch();
         </div>
     </div>
     );
-}
+                            };
