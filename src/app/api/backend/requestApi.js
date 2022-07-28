@@ -60,3 +60,9 @@ export const forgottenPassword = (values) => {
 export const passwordChange = (values) => {
     return apiBackEnd.post('user/password-change', values);
 };
+
+//requete produit
+
+export const addProduct = (values) => {
+    return apiBackEnd.post('product/add', values);
+};

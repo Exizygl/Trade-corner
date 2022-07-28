@@ -117,7 +117,7 @@ export default function UserById() {
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
                         {userState.imageProfilUrl ? <div>
-                            <img src={`http://localhost:8080/static/` + userState.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} />
+                            <img src={`http://localhost:8080/static/` + userState.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200} />
                             </div> :
                         <p> Aucune image </p>}
                     </div>    
