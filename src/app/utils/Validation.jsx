@@ -20,17 +20,17 @@ const validationAddProduct = Yup.object().shape(
         description : Yup.string()
         .required('Il manque une description à votre produit'),
 
-        category : Yup.string()
-        .required(),
+        category : Yup.string(),
+        // .required('Veuillez selectionner une catégorie'),
 
         tags : Yup.string(),
 
         price : Yup.number()
-        .required()
+        .required('Veuillez indiquer un prix pour votre produit')
         .min(1),
 
         quantity : Yup.number()
-        .required()
+        .required('veuillez indiquer le nombre de produit en stock')
         .min(1),
         
     }

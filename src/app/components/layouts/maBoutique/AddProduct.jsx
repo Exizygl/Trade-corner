@@ -33,14 +33,13 @@ const dispatch = useDispatch();
         tags: '',
         price: '',
         quantity: '',
-        vendeur: '',
         photos: '',
     };
 
     const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
         useFormik({
             initialValues,
-            validationAddProduct,
+            validationSchema : validationAddProduct,
             onSubmit,
         });
 
@@ -161,18 +160,18 @@ const dispatch = useDispatch();
 {/* Stock du proudit */}
 
                 <div>
-                    <label htmlFor="stock"> Stock : </label>
+                    <label htmlFor="quantity"> Stock : </label>
                     <input
                     type="number"
-                    name="stock"
-                    id="stock"
+                    name="quantity"
+                    id="quantity"
                     value={values.quantity}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     />
                     <div>
-                        {touched.stock && errors.stock ? (
-                            <small>{errors.stock}</small>
+                        {touched.quantity && errors.quantity ? (
+                            <small>{errors.quantity}</small>
                             ) : (
                                 ''
                             )}

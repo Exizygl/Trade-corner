@@ -30,7 +30,7 @@ const Register = () => {
     const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
         useFormik({
             initialValues,
-            validationRegister,
+            validationSchema : validationRegister,
             onSubmit,
         });
 
