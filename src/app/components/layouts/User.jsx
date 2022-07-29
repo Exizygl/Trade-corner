@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userInfo } from '../../api/backend/requestApi';
+import { addProduct, userInfo } from '../../api/backend/requestApi';
 
 
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
@@ -21,8 +21,20 @@ const User = () => {
             function (res) {
                 if (res.status === 200) {
 
+                    const Product = {
+                        title : "test",
+                        tag : "tag 1,tag 2 , tag 3",
+                        category : "test",
+                        imageProductUrl : ["test", "test2"],
+                        description : "test",
+                        price : 4523,
+                        quantity : 5,
+                    }
 
                     dispatch(updateUser(res.data));
+                    addProduct(Product);
+                    
+                    
 
 
 
