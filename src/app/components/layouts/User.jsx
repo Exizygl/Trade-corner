@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userInfo } from '../../api/backend/requestApi';
+import { addProduct, userInfo } from '../../api/backend/requestApi';
 
 
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
@@ -21,7 +21,21 @@ const User = () => {
             function (res) {
                 if (res.status === 200) {
 
+                    const Product = {
+                        title : "test",
+                        tag : "tag 1,tag 2 , tag 3",
+                        category : "test",
+                        imageProductUrl : ["test", "test2"],
+                        description : "test",
+                        price : 4523,
+                        quantity : 5,
+                    }
+
                     dispatch(updateUser(res.data));
+                    addProduct(Product);
+                    
+                    
+
 
 
                 }
@@ -68,7 +82,7 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
-                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200}/></div> :
                             <p> Aucune image </p>}
                     </div>
                     <div className="pr-4 py-2">
