@@ -60,7 +60,7 @@ export function isAuthenticated() {
 
         //console.log('login', login);
         const dateNow = new Date();
-        return token && (roles === 0 || roles === 1 || roles === 2) && login && expirationDate < dateNow.getTime();
+        return token && (roles === "user" || roles === "seller" || roles === "admin") && login && expirationDate < dateNow.getTime();
     } catch {
         //  console.log('CATCH FALSE');
         return false;
