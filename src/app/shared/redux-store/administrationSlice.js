@@ -1,16 +1,15 @@
-import {createSlice} from '@reduxjs/toolkit';
-
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     //initialisation normale
-    users : [],
+    users: [],
 };
 
 export const AdministrationSlice = createSlice({
     name: 'adm',
     initialState,
     reducers: {
-        setListUsers : (state, action) => {
+        setListUsers: (state, action) => {
             state.users = action.payload;
         },
     },

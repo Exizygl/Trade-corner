@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { URL_HOME } from './../../shared/constants/urls/urlConstants';
 import { URL_LOGIN } from './../../shared/constants/urls/urlConstants';
-import { URL_REGISTER } from './../../shared/constants/urls/urlConstants';
-import { URL_ADMIN } from './../../shared/constants/urls/urlConstants';
-import { URL_USER } from './../../shared/constants/urls/urlConstants';
-import { URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
-import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
+// import { URL_REGISTER } from './../../shared/constants/urls/urlConstants';
+// import { URL_ADMIN } from './../../shared/constants/urls/urlConstants';
+// import { URL_USER } from './../../shared/constants/urls/urlConstants';
+// import { URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
+// import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const Navbar = () => {
                                     <Link to={URL_LOGIN} className="ml-3">
                                         Se connecter
                                     </Link>
-                                    <Link to={URL_REGISTER} className="ml-3">
+                                    {/* <Link to={URL_REGISTER} className="ml-3">
                                         S'enregistrer
                                     </Link>
                                     <Link to={URL_LOGOUT}>
@@ -47,13 +47,13 @@ const Navbar = () => {
                                             {' '}
                                             Sign out{' '}
                                         </button>
-                                    </Link>
-                                    <Link to={URL_USER} className="ml-3">
+                                    </Link> */}
+                                    {/* <Link to={URL_USER} className="ml-3">
                                         Profil
                                     </Link>
                                     <Link to={URL_ADMIN} className="ml-3">
                                         Administration
-                                    </Link>
+                                    </Link> */}
                                 </div>
                             </div>
 
