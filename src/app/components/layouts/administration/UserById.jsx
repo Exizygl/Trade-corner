@@ -89,11 +89,12 @@ export default function UserById() {
                         {renderRole()}
                     </div>
                     <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
+                        {userState.role != 2 && <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
                             <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
                                 Modifier
                             </button>
-                        </Link>
+                        </Link>}
+                        
                     </div>
                 </div>
  
@@ -117,7 +118,7 @@ export default function UserById() {
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Avatar</div>
                         {userState.imageProfilUrl ? <div>
-                            <img src={`http://localhost:8080/static/` + userState.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} />
+                            <img src={`http://localhost:8080/static/` + userState.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200} />
                             </div> :
                         <p> Aucune image </p>}
                     </div>    

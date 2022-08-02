@@ -18,9 +18,9 @@ let persistor = persistStore(store);
 const App = () => {
     return (
         <Provider store={store}>
-            <PersistGate persistor={persistor}>
+            {/* <PersistGate persistor={persistor}> */}
             <RoutesWithNavigation />
-            </PersistGate>
+            {/* </PersistGate> */}
         </Provider>
     );
 };

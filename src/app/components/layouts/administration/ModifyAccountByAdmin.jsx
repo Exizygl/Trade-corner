@@ -118,7 +118,7 @@ const ModifyAccountByAdmin = () => {
                 //récupèration des erreurs
 
                 if (res.status === 201) {
-                    console.log("erreur reçue : " + JSON.stringify(res.data.error))
+                    alert(JSON.stringify(res.data.error))
                 }
                 if (res.data.errors) {
                     setMsgError(res.data.errors); 
@@ -280,7 +280,6 @@ const ModifyAccountByAdmin = () => {
                 <legend className="titre">
                      Modifier le {typeModification}
                 </legend>
-
                 <input
                         type="hidden"
                         name="valueName"
@@ -292,18 +291,13 @@ const ModifyAccountByAdmin = () => {
                 <select name="valueChange"
                 value={valueChange}
                 onChange={formik.handleChange}>
-
-                    <option value="" label="Selectionner un role">
-                        Selectionner un role{" "}
+                    <option value="" label="Selectionner un rôle">
                     </option>
                     <option value="0" label="utilisateur normal">
                         utilisateur normal
                     </option>
                     <option value="1" label="vendeur">
                         Utilisateur- vendeur
-                    </option>
-                    <option value="2" label="administrateur">
-                        administrateur
                     </option>
                 </select>
                 <div>

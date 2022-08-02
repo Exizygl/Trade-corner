@@ -24,6 +24,14 @@ import ModifyAccountByAdminView from '../views/administration/ModifyAccountByAdm
 import DemandesComView from '../views/administration/DemandesComView';
 import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
 
+//import vendeur
+ import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
+import ListProductsView from '../views/maBoutique/ListProductsView';
+import AddProductView from '../views/maBoutique/AddProductView';
+import CommandesView from '../views/maBoutique/CommandesView';
+import RetoursView from '../views/maBoutique/RetoursView';
+import HistoryView from '../views/maBoutique/HistoryView';
+
 
 /**
  * Routes of the application
@@ -60,6 +68,15 @@ const Routes = () => {
             />
             <Route exact path={URL.URL_DELETE_USER_BYID + ':id'} component={DeleteUserByIdView} />
             <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
+
+            {/* routes vendeurs */}
+            <Route exact path={URL.URL_SELLER} component={MaBoutiqueView} />
+            <Route exact path={URL.URL_SELLER_LISTPRODUCTS} component={ListProductsView} />
+            <Route exact path={URL.URL_SELLER_ADDPRODUCT} component={AddProductView} />
+            <Route exact path={URL.URL_SELLER_COMMANDES} component={CommandesView} />
+            <Route exact path={URL.URL_SELLER_RETOURS} component={RetoursView} />
+            <Route exact path={URL.URL_SELLER_HISTORY} component={HistoryView} />
+
         </Switch>
     );
 };

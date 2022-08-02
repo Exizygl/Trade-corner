@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
-import validationSchema from '../../utils/Validation';
+import validationSchema from '../../utils/Validation'; //validation YUP
 import SubmitRegisterModal from './modal/SubmitRegisterModal';
-import * as yup from 'yup';
 
 const Register = () => {
     // Variable
@@ -13,7 +12,7 @@ const Register = () => {
         setSuccessSubmitModal('');
     };
 
-    // Formik and YUP
+    // Formik
 
     const initialValues = {
         pseudo: '',
@@ -158,7 +157,7 @@ const Register = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="zipcode">Code postale : </label>
+                            <label htmlFor="zipcode">Code postal : </label>
 
                             <input
                                 type="text"
