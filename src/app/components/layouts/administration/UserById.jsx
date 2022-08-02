@@ -23,15 +23,15 @@ export default function UserById() {
             if (res.status === 200) 
                 {   let user = {
                     id: res.data._id,
-                    role : res.data.role, 
+                    role : res.data.role.label, 
                     name : res.data.name, 
                     imageProfilUrl : res.data.imageProfilUrl, 
                     pseudo : res.data.pseudo, 
                     email : res.data.email, 
                     phoneNumber : res.data.phoneNumber, 
-                    adress : res.data.adress, 
-                    zipcode : res.data.zipcode, 
-                    ville : res.data.ville, 
+                    adress : res.data.adress.street, 
+                    zipcode : res.data.adress.zipcode, 
+                    ville : res.data.adress.city, 
                     createdAt : res.data.createdAt
                     };
                     setUserState(user);
@@ -44,19 +44,19 @@ export default function UserById() {
     }, []);
 
 
-    function renderRole(){
-        switch(userState.role) {
-            case 0 :
-            return (<div> Utilisateur normal</div>);
-            break;
-            case 1 : 
-            return (<div> Vendeur </div>);
-            break;
-            case 2 : 
-            return (<div> Administrateur</div>);
-            break;
-        }
-    };
+    // function renderRole(){
+    //     switch(userState.role) {
+    //         case 0 :
+    //         return (<div> Utilisateur normal</div>);
+    //         break;
+    //         case 1 : 
+    //         return (<div> Vendeur </div>);
+    //         break;
+    //         case 2 : 
+    //         return (<div> Administrateur</div>);
+    //         break;
+    //     }
+    // };
 
 
     return (
@@ -86,7 +86,7 @@ export default function UserById() {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Role de l'utilisateur</div>
-                        {renderRole()}
+                      {userState.role}
                     </div>
                     <div className="pr-4 py-2">
                         {userState.role != 2 && <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>

@@ -28,7 +28,7 @@ export default function PreviewListUsers() {
                                 //pour la preview on récupére tous les utilisateurs
                                 let name = res.data[i].name;
                                 let id = res.data[i]._id;
-                                let role = res.data[i].role;
+                                let role = res.data[i].role.label;
                                 let imageProfilUrl = res.data[i].imageProfilUrl;
                                 let user = {
                                     name: name,
@@ -43,7 +43,7 @@ export default function PreviewListUsers() {
                                 //pour la preview on récupére les 4 premiers utilisateurs
                                 let name = res.data[i].name;
                                 let id = res.data[i]._id;
-                                let role = res.data[i].role;
+                                let role = res.data[i].role.label;
                                 let imageProfilUrl = res.data[i].imageProfilUrl;
                                 let user = {
                                     name: name,

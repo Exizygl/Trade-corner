@@ -3,8 +3,8 @@ import {useEffect,useState} from 'react';
 import Navigation from './Navigation';
 import CardUser from './CardUser';
 import { useSelector, useDispatch } from 'react-redux';
-import {setListUsers} from '../../../shared/redux-store/administrationSlice';
-import { getAllUser } from '../../../api/backend/requestApi';
+import {setListUsers, setListRoles} from '../../../shared/redux-store/administrationSlice';
+import { getAllUser, getAllRoles } from '../../../api/backend/requestApi';
 import PreviewListUsers from './PreviewListUsers';
 
 
@@ -13,7 +13,28 @@ export default function Administration() {
 const users = useSelector(state => state.adm.users); //je pointe sur le tableau user dans le store
 const dispatch = useDispatch();
 
-useEffect( () => {
+const getlistRoles =  () => {
+  getAllRoles() //j'appelle l'api 
+  .then (
+    function (res) {
+      if (res.status === 200) {
+          let resRoles = res.data.message.roles ;
+          console.log("res.data : " + JSON.stringify(resRoles));
+        let roles = [];
+        for (let i=0; i<resRoles.length; i++) { 
+          let label = resRoles[i].label;
+          let id = i;
+          let role = { label : label ,
+          id : id}
+          roles.push(role);      //j'ai récup la liste des rôles
+        };
+        dispatch(setListRoles(roles));             
+       
+      }
+    }
+  )
+  };
+const getlistUsers = () => {
   getAllUser() //j'appelle l'api 
   .then (
     function (res) {
@@ -22,7 +43,7 @@ useEffect( () => {
         for (let i=0; i<res.data.length; i++) { 
           let name= res.data[i].name;
           let id = res.data[i]._id;
-          let role = res.data[i].role;
+          let role = res.data[i].role.label;
           let imageProfilUrl = res.data[i].imageProfilUrl;
           let user = {name : name, id: id, role : role, imageProfilUrl :  imageProfilUrl};
           usersTemp.push(user);      //j'ai récup les données que je voulais
@@ -31,6 +52,13 @@ useEffect( () => {
       }
     }
   )
+
+}
+
+useEffect( () => {
+  getlistUsers();
+  getlistRoles();
+  
 }
   ,[]
 )
