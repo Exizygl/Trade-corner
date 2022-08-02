@@ -43,7 +43,7 @@ const DeleteUser = () => {
              if (res.status === 200) 
                  {   let user = {
                      id: res.data._id,
-                     role : res.data.role, 
+                     role : res.data.role.label, 
                      name : res.data.name, 
                      };
                      setUserState(user); 

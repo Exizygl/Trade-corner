@@ -4,20 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function CardUser(props) {
 
-// let role = "";
-// switch(props.role) {
-//   case 0 :
-//     role = "Utilisateur normal"
-//     break;
-//   case 1 : 
-//     role = "Vendeur"
-//     break;
-//   case 2 : 
-//     role = "Administrateur"
-//     break;
-// };
-
-
   return (
     <div className=" cardPerso shadow-2xl border-solid border-2 ">
       <div className="illus">

@@ -300,8 +300,7 @@ const ModifyAccountByAdmin = () => {
                 onChange={formik.handleChange}>
                     <option value="" label="Selectionner un rôle">
                     </option>
-
-                    {roles.map((role) => (<option value={role.label} label= {role.label} key={role.id}></option> ))}                   
+                    {roles.map((role) => ( <option value={role.label} label= {role.label} key={role.id}></option> ))}                  
                  
                 </select>
                 <div>

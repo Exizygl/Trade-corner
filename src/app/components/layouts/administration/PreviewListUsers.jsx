@@ -22,7 +22,7 @@ export default function PreviewListUsers() {
                     if (res.data.length === 0) {
                         alert("Il n'y a pas d'utilisateurs dans la base de donnée !");
                     } else {
-                        if (res.data.length < 3) {
+                        if (res.data.length <= 3) {
                             //Si il y a 1 ou 2 utilisateurs dans la BDD
                             for (let i = 0; i < res.data.length; i++) {
                                 //pour la preview on récupére tous les utilisateurs
