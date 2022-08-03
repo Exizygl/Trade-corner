@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 
-import { userInfo, updateUserById, uploadUserImageById } from '../../../api/backend/requestApi';
+import { userInfo, updateUserById, uploadUserImageById, getAllRoles } from '../../../api/backend/requestApi';
 
 import PreviewUserImage from '../../layouts/PreviewUserImage';
 import { URL_ADMIN_LISTUSERS, URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
@@ -12,8 +12,10 @@ import ErrorMessSmall from '../../../shared/components/form-and-error-components
 
 
 
+
 const ModifyAccountByAdmin = () => {
     const userId = useSelector((state) => state.auth.user._id);
+    const roles = useSelector((state)=>state.adm.roles);
 
     const [userToModify, setUserToModify] = useState(""); // utile pour la modification d'avatar
     const [userImageValue, setUserImageValue] = useState("");
@@ -26,10 +28,10 @@ const ModifyAccountByAdmin = () => {
     // state pour la gestion d'erreur
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState("");
-
     const dispatch = useDispatch();
     const history = useHistory();
 
+    //state de la view
     const callGetUser = (id) => {
         userInfo(id)
             .then((res) => {
@@ -41,7 +43,7 @@ const ModifyAccountByAdmin = () => {
     }
 
     useEffect(() => {
-        callGetUser(id)
+        callGetUser(id);        
     }, [])
 
 
@@ -118,7 +120,7 @@ const ModifyAccountByAdmin = () => {
                 //récupèration des erreurs
 
                 if (res.status === 201) {
-                    console.log("erreur reçue : " + JSON.stringify(res.data.error))
+                    alert(JSON.stringify(res.data.error))
                 }
                 if (res.data.errors) {
                     setMsgError(res.data.errors); 
@@ -242,6 +244,8 @@ const ModifyAccountByAdmin = () => {
         }
     };
 
+
+
     return (
         <div>
             <div className="global2">
@@ -280,7 +284,6 @@ const ModifyAccountByAdmin = () => {
                 <legend className="titre">
                      Modifier le {typeModification}
                 </legend>
-
                 <input
                         type="hidden"
                         name="valueName"
@@ -292,19 +295,10 @@ const ModifyAccountByAdmin = () => {
                 <select name="valueChange"
                 value={valueChange}
                 onChange={formik.handleChange}>
-
-                    <option value="" label="Selectionner un role">
-                        Selectionner un role{" "}
+                    <option value="" label="Selectionner un rôle">
                     </option>
-                    <option value="0" label="utilisateur normal">
-                        utilisateur normal
-                    </option>
-                    <option value="1" label="vendeur">
-                        Utilisateur- vendeur
-                    </option>
-                    <option value="2" label="administrateur">
-                        administrateur
-                    </option>
+                    {roles.map((role) => ( <option value={role.label} label= {role.label} key={role.id}></option> ))}                  
+                 
                 </select>
                 <div>
                     <button type="submit" className= "submit2">Modifier</button>

@@ -12,10 +12,9 @@ const DeleteUser = () => {
 
     const userId = useSelector(state => state.auth.userId);
 
-    // const dispatch = useDispatch();
     const history = useHistory();
     
-     //récupération de l'id
+     //récupération de l'id dans l'url
     const {id} = useParams(); // renvoie une paire clef/valeur  
     const initialValues = {
         password: '',
@@ -25,7 +24,7 @@ const DeleteUser = () => {
     const [userState, setUserState] = useState({});
 
      //recupération des infos sur l'utilisateur
-      //je pointe sur le tableau user dans le store
+    
     //  -------- Methode 2 ----------
     //  useEffect( ()=> {
     //     const users = useSelector(state => state.adm.users);
@@ -43,7 +42,7 @@ const DeleteUser = () => {
              if (res.status === 200) 
                  {   let user = {
                      id: res.data._id,
-                     role : res.data.role, 
+                     role : res.data.role.label, 
                      name : res.data.name, 
                      };
                      setUserState(user); 
@@ -61,9 +60,8 @@ const DeleteUser = () => {
             deleteUserById(values)
             .then (function (res) {
                 if (res.status === 200)
-                {alert("l'utilisateur a bien été supprimé" + res.data);
+                {alert("l'utilisateur a bien été supprimé");
                 history.push(URL_ADMIN);
-            //redirection
                 }
                 else {
                     if (res.status === 201)

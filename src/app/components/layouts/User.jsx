@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userInfo } from '../../api/backend/requestApi';
+import { addProduct, userInfo } from '../../api/backend/requestApi';
 
 
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
@@ -21,8 +21,12 @@ const User = () => {
             function (res) {
                 if (res.status === 200) {
 
+                   
 
                     dispatch(updateUser(res.data));
+                    
+                    
+                    
 
 
 
@@ -97,7 +101,7 @@ const User = () => {
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Adresse</div>
-                        <div>{user.adress} {user.zipcode} {user.ville}</div>
+                        <div>{user.adress.street} {user.adress.zipcode} {user.adress.city}</div>
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT + 'adress'}>

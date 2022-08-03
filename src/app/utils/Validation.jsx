@@ -65,7 +65,7 @@ const validationRegister = Yup.object().shape({
         //.min(8, 'Le mot de passe doit avoir au moins 8 caractères !')
         .matches(
             //regExPassword,
-            'Veuillez créer un mot de passe plus fort ! 1 Majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial',
+            //'Veuillez créer un mot de passe plus fort ! 1 Majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial',
         ),
 
     passwordConfirmation: Yup.string()

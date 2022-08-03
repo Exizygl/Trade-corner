@@ -29,9 +29,12 @@ const Login = () => {
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }
+               
                 if (res.status === 200 && res.data.message.user.id_token) {
                     dispatch(signIn(res.data.message.user));
+                    
                     if (isAuthenticated()) {
+                       
                         history.push(URL_HOME)
                     };
                 }

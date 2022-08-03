@@ -41,6 +41,10 @@ export const getAllUser = () => {
     return apiBackEnd.get('user');
 };
 
+export const getAllRoles = () => {
+    return apiBackEnd.get('roleUsers');
+};
+
 export const deleteUserById = (values) => {
     return apiBackEnd.put('admin/delete', values);
 };
@@ -66,3 +70,5 @@ export const passwordChange = (values) => {
 export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
+
+
