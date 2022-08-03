@@ -121,21 +121,13 @@ const ModifyAccount = () => {
                             } else {
                                 history.push(URL_USER);
                             }
-
-
                         })
 
-
-
                 }
-
-
 
             })
 
             setErrorLog(true)
-
-
         },
     });
 

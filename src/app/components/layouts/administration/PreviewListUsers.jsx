@@ -1,14 +1,9 @@
 import React from 'react';
 import CardUser from './CardUser';
-import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getAllUser } from '../../../api/backend/requestApi';
 import { Link } from 'react-router-dom';
-import {
-    URL_ADMIN_DEMANDESCOM,
-    URL_ADMIN_LISTUSERS,
-    URL_ADMIN,
-} from '../../../shared/constants/urls/urlConstants';
+import {   URL_ADMIN_LISTUSERS} from '../../../shared/constants/urls/urlConstants';
 
 export default function PreviewListUsers() {
     const [state, setState] = useState({ usersPreview: [] });
@@ -23,7 +18,7 @@ export default function PreviewListUsers() {
                         alert("Il n'y a pas d'utilisateurs dans la base de donnée !");
                     } else {
                         if (res.data.length <= 3) {
-                            //Si il y a 1 ou 2 utilisateurs dans la BDD
+                            //Si il y a 1,2 ou 3 utilisateurs dans la BDD
                             for (let i = 0; i < res.data.length; i++) {
                                 //pour la preview on récupére tous les utilisateurs
                                 let name = res.data[i].name;

@@ -10,13 +10,17 @@ import SubmitRegisterModal from '.././modal/SubmitRegisterModal';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
 import { addProduct } from '../../../api/backend/requestApi';
+import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
 
 
 export default function AddProduct() {
   // storage.clear();
-
+//   const [userImageValue, setUserImageValue] = useState("");
+//   const [errorSizeImage, setErrorSizeImage] = useState("");
+//   const [errorExtensionImage, setErrorExtensionImage] = useState("");
 const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
 const dispatch = useDispatch();
+
 const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}, {name : 'categorie 3', id: 3}];
 
 // const loadImage = (e) => {
@@ -32,11 +36,10 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
 //     } else setErrorSizeImage("");
 
 //     if (extension && imageSize) {
-//         formikImage.setFieldValue('avatar', e.currentTarget.files[0])
+//         formik.setFieldValue('photos', e.currentTarget.files[0])
 //     }
 // }
 
-// }
 
     // Variable
 
@@ -57,7 +60,8 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
         photos: '',
     };
 
-    const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
+ 
+        const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
         useFormik({
             initialValues,
             validationSchema : validationAddProduct,
@@ -114,6 +118,7 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                                     multiple = "multiple"
                                     value={values.photos}
                                     onChange={handleChange}
+                                    // onChange={(e) => loadImage(e)}
                                 />
                                 {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
                                 {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
@@ -134,9 +139,6 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     <option value={category.name} key = {category.id}> {category.name}</option>
                     )}
                     </select>
-
-                    
-
 
                     <div>
                         {touched.category && errors.category ? (

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 
-import { userInfo, updateUserById, uploadUserImageById, getAllRoles } from '../../../api/backend/requestApi';
+import { userInfo, updateUserById, uploadUserImageById } from '../../../api/backend/requestApi';
 
 import PreviewUserImage from '../../layouts/PreviewUserImage';
 import { URL_ADMIN_LISTUSERS, URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
@@ -47,7 +47,7 @@ const ModifyAccountByAdmin = () => {
     }, [])
 
 
-//<-----Initialisation des valeurs pour coordonnées ----->
+//<-----Initialisation des valeurs ----->
 
 
     const initialValues = {
@@ -154,13 +154,11 @@ const ModifyAccountByAdmin = () => {
         initialValues: { userToUpdate: id,
             avatar: '' },
         onSubmit: (values) => {
-            console.log("valeurs : "+JSON.stringify(values));
             handleImageUser(values);
         },
     });
 
     const handleImageUser = (values) => {
-
         const formData = new FormData()
         formData.append('avatar', values.avatar);
         formData.append('userToUpdate',id);
