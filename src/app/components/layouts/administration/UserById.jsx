@@ -12,8 +12,7 @@ export default function UserById() {
 
     //récupération de l'id
     const {id} = useParams(); // renvoie une paire clef/valeur  
-    const URL_DELETE = '/administration/delete/${userState.id}'
-
+   
     //recupération des infos sur l'utilisateur
 
    useEffect( () => {

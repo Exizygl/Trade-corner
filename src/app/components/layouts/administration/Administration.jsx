@@ -1,11 +1,10 @@
 import React from 'react';
 import {useEffect,useState} from 'react';
 import Navigation from './Navigation';
-import CardUser from './CardUser';
+import PreviewListUsers from './PreviewListUsers';
 import { useSelector, useDispatch } from 'react-redux';
 import {setListUsers, setListRoles} from '../../../shared/redux-store/administrationSlice';
 import { getAllUser, getAllRoles } from '../../../api/backend/requestApi';
-import PreviewListUsers from './PreviewListUsers';
 
 
 export default function Administration() {
@@ -13,27 +12,29 @@ export default function Administration() {
 const users = useSelector(state => state.adm.users); //je pointe sur le tableau user dans le store
 const dispatch = useDispatch();
 
+//récupération des roles de la BDD, enregistrement dans le store
 const getlistRoles =  () => {
   getAllRoles() //j'appelle l'api 
   .then (
     function (res) {
       if (res.status === 200) {
-          let resRoles = res.data.message.roles ;
-          console.log("res.data : " + JSON.stringify(resRoles));
+        let resRoles = res.data.message.roles ;
         let roles = [];
         for (let i=0; i<resRoles.length; i++) { 
           let label = resRoles[i].label;
           let id = i;
-          let role = { label : label ,
-          id : id}
+          let role = { 
+            label : label ,
+            id : id
+          }
           roles.push(role);      //j'ai récup la liste des rôles
         };
-        dispatch(setListRoles(roles));             
-       
+        dispatch(setListRoles(roles));  //enregistrement des rôles dans le store           
       }
     }
   )
-  };
+};
+//récuération des utilisateurs de la BDD, enregistrement dans le store
 const getlistUsers = () => {
   getAllUser() //j'appelle l'api 
   .then (
@@ -52,13 +53,11 @@ const getlistUsers = () => {
       }
     }
   )
-
 }
 
 useEffect( () => {
   getlistUsers();
   getlistRoles();
-  
 }
   ,[]
 )
@@ -76,10 +75,8 @@ useEffect( () => {
             {/* barre de recherche */}
             <p>Nombre total d'utilisateurs : {users.length} </p>
 
-
-            {/* Liste utilisateurs */}
             <h3>Liste des demandes</h3>
-            {/* Liste demandes */}
+            {/* preview Liste demandes */}
             <p>Vous n'avez pas de demandes en attente.</p>
         </div> 
     </div>

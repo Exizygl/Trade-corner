@@ -1,6 +1,5 @@
 import React from 'react';
 import './CardUser.css';
-import { useSelector, useDispatch } from 'react-redux';
 
 export default function CardUser(props) {
 

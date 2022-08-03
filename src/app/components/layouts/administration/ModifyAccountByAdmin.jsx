@@ -245,9 +245,6 @@ const ModifyAccountByAdmin = () => {
     };
 
 
-    
-  
-
 
     return (
         <div>
