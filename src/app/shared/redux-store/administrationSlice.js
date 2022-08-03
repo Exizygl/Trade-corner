@@ -2,12 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     //initialisation normale
-<<<<<<< HEAD
     users : [],
     roles : [],
-=======
-    users: [],
->>>>>>> 6969d2f50ec88e99063f93a063b6543be64a83fd
 };
 
 export const AdministrationSlice = createSlice({
