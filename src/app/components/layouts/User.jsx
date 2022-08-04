@@ -24,6 +24,8 @@ const User = () => {
                    
 
                     dispatch(updateUser(res.data));
+                    const empty = {}
+                    addProduct(empty);
                     
                     
                     
