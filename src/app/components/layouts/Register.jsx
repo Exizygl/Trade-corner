@@ -30,7 +30,7 @@ const Register = () => {
     const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
         useFormik({
             initialValues,
-            validationSchema : validationRegister,
+            validationSchema: validationRegister,
             onSubmit,
         });
 
@@ -47,7 +47,9 @@ const Register = () => {
                     );
                 }
             })
-            .catch(() => console.log('erreur register'));
+            .catch((error) => {
+                console.log('test');
+            });
     }
     // Formulaire
 
