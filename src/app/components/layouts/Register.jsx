@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
+import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
 // import validationRegister from '../../utils/Validation'; //validation YUP
 import SubmitRegisterModal from './modal/SubmitRegisterModal';
 import { validationRegister } from '../../utils/Validation';
@@ -12,6 +13,9 @@ const Register = () => {
     const closeModal = () => {
         setSuccessSubmitModal('');
     };
+
+    const [errorLog, setErrorLog] = useState(false);
+    const [msgError, setMsgError] = useState('');
 
     // Formik
 
@@ -38,6 +42,7 @@ const Register = () => {
         console.log(formValues);
         register(values)
             .then((res) => {
+                console.log(res);
                 if (res.data.message.user) {
                     setSuccessSubmitModal(
                         <SubmitRegisterModal
@@ -48,7 +53,11 @@ const Register = () => {
                 }
             })
             .catch((error) => {
-                console.log('test');
+                console.log(error.response.data);
+                if (error.response.data) {
+                    setMsgError(error.response.data.errors);
+                }
+                setErrorLog(true);
             });
     }
     // Formulaire
@@ -247,6 +256,14 @@ const Register = () => {
                     <div className="submit">
                         <button type="submit">Créer mon compte</button>
                     </div>
+                    {console.log(msgError)}
+                    {console.log(errorLog)}
+                    {errorLog && msgError.pseudo && (
+                        <ErrorMessSmall middle message="Ce pseudo est déjà pris" />
+                    )}
+                    {errorLog && msgError.email && (
+                        <ErrorMessSmall middle message="Cet email est déjà enregistré" />
+                    )}
                 </form>
             </div>
             {successSubmitModal}
