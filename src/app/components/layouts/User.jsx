@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addProduct, userInfo } from '../../api/backend/requestApi';
+import { userInfo } from '../../api/backend/requestApi';
 
 
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
@@ -21,17 +21,8 @@ const User = () => {
             function (res) {
                 if (res.status === 200) {
 
-                   
 
                     dispatch(updateUser(res.data));
-                    const empty = {}
-                    addProduct(empty);
-                    
-                    
-                    
-
-
-
                 }
             });
     }, []);

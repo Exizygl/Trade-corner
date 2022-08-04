@@ -1,10 +1,11 @@
 import React from 'react';
+import Home from '../components/layouts/Home';
 
 
 const HomeView = () => {
     return (
         <div>
-            <div>Home</div>
+            <Home />
         </div>
     );
 };

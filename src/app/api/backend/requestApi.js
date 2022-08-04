@@ -66,3 +66,8 @@ export const passwordChange = (values) => {
 export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
+
+export const getAllProduct = () => {
+    return apiBackEnd.get('product');
+};
+
