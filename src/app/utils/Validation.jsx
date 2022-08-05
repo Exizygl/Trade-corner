@@ -4,8 +4,7 @@ import * as Yup from 'yup';
 // Regex
 
 const regExPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-const regExNumberPhone =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,3})[ \\-]*)*?[0-9]{2,3}?[ \\-]*[0-9]{2,3}?$/;
+const regExNumberPhone = /^(0|(\+[0-9]{2}[. -]?))[1-9]([. -]?[0-9][0-9]){4}$/;
 const regExEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const regExVille = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
 const regExZipCode = /^[0-9]{5}(?:-[0-9]{4})?$/;
