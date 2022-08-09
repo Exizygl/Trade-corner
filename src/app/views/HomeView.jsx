@@ -1,10 +1,10 @@
 import React from 'react';
-
+import Search from '../components/layouts/Search';
 
 const HomeView = () => {
     return (
         <div>
-            <div>Home</div>
+            <Search />
         </div>
     );
 };

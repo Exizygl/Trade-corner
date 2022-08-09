@@ -2,11 +2,11 @@ import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
     URL_HOME,
     URL_LOGIN,
-    // URL_REGISTER,
+    URL_REGISTER,
     URL_LOGOUT,
 } from './../../shared/constants/urls/urlConstants';
 import {
@@ -17,45 +17,6 @@ import {
 
 import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
 
-const auth = useSelector((state) => state.auth);
-
-const { isLogged } = auth;
-
-const userLink = () => {
-    return (
-        <li className="drop-nav">
-            <ul className="dropdown">
-                <li>
-                    <Link to={URL_USER} className="ml-3">
-                        Profil
-                    </Link>
-                </li>
-                <li>
-                    <Link to={URL_SELLER} className="ml-3">
-                        Ma boutique
-                    </Link>
-                </li>
-                <li>
-                    <Link to={URL_ADMIN} className="ml-3">
-                        Administration
-                    </Link>
-                </li>
-                <li>
-                    <Link to={URL_LOGOUT}>
-                        <button className="ml-3" onClick={() => dispatch(signOut())}>
-                            {' '}
-                            Sign out{' '}
-                        </button>
-                    </Link>
-                </li>
-            </ul>
-        </li>
-    );
-};
-
-const transForm = {
-    transform: isLogged ? 'translateY(-5px)' : 0,
-};
 const Navbar = () => {
     const dispatch = useDispatch();
     return (
@@ -76,19 +37,12 @@ const Navbar = () => {
                                                 height={60}
                                             />
                                         </Link>
-                                        <div style={transForm}>
-                                            {isLogged ? (
-                                                userLink()
-                                            ) : (
-                                                <li>
-                                                    <Link to={URL_LOGIN} className="Nav2">
-                                                        Se connecter
-                                                    </Link>
-                                                </li>
-                                            )}
-                                        </div>
-                                        {/* <div className="Nav2"> */}
-                                        {/* <Link to={URL_REGISTER} className="ml-3">
+
+                                        <div>
+                                            <Link to={URL_LOGIN} className="ml-3">
+                                                Se connecter
+                                            </Link>
+                                            <Link to={URL_REGISTER} className="ml-3">
                                                 S'enregistrer
                                             </Link>
                                             <Link to={URL_LOGOUT}>
@@ -108,8 +62,8 @@ const Navbar = () => {
                                             </Link>
                                             <Link to={URL_ADMIN} className="ml-3">
                                                 Administration
-                                            </Link> */}
-                                        {/* </div> */}
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
 
