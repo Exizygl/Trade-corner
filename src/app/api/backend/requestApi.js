@@ -71,4 +71,10 @@ export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
 
+//requete categorie
+
+export const getAllCategory = () => {
+    return apiBackEnd.get('category');
+}
+
 

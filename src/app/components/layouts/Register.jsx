@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
-// import validationRegister from '../../utils/Validation'; //validation YUP
 import SubmitRegisterModal from './modal/SubmitRegisterModal';
 import { validationRegister } from '../../utils/Validation';
 
