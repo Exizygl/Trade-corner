@@ -38,32 +38,30 @@ const Navbar = () => {
                                             />
                                         </Link>
 
-                                        <div>
-                                            <Link to={URL_LOGIN} className="ml-3">
-                                                Se connecter
-                                            </Link>
-                                            <Link to={URL_REGISTER} className="ml-3">
-                                                S'enregistrer
-                                            </Link>
-                                            <Link to={URL_LOGOUT}>
-                                                <button
-                                                    className="ml-3"
-                                                    onClick={() => dispatch(signOut())}
-                                                >
-                                                    {' '}
-                                                    Sign out{' '}
-                                                </button>
-                                            </Link>
-                                            <Link to={URL_USER} className="ml-3">
-                                                Profil
-                                            </Link>
-                                            <Link to={URL_SELLER} className="ml-3">
-                                                Ma boutique
-                                            </Link>
-                                            <Link to={URL_ADMIN} className="ml-3">
-                                                Administration
-                                            </Link>
-                                        </div>
+                                        <Link to={URL_LOGIN} className="ml-3">
+                                            Se connecter
+                                        </Link>
+                                        <Link to={URL_REGISTER} className="ml-3">
+                                            S'enregistrer
+                                        </Link>
+                                        <Link to={URL_LOGOUT}>
+                                            <button
+                                                className="ml-3"
+                                                onClick={() => dispatch(signOut())}
+                                            >
+                                                {' '}
+                                                Sign out{' '}
+                                            </button>
+                                        </Link>
+                                        <Link to={URL_USER} className="ml-3">
+                                            Profil
+                                        </Link>
+                                        <Link to={URL_SELLER} className="ml-3">
+                                            Ma boutique
+                                        </Link>
+                                        <Link to={URL_ADMIN} className="ml-3">
+                                            Administration
+                                        </Link>
                                     </div>
                                 </div>
 
