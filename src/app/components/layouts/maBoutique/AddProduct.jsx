@@ -102,12 +102,19 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
         });
 
     function onSubmit(formValues) {
-        //const files = target.files;
-        //console.log("target.files = "+files);
+
+        const formData = new FormData();
+        formData.append('photos', formValues.photos);
+        formData.append('title', formValues.title);
+        formData.append('description', formValues.description);
+        formData.append('category', formValues.category);
+        formData.append('tags', formValues.tags);
+        formData.append('price', formValues.price);
+        formData.append('quantity', formValues.quantity);
+        
         console.log("submit");
-        console.log("formValues = " +JSON.stringify(formValues))
-        console.log("image ? : " + JSON.stringify(formValues.photos.name) );
-        addProduct(formValues)
+        console.log("formData = " +JSON.stringify(formData))
+        addProduct(formData)
         .then (console.log ("ok"));
     }
 
