@@ -6,7 +6,7 @@
         @apply h-full
     }
     body{
-        @apply h-full
+        @apply h-full 
     }
 
     
@@ -29,4 +29,5 @@
     h6{
         @apply text-xl
     }
+
 }

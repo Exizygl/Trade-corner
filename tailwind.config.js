@@ -13,7 +13,14 @@ module.exports = {
                     DEFAULT: '#ed7410',
                     dark: '#bf5d0d',
                 },
+                background: {
+                    light: '#f39e58',
+                    DEFAULT: '#22262F',
+                    dark: '#bf5d0d',
+                },
+
             },
+           
         },
     },
     plugins: [require('@tailwindcss/forms')],

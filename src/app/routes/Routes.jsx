@@ -23,6 +23,7 @@ import UserByIdView from '../views/administration/UserByIdView';
 import ModifyAccountByAdminView from '../views/administration/ModifyAccountByAdminView';
 import DemandesComView from '../views/administration/DemandesComView';
 import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
+import ProductDetailView from '../views/ProductDetailView';
 
 
 /**
@@ -39,6 +40,13 @@ const Routes = () => {
             <Route exact path={URL.URL_REGISTER} component={RegisterView} />
             <Route path={URL.URL_CONFIRM_REGISTER} component={ConfirmRegisterView} />
             
+            {/*routes pour les produits */}
+
+            <Route
+                exact
+                path={URL.URL_PRODUCT + ':id'}
+                component={ProductDetailView}
+            />
             {/*routes pour le profil */}
             <Route exact path={URL.URL_USER} component={UserView} />
             <Route path={URL.URL_DELETE} component={UserDeleteView} />
