@@ -56,6 +56,14 @@ const dispatch = useDispatch();
 
 const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}, {name : 'categorie 3', id: 3}];
 
+const loadImages = (e) => {
+    const newFiles = []
+    for(let i = 0; i < e.target.files.length; i++){
+        newFiles.push(e.target.files[i]); 
+    }
+    setFieldValue('photos',newFiles);
+}
+
 // const loadImage = (e) => {
 
 //     const extension = findImageExtension(e.currentTarget.files[0].name)
@@ -113,7 +121,8 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
         formData.append('quantity', formValues.quantity);
         
         console.log("submit");
-        console.log("formData = " +JSON.stringify(formData))
+
+        console.log("value photo = "  + formValues.photos);
         addProduct(formData)
         .then (console.log ("ok"));
     }
@@ -157,10 +166,10 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                         type="file"
                         name="photos"
                         accept='images/*'
-                        // multiple = "multiple"
+                        multiple = "multiple"
                        
-                        onChange={(e) => setFieldValue('photos',e.currentTarget.files[0])}
-                        // onChange={(e) => loadImage(e)}
+                        //onChange={(e) => setFieldValue('photos',e.currentTarget.files[0])}
+                        onChange={(e) => loadImages(e)}
                                 />
                                 {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
                                 {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
