@@ -24,6 +24,7 @@ import ModifyAccountByAdminView from '../views/administration/ModifyAccountByAdm
 import DemandesComView from '../views/administration/DemandesComView';
 import DeleteUserByIdView from '../views/administration/DeleteUserByIdView';
 import ProductDetailView from '../views/ProductDetailView';
+import ProductListView from '../views/ProductListView';
 
 
 /**
@@ -46,6 +47,11 @@ const Routes = () => {
                 exact
                 path={URL.URL_PRODUCT + ':id'}
                 component={ProductDetailView}
+            />
+            <Route
+                exact
+                path={URL.URL_PRODUCTLIST}
+                component={ProductListView}
             />
             {/*routes pour le profil */}
             <Route exact path={URL.URL_USER} component={UserView} />

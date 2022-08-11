@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { getNewProduct } from '../../api/backend/requestApi';
 
 
-import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
+import { } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
 import Product from './card/Product';
 
@@ -56,7 +56,7 @@ const Home = () => {
         return (
             <div>
 
-                <div className="flex">{list}</div>
+                <div className="flex flex-wrap">{list}</div>
             </div>
         )
 
@@ -64,21 +64,33 @@ const Home = () => {
     }
     return (
 
-        <div>
+        <div className='text-white'>
 
-            <h1 className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem] text-white'>LES NOUVEAUTÉS </h1>
-            <div>
-                {displayProducts()}
-            </div>
-            <Link to={URL_PRODUCTLIST}>
-            <div className='h-12 w-80 bg-[#53216C] font-bold text-[1rem] flex items-center justify-items-center mt-20 mx-auto'>
-            
-                <div className='justify-self-center m-auto '>
-                    Voir plus
+            <h1 className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem]'>Nos Articles </h1>
+            <div className='flex justify-around mt-8'>
+                <div>
+                    JEUX VIDEO
                 </div>
-            
+                <div>
+                    GOODIES
+                </div>
+                <div>
+                    COMICS/MANGA
+                </div>
+                <div>
+                    DVD/BLUE-RAY
+                </div>
             </div>
-            </Link>
+
+            <div className='mt-20 flex ml-14'>
+                <div className='w-[18.75rem] h-full bg-[#53216C]'>
+                    
+                </div>
+                <div>
+                    {displayProducts()}
+                </div>
+            </div>
+
         </div>
 
 

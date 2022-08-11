@@ -10,7 +10,7 @@ const Product = ({id, title, price, image}) => {
     const truePrice = price / 100 ;
     return (
       
-        <div className=" cardUser w-[18.75rem] h-[26.875rem] ml-[2.8125rem]">
+        <div className=" cardUser w-[18.75rem] h-[26.875rem] ml-[2.8125rem] mb-12">
           <Link to={URL_PRODUCT + id}>
           <div className="h-[17.625rem]">
             {image ?

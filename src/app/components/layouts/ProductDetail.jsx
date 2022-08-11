@@ -1,22 +1,22 @@
+import DayJS from 'react-dayjs';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../api/backend/requestApi';
+
 
 const ProductDetail = () => {
 
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [seller, setSeller] = useState([]);
+  const [date, setDate] = useState([]);
   const productDetail = product;
-  
-
 
   const { id } = useParams();
-
-
+  
   useEffect(() => {
-   
+
     getProduct(id).then(
       function (res) {
 
@@ -24,8 +24,8 @@ const ProductDetail = () => {
           setProduct(res.data.message.product)
           setCategory(res.data.message.product.categoryId)
           setSeller(res.data.message.product.sellerId)
-          
-         
+          setDate(dateFormat(res.data.message.product.createdAt))
+
 
 
         }
@@ -34,6 +34,10 @@ const ProductDetail = () => {
 
   }, []);
 
+  const dateFormat = (date) => {
+
+   return (date.slice(8, -14) + "/" + date.slice(5, -17) + "/" + date.slice(0, -20));
+  }
   return (
     <div>
       <div className='flex text-white'>
@@ -55,18 +59,18 @@ const ProductDetail = () => {
               <div className='font-bold text-[1rem] mr-4'>
                 Prix :
 
-                <spam className='font-normal text-[1.5rem]'>
+                <span className='font-normal text-[1.5rem]'>
                   {productDetail.price / 100}€
 
-                </spam>
+                </span>
               </div>
               <div className='font-bold text-[1rem] '>
                 Stock :
 
-                <spam className='font-normal text-[1.5rem]'>
+                <span className='font-normal text-[1.5rem] ml-4'>
                   {productDetail.quantity}
 
-                </spam>
+                </span>
               </div>
             </div>
 
@@ -76,10 +80,10 @@ const ProductDetail = () => {
               <div className='font-bold text-[1rem] mr-4'>
                 Vendu par :
 
-                <spam className='font-normal text-[1.5rem]'>
+                <span className='font-normal text-[1.5rem] ml-4'>
                   {seller.pseudo}
 
-                </spam>
+                </span>
               </div>
             </div>
 
@@ -90,13 +94,12 @@ const ProductDetail = () => {
               <div className='font-bold text-[1rem] mr-4'>
                 En ligne depuis le :
 
-                <spam className='font-normal text-[1.5rem]'>
-                  {productDetail.createdAt}
-
-                </spam>
+                <span className='font-normal text-[1.5rem] ml-4'>
+                  {date}
+                </span>
               </div>
               <div className='h-12 w-80 bg-[#53216C] font-bold text-[1rem] flex items-center justify-items-center'>
-                <div className=' '>
+                <div className='justify-self-center m-auto '>
                   Ajouter au panier
                 </div>
               </div>
