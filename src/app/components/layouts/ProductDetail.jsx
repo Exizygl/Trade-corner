@@ -6,22 +6,26 @@ import { getProduct } from '../../api/backend/requestApi';
 const ProductDetail = () => {
 
   const [product, setProduct] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [seller, setSeller] = useState([]);
   const productDetail = product;
-  const category = productDetail.categoryId
+  
 
 
   const { id } = useParams();
 
 
   useEffect(() => {
-    console.log(id)
+   
     getProduct(id).then(
       function (res) {
 
         if (res.status === 200) {
           setProduct(res.data.message.product)
-          console.log(res.data.message.product)
-          console.log(category)
+          setCategory(res.data.message.product.categoryId)
+          setSeller(res.data.message.product.sellerId)
+          
+         
 
 
         }
@@ -42,7 +46,7 @@ const ProductDetail = () => {
 
         <div className='mt-10 w-[47.875rem]'>
           <h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>{productDetail.title}</h1>
-          <div className='font-normal text-[1.125rem] mb-8'>category</div>
+          <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>
           <p className='w-[47.75rem] font-normal leading-[1.75rem] text-[1rem]'>{productDetail.description}</p>
 
 
@@ -73,7 +77,7 @@ const ProductDetail = () => {
                 Vendu par :
 
                 <spam className='font-normal text-[1.5rem]'>
-                  pseudo
+                  {seller.pseudo}
 
                 </spam>
               </div>
