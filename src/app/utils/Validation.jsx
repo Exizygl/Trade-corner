@@ -15,24 +15,45 @@ const validationAddProduct = Yup.object().shape(
     {
         title : Yup.string()
         .required ('Il manque un titre à votre produit')
-        .min (5),
+        .min (4).max(30),
 
         description : Yup.string()
-        .required('Il manque une description à votre produit'),
+        .required('Il manque une description à votre produit')
+        .min(20).max(800),
 
-        category : Yup.string(),
-        // .required('Veuillez selectionner une catégorie'),
+        category : Yup.string()
+        .required('Veuillez selectionner une catégorie'),
 
         tags : Yup.string(),
 
         price : Yup.number()
         .required('Veuillez indiquer un prix pour votre produit')
-        .min(1),
+        .min(1).max(1000),
 
         quantity : Yup.number()
         .required('veuillez indiquer le nombre de produit en stock')
-        .min(1),
+        .min(1).max(40),
         
+        photos : Yup.mixed()
+        .required('Une photo du produit est obligatoire')
+        .test('PhotoTypes','Les photos doivent etre en jpg, jpeg ou png', function (value) {
+            if (!value) return false;
+            const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+            const validFormats = [];
+            for(let i=0; i<value.lenght; i++)
+                {validFormats.push(SUPPORTED_FORMATS.includes(value[i].type));
+            }
+            return validFormats.every((value) => value === true);
+        }
+        ),
+
+
+        //     for(let i=0; i<value.lenght; i++)
+        //     {if (SUPPORTED_FORMATS.includes(value[i].type) === false)
+        //         return false;
+        //     }
+        //     return SUPPORTED_FORMATS.includes(value[0].type) //return true si format ok, et false sinon
+        //   }),
     }
 );
 
@@ -78,6 +99,7 @@ const validationRegister = Yup.object().shape({
         .min(9, 'Le numéro de téléphone doit comporter au minimum 9 numéros')
         .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });
+
 
 export {validationAddProduct, validationRegister}
 

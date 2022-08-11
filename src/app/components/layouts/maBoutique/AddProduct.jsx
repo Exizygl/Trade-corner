@@ -3,24 +3,24 @@ import {useEffect,useState} from 'react';
 import Navigation from './Navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, FormikConsumer, useFormik } from 'formik';
-import storage from 'redux-persist/lib/storage';
-import { store } from '../../../shared/redux-store/store';
 import { validationAddProduct } from '../../../utils/Validation';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
 import { addProduct, getAllCategory} from '../../../api/backend/requestApi';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
+import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 export default function AddProduct() {
   // storage.clear();
-//   const [userImageValue, setUserImageValue] = useState("");
-//   const [errorSizeImage, setErrorSizeImage] = useState("");
-//   const [errorExtensionImage, setErrorExtensionImage] = useState("");
+  const [userImageValue, setUserImageValue] = useState("");
+  const [errorSizeImage, setErrorSizeImage] = useState("");
+  const [errorExtensionImage, setErrorExtensionImage] = useState("");
+  const [state, setState] = useState({ categories: [] });
 
-const [state, setState] = useState({ categories: [] });
+//---------FONCTIONS --------------
 
-const getlistCategory =  () => {
+  const getlistCategory =  () => {
     getAllCategory() //j'appelle l'api 
     .then (
       function (res) {
@@ -34,9 +34,8 @@ const getlistCategory =  () => {
               label : label ,
               id : id
             }
-            categories.push(category);      //j'ai récup la liste des rôles
+            categories.push(category);  //j'ai récup la liste des categories
           };
-          console.log("liste des catégories : " + JSON.stringify(categories));
           setState((state) => ({
             categories: [...state.categories, ...categories],
         }));           
@@ -45,53 +44,28 @@ const getlistCategory =  () => {
     )
   };
 
+
+
   useEffect( () => {
     getlistCategory();
   }
     ,[]
   )
 
-const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
-const dispatch = useDispatch();
-
-const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}, {name : 'categorie 3', id: 3}];
-
-const loadImages = (e) => {
-    const newFiles = []
-    for(let i = 0; i < e.target.files.length; i++){
-        newFiles.push(e.target.files[i]); 
-    }
-    setFieldValue('photos',newFiles);
-}
-
-// const loadImage = (e) => {
-
-//     const extension = findImageExtension(e.currentTarget.files[0].name)
-//     if (!extension) {
-//         setErrorExtensionImage(`L'extension d'image doit être jpg, jpeg ou png`)
-//     } else setErrorExtensionImage("");
-
-//     const imageSize = validImageSize(e.currentTarget.files[0].size)
-//     if (!imageSize) {
-//         setErrorSizeImage(`Le poids de l'image ne doit pas dépasser 200 Ko`)
-//     } else setErrorSizeImage("");
-
-//     if (extension && imageSize) {
-//         formik.setFieldValue('photos', e.currentTarget.files[0])
-//     }
-// }
+  const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
+  const dispatch = useDispatch();
 
 
     // Variable
 
-    const [successSubmitModal, setSuccessSubmitModal] = useState('');
-    const closeModal = () => {
+  const [successSubmitModal, setSuccessSubmitModal] = useState('');
+  const closeModal = () => {
         setSuccessSubmitModal('');
-    };
+  };
 
-    // Formik
+    // ----- FORMIK ------------
 
-    const initialValues = {
+  const initialValues = {
         title: '',
         description: '',
         category: '',
@@ -99,20 +73,49 @@ const loadImages = (e) => {
         price: '',
         quantity: '',
         photos: '',
-    };
+  };
 
- 
-        const { handleSubmit, values, touched, isValid, handleChange, handleBlur, setFieldValue, errors } =
-        useFormik({
-            initialValues,
-            validationSchema : validationAddProduct,
-            onSubmit,
-        });
+  const { handleSubmit, values, touched, isValid, handleChange, handleBlur, setFieldValue, errors } =
+  useFormik({
+    initialValues,
+    validationSchema : validationAddProduct,
+    onSubmit,
+  });
 
-    function onSubmit(formValues) {
+//   const checkValidImages = (e) => {
+
+//     for (let i=0; i<e.currentTarget.files; i++)
+//     {
+//     const extension = findImageExtension(e.currentTarget.files[i].name)
+//     if (!extension) {
+//         setErrorExtensionImage(`L'extension d'image doit être jpg, jpeg ou png`)
+//     } else setErrorExtensionImage("");
+
+//     const imageSize = validImageSize(e.currentTarget.files[i].size)
+//     if (!imageSize) {
+//         setErrorSizeImage(`Le poids de l'image ne doit pas dépasser 200 Ko`)
+//     } else setErrorSizeImage("");
+//     }
+//   }
+
+  const loadImages = (e) => {
+    // checkValidImages(e);
+    
+    const newFiles = []
+    for(let i = 0; i < e.target.files.length; i++){
+        
+        newFiles.push(e.target.files[i]); 
+    }
+    setFieldValue('photos',newFiles);
+  }
+
+  function onSubmit(formValues) {
 
         const formData = new FormData();
-        formData.append('photos', formValues.photos);
+
+        for (let i=0; i <formValues.photos.length; i++){
+            formData.append('photos', formValues.photos[i]); //on envoie chaque file avec la key "photos"
+        };
         formData.append('title', formValues.title);
         formData.append('description', formValues.description);
         formData.append('category', formValues.category);
@@ -120,12 +123,8 @@ const loadImages = (e) => {
         formData.append('price', formValues.price);
         formData.append('quantity', formValues.quantity);
         
-        console.log("submit");
-
-        console.log("value photo = "  + formValues.photos);
         addProduct(formData)
-        .then (console.log ("ok"));
-    }
+  }
 
 
   return (
@@ -158,22 +157,25 @@ const loadImages = (e) => {
                         )}
                     </div>
                 </div>
-
+{/*photos*/}
                 <label htmlFor="photos">Photos</label>
                 <div>
                     <input
                         id="photos"
                         type="file"
                         name="photos"
-                        accept='images/*'
+                        accept='image/*'
                         multiple = "multiple"
-                       
-                        //onChange={(e) => setFieldValue('photos',e.currentTarget.files[0])}
                         onChange={(e) => loadImages(e)}
-                                />
-                                {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
-                                {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
-                                {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>} */}
+                    />
+                    {touched.photos && errors.photos ? (
+                            <small>{errors.photos}</small>
+                        ) : (
+                         ''
+                        )}
+
+                                {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>} */}
+                               
 
                 </div>
 
@@ -286,7 +288,6 @@ const loadImages = (e) => {
                     <Link to={URL_SELLER}><button className="submit2">Annuler</button></Link>
                 </div>
             </form>
-            
             {successSubmitModal}
         </div>
     </div>
