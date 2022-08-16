@@ -24,7 +24,7 @@ const RoutesWithNavigation = () => {
 
     return (
         <BrowserRouter>
-            <div className="h-full flex flex-col bg-gray-100 cursor-default">
+            <div className="h-full flex flex-col cursor-default">
                 <Navbar />
                 <main className="grow mt-24">
                     <Routes />

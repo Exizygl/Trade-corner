@@ -19,7 +19,9 @@ const App = () => {
     return (
         <Provider store={store}>
             {/* <PersistGate persistor={persistor}> */}
-            <RoutesWithNavigation />
+            {/* <div className="darkgray text"> */}
+                <RoutesWithNavigation />
+                {/* </div> */}
             {/* </PersistGate> */}
         </Provider>
     );

@@ -6,7 +6,7 @@
 @import url(./components/navbar.scss);
  @import url(./components/register.css);
 @import url(./components/connexion.scss);
-@import url(./maBoutique.css);
+
 
 @tailwind utilities;
 
@@ -20,4 +20,5 @@
 .anim-delay-600 {
     animation-delay: 0.6s;
 }
+
 

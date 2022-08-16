@@ -4,7 +4,7 @@ import Navigation from './Navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, FormikConsumer, useFormik } from 'formik';
 import { validationAddProduct } from '../../../utils/Validation';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
 import { addProduct, getAllCategory} from '../../../api/backend/requestApi';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
@@ -17,6 +17,7 @@ export default function AddProduct() {
   const [errorSizeImage, setErrorSizeImage] = useState("");
   const [errorExtensionImage, setErrorExtensionImage] = useState("");
   const [state, setState] = useState({ categories: [] });
+  const history = useHistory();
 
 //---------FONCTIONS --------------
 
@@ -124,16 +125,22 @@ export default function AddProduct() {
         formData.append('quantity', formValues.quantity);
         
         addProduct(formData)
+        .then ((res)=> {
+          if(res.status === 200)
+          {          alert("le produit a bien été ajouté");
+          history.push(URL_SELLER);}
+          else {alert("error")}
+        })
   }
 
 
   return (
-    <div className="flex flex-row ml-12">
-        <div className = "border-solid border-2 basis-2/6">
+    <div className="flex flex-row mx-12 gap-10 bg-darkgray text-white">
+        <div className = "basis-3/12">
             <Navigation/>
         </div> 
 
-        <div className= " addProduct border-solid border-2 basis-4/6 "> 
+        <div className= "basis-9/12"> 
             <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
                 <h2>Ajouter un produit</h2>
 
@@ -144,6 +151,7 @@ export default function AddProduct() {
                     type="text"
                     name="title"
                     id="title"
+                    className="input"
                     placeholder="Nom du produit"
                     value={values.title}
                     onChange={handleChange}
@@ -164,6 +172,7 @@ export default function AddProduct() {
                         id="photos"
                         type="file"
                         name="photos"
+                        className="input"
                         accept='image/*'
                         multiple = "multiple"
                         onChange={(e) => loadImages(e)}
@@ -182,7 +191,7 @@ export default function AddProduct() {
 {/* catégorie du produit */}
                 <div>
                     <label htmlFor="category">Catégorie : </label>
-                    <select name="category"
+                    <select name="category" className="input"
                     value={values.category}
                     onChange={handleChange}>
                         <option value="" label="Choisir une catégorie">
@@ -209,6 +218,7 @@ export default function AddProduct() {
                     type="text"
                     name="tags"
                     id="tags"
+                    className="input"
                     placeholder="ajouter des tags en les séparant par une virgule"
                     value={values.tags}
                     onChange={handleChange}
@@ -228,6 +238,7 @@ export default function AddProduct() {
                     <textarea
                         name="description"
                         id="description"
+                        className="input"
                         value={values.description}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -248,6 +259,7 @@ export default function AddProduct() {
                     type="number"
                     name="price"
                     id="price"
+                    className="input"
                     value={values.price}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -268,6 +280,7 @@ export default function AddProduct() {
                     type="number"
                     name="quantity"
                     id="quantity"
+                    className="input"
                     value={values.quantity}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -284,8 +297,8 @@ export default function AddProduct() {
                     
 
                 <div className="submit">
-                    <button type="submit" className= "submit2">Ajouter un produit</button>
-                    <Link to={URL_SELLER}><button className="submit2">Annuler</button></Link>
+                    <button type="submit" className= " btn-primary w-[300px]">Ajouter un produit</button>
+                    <Link to={URL_SELLER}><button className="btn-primary">Annuler</button></Link>
                 </div>
             </form>
             {successSubmitModal}

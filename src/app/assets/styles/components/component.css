@@ -3,7 +3,7 @@
 @layer components {
 
     #root{
-        @apply h-full
+        @apply h-full bg-darkgray
     }
 
     /* LINKS */
