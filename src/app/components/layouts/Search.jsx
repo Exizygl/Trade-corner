@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { URL_PRODUCT } from '../../shared/constants/urls/urlConstants';
 
 const Search = () => {
-    const { value, setValue } = useState('');
+    
 
     // const onChange = (event) => {
     //     setValue(event.target.value);
     // };
 
     const onSearch = (searchTerm) => {
-        history.push(URL_LOGIN);
+        navigate
+        navigate(URL_PRODUCT + searchTerm, {replace: true});
         // console.log('search', searchTerm);
     };
     return (
@@ -20,7 +22,7 @@ const Search = () => {
                             type="text"
                             name="search"
                             id="search"
-                            value={value}
+                            
                         />
                         <button onClick={() => onSearch(value)} className="search">
                             {' '}

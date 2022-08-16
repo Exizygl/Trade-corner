@@ -58,7 +58,7 @@ const Routes = () => {
             />
             <Route
                 exact
-                path={URL.URL_PRODUCTLIST+ ':query'}
+                path={URL.URL_PRODUCTLIST+ ':query?'}
                 component={ProductListView}
             />
             {/*routes pour le profil */}

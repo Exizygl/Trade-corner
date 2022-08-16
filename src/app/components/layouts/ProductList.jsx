@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { getNewProduct } from '../../api/backend/requestApi';
+import { Link, useParams } from 'react-router-dom';
+import { search } from '../../api/backend/requestApi';
 
 
 import { } from '../../shared/constants/urls/urlConstants';
@@ -13,9 +13,12 @@ import Product from './card/Product';
 
 
 
-const Home = () => {
+const ProductList = () => {
 
     const [products, setProducts] = useState([]);
+    const params = new URLSearchParams(location.search)
+    console.log(params.get("search"));
+    
 
 
 
@@ -23,10 +26,11 @@ const Home = () => {
 
 
     useEffect(() => {
-
-        getNewProduct().then(
+        console.log('poya');
+        search(params.get("search")).then(
+            
             function (res) {
-
+                
                 if (res.status === 200) {
                     setProducts(res.data.message.productList)
 
@@ -99,4 +103,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default ProductList;

@@ -23,11 +23,12 @@ const Home = () => {
 
 
     useEffect(() => {
-
+        console.log("poya")
         getNewProduct().then(
             function (res) {
-
+                console.log("poyo")
                 if (res.status === 200) {
+                    console.log(res.data.message.productList)
                     setProducts(res.data.message.productList)
 
 
