@@ -8,6 +8,9 @@ export const URL_MODIFYACCOUNT = '/modify+';
 export const URL_DELETE = '/delete';
 export const URL_FORGOTTENPASSWORD = '/forgotten-password';
 export const URL_PASSWORDCHANGE = '/password-change';
+export const URL_PRODUCT = '/product-detail+';
+export const URL_PRODUCTLIST = '/product-list';
+
 
 //routes accessibles aux administrateurs
 export const URL_ADMIN = '/administration';

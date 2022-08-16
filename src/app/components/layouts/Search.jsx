@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 const Search = () => {
     const { value, setValue } = useState('');
 
-    const onChange = (event) => {
-        setValue(event.target.value);
-    };
+    // const onChange = (event) => {
+    //     setValue(event.target.value);
+    // };
 
     const onSearch = (searchTerm) => {
-        setValue(searchTerm);
+        history.push(URL_LOGIN);
         // console.log('search', searchTerm);
     };
     return (
@@ -21,7 +21,6 @@ const Search = () => {
                             name="search"
                             id="search"
                             value={value}
-                            onChange={onChange}
                         />
                         <button onClick={() => onSearch(value)} className="search">
                             {' '}

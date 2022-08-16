@@ -71,4 +71,15 @@ export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
 
+export const getAllProduct = () => {
+    return apiBackEnd.get('product');
+};
+
+export const getNewProduct = () => {
+    return apiBackEnd.get('product/new');
+};
+
+export const getProduct = (id) => {
+    return apiBackEnd.get('product/' + id);
+};
 

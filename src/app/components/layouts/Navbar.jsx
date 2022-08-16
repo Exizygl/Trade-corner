@@ -16,7 +16,7 @@ import {
 } from './../../shared/constants/urls/urlConstants';
 
 import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
-
+import Search from './Search';
 const Navbar = () => {
     const dispatch = useDispatch();
     return (
@@ -37,7 +37,7 @@ const Navbar = () => {
                                                 height={60}
                                             />
                                         </Link>
-
+                                        <Search />
                                         <Link to={URL_LOGIN} className="ml-3">
                                             Se connecter
                                         </Link>
@@ -59,9 +59,9 @@ const Navbar = () => {
                                         <Link to={URL_SELLER} className="ml-3">
                                             Ma boutique
                                         </Link>
-                                        <Link to={URL_ADMIN} className="ml-3">
+                                        {/* <Link to={URL_ADMIN} className="ml-3">
                                             Administration
-                                        </Link>
+                                        </Link> */}
                                     </div>
                                 </div>
 

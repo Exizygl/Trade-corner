@@ -1,10 +1,11 @@
 import React from 'react';
-import Search from '../components/layouts/Search';
+import Home from '../components/layouts/Home';
+
 
 const HomeView = () => {
     return (
         <div>
-            <Search />
+            <Home />
         </div>
     );
 };
