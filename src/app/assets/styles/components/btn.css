@@ -1,3 +1,15 @@
+/* classes customisées et utilisées */
+
+.btn-primary{
+    @apply bg-gradient-to-b from-purplecorner to-magentacorner h-[50px] px-5 mr-5 mb-5 text-white uppercase ;
+}
+
+.btn-nav-primary {
+    @apply bg-gradient-to-b from-purplecorner to-magentacorner h-[50px] px-5  text-white inline-flex items-center justify-center;
+
+}
+
+
 
 .btn{
     @apply inline-flex items-center justify-center px-4 py-2 text-base font-medium transform border border-transparent rounded-md shadow whitespace-nowrap focus:outline-none active:scale-95 active:ring-2 active:ring-offset-2 active:ring-white ;
@@ -7,9 +19,7 @@
     @apply font-medium text-primary hover:text-primary-dark ;
 }
 
-.btn-primary{
-    @apply bg-gradient-to-b from-purplecorner to-magentacorner h-[50px] px-5 mr-5 mb-5 text-white uppercase ;
-}
+
 
 .btn-secondary{
     @apply text-white bg-secondary hover:bg-secondary-dark hover:text-white active:ring-secondary-light ;

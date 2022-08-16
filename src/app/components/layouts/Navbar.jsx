@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { URL_HOME, URL_LOGIN, URL_REGISTER,URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
 import { URL_USER, URL_ADMIN, URL_SELLER } from './../../shared/constants/urls/urlConstants';
+import logo from '../../assets/images/logo-trade-corner-white.jpg';
 
 
 import { selectIsLogged, signOut } from './../../shared/redux-store/authenticationSlice';
@@ -12,32 +13,28 @@ import { selectIsLogged, signOut } from './../../shared/redux-store/authenticati
 const Navbar = () => {
     const dispatch = useDispatch();
     return (
-        <Disclosure as="nav" className="top-0 fixed z-50 w-full bg-black text-white">
+        <Disclosure as="nav" className="top-0 fixed w-full bg-black text-white">
             {({ open }) => (
                 <>
                     <div>
-                        <div className="flex justify-between row items-center py-6 md:justify-start md:space-x-10">
-                            <div className="Nav">
-                                <div className="NavBar">
+                        <div className="flex justify-between row items-center py-6 mx-10 h-[100px]">
+
+                                <div className="">
                                     <Link to={URL_HOME}>
                                         <img
-                                            className="h-8 w-auto sm:h-10 cursor-pointer"
-                                            src="https://insy2s.com/insy2s/images/Logo-insy2s-INLINE-2021.svg"
-                                            alt=""
-                                            width={200}
-                                            height={60}
+                                            className="cursor-pointer"
+                                            src={logo}                                         
+                                            alt="Trade Corner, vente, achat, occasion"
+                                            width={341}
+                                            
                                         />
                                     </Link>
                                 </div>
 
-                                <div className="">
-                                    <Link to={URL_LOGIN} className="ml-3">
-                                        Se connecter
-                                    </Link>
-                                    <Link to={URL_REGISTER} className="ml-3">
-                                        S'enregistrer
-                                    </Link>
-                                    <Link to={URL_LOGOUT}>
+                                <div className="h-[50px] items-center">
+                                    
+                                    
+                                <Link to={URL_LOGOUT}>
                                         <button
                                             className="ml-3"
                                             onClick={() => dispatch(signOut())}
@@ -46,14 +43,20 @@ const Navbar = () => {
                                             Sign out{' '}
                                         </button>
                                     </Link>
-                                    <Link to={URL_USER} className="ml-3">
+                                    <Link to={URL_USER} className="ml-5">
                                         Profil
                                     </Link>
-                                    <Link to={URL_SELLER} className="ml-3">
+                                    <Link to={URL_SELLER} className="ml-5">
                                         Ma boutique
                                     </Link>
-                                    <Link to={URL_ADMIN} className="ml-3">
+                                    <Link to={URL_ADMIN} className="ml-5">
                                         Administration
+                                    </Link>
+                                    <Link to={URL_REGISTER} className="btn-nav-primary ml-5">
+                                        S'enregistrer
+                                    </Link>
+                                    <Link to={URL_LOGIN} className=" btn-nav-primary ml-5">
+                                        Se connecter
                                     </Link>
                                 </div>
                             </div>
@@ -77,7 +80,7 @@ const Navbar = () => {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                        </div>
+                       
                     </div>
                 </>
             )}
