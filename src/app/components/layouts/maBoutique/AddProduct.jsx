@@ -120,7 +120,7 @@ export default function AddProduct() {
         formData.append('description', formValues.description);
         formData.append('category', formValues.category);
         formData.append('tags', formValues.tags);
-        formData.append('price', formValues.price);
+        formData.append('price', formValues.price*100);
         formData.append('quantity', formValues.quantity);
         
         addProduct(formData)

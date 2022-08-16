@@ -40,20 +40,13 @@ const validationAddProduct = Yup.object().shape(
             if (!value) return false;
             const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
             const validFormats = [];
-            for(let i=0; i<value.lenght; i++)
-                {validFormats.push(SUPPORTED_FORMATS.includes(value[i].type));
+            for(let i=0; i<value.length; i++){
+                validFormats.push(SUPPORTED_FORMATS.includes(value[i].type));
             }
+           
             return validFormats.every((value) => value === true);
         }
         ),
-
-
-        //     for(let i=0; i<value.lenght; i++)
-        //     {if (SUPPORTED_FORMATS.includes(value[i].type) === false)
-        //         return false;
-        //     }
-        //     return SUPPORTED_FORMATS.includes(value[0].type) //return true si format ok, et false sinon
-        //   }),
     }
 );
 
