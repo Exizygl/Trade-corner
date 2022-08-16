@@ -55,29 +55,6 @@
 
 /* Identifiant */
 
-#password {
-    margin-left: 95px;
-}
-
-#zipcode {
-    margin-left: 98px;
-}
-#ville {
-    margin-left: 160px;
-}
-#adress {
-    margin-left: 77px;
-}
-#phoneNumber {
-    margin-left: 31px;
-}
-#surName {
-    margin-left: 90px;
-}
-#pseudo {
-    margin-left: 96px;
-}
-
 /* .input {
     background: rgba(0, 0, 0, 0.068);
     margin-bottom: 10px;

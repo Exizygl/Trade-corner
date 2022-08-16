@@ -1,7 +1,7 @@
 /* classes customisées et utilisées */
 
 .btn-primary{
-    @apply bg-gradient-to-b from-purplecorner to-magentacorner h-[50px] px-5 mr-5 mb-5 text-white uppercase ;
+    @apply bg-gradient-to-b from-purplecorner to-magentacorner h-[50px] px-5 mb-5 text-white !uppercase ;
 }
 
 .btn-nav-primary {

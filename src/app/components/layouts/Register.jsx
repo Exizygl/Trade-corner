@@ -51,17 +51,18 @@ const Register = () => {
     // Formulaire
 
     return (
-        <div>
-            <div className="global">
+        <div className="text-white px-10"><h1>Inscription</h1>
+            <div className="w-[833px] mx-auto  bg-black py-[20px] px-[120px] text-white">
                 <form onSubmit={handleSubmit}>
-                    <h1>Inscription</h1>
+                    
 
                     <div className="form">
-                        <div className="Information">
+                        <div className="">
                             <label htmlFor="pseudo">Pseudonyme : </label>
 
                             <input
                                 type="text"
+                                className="input"
                                 name="pseudo"
                                 id="pseudo"
                                 value={values.pseudo}
@@ -80,6 +81,7 @@ const Register = () => {
 
                             <input
                                 type="text"
+                                className="input"
                                 name="name"
                                 id="surName"
                                 value={values.name}
@@ -100,6 +102,7 @@ const Register = () => {
 
                             <input
                                 type="tel"
+                                className="input"
                                 name="phoneNumber"
                                 id="phoneNumber"
                                 value={values.phoneNumber}
@@ -121,6 +124,7 @@ const Register = () => {
 
                             <input
                                 type="text"
+                                className="input"
                                 name="adress"
                                 id="adress"
                                 value={values.adress}
@@ -141,6 +145,7 @@ const Register = () => {
 
                             <input
                                 type="text"
+                                className="input"
                                 name="ville"
                                 id="ville"
                                 value={values.ville}
@@ -161,6 +166,7 @@ const Register = () => {
 
                             <input
                                 type="text"
+                                className="input"
                                 name="zipcode"
                                 id="zipcode"
                                 value={values.zipcode}
@@ -181,6 +187,7 @@ const Register = () => {
 
                             <input
                                 type="email"
+                                className="input"
                                 name="email"
                                 id="email"
                                 value={values.email}
@@ -201,6 +208,7 @@ const Register = () => {
 
                             <input
                                 type="password"
+                                className="input"
                                 name="password"
                                 id="password"
                                 placeholder="Ex : Test123!"
@@ -224,6 +232,7 @@ const Register = () => {
 
                             <input
                                 type="password"
+                                className="input"
                                 name="passwordConfirmation"
                                 id="passwordConfirmation"
                                 value={values.passwordConfirmation}
@@ -241,8 +250,8 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <div className="submit">
-                        <button type="submit">Créer mon compte</button>
+                    <div className="text-center" >
+                        <button className="btn-primary mx-auto" type="submit">Créer mon compte</button>
                     </div>
                 </form>
             </div>

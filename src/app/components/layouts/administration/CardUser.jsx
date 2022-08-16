@@ -1,5 +1,4 @@
 import React from 'react';
-import './CardUser.css';
 
 export default function CardUser(props) {
 
