@@ -23,7 +23,9 @@ const contextClass = {
 const RoutesWithNavigation = () => {
     return (
         <BrowserRouter>
-            <div className="h-full flex flex-col bg-[#22262F]cursor-default">
+
+            <div className="h-full flex flex-col cursor-default">
+
                 <Navbar />
                 <main className="grow mt-24 bg-[#22262F]">
                     <Routes />

@@ -87,3 +87,10 @@ export const search = (search) => {
     return apiBackEnd.get('product/search/' + search);
 };
 
+//requete categorie
+
+export const getAllCategory = () => {
+    return apiBackEnd.get('category');
+}
+
+

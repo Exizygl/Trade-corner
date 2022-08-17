@@ -11,22 +11,48 @@ const regExZipCode = /^[0-9]{5}(?:-[0-9]{4})?$/;
 
 // Validation par YUP
 
-const validationAddProduct = Yup.object().shape({
-    title: Yup.string().required('Il manque un titre à votre produit').min(5),
 
-    description: Yup.string().required('Il manque une description à votre produit'),
+const validationAddProduct = Yup.object().shape(
+    {
+        title : Yup.string()
+        .required ('Il manque un titre à votre produit')
+        .min (4).max(30),
 
-    category: Yup.string(),
-    // .required('Veuillez selectionner une catégorie'),
+        description : Yup.string()
+        .required('Il manque une description à votre produit')
+        .min(20).max(800),
+
+        category : Yup.string()
+        .required('Veuillez selectionner une catégorie'),
 
     tags: Yup.string(),
 
-    price: Yup.number().required('Veuillez indiquer un prix pour votre produit').min(1),
+
+        price : Yup.number()
+        .required('Veuillez indiquer un prix pour votre produit')
+        .min(1).max(1000),
+
 
     quantity: Yup.number()
         .required('veuillez indiquer le nombre de produit en stock')
-        .min(1),
-});
+
+        .min(1).max(40),
+        
+        photos : Yup.mixed()
+        .required('Une photo du produit est obligatoire')
+        .test('PhotoTypes','Les photos doivent etre en jpg, jpeg ou png', function (value) {
+            if (!value) return false;
+            const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+            const validFormats = [];
+            for(let i=0; i<value.length; i++){
+                validFormats.push(SUPPORTED_FORMATS.includes(value[i].type));
+            }
+           
+            return validFormats.every((value) => value === true);
+        }
+        ),
+    }
+);
 
 const validationRegister = Yup.object().shape({
     pseudo: Yup.string()
@@ -71,7 +97,10 @@ const validationRegister = Yup.object().shape({
         .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });
 
-export { validationAddProduct, validationRegister };
+
+
+export {validationAddProduct, validationRegister}
+
 
 // export default Yup.object().shape({
 //     pseudo: Yup.string()
