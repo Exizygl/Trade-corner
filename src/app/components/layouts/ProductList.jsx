@@ -17,7 +17,7 @@ const ProductList = () => {
 
     const [products, setProducts] = useState([]);
     const params = new URLSearchParams(location.search)
-    console.log(params.get("search"));
+   
     
 
 
@@ -26,12 +26,14 @@ const ProductList = () => {
 
 
     useEffect(() => {
-        console.log('poya');
-        search(params.get("search")).then(
+        var searchEntry = params.get("search");
+        if(searchEntry == "") searchEntry = "all"
+        search(searchEntry).then(
             
             function (res) {
                 
                 if (res.status === 200) {
+                    console.log(res.data.message.productList)
                     setProducts(res.data.message.productList)
 
 
@@ -87,8 +89,8 @@ const ProductList = () => {
             </div>
 
             <div className='mt-20 flex ml-14'>
-                <div className='w-[18.75rem] h-full bg-[#53216C]'>
-                    
+                <div className='w-[18.75rem] h-full bg-[grey]'>
+                    <div>filtre</div>
                 </div>
                 <div>
                     {displayProducts()}

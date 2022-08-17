@@ -9,6 +9,7 @@ import { getNewProduct } from '../../api/backend/requestApi';
 import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
 import Product from './card/Product';
+import Search from './Search';
 
 
 
@@ -66,7 +67,6 @@ const Home = () => {
     return (
 
         <div>
-
             <h1 className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem] text-white'>LES NOUVEAUTÉS </h1>
             <div>
                 {displayProducts()}

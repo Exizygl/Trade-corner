@@ -1,33 +1,46 @@
 import React, { useState } from 'react';
-import { URL_PRODUCT } from '../../shared/constants/urls/urlConstants';
+import { useHistory } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 
 const Search = () => {
+
+    const [searchEntry, setSearchEntry] = useState("");
+    const history = useHistory();
     
-
-    // const onChange = (event) => {
-    //     setValue(event.target.value);
-    // };
-
-    const onSearch = (searchTerm) => {
-        navigate
-        navigate(URL_PRODUCT + searchTerm, {replace: true});
-        // console.log('search', searchTerm);
+    const initialValues = {
+        search: '',
     };
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit: (values) => {
+            if(!values.search) history.push(URL_PRODUCTLIST)
+            history.push(URL_PRODUCTLIST + "?search=" + values.search);
+            if(window.location.pathname == URL_PRODUCTLIST) window.location.reload(true)
+
+        }
+
+    });
+
+    const { search } = formik.values;
+
     return (
         <div className="App">
             <div className="search-container">
                 <div className="search-inner">
-                    <form>
+                    <form onSubmit={formik.handleSubmit}>
                         <input
                             type="text"
                             name="search"
                             id="search"
-                            
+                            value={search}
+                            onChange={formik.handleChange}
+
                         />
-                        <button onClick={() => onSearch(value)} className="search">
-                            {' '}
-                            Rechercher{' '}
-                        </button>
+                        <input type="submit" value="Recherche" className="search" />
+
+
                     </form>
                 </div>
             </div>
