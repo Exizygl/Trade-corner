@@ -148,7 +148,7 @@ export default function AddProduct() {
                 
           <div className="flex flex-row gap-3 content-center mt-5">
             <label htmlFor="title" className="basis-1/6 flex content-center"> Titre : </label>
-            <div className="flex basis-5/6">
+            <div className="basis-5/6">
               <input
               type="text"
               name="title"
@@ -159,13 +159,13 @@ export default function AddProduct() {
               onChange={handleChange}
               onBlur={handleBlur}
               />
-              <div>
+              
                 {touched.title && errors.title ? (
                   <small>{errors.title}</small>
                   ) : (
                     ''
                   )}
-              </div>
+              
             </div>
           </div>
                     

@@ -1,4 +1,3 @@
-import DayJS from 'react-dayjs';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -25,9 +24,6 @@ const ProductDetail = () => {
           setCategory(res.data.message.product.categoryId)
           setSeller(res.data.message.product.sellerId)
           setDate(dateFormat(res.data.message.product.createdAt))
-
-
-
         }
       }
     );
@@ -52,7 +48,6 @@ const ProductDetail = () => {
           <h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>{productDetail.title}</h1>
           <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>
           <p className='w-[47.75rem] font-normal leading-[1.75rem] text-[1rem]'>{productDetail.description}</p>
-
 
           <div className='mt-16 flex'>
             <div className='flex items-end justify-between w-full mb-6'>
@@ -98,11 +93,11 @@ const ProductDetail = () => {
                   {date}
                 </span>
               </div>
-              <div className='h-12 w-80 bg-[#53216C] font-bold text-[1rem] flex items-center justify-items-center'>
-                <div className='justify-self-center m-auto '>
+              
+                <button className=' m-auto btn-primary'>
                   Ajouter au panier
-                </div>
-              </div>
+                </button>
+              
             </div>
 
           </div>
