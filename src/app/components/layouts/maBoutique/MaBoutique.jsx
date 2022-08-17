@@ -16,11 +16,11 @@ const dispatch = useDispatch();
 
 
   return (
-    <div className="flex flex-row ml-12">
-        <div className = "border-solid border-2 basis-2/6">
+    <div className="flex flex-row mx-12 gap-6 bg-darkgray text-white">
+        <div className = "basis-3/12">
             <Navigation/>
         </div> 
-        <div className= "border-solid border-2 basis-4/6 "> 
+        <div className= "basis-9/12"> 
             <h2>Ma Boutique</h2>
 
             <h3> Notifications </h3>

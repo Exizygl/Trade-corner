@@ -2,55 +2,71 @@ import React from 'react';
 import {useEffect,useState} from 'react';
 import Navigation from './Navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
-import storage from 'redux-persist/lib/storage';
-import { store } from '../../../shared/redux-store/store';
+import { Formik, FormikConsumer, useFormik } from 'formik';
 import { validationAddProduct } from '../../../utils/Validation';
-import SubmitRegisterModal from '.././modal/SubmitRegisterModal';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
-import { addProduct } from '../../../api/backend/requestApi';
+import { addProduct, getAllCategory} from '../../../api/backend/requestApi';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
+import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 export default function AddProduct() {
   // storage.clear();
-//   const [userImageValue, setUserImageValue] = useState("");
-//   const [errorSizeImage, setErrorSizeImage] = useState("");
-//   const [errorExtensionImage, setErrorExtensionImage] = useState("");
-const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
-const dispatch = useDispatch();
+  const [userImageValue, setUserImageValue] = useState("");
+  const [errorSizeImage, setErrorSizeImage] = useState("");
+  const [errorExtensionImage, setErrorExtensionImage] = useState("");
+  const [state, setState] = useState({ categories: [] });
+  const history = useHistory();
 
-const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}, {name : 'categorie 3', id: 3}];
+//---------FONCTIONS --------------
 
-// const loadImage = (e) => {
+  const getlistCategory =  () => {
+    getAllCategory() //j'appelle l'api 
+    .then (
+      function (res) {
+        if (res.status === 200) {
+          let resCategories = res.data.message.categoryList ;
+          let categories = [];
+          for (let i=0; i<resCategories.length; i++) { 
+            let label = resCategories[i].label;
+            let id = i;
+            let category = { 
+              label : label ,
+              id : id
+            }
+            categories.push(category);  //j'ai récup la liste des categories
+          };
+          setState((state) => ({
+            categories: [...state.categories, ...categories],
+        }));           
+        }
+      }
+    )
+  };
 
-//     const extension = findImageExtension(e.currentTarget.files[0].name)
-//     if (!extension) {
-//         setErrorExtensionImage(`L'extension d'image doit être jpg, jpeg ou png`)
-//     } else setErrorExtensionImage("");
 
-//     const imageSize = validImageSize(e.currentTarget.files[0].size)
-//     if (!imageSize) {
-//         setErrorSizeImage(`Le poids de l'image ne doit pas dépasser 200 Ko`)
-//     } else setErrorSizeImage("");
 
-//     if (extension && imageSize) {
-//         formik.setFieldValue('photos', e.currentTarget.files[0])
-//     }
-// }
+  useEffect( () => {
+    getlistCategory();
+  }
+    ,[]
+  )
+
+  const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
+  const dispatch = useDispatch();
 
 
     // Variable
 
-    const [successSubmitModal, setSuccessSubmitModal] = useState('');
-    const closeModal = () => {
+  const [successSubmitModal, setSuccessSubmitModal] = useState('');
+  const closeModal = () => {
         setSuccessSubmitModal('');
-    };
+  };
 
-    // Formik
+    // ----- FORMIK ------------
 
-    const initialValues = {
+  const initialValues = {
         title: '',
         description: '',
         category: '',
@@ -58,33 +74,74 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
         price: '',
         quantity: '',
         photos: '',
-    };
+  };
 
- 
-        const { handleSubmit, values, touched, isValid, handleChange, handleBlur, errors } =
-        useFormik({
-            initialValues,
-            validationSchema : validationAddProduct,
-            onSubmit,
-        });
+  const { handleSubmit, values, touched, isValid, handleChange, handleBlur, setFieldValue, errors } =
+  useFormik({
+    initialValues,
+    validationSchema : validationAddProduct,
+    onSubmit,
+  });
 
-    function onSubmit(formValues) {
-        //const files = target.files;
-        //console.log("target.files = "+files);
-        console.log("submit");
-        console.log("formValues = " +JSON.stringify(formValues));
-        addProduct(formValues);
+//   const checkValidImages = (e) => {
+
+//     for (let i=0; i<e.currentTarget.files; i++)
+//     {
+//     const extension = findImageExtension(e.currentTarget.files[i].name)
+//     if (!extension) {
+//         setErrorExtensionImage(`L'extension d'image doit être jpg, jpeg ou png`)
+//     } else setErrorExtensionImage("");
+
+//     const imageSize = validImageSize(e.currentTarget.files[i].size)
+//     if (!imageSize) {
+//         setErrorSizeImage(`Le poids de l'image ne doit pas dépasser 200 Ko`)
+//     } else setErrorSizeImage("");
+//     }
+//   }
+
+  const loadImages = (e) => {
+    // checkValidImages(e);
+    
+    const newFiles = []
+    for(let i = 0; i < e.target.files.length; i++){
+        
+        newFiles.push(e.target.files[i]); 
     }
+    setFieldValue('photos',newFiles);
+  }
+
+  function onSubmit(formValues) {
+
+        const formData = new FormData();
+
+        for (let i=0; i <formValues.photos.length; i++){
+            formData.append('photos', formValues.photos[i]); //on envoie chaque file avec la key "photos"
+        };
+        formData.append('title', formValues.title);
+        formData.append('description', formValues.description);
+        formData.append('category', formValues.category);
+        formData.append('tags', formValues.tags);
+        formData.append('price', formValues.price*100);
+        formData.append('quantity', formValues.quantity);
+        
+        addProduct(formData)
+        .then ((res)=> {
+          if(res.status === 200)
+          {          alert("le produit a bien été ajouté");
+          history.push(URL_SELLER);}
+          else {alert("error")}
+        })
+  }
 
 
   return (
-    <div className="flex flex-row ml-12">
-        <div className = "border-solid border-2 basis-2/6">
+    <div className="flex flex-row mx-12 gap-10 bg-darkgray text-white">
+        <div className = "basis-3/12">
             <Navigation/>
         </div> 
 
-        <div className= " addProduct border-solid border-2 basis-4/6 "> 
-            <form onSubmit={handleSubmit}>
+        <div className= "basis-9/12"> 
+            <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
                 <h2>Ajouter un produit</h2>
 
 {/* titre du produit */}
@@ -92,11 +149,12 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     <label htmlFor="title"> Titre : </label>
                     <input
                     type="text"
-                                    name="title"
-                                    id="title"
-                                    placeholder="Nom du produit"
-                                    value={values.title}
-                                    onChange={handleChange}
+                    name="title"
+                    id="title"
+                    className="input"
+                    placeholder="Nom du produit"
+                    value={values.title}
+                    onChange={handleChange}
                     onBlur={handleBlur}
                     />
                     <div>
@@ -107,36 +165,40 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                         )}
                     </div>
                 </div>
+{/*photos*/}
+                <label htmlFor="photos">Photos</label>
+                <div>
+                    <input
+                        id="photos"
+                        type="file"
+                        name="photos"
+                        className="input"
+                        accept='image/*'
+                        multiple = "multiple"
+                        onChange={(e) => loadImages(e)}
+                    />
+                    {touched.photos && errors.photos ? (
+                            <small>{errors.photos}</small>
+                        ) : (
+                         ''
+                        )}
 
-                <label htmlFor="email">Photos</label>
-                            <div>
-                                <input
-                                    id="photos"
-                                    type="file"
-                                    name="photos"
-                                    accept='images/*'
-                                    multiple = "multiple"
-                                    value={values.photos}
-                                    onChange={handleChange}
-                                    // onChange={(e) => loadImage(e)}
-                                />
-                                {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>}
-                                {errorSizeImage && <label className='text-red-500'> {errorSizeImage}</label>}
-                                {errorExtensionImage && <label className='text-red-500'> {errorExtensionImage}</label>} */}
+                                {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>} */}
+                               
 
-                            </div>
+                </div>
 
 {/* catégorie du produit */}
                 <div>
                     <label htmlFor="category">Catégorie : </label>
-                    <select name="category"
+                    <select name="category" className="input"
                     value={values.category}
                     onChange={handleChange}>
                         <option value="" label="Choisir une catégorie">
                             Choisir une catégorie
                         </option>
-                        {categories.map( category => 
-                    <option value={category.name} key = {category.id}> {category.name}</option>
+                        {state.categories.map( category => 
+                        <option value={category.label} key = {category.id}> {category.label}</option>
                     )}
                     </select>
 
@@ -156,6 +218,7 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     type="text"
                     name="tags"
                     id="tags"
+                    className="input"
                     placeholder="ajouter des tags en les séparant par une virgule"
                     value={values.tags}
                     onChange={handleChange}
@@ -175,6 +238,7 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     <textarea
                         name="description"
                         id="description"
+                        className="input"
                         value={values.description}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -195,6 +259,7 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     type="number"
                     name="price"
                     id="price"
+                    className="input"
                     value={values.price}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -215,6 +280,7 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     type="number"
                     name="quantity"
                     id="quantity"
+                    className="input"
                     value={values.quantity}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -231,11 +297,10 @@ const categories = [{name : 'categorie 1', id: 1}, {name : 'categorie 2', id: 2}
                     
 
                 <div className="submit">
-                    <button type="submit" className= "submit2">Ajouter un produit</button>
-                    <Link to={URL_SELLER}><button className="submit2">Annuler</button></Link>
+                    <button type="submit" className= " btn-primary w-[300px]">Ajouter un produit</button>
+                    <Link to={URL_SELLER}><button className="btn-primary">Annuler</button></Link>
                 </div>
             </form>
-            
             {successSubmitModal}
         </div>
     </div>

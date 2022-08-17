@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { register } from '../../api/backend/requestApi';
+<<<<<<< HEAD
 import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
 // import validationRegister from '../../utils/Validation'; //validation YUP
+=======
+>>>>>>> origin/addProduct
 import SubmitRegisterModal from './modal/SubmitRegisterModal';
 import { validationRegister } from '../../utils/Validation';
 
