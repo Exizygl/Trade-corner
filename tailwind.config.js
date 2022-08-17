@@ -1,5 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
     theme: {
@@ -21,6 +20,9 @@ module.exports = {
                 purplecorner : '#53216C',
                 magentacorner : '#AD09FF',
                 darkgray : "#22262F",
+                redcorner : '#CD2222',
+                pinkcorner : "#FF7171",
+                
                
             },
             fontFamily : {

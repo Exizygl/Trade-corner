@@ -51,8 +51,12 @@ const Register = () => {
     // Formulaire
 
     return (
-        <div className="text-white px-10"><h1>Inscription</h1>
+        <div className="text-white px-10">
+            <h1>Inscription</h1>
             <div className="w-[833px] mx-auto  bg-black py-[20px] px-[120px] text-white">
+            <h2 className="text-center">Bonjour !</h2>
+                <p className="text-center">Connectez-vous pour découvrir toutes nos fonctionnalitées</p>
+                <div className="line basis-1/2 text-center"></div>
                 <form onSubmit={handleSubmit}>
                     
 
@@ -140,7 +144,9 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <div>
+                        <div className="flex row justify-between gap-10">
+
+                        <div className = "basis-1/2">
                             <label htmlFor="ville">Ville : </label>
 
                             <input
@@ -161,7 +167,7 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <div>
+                        <div className = "basis-1/2">
                             <label htmlFor="zipcode">Code postal : </label>
 
                             <input
@@ -180,6 +186,7 @@ const Register = () => {
                                     ''
                                 )}
                             </div>
+                        </div>
                         </div>
 
                         <div>

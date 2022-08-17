@@ -136,173 +136,184 @@ export default function AddProduct() {
 
   return (
     <div className="flex flex-row mx-12 gap-10 bg-darkgray text-white">
-        <div className = "basis-3/12">
-            <Navigation/>
-        </div> 
+      <div className = "basis-3/12">
+        <Navigation/>
+      </div> 
 
-        <div className= "basis-9/12"> 
-            <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
-                <h2>Ajouter un produit</h2>
+      <div className= "basis-9/12"> 
+        <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
+          <h2>Ajouter un produit</h2>
 
 {/* titre du produit */}
-                <div>
-                    <label htmlFor="title"> Titre : </label>
-                    <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    className="input"
-                    placeholder="Nom du produit"
-                    value={values.title}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    />
-                    <div>
-                        {touched.title && errors.title ? (
-                            <small>{errors.title}</small>
-                            ) : (
-                            ''
-                        )}
-                    </div>
-                </div>
+                
+          <div className="flex flex-row gap-3 content-center mt-5">
+            <label htmlFor="title" className="basis-1/6 flex content-center"> Titre : </label>
+            <div className="flex basis-5/6">
+              <input
+              type="text"
+              name="title"
+              id="title"
+              className="input"
+              placeholder="Nom du produit"
+              value={values.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              />
+              <div>
+                {touched.title && errors.title ? (
+                  <small>{errors.title}</small>
+                  ) : (
+                    ''
+                  )}
+              </div>
+            </div>
+          </div>
+                    
 {/*photos*/}
-                <label htmlFor="photos">Photos</label>
-                <div>
-                    <input
-                        id="photos"
-                        type="file"
-                        name="photos"
-                        className="input"
-                        accept='image/*'
-                        multiple = "multiple"
-                        onChange={(e) => loadImages(e)}
-                    />
-                    {touched.photos && errors.photos ? (
-                            <small>{errors.photos}</small>
-                        ) : (
-                         ''
-                        )}
-
-                                {/* {userImageValue && <div> <p>Image chargée</p> <PreviewUserImage file={userImageValue} /> </div>} */}
-                               
-
-                </div>
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="photos" className="basis-1/6 flex content-center">Photos</label>
+            <div className="basis-5/6">
+              <input
+                  id="photos"
+                  type="file"
+                  name="photos"
+                  className="input"
+                  accept='image/*'
+                  multiple = "multiple"
+                  onChange={(e) => loadImages(e)}
+              />
+              {touched.photos && errors.photos ? (
+                <small>{errors.photos}</small>
+                  ) : (
+                    ''
+                  )}
+            </div>
+          </div>
 
 {/* catégorie du produit */}
-                <div>
-                    <label htmlFor="category">Catégorie : </label>
-                    <select name="category" className="input"
-                    value={values.category}
-                    onChange={handleChange}>
-                        <option value="" label="Choisir une catégorie">
-                            Choisir une catégorie
-                        </option>
-                        {state.categories.map( category => 
-                        <option value={category.label} key = {category.id}> {category.label}</option>
-                    )}
-                    </select>
-
-                    <div>
-                        {touched.category && errors.category ? (
-                                        <small>{errors.category}</small>
-                        ) : (
-                        ''
-                        )}
-                    </div>
-                </div>
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="category" className="basis-1/6 flex content-center">Catégorie : </label>
+            <div className="basis-5/6">
+              <select name="category" className="input"
+                value={values.category}
+                onChange={handleChange}>
+                <option value="" label="Choisir une catégorie">
+                    Choisir une catégorie
+                </option>
+                {state.categories.map( category => 
+                  <option value={category.label} key = {category.id}> {category.label}</option>
+                  )}
+              </select>
+              <div>
+                {touched.category && errors.category ? (
+                  <small>{errors.category}</small>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
+          </div>
 
 {/* Tags du produit */}
-                <div>
-                    <label htmlFor="tags">Tags : </label>
-                    <input
-                    type="text"
-                    name="tags"
-                    id="tags"
-                    className="input"
-                    placeholder="ajouter des tags en les séparant par une virgule"
-                    value={values.tags}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    />
-                    <div>
-                        {touched.tags && errors.tags ? (
-                            <small>{errors.tags}</small>
-                        ) : (
-                         ''
-                        )}
-                    </div>
-                </div>
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="tags" className="basis-1/6 flex content-center">Tags : </label>
+            <div className="basis-5/6">
+              <input
+                type="text"
+                name="tags"
+                id="tags"
+                className="input"
+                placeholder="ajouter des tags en les séparant par une virgule"
+                value={values.tags}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div>
+                {touched.tags && errors.tags ? (
+                  <small>{errors.tags}</small>
+                ) : (
+                ''
+                )}
+              </div>
+            </div>
+          </div>
+
 {/* Description du produit */}
-                <div>
-                    <label htmlFor="description">Description : </label>
-                    <textarea
-                        name="description"
-                        id="description"
-                        className="input"
-                        value={values.description}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        placeholder="Ecrivez une description la plus compléte possible : taille du produit, état, couleur..."
-                    />
-                    <div>
-                        {touched.description && errors.description ? (
-                            <small>{errors.description}</small>
-                        ) : (
-                                    ''
-                        )}
-                    </div>
-                </div>
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="description" className="basis-1/6 flex content-center">Description : </label>
+            <div className="basis-5/6">
+              <textarea
+                name="description"
+                id="description"
+                className="input"
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Ecrivez une description la plus compléte possible : taille du produit, état, couleur..."
+              />
+              <div>
+                {touched.description && errors.description ? (
+                  <small>{errors.description}</small>
+                  ) : (
+                    ''
+                  )}
+              </div>
+            </div>
+          </div>
+
 {/* Prix du produit */}
-                <div>
-                    <label htmlFor="price">Prix : </label>
-                    <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    className="input"
-                    value={values.price}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    />
-                    <div>
-                        {touched.price && errors.price ? (
-                            <small>{errors.price}</small>
-                            ) : (
-                                ''
-                        )}
-                    </div>
-                </div>
-{/* Stock du proudit */}
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="price" className="basis-1/6 flex content-center">Prix : </label>
+            <div className="basis-5/6">
+              <input
+                type="number"
+                name="price"
+                id="price"
+                className="input"
+                value={values.price}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div>
+                {touched.price && errors.price ? (
+                  <small>{errors.price}</small>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
+          </div>
+{/* Stock du produit */}
 
-                <div>
-                    <label htmlFor="quantity"> Stock : </label>
-                    <input
-                    type="number"
-                    name="quantity"
-                    id="quantity"
-                    className="input"
-                    value={values.quantity}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    />
-                    <div>
-                        {touched.quantity && errors.quantity ? (
-                            <small>{errors.quantity}</small>
-                            ) : (
-                                ''
-                            )}
-                    </div>
-                </div>
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="quantity" className="basis-1/6 flex content-center"> Stock : </label>
+            <div className="basis-5/6">
+              <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                className="input"
+                value={values.quantity}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div>
+                {touched.quantity && errors.quantity ? (
+                  <small>{errors.quantity}</small>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
+          </div>
 
-                    
-
-                <div className="submit">
-                    <button type="submit" className= " btn-primary w-[300px]">Ajouter un produit</button>
-                    <Link to={URL_SELLER}><button className="btn-primary">Annuler</button></Link>
-                </div>
-            </form>
-            {successSubmitModal}
-        </div>
+          <div className="submit">
+            <button type="submit" className= " btn-primary w-[300px] mr-5">Ajouter un produit</button>
+            <Link to={URL_SELLER}><button className="btn-red">Annuler</button></Link>
+          </div>
+        </form>
+        {successSubmitModal}
+      </div>
     </div>
-    );
-                            };
+  );
+};

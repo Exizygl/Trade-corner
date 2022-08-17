@@ -49,15 +49,20 @@ const Login = () => {
     const { email, password } = formik.values;
 
     return (
-        <div>
-            <div className="global2">
-                <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">Connexion</legend>
+        <div className="text-white px-10 ">
+            <h1>Connexion</h1>
+            <div className="w-[833px] mx-auto  bg-black py-[20px] px-[120px] text-white">
+                <h2 className="text-center">Bonjour !</h2>
+                <p className="text-center">Connectez-vous pour découvrir toutes nos fonctionnalitées</p>
+                <div className="line basis-1/2 text-center"></div>
+                <form onSubmit={formik.handleSubmit}>
+                    {/* <legend className="titre">Connexion</legend> */}
 
                     <label htmlFor="email">Adresse email électronique</label>
                     <div>
                         <input
                             type="email"
+                            className="input"
                             name="email"
                             value={email}
                             onChange={formik.handleChange}
@@ -69,28 +74,31 @@ const Login = () => {
                     <div>
                         <input
                             type="password"
+                            className="input"
                             name="password"
                             value={password}
                             onChange={formik.handleChange}
                             required
                         />
                     </div>
+                    <p className='text-right'>
+                        <a href="./forgotten-password" className="underline">Mot de passe oublié ?</a>
+                    </p>
 
-                    <div className="submit2">
-                        <button type="submit">Se connecter</button>
+                    <div className="text-center my-5">
+                        <button type="submit" className="btn-primary">Se connecter</button>
                     </div>
+                    
                     {(errorLog && msgError.password) && <ErrorMessSmall middle message="Login/Password incorrect(s)" />}
                     {(errorLog && msgError.email) && <ErrorMessSmall middle message="Login/Email incorrect(s)" />}
                     {(errorLog && msgError.isValid) && <ErrorMessSmall middle message="Login/Valider le mail de confirmation" />}
                 </form>
-                <div className="sign">
+                <div className="text-center">
                     <p>
                         Pas de compte ? Appuyez ici pour{' '}
-                        <a href="./register">S'enregistrer</a>
+                        <a href="./register" className="underline">S'enregistrer</a>
                     </p>
-                    <p>
-                        <a href="./forgotten-password">Mot de passe oublié</a>
-                    </p>
+                    
                 </div>
             </div>
         </div>
