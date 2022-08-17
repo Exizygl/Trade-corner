@@ -11,15 +11,6 @@ const regExZipCode = /^[0-9]{5}(?:-[0-9]{4})?$/;
 
 // Validation par YUP
 
-<<<<<<< HEAD
-const validationAddProduct = Yup.object().shape({
-    title: Yup.string().required('Il manque un titre à votre produit').min(5),
-
-    description: Yup.string().required('Il manque une description à votre produit'),
-
-    category: Yup.string(),
-    // .required('Veuillez selectionner une catégorie'),
-=======
 const validationAddProduct = Yup.object().shape(
     {
         title : Yup.string()
@@ -32,24 +23,15 @@ const validationAddProduct = Yup.object().shape(
 
         category : Yup.string()
         .required('Veuillez selectionner une catégorie'),
->>>>>>> origin/addProduct
 
     tags: Yup.string(),
 
-<<<<<<< HEAD
-    price: Yup.number().required('Veuillez indiquer un prix pour votre produit').min(1),
-=======
         price : Yup.number()
         .required('Veuillez indiquer un prix pour votre produit')
         .min(1).max(1000),
->>>>>>> origin/addProduct
 
     quantity: Yup.number()
         .required('veuillez indiquer le nombre de produit en stock')
-<<<<<<< HEAD
-        .min(1),
-});
-=======
         .min(1).max(40),
         
         photos : Yup.mixed()
@@ -68,7 +50,6 @@ const validationAddProduct = Yup.object().shape(
     }
 );
 
->>>>>>> origin/addProduct
 
 const validationRegister = Yup.object().shape({
     pseudo: Yup.string()
@@ -113,12 +94,8 @@ const validationRegister = Yup.object().shape({
         .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });
 
-<<<<<<< HEAD
-export { validationAddProduct, validationRegister };
-=======
 
 export {validationAddProduct, validationRegister}
->>>>>>> origin/addProduct
 
 // export default Yup.object().shape({
 //     pseudo: Yup.string()

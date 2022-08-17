@@ -21,13 +21,13 @@ const Navbar = () => {
     const dispatch = useDispatch();
     return (
         <header>
-            <Disclosure as="nav" className="top-0 fixed z-50 w-full bg-white shadow-md">
-                {({ open }) => (
-                    <>
-                        <div>
-                            <div className="flex justify-between row items-center py-6 md:justify-start md:space-x-10">
-                                <div className="Nav">
-                                    <div className="NavBar">
+            <Disclosure as="nav" className="top-0 fixed z-50 w-full bg-black text-white">
+            {({ open }) => (
+                <>
+                    <div>
+                        <div className="flex justify-between row items-center py-6 md:justify-start md:space-x-10">
+                            <div className="Nav">
+                                <div className="NavBar">
                                     <Link to={URL_HOME}>
                                         <img
                                             className="h-8 w-auto sm:h-10 cursor-pointer"
@@ -63,7 +63,8 @@ const Navbar = () => {
                                             Administration
                                         </Link> */}
                                     </div>
-                            
+                                </div>
+
                                 <div className="-mr-2 flex md:hidden">
                                     {/* Mobile menu button */}
                                     <Disclosure.Button
@@ -85,7 +86,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 )}
             </Disclosure>
         </header>

@@ -71,7 +71,6 @@ export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
 
-<<<<<<< HEAD
 export const getAllProduct = () => {
     return apiBackEnd.get('product');
 };
@@ -87,12 +86,10 @@ export const search = (search) => {
     console.log(search)
     return apiBackEnd.get('product/search/' + search);
 };
-=======
 //requete categorie
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
 }
 
->>>>>>> origin/addProduct
 

@@ -15,13 +15,6 @@ module.exports = {
                     DEFAULT: '#ed7410',//orange foncé
                     dark: '#bf5d0d',//marron
                 },
-<<<<<<< HEAD
-                background: {
-                    light: '#f39e58',
-                    DEFAULT: '#22262F',
-                    dark: '#bf5d0d',
-                },
-=======
                 purplecorner : '#53216C',
                 magentacorner : '#AD09FF',
                 darkgray : "#22262F",
@@ -29,7 +22,6 @@ module.exports = {
             },
             fontFamily : {
                 'sans': ['heebo', ...defaultTheme.fontFamily.sans],
->>>>>>> origin/addProduct
 
             },
            
