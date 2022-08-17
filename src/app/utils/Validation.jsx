@@ -11,7 +11,6 @@ const regExZipCode = /^[0-9]{5}(?:-[0-9]{4})?$/;
 
 // Validation par YUP
 
-
 const validationAddProduct = Yup.object().shape(
     {
         title : Yup.string()
@@ -27,7 +26,6 @@ const validationAddProduct = Yup.object().shape(
 
     tags: Yup.string(),
 
-
         price : Yup.number()
         .required('Veuillez indiquer un prix pour votre produit')
         .min(1).max(1000),
@@ -35,7 +33,6 @@ const validationAddProduct = Yup.object().shape(
 
     quantity: Yup.number()
         .required('veuillez indiquer le nombre de produit en stock')
-
         .min(1).max(40),
         
         photos : Yup.mixed()
@@ -97,9 +94,8 @@ const validationRegister = Yup.object().shape({
         .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });
 
-
-
 export {validationAddProduct, validationRegister}
+
 
 
 // export default Yup.object().shape({

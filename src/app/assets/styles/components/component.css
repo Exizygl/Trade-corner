@@ -8,7 +8,7 @@
 
     /* LINKS */
     .link {
-        @apply text-base font-medium text-gray-500 cursor-pointer hover:text-primary;
+        @apply text-base font-medium  cursor-pointer hover:text-primary;
     }
 
     /* GEOMETRY */
@@ -16,4 +16,7 @@
         @apply w-4 h-4 p-2 mt-2 rounded-full;
     }
     
+    .line{
+        @apply h-[2px] bg-magentacorner my-5;
+    }
 }
