@@ -27,7 +27,7 @@ const Home = () => {
         console.log("poya")
         getNewProduct().then(
             function (res) {
-                console.log("poyo")
+                console.log("la")
                 if (res.status === 200) {
                     console.log(res.data.message.productList)
                     setProducts(res.data.message.productList)

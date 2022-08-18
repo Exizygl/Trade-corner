@@ -25,11 +25,7 @@ const RoutesWithNavigation = () => {
         <BrowserRouter>
             <div className="h-full flex flex-col cursor-default">
                 <Navbar />
-<<<<<<< HEAD
-                <main className="grow mt-24 bg-[#22262F]">
-=======
                 <main className="grow mt-[125px]">
->>>>>>> origin/correctionCSS
                     <Routes />
                 </main>
                 <ToastContainer

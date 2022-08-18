@@ -16,11 +16,6 @@ const User = () => {
         userInfo(user._id).then(
             function (res) {
                 if (res.status === 200) {
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/correctionCSS
                     dispatch(updateUser(res.data));
                 }
             });

@@ -7,11 +7,7 @@
         @apply h-full bg-black
     }
     body{
-<<<<<<< HEAD
-        @apply h-full 
-=======
         @apply h-full bg-black
->>>>>>> origin/addProduct
     }
 
     
