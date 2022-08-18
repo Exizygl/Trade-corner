@@ -22,14 +22,11 @@ module.exports = {
                 darkgray : "#22262F",
                 redcorner : '#CD2222',
                 pinkcorner : "#FF7171",
-                
-               
             },
             fontFamily : {
                 'sans': ['heebo', ...defaultTheme.fontFamily.sans],
 
-            },
-           
+            },  
         },
 
     plugins: [require('@tailwindcss/forms')],

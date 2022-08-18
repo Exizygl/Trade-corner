@@ -43,21 +43,20 @@ export default function UserById() {
     }, []);
 
     return (
-        <div className="flex mt-12">
-            <div className = "border-solid border-2 basis-2/6">
+        <div className="flex gap-10 mx-12 mt-12 text-white bg-darkgray">
+            <div className = "basis-3/12">
             <Navigation/>
         </div>
 
-            <div className="flex flex-col w-2/5 ml-12 bg-white">
-
-                <div className="flex pl-4 py-2 justify-between border-b-4">
+            <div className="flex flex-col basis-9/12 ">
+                <div className="flex pl-4 py-2 justify-between">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Pseudonyme</div>
                         <div>{userState.pseudo}</div>
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID + 'pseudo'+`/${userState.id}`}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -74,7 +73,7 @@ export default function UserById() {
                     <div className="pr-4 py-2">
                         {/* {userState.role != "admin" && <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}> */}
                         {userState.role != "" && <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
-                            <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
+                            <button className="btn-red">
                                 Modifier
                             </button>
                         </Link>}
@@ -91,7 +90,7 @@ export default function UserById() {
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID + 'email'+`/${userState.id}`}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -110,7 +109,7 @@ export default function UserById() {
 
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID + 'avatar'+`/${userState.id}`}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -123,7 +122,7 @@ export default function UserById() {
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID + 'name'+`/${userState.id}`}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -136,7 +135,7 @@ export default function UserById() {
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID + 'adress'+`/${userState.id}`}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -149,7 +148,7 @@ export default function UserById() {
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID + 'phone' +`/${userState.id}`}>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -162,7 +161,7 @@ export default function UserById() {
                     </div>
                     <div className="pr-4 py-2">
                         <Link to={URL_MODIFYACCOUNT_BYID +'password' +`/${userState.id}` }>
-                            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent">
+                            <button className="btn-primary">
                                 Modifier
                             </button>
                         </Link>
@@ -174,7 +173,7 @@ export default function UserById() {
                     </div>
                     <div className="pr-4 py-2">
                         <Link to = {`/administration/delete/${userState.id}`}>
-                        <button className="bg-white hover:bg-red-700 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-700 hover:border-white">
+                        <button className="btn-red">
                             Supprimer
                         </button>
                         </Link>

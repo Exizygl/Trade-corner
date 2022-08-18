@@ -30,6 +30,7 @@ const validationAddProduct = Yup.object().shape(
         .required('Veuillez indiquer un prix pour votre produit')
         .min(1).max(1000),
 
+
     quantity: Yup.number()
         .required('veuillez indiquer le nombre de produit en stock')
         .min(1).max(40),
@@ -49,7 +50,6 @@ const validationAddProduct = Yup.object().shape(
         ),
     }
 );
-
 
 const validationRegister = Yup.object().shape({
     pseudo: Yup.string()
@@ -94,8 +94,9 @@ const validationRegister = Yup.object().shape({
         .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });
 
-
 export {validationAddProduct, validationRegister}
+
+
 
 // export default Yup.object().shape({
 //     pseudo: Yup.string()
