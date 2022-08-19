@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Component } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { search } from '../../api/backend/requestApi';
+import { Pagination } from 'reactstrap';
+import { search, searchCount } from '../../api/backend/requestApi';
 
 
 import { } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
+import PaginationList from './card/PaginationList';
 import Product from './card/Product';
 
 
@@ -15,10 +17,13 @@ import Product from './card/Product';
 
 const ProductList = () => {
 
+
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(4);
+    const [numberPage, setNumberPage] = useState(0);
     const params = new URLSearchParams(location.search)
-   
-    
+
+
 
 
 
@@ -26,15 +31,37 @@ const ProductList = () => {
 
 
     useEffect(() => {
-        var searchEntry = params.get("search");
-        if(searchEntry == "") searchEntry = "all"
+
+        var searchEntry = []
+        searchEntry["search"] = params.get("search")
+        searchEntry["page"] = page
+
+
+
+        if (searchEntry["search"] == "" || searchEntry["search"] == null) searchEntry["search"] = "all"
+        if (searchEntry["page"] == "" || searchEntry["page"] == null) searchEntry["page"] = "1"
+        console.log(searchEntry);
         search(searchEntry).then(
-            
+
             function (res) {
-                
+
                 if (res.status === 200) {
                     console.log(res.data.message.productList)
                     setProducts(res.data.message.productList)
+                    
+                    searchCount(searchEntry).then(
+
+                        function (res) {
+
+                            if (res.status === 200) {
+                                console.log(res.data.message.number)
+                                setNumberPage(res.data.message.number)
+                                
+
+
+                            }
+                        }
+                    );
 
 
                 }
@@ -68,6 +95,28 @@ const ProductList = () => {
 
 
     }
+
+    const displayPagination = () => {
+       
+            return (
+                <PaginationList
+                    page={page}
+                    max={numberPage}
+                    
+
+                />
+            );
+       
+
+       
+
+
+    }
+
+    const handleClick = (page) => {
+        setPage(page);
+      };
+
     return (
 
         <div className='text-white'>
@@ -94,6 +143,7 @@ const ProductList = () => {
                 </div>
                 <div>
                     {displayProducts()}
+                    {displayPagination()}
                 </div>
             </div>
 

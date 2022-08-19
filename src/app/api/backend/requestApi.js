@@ -84,8 +84,11 @@ export const getProduct = (id) => {
     return apiBackEnd.get('product/' + id);
 };
 export const search = (search) => {
-    console.log(search)
-    return apiBackEnd.get('product/search/' + search);
+    console.log('product/search/' + search["search"] + "/" + search["page"])
+    return apiBackEnd.get('product/search/' + search["search"] + "/" + search["page"]);
+};
+export const searchCount = (search) => {
+    return apiBackEnd.get('product/searchCount/' + search["search"]);
 };
 
 //requete categorie
