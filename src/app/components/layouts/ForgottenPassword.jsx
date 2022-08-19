@@ -49,24 +49,20 @@ const ForgottenPassword = () => {
 
     return (
         <div>
-            <div className="global2">
-                <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">Mot de passe oublié</legend>
-
+            <div className="m-auto w-1/2 text-center text-white">
+                <form className="" onSubmit={formik.handleSubmit}>
+                    <legend className="mb-10"><h2>Mot de passe oublié</h2></legend>
                     <label htmlFor="email">Adresse email électronique</label>
-                    <div>
-                        <input
-                            type="email"
-                            name="email"
-                            value={email}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+                    <input
+                        type="email"
+                        className="input w-1/2 mx-auto mb-5"
+                        name="email"
+                        value={email}
+                        onChange={formik.handleChange}
+                        required
+                    />
+                    <button type="submit" className="btn-primary">Envoie</button>
 
-                    <div className="submit2">
-                        <button type="submit">Envoie</button>
-                    </div>
                     {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email incorrect(s)" />}
                    
                 </form>

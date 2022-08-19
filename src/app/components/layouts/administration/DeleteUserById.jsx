@@ -77,10 +77,10 @@ const DeleteUser = () => {
 
     return (
         <div>
-            <div className="global2">
-                <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">
-                        Suppression du compte
+            <div className="w-2/3 bg-black text-white text-center m-auto p-6">
+                <form className="" onSubmit={formik.handleSubmit}>
+                    <legend className="">
+                       <h2> Suppression du compte</h2>
                     </legend>
                     <p>Vous vous apprêtez à supprimer le compte de {userState.name}, qui a le rôle {userState.role}.<br/>
                      Etes vous sûr de vouloir continuer ? <br/><br/></p>
@@ -89,14 +89,15 @@ const DeleteUser = () => {
                     <div>
                         <input
                             type="password"
+                            className="input mb-6"
                             name="password"
                             value={password}
                             onChange={formik.handleChange}
                             required
                         />
                     </div>
-                       <div> <button type="submit" className="text-red-700 font-semibold border p-2 m-2">Supprimer l'utilisateur</button> 
-                       <Link to={`/administration/user/${id}`}><button className="border p-2">Annuler</button></Link>
+                       <div> <button type="submit" className="btn-red mr-6">Supprimer l'utilisateur</button> 
+                       <Link to={`/administration/user/${id}`}><button className="btn-primary">Annuler</button></Link>
                        </div>
                 </form>
             </div>

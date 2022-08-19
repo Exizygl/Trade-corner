@@ -11,10 +11,8 @@ const Home = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        console.log("poya")
         getNewProduct().then(
             function (res) {
-                console.log("poyo")
                 if (res.status === 200) {
                     console.log(res.data.message.productList)
                     setProducts(res.data.message.productList)
@@ -49,7 +47,7 @@ const Home = () => {
     return (
 
         <div>
-            <h1 className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem] text-white'>LES NOUVEAUTÉS </h1>
+            <h1 className=''>LES NOUVEAUTÉS </h1>
             <div className="text-center">
                 {displayProducts()}
                 <Link to={URL_PRODUCTLIST}>

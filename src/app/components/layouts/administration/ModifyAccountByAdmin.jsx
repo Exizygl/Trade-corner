@@ -49,7 +49,6 @@ const ModifyAccountByAdmin = () => {
 
 //<-----Initialisation des valeurs ----->
 
-
     const initialValues = {
         valueChange: '',
         userToUpdate: id,
@@ -70,7 +69,6 @@ const ModifyAccountByAdmin = () => {
 
         case 'role':
             textLabel = 'Nouveau role';
-            //typeInput = 'text';
             initialValues.valueName = 'role';
             break;
 
@@ -202,6 +200,7 @@ const ModifyAccountByAdmin = () => {
                     <div>
                         <input
                             type="password"
+                            className="input mb-6"
                             name="repeatNewPassword"
                             value={repeatNewPassword}
                             onChange={formik.handleChange}
@@ -219,6 +218,7 @@ const ModifyAccountByAdmin = () => {
                     <div>
                         <input
                             type="text"
+                            className='input'
                             name="adress"
                             value={adress}
                             onChange={formik.handleChange}
@@ -231,6 +231,7 @@ const ModifyAccountByAdmin = () => {
                     <div>
                         <input
                             type="number"
+                            className='input'
                             name="zipcode"
                             value={zipcode}
                             onChange={formik.handleChange}
@@ -246,20 +247,21 @@ const ModifyAccountByAdmin = () => {
 
     return (
         <div>
-            <div className="global2">
+            <div className="bg-black text-white text-center w-2/3 m-auto p-6">
 
-                {typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
+                {typeModification === "avatar" && <form id="formImage" className="flex text-align-center flex-col" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
                             {userToModify.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + userToModify.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
                                 <p> Aucune image </p>}
-                            <legend className="titre">
+                            <legend className="">
                                 Modifier le champ  {typeModification}
                             </legend>
 
 
-                            <label htmlFor="email">Avatar</label>
-                            <div>
+                            <label htmlFor="">Avatar</label>
+                            <div className='mb-6'>
                                 <input
                                     id="avatar"
+                                    className="input"
                                     type="file"
                                     name="avatar"
                                     accept='images/*'
@@ -272,25 +274,26 @@ const ModifyAccountByAdmin = () => {
 
                             </div>
                             <div>
-                                <button className="submit2" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
-                                <Link to={`/administration/user/${id}`}><button className="submit2">Annuler</button></Link>
+                                <button className="btn-primary" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                                <Link to={`/administration/user/${id}`}><button className="btn-red">Annuler</button></Link>
                             </div>
                     </form>
                 }
 
-                {typeModification === "role" && <form className="login" onSubmit={formik.handleSubmit}>
-                <legend className="titre">
-                     Modifier le {typeModification}
+                {typeModification === "role" && <form className="flex text-align-center flex-col" onSubmit={formik.handleSubmit}>
+                <legend className="mb-6">
+                     <h2>Modifier le {typeModification}</h2>
                 </legend>
                 <input
                         type="hidden"
+                        className="input"
                         name="valueName"
                         value={valueName}
                         onChange={formik.handleChange}
                         required
                     />
 
-                <select name="valueChange"
+                <select name="valueChange" className='mb-6 select-corner'
                 value={valueChange}
                 onChange={formik.handleChange}>
                     <option value="" label="Selectionner un rôle">
@@ -299,19 +302,20 @@ const ModifyAccountByAdmin = () => {
                  
                 </select>
                 <div>
-                    <button type="submit" className= "submit2">Modifier</button>
-                    <Link to={`/administration/user/${id}`}><button className="submit2">Annuler</button></Link>
+                    <button type="submit" className= "btn-primary mr-6">Modifier</button>
+                    <Link to={`/administration/user/${id}`}><button className="btn-red">Annuler</button></Link>
                 </div>   
                 </form>
                 }
 
-                {typeModification != "avatar" && typeModification != "role" && <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">
-                        Modifier le {typeModification}
+                {typeModification != "avatar" && typeModification != "role" && <form className="flex text-align-center flex-col" onSubmit={formik.handleSubmit}>
+                    <legend className="mb-6">
+                        <h2>Modifier le {typeModification}</h2>
                     </legend>
 
                     <input
                         type="hidden"
+                        className="input mb-6"
                         name="valueName"
                         value={valueName}
                         onChange={formik.handleChange}
@@ -322,6 +326,7 @@ const ModifyAccountByAdmin = () => {
                     <div>
                         <input
                             type={typeInput}
+                            className="input mb-6"
                             name="valueChange"
                             value={valueChange}
                             onChange={formik.handleChange}
@@ -330,8 +335,8 @@ const ModifyAccountByAdmin = () => {
                     </div>
 
                     <div>
-                        <button type="submit" className= "submit2">Modifier</button>
-                        <Link to={`/administration/user/${id}`}><button className="submit2">Annuler</button></Link>
+                        <button type="submit" className= "btn-primary mr-6">Modifier</button>
+                        <Link to={`/administration/user/${id}`}><button className="btn-red">Annuler</button></Link>
                     </div>
                     
                     {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
