@@ -19,7 +19,7 @@ const ProductList = () => {
 
 
     const [products, setProducts] = useState([]);
-    const [page, setPage] = useState(4);
+    const [page, setPage] = useState(1);
     const [numberPage, setNumberPage] = useState(0);
     const params = new URLSearchParams(location.search)
 
@@ -36,6 +36,8 @@ const ProductList = () => {
         searchEntry["search"] = params.get("search")
         searchEntry["page"] = page
 
+        if (page < 1 || page > numberPage) setPage(1)
+        
 
 
         if (searchEntry["search"] == "" || searchEntry["search"] == null) searchEntry["search"] = "all"
@@ -68,7 +70,7 @@ const ProductList = () => {
             }
         );
 
-    }, []);
+    }, [page]);
 
 
     const displayProducts = () => {
@@ -102,6 +104,7 @@ const ProductList = () => {
                 <PaginationList
                     page={page}
                     max={numberPage}
+                    changePage = {changePage}
                     
 
                 />
@@ -113,8 +116,9 @@ const ProductList = () => {
 
     }
 
-    const handleClick = (page) => {
-        setPage(page);
+    const changePage = (number) => {
+        console.log(number)
+        setPage(number);
       };
 
     return (
@@ -143,7 +147,9 @@ const ProductList = () => {
                 </div>
                 <div>
                     {displayProducts()}
+                    <div className='flex flex-end'>
                     {displayPagination()}
+                    </div>
                 </div>
             </div>
 

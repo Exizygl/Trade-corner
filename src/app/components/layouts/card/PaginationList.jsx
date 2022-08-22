@@ -5,56 +5,95 @@ import './CardUser.css';
 
 
 
-const PaginationList = ({page, max}) => {
+const PaginationList = ({ page, max, changePage }) => {
     var number = [];
 
-    for(var i = 1; i <= max; i++){
+    for (var i = 1; i <= max; i++) {
         number.push(i)
     }
 
     const list = number.map(item => {
-        if(item == 1 || item == max)
-        return (
-            <div>{item}</div>
-        );
-        
-        if(item == page && (item != 1 && item != max)){
+        if (item == 1 || item == max)
             return (
-                <div>{item}</div>
+                <button className='btn-page-primary' onClick={() => {
+
+                    changePage(item);
+                }}>{item}</button>
+            );
+
+        if (item == page && (item != 1 && item != max)) {
+            return (
+                <button className='btn-page-primary' onClick={() => {
+
+                    changePage(item);
+                }}>{item}</button>
             );
         }
-        
-        if(item == page - 1 && item > 2 && (item != 1 && item != max)){
+
+        if (item == page - 1 && item == 2 && (item != 1 && item != max)) {
             return (
-                <div className ="flex">
-                <div>...</div>
-                <div>{item}</div>
+                <div className="flex">
+                    <button className='btn-page-primary' onClick={() => {
+                        changePage(item)
+                    }}>{item}</button>
                 </div>
             );
         }
 
-        if(item == page + 1 && item < page - 2 && (item != 1 && item != max)){
+        if (item == page - 1 && item > 2 && (item != 1 && item != max)) {
             return (
-                <div className ="flex">
-                
-                <div>{item}</div>
-                <div>...</div>
+                <div className="flex">
+                    <div className='mx-[6px]'>...</div>
+                    <button className='btn-page-primary'onClick={() => {
+                        changePage(item)
+                    }}>{item}</button>
+                </div>
+            );
+        }
+
+        if (item == page + 1 && item < max - 1 && (item != 1 && item != max)) {
+            return (
+                <div className="flex">
+
+                    <button className='btn-page-primary' onClick={() => {
+                        changePage(item)
+                    }}>{item}</button>
+                    <div className='mx-[6px]'>...</div>
                 </div>
             );
         }
         
-        })
-    
-    
+        if (item == page + 1 && item == max - 1 && (item != 1 && item != max)) {
+            return (
+                <div className="flex">
+
+                    <button className='btn-page-primary' onClick={() => {
+                        changePage(item)
+                    }}>{item}</button>
+                   
+                </div>
+            );
+        }
+
+    })
+
+
+
     return (
-      
+
         <div className="flex">
-            <div> Prècedente </div>
-            <div>{list}</div>
-            <div> Suivant</div>
+            <button className='btn-primary mx-auto' onClick={() => {
+                        changePage(page - 1)
+                    }}> Prècedente </button>
+            <div className="flex">{list}</div>
+            <button className='btn-primary mx-auto' onClick={() => {
+                        changePage(page + 1)
+                    }}> Suivant</button>
         </div>
-      )
-    }
+    )
+
+    
+}
 
 
 export default PaginationList
