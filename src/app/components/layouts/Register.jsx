@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { useFormik } from 'formik';
+import { validationRegister } from '../../utils/Validation';
 import { register } from '../../api/backend/requestApi';
 import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
+import { URL_HOME} from './../../shared/constants/urls/urlConstants';
 
-import SubmitRegisterModal from './modal/SubmitRegisterModal';
-import { validationRegister } from '../../utils/Validation';
+import Modal from './modal/Modal';
+
 
 const Register = () => {
     // Variable
+    const history = useHistory();
 
-    const [successSubmitModal, setSuccessSubmitModal] = useState('');
+    //Gestion modal
+    const [showModal, setShowModal] = useState(false);
+    const [msgModal, setMsgModal] = useState("");
     const closeModal = () => {
-        setSuccessSubmitModal('');
+        setShowModal(false);
+        history.push(URL_HOME);
     };
-
+    
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState('');
 
@@ -41,15 +49,11 @@ const Register = () => {
     function onSubmit(formValues) {
         console.log(formValues);
         register(values)
-            .then((res) => {
-                console.log(res);
+            .then( (res) => {
                 if (res.data.message.user) {
-                    setSuccessSubmitModal(
-                        <SubmitRegisterModal
-                            user={res.data.message.user}
-                            closeModal={() => closeModal()}
-                        />,
-                    );
+                    const user=res.data.message.user;
+                    setMsgModal(user.pseudo + ", il ne vous reste plus qu'à activer votre compte via un mail que vous avez reçu dans la messagerie de" + user.email);
+                    setShowModal(true);
                 }
             })
             .catch((error) => {
@@ -275,7 +279,12 @@ const Register = () => {
                     )}
                 </form>
             </div>
-            {successSubmitModal}
+            { showModal === true && //Modal visible que si l'enregistrement s'est bien déroulé
+            <Modal message={msgModal} 
+                    title={"Inscription en cours"}
+                    showModal={showModal}
+                    closeModal={()=>closeModal}
+             />}
         </div>
     );
 };

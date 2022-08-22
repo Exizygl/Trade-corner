@@ -1,3 +1,6 @@
+/*----- MODAL DE MAX ------*/
+// supprimé car utilisation de bootstrap au lieu de tailWind
+
 import React from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Button } from 'reactstrap';
 

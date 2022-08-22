@@ -7,13 +7,15 @@ import { userInfo, userInfoUpdate, uploadUserImage } from '../../api/backend/req
 
 import PreviewUserImage from '../layouts/PreviewUserImage';
 import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
-import { URL_HOME, URL_LOGIN, URL_USER } from '../../shared/constants/urls/urlConstants';
+import { URL_LOGIN, URL_USER } from '../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 
 const ModifyAccount = () => {
+    const history = useHistory();
+
     const userId = useSelector((state) => state.auth.user._id);
     const [user, setUser] = useState("");
     const [userImageValue, setUserImageValue] = useState("");
@@ -25,7 +27,15 @@ const ModifyAccount = () => {
     const [msgError, setMsgError] = useState("");
     const dispatch = useDispatch();
 
-    const history = useHistory();
+      //gestion du Modal
+      const [showModal, setShowModal] = useState(false);
+      const [msgModal, setMsgModal] = useState("Les changements ont bien été enregistrés dans la base de données");
+      const closeModal = () => {
+          setShowModal(false); //ferme le modal
+          history.push(URL_USER+id); //redirige sur la page utilisateur
+      };
+
+
 
     const callGetUser = (userId) => {
         userInfo(userId)
@@ -122,7 +132,6 @@ const ModifyAccount = () => {
                                 history.push(URL_USER);
                             }
                         })
-
                 }
 
             })
@@ -216,6 +225,7 @@ const ModifyAccount = () => {
                     <div>
                         <input
                             type="text"
+                            className="input mb-6"
                             name="adress"
                             value={adress}
                             onChange={formik.handleChange}
@@ -228,6 +238,7 @@ const ModifyAccount = () => {
                     <div>
                         <input
                             type="number"
+                            className="input mb-6"
                             name="zipcode"
                             value={zipcode}
                             onChange={formik.handleChange}
@@ -243,14 +254,15 @@ const ModifyAccount = () => {
     return (
         <div>
 
-            <div className="global2">
-                {typeModification != "avatar" && <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">
-                        Modifier votre {typeModification}
+            <div className="bg-black text-white text-center w-2/3 m-auto p-6">
+                {typeModification != "avatar" && <form className="flex text-align-center flex-col" onSubmit={formik.handleSubmit}>
+                    <legend className="mb-6">
+                        <h2>Modifier votre {typeModification}</h2>
                     </legend>
 
                     <input
                         type="hidden"
+                        className="input mb-6"
                         name="valueName"
                         value={valueName}
                         onChange={formik.handleChange}
@@ -261,6 +273,7 @@ const ModifyAccount = () => {
                     <div>
                         <input
                             type={typeInput}
+                            className="input mb-6"
                             name="valueChange"
                             value={valueChange}
                             onChange={formik.handleChange}
@@ -268,12 +281,10 @@ const ModifyAccount = () => {
                         />
                     </div>
 
-                    
-                        
-                  
+                                          
                     <div>
-                        <button type="submit" className='submit2'>Modifier</button>
-                        <Link to={URL_USER}><button className="submit2">Annuler</button></Link>
+                        <button type="submit" className='btn-primary mr-6'>Modifier</button>
+                        <Link to={URL_USER}><button className="btn-red">Annuler</button></Link>
                     </div>
                     {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
                     {(errorLog && msgError.password) && <ErrorMessSmall middle message="L'ancien mot de passe ne correspond pas" />}
@@ -289,16 +300,17 @@ const ModifyAccount = () => {
                     typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
                         {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
                             <p> Aucune image </p>}
-                        <legend className="titre">
-                            Modifier votre {typeModification}
+                        <legend className="mb-6">
+                            <h2>Modifier votre {typeModification}</h2>
                         </legend>
 
 
                         <label htmlFor="email">Avatar</label>
-                        <div>
+                        <div className="mb-6">
                             <input
                                 id="avatar"
                                 type="file"
+                                className="input"
                                 name="avatar"
                                 accept='images/*'
                                 onChange={(e) => loadImage(e)}
@@ -310,8 +322,9 @@ const ModifyAccount = () => {
 
                         </div>
                         <div>
-                            <Link to={URL_USER}><button className="submit2">Annuler</button></Link>
-                            <button className="submit2" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                            <button className="btn-primary mr-6" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                            <Link to={URL_USER}><button className="btn-red">Annuler</button></Link>
+                            
                         </div>
                     </form>
                 }

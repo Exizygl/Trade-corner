@@ -6,21 +6,30 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import { userInfo, updateUserById, uploadUserImageById } from '../../../api/backend/requestApi';
 
 import PreviewUserImage from '../../layouts/PreviewUserImage';
-import { URL_ADMIN_LISTUSERS, URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
+import { URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
-
-
+import Modal from '../modal/Modal';
 
 
 const ModifyAccountByAdmin = () => {
     const userId = useSelector((state) => state.auth.user._id);
     const roles = useSelector((state)=>state.adm.roles);
+  
 
     const [userToModify, setUserToModify] = useState(""); // utile pour la modification d'avatar
     const [userImageValue, setUserImageValue] = useState("");
     const [errorSizeImage, setErrorSizeImage] = useState("");
     const [errorExtensionImage, setErrorExtensionImage] = useState("");
+
+    //gestion du Modal
+    const [showModal, setShowModal] = useState(false);
+    const [msgModal, setMsgModal] = useState("Les changements ont bien été enregistrés dans la base de données");
+    const closeModal = () => {
+        setShowModal(false); //ferme le modal
+        history.push(URL_USER_BYID+id); //redirige sur la page utilisateur
+    };
+
 
     //récupération du parramètre et modification de la page en fonction
     const { typeModification, id} = useParams();
@@ -108,7 +117,7 @@ const ModifyAccountByAdmin = () => {
 
     }
 
-    // <----- gestion du formulaire ----->
+// <----- gestion du formulaire ----->
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
@@ -116,7 +125,6 @@ const ModifyAccountByAdmin = () => {
             updateUserById(values).then((res) => {
 
                 //récupèration des erreurs
-
                 if (res.status === 201) {
                     alert(JSON.stringify(res.data.error))
                 }
@@ -127,15 +135,13 @@ const ModifyAccountByAdmin = () => {
                 //Modification et redirection
                 if (res.status === 200 && !res.data.errors) {
                     userInfo(userId).then(
-
-                        function (res) {
+                         function (res) {
                             if (values.valueName == "password" || values.valueName == "email")
-                             {  alert("le " + values.valueName + " de l'utilisateur a bien été changé. Veuillez lui transmettre son nouveau " + values.valuesName);
-                                history.push(URL_ADMIN_LISTUSERS);
-
+                            {
+                               setMsgModal("le " + values.valueName + " de l'utilisateur a bien été changé. Veuillez lui transmettre son nouveau " + values.valueName);
+                                setShowModal(true);
                             } else { 
-                                alert ("Modification pris en compte"),
-                                history.push(URL_USER_BYID+id);
+                                setShowModal(true);
                             }
                         })
                 }
@@ -247,7 +253,7 @@ const ModifyAccountByAdmin = () => {
 
     return (
         <div>
-            <div className="bg-black text-white text-center w-2/3 m-auto p-6">
+            <div className="bg-black text-white text-center w-2/3 m-auto py-6 px-10">
 
                 {typeModification === "avatar" && <form id="formImage" className="flex text-align-center flex-col" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
                             {userToModify.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + userToModify.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
@@ -346,7 +352,11 @@ const ModifyAccountByAdmin = () => {
                     {(errorLog && msgError.zipcode) && <ErrorMessSmall middle message="Code postal trop long" />}
                 </form>
                 }
+                     
             </div>
+            { showModal === true &&
+                <Modal title={"Modification prise en compte"} message={msgModal} showModal={showModal} closeModal={()=>closeModal} />
+                }  
         </div >
     );
 };

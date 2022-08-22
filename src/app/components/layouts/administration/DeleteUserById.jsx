@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import React , {useEffect,useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams, Link} from 'react-router-dom';
 
 import { userInfo } from '../../../api/backend/requestApi';
@@ -89,7 +89,7 @@ const DeleteUser = () => {
                     <div>
                         <input
                             type="password"
-                            className="input mb-6"
+                            className="input mb-6 w-1/2 mx-auto"
                             name="password"
                             value={password}
                             onChange={formik.handleChange}
