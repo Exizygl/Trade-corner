@@ -147,7 +147,7 @@ const ProductList = () => {
                 </div>
                 <div>
                     {displayProducts()}
-                    <div className='flex flex-end'>
+                    <div className='flex justify-end mr-14 mb-16'>
                     {displayPagination()}
                     </div>
                 </div>
