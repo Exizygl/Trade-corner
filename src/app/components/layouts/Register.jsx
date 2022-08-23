@@ -52,7 +52,7 @@ const Register = () => {
             .then( (res) => {
                 if (res.data.message.user) {
                     const user=res.data.message.user;
-                    setMsgModal(user.pseudo + ", il ne vous reste plus qu'à activer votre compte via un mail que vous avez reçu dans la messagerie de" + user.email);
+                    setMsgModal(user.pseudo + ", il ne vous reste plus qu'à activer votre compte via un mail que vous avez reçu dans la messagerie de " + user.email);
                     setShowModal(true);
                 }
             })

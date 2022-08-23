@@ -30,16 +30,16 @@ const ConfirmRegisterView = () => {
     }
 
     return (
-        <div className="flex items-center justify-center h-40">
+        <div className="flex items-center justify-center h-40 w-1/2 mx-auto bg-black">
             {emailCrypt && <button
-                className="btn btn-success"
+                className="btn-primary"
                 onClick={() => confirm()}>
                 <Link to={URL_LOGIN}>
                     Activez votre compte
                 </Link>
             </button>}
             {!emailCrypt && <button
-                className="btn btn-primary">
+                className="btn-primary btn-primary">
                 <Link to={URL_REGISTER}>
                     Inscrivez-vous
                 </Link>
