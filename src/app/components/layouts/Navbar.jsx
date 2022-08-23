@@ -15,7 +15,7 @@ const Navbar = () => {
     return (
         <Disclosure as="nav" className="top-0 fixed w-full bg-black text-white z-10">
             {({ open }) => (
-
+                           <div className="flex justify-between row items-center py-6 mx-10 h-[100px]">
                                 <div className="flex flex-row">
                                     <Link to={URL_HOME}>
                                         <img
@@ -28,33 +28,6 @@ const Navbar = () => {
                                     <Search />
                                 </div>                               
 
-                                <div className="h-[50px] items-center">             
-                                    <Link to={URL_LOGOUT}>
-                                        <button
-                                            className="ml-3"
-                                            onClick={() => dispatch(signOut())}
-                                        >
-                                            {' '}
-                                            Sign out{' '}
-                                        </button>
-                                    </Link>
-                                    <Link to={URL_USER} className="ml-5">
-                                        Profil
-                                    </Link>
-                                    <Link to={URL_SELLER} className="ml-5">
-                                        Ma boutique
-                                    </Link>
-                                    <Link to={URL_ADMIN} className="ml-5">
-                                        Administration
-                                    </Link>
-                                    <Link to={URL_REGISTER} className="btn-nav-primary ml-5">
-                                        S'enregistrer
-                                    </Link>
-                                    <Link to={URL_LOGIN} className=" btn-nav-primary ml-5">
-                                        Se connecter
-                                    </Link>
-                                </div>
-                            </div>
 
                         <div className="h-[50px] items-center">
 
@@ -84,7 +57,7 @@ const Navbar = () => {
                                 Se connecter
                             </Link>
                         </div>
-                    </div>
+                  
 
                     <div className="-mr-2 flex md:hidden">
                         {/* Mobile menu button */}
@@ -106,7 +79,6 @@ const Navbar = () => {
                         </Disclosure.Button>
                     </div>
                 </div>
-
 
             )}
         </Disclosure>
