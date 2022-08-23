@@ -148,7 +148,7 @@ export default function AddProduct() {
                 
           <div className="flex flex-row gap-3 content-center mt-5">
             <label htmlFor="title" className="basis-1/6 flex content-center"> Titre : </label>
-            <div className="basis-5/6">
+            <div className="basis-5/6 mb-6">
               <input
               type="text"
               name="title"
@@ -172,7 +172,7 @@ export default function AddProduct() {
 {/*photos*/}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="photos" className="basis-1/6 flex content-center">Photos</label>
-            <div className="basis-5/6">
+            <div className="basis-5/6 mb-6">
               <input
                   id="photos"
                   type="file"
@@ -193,8 +193,8 @@ export default function AddProduct() {
 {/* catégorie du produit */}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="category" className="basis-1/6 flex content-center">Catégorie : </label>
-            <div className="basis-5/6">
-              <select name="category" className="input"
+            <div className="basis-5/6 mb-6">
+              <select name="category" className="select-corner"
                 value={values.category}
                 onChange={handleChange}>
                 <option value="" label="Choisir une catégorie">
@@ -217,7 +217,7 @@ export default function AddProduct() {
 {/* Tags du produit */}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="tags" className="basis-1/6 flex content-center">Tags : </label>
-            <div className="basis-5/6">
+            <div className="basis-5/6 mb-6">
               <input
                 type="text"
                 name="tags"
@@ -241,7 +241,7 @@ export default function AddProduct() {
 {/* Description du produit */}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="description" className="basis-1/6 flex content-center">Description : </label>
-            <div className="basis-5/6">
+            <div className="basis-5/6 mb-6">
               <textarea
                 name="description"
                 id="description"
@@ -264,7 +264,7 @@ export default function AddProduct() {
 {/* Prix du produit */}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="price" className="basis-1/6 flex content-center">Prix : </label>
-            <div className="basis-5/6">
+            <div className="basis-5/6 mb-6">
               <input
                 type="number"
                 name="price"
@@ -287,7 +287,7 @@ export default function AddProduct() {
 
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="quantity" className="basis-1/6 flex content-center"> Stock : </label>
-            <div className="basis-5/6">
+            <div className="basis-5/6 mb-6">
               <input
                 type="number"
                 name="quantity"

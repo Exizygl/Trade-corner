@@ -62,7 +62,7 @@ const Login = () => {
                     <div>
                         <input
                             type="email"
-                            className="input"
+                            className="input mb-6"
                             name="email"
                             value={email}
                             onChange={formik.handleChange}
@@ -74,7 +74,7 @@ const Login = () => {
                     <div>
                         <input
                             type="password"
-                            className="input"
+                            className="input mb-6"
                             name="password"
                             value={password}
                             onChange={formik.handleChange}
@@ -84,15 +84,15 @@ const Login = () => {
                     <p className='text-right'>
                         <a href="./forgotten-password" className="underline">Mot de passe oublié ?</a>
                     </p>
-
+                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="Login/Password incorrect(s)" />}
+                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Login/Email incorrect(s)" />}
+                    {(errorLog && msgError.isValid) && <ErrorMessSmall middle message="Login/Valider le mail de confirmation" />}
+               
                     <div className="text-center my-5">
                         <button type="submit" className="btn-primary">Se connecter</button>
                     </div>
                     
-                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="Login/Password incorrect(s)" />}
-                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Login/Email incorrect(s)" />}
-                    {(errorLog && msgError.isValid) && <ErrorMessSmall middle message="Login/Valider le mail de confirmation" />}
-                </form>
+                     </form>
                 <div className="text-center">
                     <p>
                         Pas de compte ? Appuyez ici pour{' '}

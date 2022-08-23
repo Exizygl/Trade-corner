@@ -3,7 +3,6 @@
     border border-2 border-magentacorner rounded-none
     placeholder-gray-500 text-darkgray bg-white
     focus:outline-none focus:ring-purplecorner focus:border-purplecorner focus:z-20 sm:text-sm
-    mb-6
 }
 
 .input-error {
@@ -24,4 +23,8 @@
 
 .radio-error{
     @apply border-red-500 border-2
+}
+
+.select-corner{
+    @apply bg-white border border-2 border-magentacorner text-darkgray text-sm  focus:ring-pinkcorner focus:border-purplecorner block w-full p-2.5
 }

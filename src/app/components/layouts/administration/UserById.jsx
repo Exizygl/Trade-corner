@@ -43,10 +43,10 @@ export default function UserById() {
     }, []);
 
     return (
-        <div className="flex gap-10 mx-12 mt-12 text-white bg-darkgray">
+        <div className="flex gap-10 mx-12 text-white bg-darkgray">
             <div className = "basis-3/12">
             <Navigation/>
-        </div>
+            </div>
 
             <div className="flex flex-col basis-9/12 ">
                 <div className="flex pl-4 py-2 justify-between">
