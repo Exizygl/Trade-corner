@@ -25,7 +25,6 @@ const PasswordChange = () => {
 
 
             passwordChange(values).then((res) => {
-                console.log(res);
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }
@@ -35,10 +34,7 @@ const PasswordChange = () => {
                     
                 }
             })
-
-                    
-                    setErrorLog(true)
-
+            setErrorLog(true)
         },
     });
 
@@ -46,12 +42,13 @@ const PasswordChange = () => {
 
     return (
         <div>
-            <div className="global2">
-                <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">Mot de passe oublié</legend>
+            <div className="bg-black text-white text-center w-2/3 m-auto p-6 px-[120px]">
+                <form className="" onSubmit={formik.handleSubmit}>
+                    <legend className="mb-6"><h2>Mot de passe oublié</h2></legend>
 
                     <input
                         type="hidden"
+                        className="input"
                         name="email"
                         value={email}
                         onChange={formik.handleChange}
@@ -62,6 +59,7 @@ const PasswordChange = () => {
                     <div>
                         <input
                             type="password"
+                            className="input mb-6"
                             name="password"
                             value={password}
                             onChange={formik.handleChange}
@@ -72,6 +70,7 @@ const PasswordChange = () => {
                     <div>
                         <input
                             type="password"
+                            className="input mb-6"
                             name="passwordRepeat"
                             value={passwordRepeat}
                             onChange={formik.handleChange}
@@ -79,13 +78,13 @@ const PasswordChange = () => {
                         />
                     </div>
 
-                    <div className="submit2">
-                        <button type="submit">Envoie</button>
-                    </div>
+                    
+                        <button className="btn-primary" type="submit">Envoie</button>
+                    
                     
                     {(errorLog && msgError.email) && <ErrorMessSmall middle message="Lien non valide" />}
                     {(errorLog && msgError.passwordNotMatch) && <ErrorMessSmall middle message="Les mots de passes sont différents" />}
-                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="Les mots de passes doit avoir au moins 6 caractères minimun" />}
+                    {(errorLog && msgError.password) && <ErrorMessSmall middle message="Le mot de passe doit avoir 6 caractères minimum" />}
                    
                 </form>
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { forgottenPassword } from '../../api/backend/requestApi';
 import ErrorMessSmall from './../../shared/components/form-and-error-components/ErrorMessSmall';
-import SubmitForgottenPasswordModal from './modal/SubmitForgottenPasswordModal';
+import Modal from './modal/Modal';
 
 
 const ForgottenPassword = () => {
@@ -10,38 +10,30 @@ const ForgottenPassword = () => {
     const [errorLog, setErrorLog] = useState(false);
     const [msgError, setMsgError] = useState("");
 
-    const [successSubmitModal, setSuccessSubmitModal] = useState('');
-
+    //Gestion Modal
+    const [showModal, setShowModal] = useState(false);
+    const msgModal = "Un email a été envoyé à l'adresse indiquée pour changer de mot de passe.";
+    const titleModal= "Email envoyé";
     const closeModal = () => {
-        setSuccessSubmitModal('');
+        setShowModal(false);
     };
+
     const initialValues = {
         email: '',
     };
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-
-
             forgottenPassword(values).then((res) => {
                 console.log(res);
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }
                 if (res.status === 200 && !res.data.errors) {
-                    setSuccessSubmitModal(
-                        <SubmitForgottenPasswordModal
-                            
-                            closeModal={() => closeModal()}
-                        />,
-                    );
-                    
+                    setShowModal(true);
                 }
-            })
-
-                    
-                    setErrorLog(true)
-
+            })     
+            setErrorLog(true)
         },
     });
 
@@ -49,29 +41,24 @@ const ForgottenPassword = () => {
 
     return (
         <div>
-            <div className="global2">
-                <form className="login" onSubmit={formik.handleSubmit}>
-                    <legend className="titre">Mot de passe oublié</legend>
-
+            <div className="m-auto w-1/2 text-center text-white">
+                <form className="" onSubmit={formik.handleSubmit}>
+                    <legend className="mb-10"><h2>Mot de passe oublié</h2></legend>
                     <label htmlFor="email">Adresse email électronique</label>
-                    <div>
-                        <input
-                            type="email"
-                            name="email"
-                            value={email}
-                            onChange={formik.handleChange}
-                            required
-                        />
-                    </div>
+                    <input
+                        type="email"
+                        className="input w-1/2 mx-auto mb-5"
+                        name="email"
+                        value={email}
+                        onChange={formik.handleChange}
+                        required
+                    />
+                    <button type="submit" className="btn-primary">Envoie</button>
 
-                    <div className="submit2">
-                        <button type="submit">Envoie</button>
-                    </div>
-                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email incorrect(s)" />}
-                   
+                    {(errorLog && msgError.email) && <ErrorMessSmall middle message="Email incorrect(s)" />}    
                 </form>
             </div>
-            {successSubmitModal}
+            <Modal message={msgModal} title={titleModal} showModal={showModal} closeModal={()=> closeModal}/>
         </div>
     );
 };

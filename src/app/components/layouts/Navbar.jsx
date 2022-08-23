@@ -25,7 +25,7 @@ const Navbar = () => {
                                             className="cursor-pointer"
                                             src={logo}                                         
                                             alt="Trade Corner, vente, achat, occasion"
-                                            width={341}  
+                                            width={200}  
                                         />
                                     </Link>
                                     <Search />

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userInfo } from '../../api/backend/requestApi';
 
-
 import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
+import NavigationUser from './NavigationUser';
 
 
 const User = () => {
@@ -24,18 +24,12 @@ const User = () => {
 
 
     return (
-        <div className="flex gap-10 bg-darkgray text-white">
+        <div className="flex gap-10 mx-12 bg-darkgray text-white">
+            <div className='basis-3/12'>
+                <NavigationUser/>
+            </div>  
 
-            <nav className="flex flex-col basis-3/12 ml-12 bg-black ">
-            <Link to=''className="py-2 hover:bg-magentacorner w-full text-left p-5">
-        Information
-        </Link>
-        <Link to='' className="py-2 hover:bg-magentacorner w-full text-left p-5">
-        Commandes
-        </Link>
-            </nav>
-
-            <div className="flex flex-col w-2/5 ml-12">
+            <div className="flex flex-col basis-9/12">
                 <div className="flex pl-4 py-2 justify-between border-b-4">
                     <div className="flex flex-col space-y-2">
                         <div className="font-semibold">Pseudonyme</div>
