@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
 import './CardUser.css';
 
 
