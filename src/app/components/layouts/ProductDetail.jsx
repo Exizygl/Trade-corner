@@ -48,7 +48,7 @@ const ProductDetail = () => {
     setMainImage(number);
   };
   const displayCarousel = (imageList) => {
-    if(loading == 0) return <div>loading</div>
+    if(loading == 0 || imageList.length < 2) return <div></div>
     // if (productDetail.imageProductUrl.length > 1) {
 
     //   var objectImage = productDetail.imageProductUrl.map((imageUrl, index) => ({ id: index + 1, value: str }))
@@ -67,7 +67,7 @@ const ProductDetail = () => {
   return (
     <div>
       <div className='flex text-white'>
-        <div className='w-[33.125rem] m-12 '>
+        <div>
           {productDetail.imageProductUrl ?
             <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
             :
@@ -78,8 +78,8 @@ const ProductDetail = () => {
             {console.log(productDetail.imageProductUrl)}
             {displayCarousel(productDetail.imageProductUrl)}
           </div>
-
-        </div>
+          </div>
+     
         <div className='mt-10 w-[47.875rem]'>
           <h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>{productDetail.title}</h1>
           <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>

@@ -8,7 +8,7 @@ const CarouselImage = ({ imageList , changeImage }) => {
         return (
             <img src={`http://localhost:8080/static/` + item}
                 onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)}
-                className='ml-[3.125rem] mt-[2.813rem] m-12 w-[5.52rem] h-[5.46rem]'
+                className='ml-[3.125rem] mt-[2.813rem] w-[5.52rem] h-[5.46rem]'
                 alt="preview"
                 onClick={() => {
                     changeImage(item)
