@@ -93,8 +93,8 @@ export default function AddProduct() {
 
   const renderPreview = (source) => {
     return source.map((photo, index) => {
-      return <div key={photo} className="relative w-[100px] h-[100px] mr-6 inline-block">
-          <img src={photo} className="w-100% h-100% cover"/>
+      return <div key={photo} className="relative mr-6 inline-block border border-solid border-2 border-magentacorner">
+          <img src={photo} className="object-contain  w-[100px] h-[100px]"/>
           <button type="button" className=" absolute -top-2 right-0 h-5 w-5  rounded-full bg-redcorner text-white text-center" onClick={()=> deleteFile(index)}> X </button>
         </div>
     })
@@ -120,15 +120,12 @@ export default function AddProduct() {
     }
   setFieldValue("photos",values.photos.concat(newTruc),true);
   }
- 
 
   function onSubmit(formValues) {
   
         const formData = new FormData();
         for (let i=0; i <formValues.photos.length; i++){
             formData.append('photos', formValues.photos[i]); //on envoie chaque file avec la key "photos"
-          // for(let i=0; i<imagesFiles.length;i++){
-          //   formData.append('photos', imagesFiles[i]);
         };
         formData.append('title', formValues.title);
         formData.append('description', formValues.description);
@@ -141,7 +138,6 @@ export default function AddProduct() {
         .then ((res)=> {
           if(res.status === 200)
            {          
-            // setSuccessSubmitModal(true);
           setShowModal(true);
           }
           else {alert("error")}
@@ -150,12 +146,12 @@ export default function AddProduct() {
 
 
   return (
-    <div className="flex flex-row mx-12 gap-10 bg-darkgray text-white">
-      <div className = "basis-3/12">
+    <div className="flex flex-row flex-wrap lg:flex-nowrap  mx-12 gap-10 bg-darkgray text-white">
+      <div className = "basis-11/12 lg:basis-3/12">
         <Navigation/>
       </div> 
 
-      <div className= "basis-9/12"> 
+      <div className= "basis-11/12 lg:basis-9/12"> 
         <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
           <h2>Ajouter un produit</h2>
 
@@ -187,7 +183,7 @@ export default function AddProduct() {
 {/*photos*/}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="photos" className="basis-1/6 flex content-center">Photos</label>
-            <div className="basis-5/6 mb-6">
+            <div className="basis-5/6 ">
               <input
                   id="photos"
                   type="file"
@@ -197,19 +193,19 @@ export default function AddProduct() {
                   multiple = "multiple"
                   onChange={(e) =>{handleChangeImage(e)}}
               />
+              <div className="text-xs p-1"> Importez jusqu'à 5 photos maximum</div>
               {touched.photos && errors.photos ? (
                 <small>{errors.photos}</small>
                   ) : (
                     ''
                   )}
-                  
+              <div id="rendePreview" className="my-6">
+                {renderPreview(previewImages)}
+              </div> 
             </div>
           </div>
-          <div id="rendePreview">
-          {renderPreview(previewImages)}
-          </div>
-          
 
+          
 {/* catégorie du produit */}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="category" className="basis-1/6 flex content-center">Catégorie : </label>
@@ -217,8 +213,8 @@ export default function AddProduct() {
               <select name="category" className="select-corner"
                 value={values.category}
                 onChange={handleChange}>
-                <option value="" label="Choisir une catégorie">
-                    Choisir une catégorie
+                <option value="" label="Choisir une catégorie" className="text-magentacorner">
+                    {/* Choisir une catégorie */}
                 </option>
                 {state.categories.map( category => 
                   <option value={category.label} key = {category.id}> {category.label}</option>
@@ -304,7 +300,6 @@ export default function AddProduct() {
             </div>
           </div>
 {/* Stock du produit */}
-
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="quantity" className="basis-1/6 flex content-center"> Stock : </label>
             <div className="basis-5/6 mb-6">
@@ -327,10 +322,15 @@ export default function AddProduct() {
             </div>
           </div>
 
-          <div className="submit">
-            <button type="submit" className= " btn-primary w-[300px] mr-5">Ajouter un produit</button>
-            <Link to={URL_SELLER}><button className="btn-red">Annuler</button></Link>
+          <div className="submit flex flex-col md:flex-row flex-wrap">
+            <div className=" basis-1/6 mb-6">
+            </div>
+            <div className="basis-5/6 mb-6 flex flex-wrap justify-between">
+              <button type="submit" className= " btn-primary w-[400px] ml-3">Ajouter un produit</button>
+              <Link to={URL_SELLER}><button className="btn-red w-[400px] ml-3 lg-ml-0">Annuler</button></Link>
+            </div>
           </div>
+
         </form>
         {/* {successSubmitModal} */}
         <Modal message={msgModal} title={titleModal} showModal={showModal} closeModal={()=> closeModal}/>

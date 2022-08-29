@@ -50,8 +50,6 @@ const validationAddProduct = Yup.object().shape(
         })
         .test('PhotoTypes','Les photos doivent etre en jpg, jpeg ou png', function (value) {
             if (!value) return false;
-            console.log("test format");
-            console.log(value);
             const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
             const validFormats = [];
             for(let i=0; i<value.length; i++){
@@ -60,7 +58,6 @@ const validationAddProduct = Yup.object().shape(
             return validFormats.every((value) => value === true);//renvoie true si toutes les valeurs de validFormats sont à true
         })
         .test('PhotoSize', 'les photos doivent faire 1Mo maximum chacune', function(value){
-            console.log("test size");
             const validSize = [];
             for(let i=0;i<value.length; i++){
                 if (value[i].size <= 1000000)//1mo
