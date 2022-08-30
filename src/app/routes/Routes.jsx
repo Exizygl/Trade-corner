@@ -94,7 +94,7 @@ const Routes = () => {
             <Route exact path={URL.URL_SELLER_RETOURS} component={RetoursView} />
             <Route exact path={URL.URL_SELLER_HISTORY} component={HistoryView} />
 
-            <Route exact path={URL.URL_SHOP} component={ShopUsersView} />
+            <Route exact path={URL.URL_SHOP + ':id'} component={ShopUsersView} />
         </Switch>
     );
 };

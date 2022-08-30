@@ -11,7 +11,7 @@ export const URL_PASSWORDCHANGE = '/password-change';
 export const URL_PRODUCT = '/product-detail+';
 export const URL_PRODUCTLIST = '/product-list/';
 
-export const URL_SHOP = '/shop-user/';
+export const URL_SHOP = '/shop-user+';
 
 //routes accessibles aux administrateurs
 export const URL_ADMIN = '/administration';

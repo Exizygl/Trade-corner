@@ -14,6 +14,8 @@ const ProductDetail = () => {
     const productDetail = product;
 
     const { id } = useParams();
+    const sellerId = seller._id;
+    console.log("id : " + sellerId);
 
     useEffect(() => {
         getProduct(id).then(function (res) {
@@ -87,7 +89,7 @@ const ProductDetail = () => {
                         <div className="flex items-end justify-between w-full mb-6">
                             <div className="font-bold text-[1rem] mr-4">
                                 Vendu par :
-                                <Link to={URL_SHOP}>
+                                <Link to={URL_SHOP+sellerId}>
                                     <span className="font-normal text-[1.5rem] ml-4  cursor-pointer hover:underline">
                                         {seller.pseudo}
                                     </span>

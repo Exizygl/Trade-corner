@@ -1,28 +1,28 @@
 import React from 'react';
-// import { useParams } from 'react-router-dom';
-// import { useState } from 'react';
-// import { useEffect } from 'react';
-// import { getProduct, getUserByPseudo } from '../api/backend/requestApi';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+ import { useEffect } from 'react';
+ import { userInfo } from '../api/backend/requestApi';
 
 const ShopUsers = () => {
     // const [shop, setShop] = useState([]);
-    // const [seller, setSeller] = useState([]);
+    const [seller, setSeller] = useState([]);
     // const shopUsers = shop;
 
-    // const { id } = useParams();
+    const { id } = useParams();
 
-    // useEffect(() => {
-    //     getProduct(id).then(function (res) {
-    //         if (res.status === 200) {
-    //             setShop(res.data.message.shop);
-    //             setSeller(res.data.message.shop.sellerId);
-    //         }
-    //     });
-    // }, []);
+     useEffect(() => {
+        userInfo(id).then(function (res) {
+            if (res.status === 200) {
+                //setShop(res.data.message.shop);
+                setSeller(res.data.pseudo);
+            }
+        });
+    }, []);
 
     return (
         <div>
-            <h1 className="m-[50px] text-white">BOUTIQUE DE </h1>
+            <h1 className="m-[50px] text-white">BOUTIQUE DE {seller}</h1>
 
             <div className="m-[106px] p-1 w-[200px] h-[200px] rounded-full ring-2 ring-gray-300 dark:ring-gray-500"></div>
             <div className="m-[50px] w-[297px] h-[506px] text-sm font-medium text-white bg-black">
