@@ -76,7 +76,6 @@ export const getAllProduct = () => {
 };
 
 export const getNewProduct = () => {
-    
     return apiBackEnd.get('product/new');
 };
 

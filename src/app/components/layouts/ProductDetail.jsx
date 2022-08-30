@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Carousel } from 'reactstrap';
 import { getProduct } from '../../api/backend/requestApi';
+import { URL_SHOP } from '../../shared/constants/urls/urlConstants'
 
 import CarouselImage from '../../shared/components/CarouselImage';
-
 import { Link, useHistory } from 'react-router-dom';
 import { URL_MODIFYPRODUCT} from '../../shared/constants/urls/urlConstants';
 
@@ -121,10 +121,11 @@ const ProductDetail = () => {
               <div className='font-bold text-[1rem] mr-4'>
                 Vendu par :
 
-                <span className='font-normal text-[1.5rem] ml-4'>
-                  {seller.pseudo}
-
-                </span>
+                <Link to={URL_SHOP+sellerId}>
+                    <span className="font-normal text-[1.5rem] ml-4  cursor-pointer hover:underline">
+                        {seller.pseudo}
+                    </span>
+                </Link>
               </div>
             </div>
 
@@ -157,4 +158,4 @@ const ProductDetail = () => {
   )
 }
 
-export default ProductDetail
+export default ProductDetail;
