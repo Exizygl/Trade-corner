@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './../assets/images/logo-trade-corner-footer-white_2.png';
+import logo from './../../assets/images/logo-trade-corner-footer-white_2.png';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';

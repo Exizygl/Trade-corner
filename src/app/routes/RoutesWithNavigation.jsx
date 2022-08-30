@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import Footer from '../components/layouts/Footer';
+
 
 import Navbar from './../components/layouts/Navbar';
 import Routes from './Routes';
@@ -32,6 +34,7 @@ const RoutesWithNavigation = () => {
 
                     <Routes />
                 </main>
+                <Footer />
                 <ToastContainer
                     toastClassName={({ type }) =>
                         contextClass[type || 'default'] +
