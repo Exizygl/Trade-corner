@@ -1,23 +1,31 @@
 import React from 'react';
 import {useEffect,useState} from 'react';
 import Navigation from './Navigation';
+import Modal from '../modal/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { Formik, FormikConsumer, useFormik } from 'formik';
+import { Formik, Form, FormikConsumer, useFormik } from 'formik';
 import { validationAddProduct } from '../../../utils/Validation';
 import { Link, useHistory } from 'react-router-dom';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
 import { addProduct, getAllCategory} from '../../../api/backend/requestApi';
-import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
-import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 export default function AddProduct() {
-  // storage.clear();
-  const [userImageValue, setUserImageValue] = useState("");
-  const [errorSizeImage, setErrorSizeImage] = useState("");
-  const [errorExtensionImage, setErrorExtensionImage] = useState("");
+
+  const [previewImages, setPreviewImages] = useState([]); //tableau d'URL pour preview d'images
+  const [refreshPreview, setRefreshPreview] = useState(false); //pour rafraichir les previews
+  const [imagesFiles, setImagesFiles]= useState([]); //tableau de files d'images pour l'envoi au back
   const [state, setState] = useState({ categories: [] });
   const history = useHistory();
+
+     //Gestion Modal
+     const [showModal, setShowModal] = useState(false);
+     const msgModal = "Un administrateur va lire et valider votre annonce rapidement";
+     const titleModal= "Votre produit a bien été enregistré";
+     const closeModal = () => {
+         setShowModal(false);
+         history.push(URL_SELLER);
+     };
 
 //---------FONCTIONS --------------
 
@@ -45,8 +53,6 @@ export default function AddProduct() {
     )
   };
 
-
-
   useEffect( () => {
     getlistCategory();
   }
@@ -55,14 +61,6 @@ export default function AddProduct() {
 
   const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
   const dispatch = useDispatch();
-
-
-    // Variable
-
-  const [successSubmitModal, setSuccessSubmitModal] = useState('');
-  const closeModal = () => {
-        setSuccessSubmitModal('');
-  };
 
     // ----- FORMIK ------------
 
@@ -73,7 +71,7 @@ export default function AddProduct() {
         tags: '',
         price: '',
         quantity: '',
-        photos: '',
+        photos: [],
   };
 
   const { handleSubmit, values, touched, isValid, handleChange, handleBlur, setFieldValue, errors } =
@@ -83,37 +81,49 @@ export default function AddProduct() {
     onSubmit,
   });
 
-//   const checkValidImages = (e) => {
+  const deleteFile = (e) => {//supprime l'image du tableau imagesFiles et supprime la preview
+    const newFiles = imagesFiles.filter((photo,index) => index!== e);
+    setImagesFiles(newFiles);
+    setFieldValue("photos", newFiles, true);
+    const newPreview = previewImages.filter((photo,index)=> index!==e);
+    setPreviewImages(newPreview);
+    setRefreshPreview(!refreshPreview);
 
-//     for (let i=0; i<e.currentTarget.files; i++)
-//     {
-//     const extension = findImageExtension(e.currentTarget.files[i].name)
-//     if (!extension) {
-//         setErrorExtensionImage(`L'extension d'image doit être jpg, jpeg ou png`)
-//     } else setErrorExtensionImage("");
+  };
 
-//     const imageSize = validImageSize(e.currentTarget.files[i].size)
-//     if (!imageSize) {
-//         setErrorSizeImage(`Le poids de l'image ne doit pas dépasser 200 Ko`)
-//     } else setErrorSizeImage("");
-//     }
-//   }
+  const renderPreview = (source) => {
+    return source.map((photo, index) => {
+      return <div key={photo} className="relative mr-6 inline-block border border-solid border-2 border-magentacorner">
+          <img src={photo} className="object-contain  w-[100px] h-[100px]"/>
+          <button type="button" className=" absolute -top-2 right-0 h-5 w-5  rounded-full bg-redcorner text-white text-center" onClick={()=> deleteFile(index)}> X </button>
+        </div>
+    })
+  };
 
-  const loadImages = (e) => {
-    // checkValidImages(e);
+  const handleChangeImage = (e) => {
     
-    const newFiles = []
+    // //etape 1 : afficher la preview
+    const filesArray = Array.from(e.target.files).map((file)=> URL.createObjectURL(file));
+    setPreviewImages((prevImages) => prevImages.concat(filesArray));
+
+    //etape 2 : modifier imagesFiles (state)
+    const newFiles = [];
     for(let i = 0; i < e.target.files.length; i++){
-        
         newFiles.push(e.target.files[i]); 
     }
-    setFieldValue('photos',newFiles);
+    setImagesFiles((imagesFiles) => imagesFiles.concat(newFiles));
+
+    //etape 3 : modifier formValues pour la validation
+    const newTruc =[];
+    for (let j=0; j <e.target.files.length; j++){
+      newTruc.push(e.target.files[j]);
+    }
+  setFieldValue("photos",values.photos.concat(newTruc),true);
   }
 
   function onSubmit(formValues) {
-
+  
         const formData = new FormData();
-
         for (let i=0; i <formValues.photos.length; i++){
             formData.append('photos', formValues.photos[i]); //on envoie chaque file avec la key "photos"
         };
@@ -127,20 +137,21 @@ export default function AddProduct() {
         addProduct(formData)
         .then ((res)=> {
           if(res.status === 200)
-          {          alert("le produit a bien été ajouté");
-          history.push(URL_SELLER);}
+           {          
+          setShowModal(true);
+          }
           else {alert("error")}
         })
   }
 
 
   return (
-    <div className="flex flex-row mx-12 gap-10 bg-darkgray text-white">
-      <div className = "basis-3/12">
+    <div className="flex flex-row flex-wrap lg:flex-nowrap  mx-12 gap-10 bg-darkgray text-white">
+      <div className = "basis-11/12 lg:basis-3/12">
         <Navigation/>
       </div> 
 
-      <div className= "basis-9/12"> 
+      <div className= "basis-11/12 lg:basis-9/12"> 
         <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
           <h2>Ajouter un produit</h2>
 
@@ -172,7 +183,7 @@ export default function AddProduct() {
 {/*photos*/}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="photos" className="basis-1/6 flex content-center">Photos</label>
-            <div className="basis-5/6 mb-6">
+            <div className="basis-5/6 ">
               <input
                   id="photos"
                   type="file"
@@ -180,16 +191,21 @@ export default function AddProduct() {
                   className="input"
                   accept='image/*'
                   multiple = "multiple"
-                  onChange={(e) => loadImages(e)}
+                  onChange={(e) =>{handleChangeImage(e)}}
               />
+              <div className="text-xs p-1"> Importez jusqu'à 5 photos maximum</div>
               {touched.photos && errors.photos ? (
                 <small>{errors.photos}</small>
                   ) : (
                     ''
                   )}
+              <div id="rendePreview" className="my-6">
+                {renderPreview(previewImages)}
+              </div> 
             </div>
           </div>
 
+          
 {/* catégorie du produit */}
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="category" className="basis-1/6 flex content-center">Catégorie : </label>
@@ -197,8 +213,8 @@ export default function AddProduct() {
               <select name="category" className="select-corner"
                 value={values.category}
                 onChange={handleChange}>
-                <option value="" label="Choisir une catégorie">
-                    Choisir une catégorie
+                <option value="" label="Choisir une catégorie" className="text-magentacorner">
+                    {/* Choisir une catégorie */}
                 </option>
                 {state.categories.map( category => 
                   <option value={category.label} key = {category.id}> {category.label}</option>
@@ -284,7 +300,6 @@ export default function AddProduct() {
             </div>
           </div>
 {/* Stock du produit */}
-
           <div className="flex flex-row gap-3 content-center">
             <label htmlFor="quantity" className="basis-1/6 flex content-center"> Stock : </label>
             <div className="basis-5/6 mb-6">
@@ -307,12 +322,18 @@ export default function AddProduct() {
             </div>
           </div>
 
-          <div className="submit">
-            <button type="submit" className= " btn-primary w-[300px] mr-5">Ajouter un produit</button>
-            <Link to={URL_SELLER}><button className="btn-red">Annuler</button></Link>
+          <div className="submit flex flex-col md:flex-row flex-wrap">
+            <div className=" basis-1/6 mb-6">
+            </div>
+            <div className="basis-5/6 mb-6 flex flex-wrap justify-between">
+              <button type="submit" className= " btn-primary w-[400px] ml-3">Ajouter un produit</button>
+              <Link to={URL_SELLER}><button className="btn-red w-[400px] ml-3 lg-ml-0">Annuler</button></Link>
+            </div>
           </div>
+
         </form>
-        {successSubmitModal}
+        {/* {successSubmitModal} */}
+        <Modal message={msgModal} title={titleModal} showModal={showModal} closeModal={()=> closeModal}/>
       </div>
     </div>
   );
