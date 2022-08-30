@@ -8,7 +8,10 @@ export const URL_MODIFYACCOUNT = '/modify+';
 export const URL_DELETE = '/delete';
 export const URL_FORGOTTENPASSWORD = '/forgotten-password';
 export const URL_PASSWORDCHANGE = '/password-change';
+
+//routes produits
 export const URL_PRODUCT = '/product-detail+';
+export const URL_MODIFYPRODUCT ='/modify-product+';
 export const URL_PRODUCTLIST = '/product-list/';
 
 

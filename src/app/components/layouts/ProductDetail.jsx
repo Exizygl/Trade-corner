@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Carousel } from 'reactstrap';
 import { getProduct } from '../../api/backend/requestApi';
+<<<<<<< HEAD
 import CarouselImage from '../../shared/components/CarouselImage';
+=======
+import { Link, useHistory } from 'react-router-dom';
+import { URL_MODIFYPRODUCT} from '../../shared/constants/urls/urlConstants';
+>>>>>>> origin/modifyProduct
 
 
 const ProductDetail = () => {
@@ -138,6 +143,10 @@ const ProductDetail = () => {
               <button className=' m-auto btn-primary'>
                 Ajouter au panier
               </button>
+              <Link to={URL_MODIFYPRODUCT + id}><button className=' ml-3 mr-auto btn-primary'>
+                Modifier
+              </button></Link>
+
 
             </div>
 

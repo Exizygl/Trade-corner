@@ -43,7 +43,7 @@ const validationAddProduct = Yup.object().shape(
             if (value.length < 1) return false;
             return true;
         })
-        .test('maximum', 'Vous ne pouvez imorter que 5 photos maximum', function (value) {
+        .test('maximum', 'Vous ne pouvez importer que 5 photos maximum', function (value) {
             if (!value) return false;
             if (value.length > 5) return false;
             return true;
@@ -66,7 +66,6 @@ const validationAddProduct = Yup.object().shape(
             }
             return validSize.every((value) => value === true);
         }),
-        
     }
 );
 
