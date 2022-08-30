@@ -15,7 +15,7 @@ const ProductDetail = () => {
   const [mainImage, setMainImage] = useState([]);
   const [loading, setLoading] = useState(0);
   const productDetail = product;
-  
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -30,7 +30,8 @@ const ProductDetail = () => {
           setDate(dateFormat(res.data.message.product.createdAt))
           setMainImage((res.data.message.product.imageProductUrl[0]))
           setLoading(1)
-          
+
+
         }
       }
     );
@@ -48,38 +49,42 @@ const ProductDetail = () => {
     setMainImage(number);
   };
   const displayCarousel = (imageList) => {
-    if(loading == 0 || imageList.length < 2) return <div></div>
+    if (loading == 0 || imageList.length < 2) return <div></div>
     // if (productDetail.imageProductUrl.length > 1) {
 
     //   var objectImage = productDetail.imageProductUrl.map((imageUrl, index) => ({ id: index + 1, value: str }))
-    
-      return (
-        <CarouselImage
-         
-          imageList={imageList}
-          changeImage={changeImage}
+
+    return (
+      <CarouselImage
+
+        imageList={imageList}
+        changeImage={changeImage}
+        mainImage={mainImage}
 
 
-        />
-      );
-    
+      />
+    );
+
   }
   return (
     <div>
       <div className='flex text-white'>
         <div>
+
+
           {productDetail.imageProductUrl ?
             <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
             :
             <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
           }
 
+
           <div>
             {console.log(productDetail.imageProductUrl)}
             {displayCarousel(productDetail.imageProductUrl)}
           </div>
-          </div>
-     
+        </div>
+
         <div className='mt-10 w-[47.875rem]'>
           <h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>{productDetail.title}</h1>
           <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>
@@ -139,7 +144,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

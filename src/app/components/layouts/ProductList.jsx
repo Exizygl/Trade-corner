@@ -4,7 +4,8 @@ import { useEffect } from 'react';
 import { Component } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Pagination } from 'reactstrap';
-import { search, searchCount } from '../../api/backend/requestApi';
+import { getAllSuperCategory, search, searchCount } from '../../api/backend/requestApi';
+import Dropdown from '../../shared/components/DropDown';
 
 
 import { } from '../../shared/constants/urls/urlConstants';
@@ -22,6 +23,14 @@ const ProductList = () => {
     const [page, setPage] = useState(1);
     const [numberPage, setNumberPage] = useState(0);
     const params = new URLSearchParams(location.search)
+    const [superCategoryList, SetsuperCategoryList] = useState([])
+    const [superCategory, setSuperCategory] = useState('')
+    const [category, setCategory] = useState('')
+    const [loading, setLoading] = useState(0);
+    const [dropDownJV, setDropDownJV] = useState(false)
+    const [dropDownManga, setDropDownManga] = useState(false)
+    const [dropDownGoodies, setDropDownGoodies] = useState(false)
+    const [dropDownBR, setDropDownBR] = useState(false)
 
 
 
@@ -32,45 +41,57 @@ const ProductList = () => {
 
     useEffect(() => {
 
+        getAllSuperCategory().then(
+
+            function (res) {
+                console.log(res.data.message.superCategoryList)
+                if (res.status === 200) {
+                    SetsuperCategoryList(res.data.message.superCategoryList);
+                    setLoading(1)
+
+                }
+            })
+
         var searchEntry = []
         searchEntry["search"] = params.get("search")
         searchEntry["page"] = page
-
+        searchEntry["superCategory"] = superCategory
+        searchEntry["category"] = category
+        console.log(searchEntry["superCategory"])
         if (page < 1 || page > numberPage) setPage(1)
-        
+
 
 
         if (searchEntry["search"] == "" || searchEntry["search"] == null) searchEntry["search"] = "all"
-        if (searchEntry["page"] == "" || searchEntry["page"] == null) searchEntry["page"] = "1"
-        console.log(searchEntry);
+        if (searchEntry["page"] == "" || searchEntry["page"] == null) searchEntry["page"] = 1
+        if (searchEntry["superCategory"] == "" || searchEntry["superCategory"] == null) searchEntry["superCategory"] = "all"
+        if (searchEntry["category"] == "" || searchEntry["category"] == null) searchEntry["category"] = "all"
+        
+
         search(searchEntry).then(
 
             function (res) {
 
                 if (res.status === 200) {
-                    console.log(res.data.message.productList)
-                    setProducts(res.data.message.productList)
                     
+                    setProducts(res.data.message.productList)
+
                     searchCount(searchEntry).then(
 
                         function (res) {
 
                             if (res.status === 200) {
-                                console.log(res.data.message.number)
-                                setNumberPage(res.data.message.number)
-                                
 
+                                setNumberPage(res.data.message.number)
 
                             }
                         }
                     );
-
-
                 }
             }
         );
 
-    }, [page]);
+    }, [page, superCategory, category]);
 
 
     const displayProducts = () => {
@@ -99,27 +120,63 @@ const ProductList = () => {
     }
 
     const displayPagination = () => {
-       
-            return (
-                <PaginationList
-                    page={page}
-                    max={numberPage}
-                    changePage = {changePage}
-                    
 
-                />
-            );
-       
+        return (
+            <PaginationList
+                page={page}
+                max={numberPage}
+                changePage={changePage}
 
-       
+
+            />
+        );
+
+
+
 
 
     }
 
+    const DropdownCategories = (number) => {
+
+        if (loading != 0) {
+
+            const list = superCategoryList[number].categoryIdList.map(item => {
+                return (
+                    <Dropdown
+                        key={item._id}
+
+                        label={item.label}
+
+                        Category={ChangeCategory}
+
+
+                    />
+                );
+            })
+            return (
+                <ul>
+                    {list}
+                </ul>
+            );
+        }
+    }
     const changePage = (number) => {
-        console.log(number)
         setPage(number);
-      };
+    };
+    const SuperCategory = (value) => {
+        console.log(value)
+        setPage(1);
+        setSuperCategory(value);
+        setCategory('')
+    };
+    const ChangeCategory = (value) => {
+        console.log(value)
+        setPage(1);
+        setSuperCategory('');
+        setCategory(value)
+    };
+
 
     return (
 
@@ -128,16 +185,36 @@ const ProductList = () => {
             <h1 className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem]'>Nos Articles </h1>
             <div className='flex justify-around mt-8'>
                 <div>
-                    JEUX VIDEO
+                    <div onMouseEnter={() => { setDropDownJV(true) }} onMouseLeave={() => { setDropDownJV(false) }} onClick={() => { SuperCategory("jeux video") }}>
+                        JEUX VIDEO
+                    </div>
+                    {dropDownJV ? <div onMouseEnter={() => { setDropDownJV(true) }} onMouseLeave={() => { setDropDownJV(false) }} className=''>
+                        {DropdownCategories(0)}
+                    </div> : null}
                 </div>
                 <div>
-                    GOODIES
+                    <div onMouseEnter={() => { setDropDownGoodies(true) }} onMouseLeave={() => { setDropDownGoodies(false) }} onClick={() => { SuperCategory("goodies") }}>
+                        GOODIES
+                    </div>
+                    {dropDownGoodies ? <div onMouseEnter={() => { setDropDownGoodies(true) }} onMouseLeave={() => { setDropDownGoodies(false) }} className=''>
+                        {DropdownCategories(1)}
+                    </div> : null}
                 </div>
                 <div>
-                    COMICS/MANGA
+                    <div onMouseEnter={() => { setDropDownManga(true) }} onMouseLeave={() => { setDropDownManga(false) }} onClick={() => { SuperCategory("comics-manga") }}>
+                        COMICS/MANGA
+                    </div>
+                    {dropDownManga ? <div onMouseEnter={() => { setDropDownManga(true) }} onMouseLeave={() => { setDropDownManga(false) }} className=''>
+                        {DropdownCategories(2)}
+                    </div> : null}
                 </div>
                 <div>
-                    DVD/BLUE-RAY
+                    <div onMouseEnter={() => { setDropDownBR(true) }} onMouseLeave={() => { setDropDownBR(false) }} onClick={() => { SuperCategory("DVD-Blu-Ray") }}>
+                        DVD/BLUE-RAY
+                    </div>
+                    {dropDownBR ? <div onMouseEnter={() => { setDropDownBR(true) }} onMouseLeave={() => { setDropDownBR(false) }} className=''>
+                        {DropdownCategories(3)}
+                    </div> : null}
                 </div>
             </div>
 
@@ -148,7 +225,7 @@ const ProductList = () => {
                 <div>
                     {displayProducts()}
                     <div className='flex justify-end mr-14 mb-16'>
-                    {displayPagination()}
+                        {displayPagination()}
                     </div>
                 </div>
             </div>

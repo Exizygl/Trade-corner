@@ -12,6 +12,7 @@ import { selectIsLogged, signOut } from './../../shared/redux-store/authenticati
 import Search from './Search';
 const Navbar = () => {
     const dispatch = useDispatch();
+    
     return (
         <Disclosure as="nav" className="top-0 fixed w-full bg-black text-white z-10">
             {({ open }) => (
