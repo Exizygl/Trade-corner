@@ -15,7 +15,6 @@ import UserDeleteView from '../views/UserDeleteView';
 import ForgottenPasswordView from '../views/forgottenPasswordView';
 import PasswordChangeView from '../views/PasswordChangeView';
 
-
 //import administration
 import AdministrationView from '../views/administration/AdministrationView';
 import ListUsersView from '../views/administration/ListUsersView';
@@ -27,13 +26,13 @@ import ProductDetailView from '../views/ProductDetailView';
 import ProductListView from '../views/ProductListView';
 
 //import vendeur
- import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
+import MaBoutiqueView from '../views/maBoutique/maBoutiqueView';
 import ListProductsView from '../views/maBoutique/ListProductsView';
 import AddProductView from '../views/maBoutique/AddProductView';
 import CommandesView from '../views/maBoutique/CommandesView';
 import RetoursView from '../views/maBoutique/RetoursView';
 import HistoryView from '../views/maBoutique/HistoryView';
-
+import ShopUsersView from '../views/maBoutique/ShopUsersView';
 
 /**
  * Routes of the application
@@ -48,17 +47,13 @@ const Routes = () => {
             <Route exact path={URL.URL_LOGIN} component={LoginView} />
             <Route exact path={URL.URL_REGISTER} component={RegisterView} />
             <Route path={URL.URL_CONFIRM_REGISTER} component={ConfirmRegisterView} />
-            
+
             {/*routes pour les produits */}
 
+            <Route exact path={URL.URL_PRODUCT + ':id'} component={ProductDetailView} />
             <Route
                 exact
-                path={URL.URL_PRODUCT + ':id'}
-                component={ProductDetailView}
-            />
-            <Route
-                exact
-                path={URL.URL_PRODUCTLIST+ ':query?'}
+                path={URL.URL_PRODUCTLIST + ':query?'}
                 component={ProductListView}
             />
             {/*routes pour le profil */}
@@ -80,17 +75,26 @@ const Routes = () => {
                 path={URL.URL_MODIFYACCOUNT_BYID + ':typeModification' + '/' + ':id'}
                 component={ModifyAccountByAdminView}
             />
-            <Route exact path={URL.URL_DELETE_USER_BYID + ':id'} component={DeleteUserByIdView} />
+            <Route
+                exact
+                path={URL.URL_DELETE_USER_BYID + ':id'}
+                component={DeleteUserByIdView}
+            />
             <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
 
             {/* routes vendeurs */}
             <Route exact path={URL.URL_SELLER} component={MaBoutiqueView} />
-            <Route exact path={URL.URL_SELLER_LISTPRODUCTS} component={ListProductsView} />
+            <Route
+                exact
+                path={URL.URL_SELLER_LISTPRODUCTS}
+                component={ListProductsView}
+            />
             <Route exact path={URL.URL_SELLER_ADDPRODUCT} component={AddProductView} />
             <Route exact path={URL.URL_SELLER_COMMANDES} component={CommandesView} />
             <Route exact path={URL.URL_SELLER_RETOURS} component={RetoursView} />
             <Route exact path={URL.URL_SELLER_HISTORY} component={HistoryView} />
 
+            <Route exact path={URL.URL_SHOP} component={ShopUsersView} />
         </Switch>
     );
 };

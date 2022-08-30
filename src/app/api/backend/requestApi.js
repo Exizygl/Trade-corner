@@ -76,7 +76,6 @@ export const getAllProduct = () => {
 };
 
 export const getNewProduct = () => {
-    
     return apiBackEnd.get('product/new');
 };
 
@@ -84,7 +83,7 @@ export const getProduct = (id) => {
     return apiBackEnd.get('product/' + id);
 };
 export const search = (search) => {
-    console.log(search)
+    console.log(search);
     return apiBackEnd.get('product/search/' + search);
 };
 
@@ -92,6 +91,4 @@ export const search = (search) => {
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
-}
-
-
+};
