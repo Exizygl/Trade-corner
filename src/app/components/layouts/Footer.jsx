@@ -9,7 +9,7 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 function Footer() {
     return (
         <footer>
-            <div className="bg-[black] text-white h-400 w-auto flex justify-around leading-10">
+            <div className="bg-[black] mt-[60px] text-white h-400 w-auto flex justify-around leading-10">
                 <div className="m-10 h-[300px] w-[300px]">
                     <img src={logo} alt="logo"></img>
                 </div>

@@ -22,6 +22,7 @@ const ProductDetail = () => {
   const productDetail = product;
 
   const { id } = useParams();
+  const sellerId = seller._id;
 
   useEffect(() => {
 
