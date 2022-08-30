@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../api/backend/requestApi';
+import { Link, useHistory } from 'react-router-dom';
+import { URL_MODIFYPRODUCT} from '../../shared/constants/urls/urlConstants';
 
 
 const ProductDetail = () => {
@@ -97,6 +99,9 @@ const ProductDetail = () => {
                 <button className=' m-auto btn-primary'>
                   Ajouter au panier
                 </button>
+                <Link to={URL_MODIFYPRODUCT + id}><button className=' ml-3 mr-auto btn-primary'>
+                 Modifier
+                </button></Link>
               
             </div>
 
