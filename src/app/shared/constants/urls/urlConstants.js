@@ -1,3 +1,4 @@
+export const URL_BECOMESELLER = '/user/devenirvendeur';
 export const URL_HOME = '/';
 export const URL_LOGIN = '/login';
 export const URL_REGISTER = '/register';

@@ -38,7 +38,7 @@ import ShopUsersView from '../views/maBoutique/ShopUsersView';
 import ProductDetailView from '../views/ProductDetailView';
 import ProductListView from '../views/ProductListView';
 import ModifyProductView from '../views/produits/ModifyProductView';
-
+import BecomeSeller from '../components/layouts/BecomeSeller';
 
 
 /**
@@ -85,6 +85,7 @@ const Routes = () => {
                 path={URL.URL_MODIFYACCOUNT + ':typeModification'}
                 component={ModifyAccountView}
             />
+            <Route path={URL.URL_BECOMESELLER} component={BecomeSeller} />
             {/* routes administrateur */}
             <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
             <Route exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} />
