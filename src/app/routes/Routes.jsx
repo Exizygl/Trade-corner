@@ -33,6 +33,7 @@ import AddProductView from '../views/maBoutique/AddProductView';
 import CommandesView from '../views/maBoutique/CommandesView';
 import RetoursView from '../views/maBoutique/RetoursView';
 import HistoryView from '../views/maBoutique/HistoryView';
+import BecomeSeller from '../components/layouts/BecomeSeller';
 
 
 /**
@@ -71,6 +72,7 @@ const Routes = () => {
                 path={URL.URL_MODIFYACCOUNT + ':typeModification'}
                 component={ModifyAccountView}
             />
+            <Route path={URL.URL_BECOMESELLER} component={BecomeSeller} />
             {/* routes administrateur */}
             <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
             <Route exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} />
