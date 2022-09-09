@@ -31,6 +31,10 @@ const ProductList = () => {
     const [dropDownManga, setDropDownManga] = useState(false)
     const [dropDownGoodies, setDropDownGoodies] = useState(false)
     const [dropDownBR, setDropDownBR] = useState(false)
+    const [order, setOrder] = useState("new")
+    const [minimunPrice, setMinimunPrice] = useState()
+    const [maximunPrice, setMaximunPrice] = useState()
+  
 
 
 
@@ -57,6 +61,9 @@ const ProductList = () => {
         searchEntry["page"] = page
         searchEntry["superCategory"] = superCategory
         searchEntry["category"] = category
+        searchEntry["order"] = order
+        searchEntry["minimun"] = minimunPrice
+        searchEntry["maximun"] = maximunPrice 
         console.log(searchEntry["superCategory"])
         if (page < 1 || page > numberPage) setPage(1)
 
@@ -66,14 +73,16 @@ const ProductList = () => {
         if (searchEntry["page"] == "" || searchEntry["page"] == null) searchEntry["page"] = 1
         if (searchEntry["superCategory"] == "" || searchEntry["superCategory"] == null) searchEntry["superCategory"] = "all"
         if (searchEntry["category"] == "" || searchEntry["category"] == null) searchEntry["category"] = "all"
-        
+        if (searchEntry["minimun"] == "" || searchEntry["minimun"] == null) searchEntry["minimun"] = 0
+        if (searchEntry["maximun"] == "" || searchEntry["maximun"] == null) searchEntry["maximun"] = 100000000000
+
 
         search(searchEntry).then(
 
             function (res) {
 
                 if (res.status === 200) {
-                    
+
                     setProducts(res.data.message.productList)
 
                     searchCount(searchEntry).then(
@@ -91,7 +100,7 @@ const ProductList = () => {
             }
         );
 
-    }, [page, superCategory, category]);
+    }, [page, superCategory, category, order, minimunPrice, maximunPrice]);
 
 
     const displayProducts = () => {
@@ -176,6 +185,21 @@ const ProductList = () => {
         setSuperCategory('');
         setCategory(value)
     };
+    const ChangeOrder = (value) => {
+        console.log(value.target.value)
+        setPage(1);
+        setOrder(value.target.value)
+    };
+
+    const ChangeMinimun = (value) => {
+        console.log(value.target.value)
+        setPage(1);
+        setMinimunPrice(value.target.value)
+    };
+    const ChangeMaximun = (value) => {
+        setPage(1);
+        setMaximunPrice(value.target.value)
+    };
 
 
     return (
@@ -220,7 +244,35 @@ const ProductList = () => {
 
             <div className='mt-20 flex ml-14'>
                 <div className='w-[18.75rem] h-full bg-[grey]'>
-                    <div>filtre</div>
+                    
+                    <label for="order">Trier par:</label>
+
+                    <select onChange={(value) => { ChangeOrder(value)}} name="order" id="order">
+                        <option value="new">Les plus récents</option>
+                        <option value="old">Les plus anciants</option>
+                        <option value="cheap">Les moins chères</option>
+                        <option value="expensive">Les plus chères</option>
+                    </select>
+                    <div>
+                    <input
+                            type="text"
+                            className=" border border-2 border-magentacorner mr-4 text-black"
+                            name="minimumPrice"
+                            
+                            onChange={(value) =>ChangeMinimun(value)}
+
+                        />
+                        € a
+                        <input
+                            type="text"
+                            className=" border border-2 border-magentacorner mr-4 text-black"
+                            name="minimumPrice"
+                            
+                            onChange={(value) =>ChangeMaximun(value)}
+
+                        />
+                    </div>
+                    
                 </div>
                 <div>
                     {displayProducts()}
