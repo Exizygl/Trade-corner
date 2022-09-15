@@ -23,6 +23,7 @@ const ProductList = () => {
     const [page, setPage] = useState(1);
     const [numberPage, setNumberPage] = useState(0);
     const params = new URLSearchParams(location.search)
+
     const [superCategoryList, SetsuperCategoryList] = useState([])
     const [superCategory, setSuperCategory] = useState('')
     const [category, setCategory] = useState('')
@@ -34,7 +35,9 @@ const ProductList = () => {
     const [order, setOrder] = useState("new")
     const [minimunPrice, setMinimunPrice] = useState()
     const [maximunPrice, setMaximunPrice] = useState()
-  
+    const [tagList, setTagList] = useState([params])
+    const [tagEntry, setTagEntry] = useState("")
+
 
 
 
@@ -57,13 +60,15 @@ const ProductList = () => {
             })
 
         var searchEntry = []
-        searchEntry["search"] = params.get("search")
+        searchEntry["search"] = tagList
+        console.log(searchEntry["search"])
+        console.log(params)
         searchEntry["page"] = page
         searchEntry["superCategory"] = superCategory
         searchEntry["category"] = category
         searchEntry["order"] = order
         searchEntry["minimun"] = minimunPrice
-        searchEntry["maximun"] = maximunPrice 
+        searchEntry["maximun"] = maximunPrice
         console.log(searchEntry["superCategory"])
         if (page < 1 || page > numberPage) setPage(1)
 
@@ -92,6 +97,7 @@ const ProductList = () => {
                             if (res.status === 200) {
 
                                 setNumberPage(res.data.message.number)
+                                console.log(res.data.message.number)
 
                             }
                         }
@@ -100,7 +106,7 @@ const ProductList = () => {
             }
         );
 
-    }, [page, superCategory, category, order, minimunPrice, maximunPrice]);
+    }, [page, superCategory, category, order, minimunPrice, maximunPrice, tagList]);
 
 
     const displayProducts = () => {
@@ -115,6 +121,22 @@ const ProductList = () => {
                     image={item.imageProductUrl[0]}
 
                 />
+            );
+        });
+
+        return (
+            <div>
+
+                <div className="flex flex-wrap">{list}</div>
+            </div>
+        )
+
+
+    }
+    const displayTags = () => {
+        const list = tagList.map(item => {
+            return (
+                <div>{item}</div>
             );
         });
 
@@ -200,6 +222,13 @@ const ProductList = () => {
         setPage(1);
         setMaximunPrice(value.target.value)
     };
+    const AddTag = (e) => {
+        if (tagEntry != "" && e.key === 'Enter') {
+            setPage(1);
+            setTagList(current => [...current, tagEntry])
+            setTagEntry("")
+        }
+    };
 
 
     return (
@@ -244,22 +273,22 @@ const ProductList = () => {
 
             <div className='mt-20 flex ml-14'>
                 <div className='w-[18.75rem] h-full bg-[grey]'>
-                    
+
                     <label for="order">Trier par:</label>
 
-                    <select onChange={(value) => { ChangeOrder(value)}} name="order" id="order">
+                    <select onChange={(value) => { ChangeOrder(value) }} name="order" id="order">
                         <option value="new">Les plus récents</option>
                         <option value="old">Les plus anciants</option>
                         <option value="cheap">Les moins chères</option>
                         <option value="expensive">Les plus chères</option>
                     </select>
                     <div>
-                    <input
+                        <input
                             type="text"
                             className=" border border-2 border-magentacorner mr-4 text-black"
                             name="minimumPrice"
-                            
-                            onChange={(value) =>ChangeMinimun(value)}
+
+                            onChange={(value) => ChangeMinimun(value)}
 
                         />
                         € a
@@ -267,12 +296,24 @@ const ProductList = () => {
                             type="text"
                             className=" border border-2 border-magentacorner mr-4 text-black"
                             name="minimumPrice"
-                            
-                            onChange={(value) =>ChangeMaximun(value)}
+
+                            onChange={(value) => ChangeMaximun(value)}
 
                         />
                     </div>
-                    
+                    <div>
+                        <input
+                            type="text"
+                            className=" border border-2 border-magentacorner mr-4 text-black"
+                            name="tag"
+                            value={tagEntry}
+                            onChange={(value) => setTagEntry(value.target.value)}
+                            onKeyDown={AddTag}
+
+                        />
+                    </div>
+                    {displayTags()}
+
                 </div>
                 <div>
                     {displayProducts()}
