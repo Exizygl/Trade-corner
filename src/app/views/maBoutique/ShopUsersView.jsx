@@ -6,7 +6,7 @@ const ShopUsersView = () => {
     return (
         <div>
             <ShopUsers />
-            {/* <ProductsFromUser /> */}
+            <ProductsFromUser />
         </div>
     );
 };

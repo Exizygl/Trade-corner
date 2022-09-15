@@ -86,7 +86,6 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
  
    //récupérations des tags
 
-
    const renderPreviewTag = (source) => {
     return source.map((tag, index) => {
       return <div key={tag} className="relative mr-6 px-6 py-1 inline-block border border-solid border-2 border-magentacorner bg-white text-black text-sm">
@@ -94,6 +93,17 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
           <button type="button" className=" absolute -top-2 -right-2 h-5 w-5  rounded-full bg-redcorner text-white text-center" onClick={()=> deleteFile(index)}> X </button>
         </div>
     })}
+
+    const deleteTag = (e) => {//supprime le tag du tableau de tag
+        const newTagList = tagList.filter((tag,index) => index!== e);
+        setTagList(newTagList);
+        var tagString ="";
+        for (i=0;i<tagList.filter((tag,index) => index!== e).length; i++) {
+            tagString = tagString + ","+ tag
+        }
+        setFieldValue("tag", newTagList, true);
+      };
+
 
   const products = useSelector(state => state.store.products); //je pointe sur le tableau products dans le store
   const dispatch = useDispatch();
@@ -125,7 +135,6 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
     const newPreview = previewImages.filter((photo,index)=> index!==e);
     setPreviewImages(newPreview);
     setRefreshPreview(!refreshPreview);
-
   };
 
   const renderPreview = (source) => {
