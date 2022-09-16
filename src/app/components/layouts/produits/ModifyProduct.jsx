@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProduct, addProduct, getAllCategory } from '../../../api/backend/requestApi';
+import { getProduct, getAllCategory, modifyProduct } from '../../../api/backend/requestApi';
 
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,6 +17,7 @@ const ModifyProduct = () => {
     const [product, setProduct] = useState([]);
     const [category, setCategory] = useState([]);
     const [tagList, setTagList] = useState([]);
+    const [tagString, setTagString] = useState([]);
     const [seller, setSeller] = useState([]);
     const [date, setDate] = useState([]);
     const productDetail = product;
@@ -30,11 +31,18 @@ const ModifyProduct = () => {
           setCategory(res.data.message.product.categoryId)
           setSeller(res.data.message.product.sellerId)
           setDate(dateFormat(res.data.message.product.createdAt))
-        setTagList(res.data.message.product.tagIdList)
+          setTagList(res.data.message.product.tagIdList)
+          let tagString = '';
+          for (let i=0; i<res.data.message.product.tagIdList.length; i++) {
+            tagString = tagString.concat(res.data.message.product.tagIdList[i].tag + ", ");
+          }
+          setTagList(res.data.message.product.tagIdList)
+          setTagString(tagString)
         }
       }
     );
     getlistCategory();
+   
 
   }, []);
 
@@ -89,9 +97,9 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
 
    const renderPreviewTag = (source) => {
     return source.map((tag, index) => {
-      return <div key={tag} className="relative mr-6 px-6 py-1 inline-block border border-solid border-2 border-magentacorner bg-white text-black text-sm">
+      return <div key={tag._id} className="relative mr-6 px-6 py-1 inline-block border border-solid border-2 border-magentacorner bg-white text-black text-sm">
         {tag.tag}
-          <button type="button" className=" absolute -top-2 -right-2 h-5 w-5  rounded-full bg-redcorner text-white text-center" onClick={()=> deleteFile(index)}> X </button>
+          <button type="button" className=" absolute -top-2 -right-2 h-5 w-5  rounded-full bg-redcorner text-white text-center" onClick={()=> deleteTag(index)}> X </button>
         </div>
     })}
 
@@ -103,7 +111,7 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
   const initialValues = {
         title: product.title,
         description: product.description,
-        category: '',
+        category: category.label,
         tags: '',
         price: product.price,
         quantity: product.quantity,
@@ -113,7 +121,7 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
   const { handleSubmit, values, touched, isValid, handleChange, handleBlur, setFieldValue, errors } =
   useFormik({
     initialValues,
-    validationSchema : validationAddProduct,
+    // validationSchema : validationAddProduct,
     onSubmit,
     enableReinitialize: true, //pour permettre à formik de recharger les initialValues aprés le useEffect
   });
@@ -126,6 +134,17 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
     setPreviewImages(newPreview);
     setRefreshPreview(!refreshPreview);
 
+  };
+
+  const deleteTag = (e) => {//supprime le tag du tableau tagList et update tagString
+    const newTags = tagList.filter((tag,index) => index!== e);
+    setTagList(newTags);
+    let newTagString = '';
+    for (let i=0; i<newTags.length; i++) {
+      newTagString = newTagString.concat(newTags[i].tag + ", ");
+      console.log(newTagString);
+    }
+    setTagString(newTagString)
   };
 
   const renderPreview = (source) => {
@@ -167,11 +186,14 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
         formData.append('title', formValues.title);
         formData.append('description', formValues.description);
         formData.append('category', formValues.category);
-        formData.append('tags', formValues.tags);
+        formData.append('tags', tagString.concat(formValues.tags));
         formData.append('price', formValues.price*100);
         formData.append('quantity', formValues.quantity);
+
+       console.log(formData.tags);
+       console.log(category.label);
         
-        addProduct(formData)
+        modifyProduct(formData)
         .then ((res)=> {
           if(res.status === 200)
            {          
@@ -367,7 +389,7 @@ const msgModal = "Un administrateur va lire et valider votre annonce rapidement"
             </div>
             <div className="basis-5/6 mb-6 flex flex-wrap justify-between">
                 <button type="submit" className= " btn-primary w-[250px] ml-3">Modifier</button>
-                <button type="button" onCLick={() => alert("supprimer")} className= " btn-red w-[250px] ml-3">Supprimer</button>
+                <button type="button" onClick={() => alert("supprimer")} className= " btn-red w-[250px] ml-3">Supprimer</button>
                 <Link to={URL_SELLER}><button className="btn-red w-[250px] ml-3 lg-ml-0">Annuler</button></Link>
             </div>
             </div>

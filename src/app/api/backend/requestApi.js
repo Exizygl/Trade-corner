@@ -71,12 +71,15 @@ export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
 
+export const modifyProduct = (values) => {
+    return apiBackEnd.put('product/modify', values);
+};
+
 export const getAllProduct = () => {
     return apiBackEnd.get('product');
 };
 
 export const getNewProduct = () => {
-    
     return apiBackEnd.get('product/new');
 };
 
