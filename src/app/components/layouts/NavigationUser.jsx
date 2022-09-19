@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { URL_BECOMESELLER } from '../../shared/constants/urls/urlConstants';
 
 export default function NavigationUser() {
   return (
@@ -9,6 +10,9 @@ export default function NavigationUser() {
         </Link>
         <Link to='' className="py-2 hover:bg-magentacorner w-full text-left p-5">
         Commandes
+        </Link>
+        <Link to={ URL_BECOMESELLER }className="py-2 hover:bg-magentacorner w-full text-left p-5">
+        Devenir vendeur
         </Link>
     </nav>
   )
