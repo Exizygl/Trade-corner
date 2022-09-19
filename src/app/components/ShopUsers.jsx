@@ -1,14 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-<<<<<<< HEAD
+
 import { useEffect } from 'react';
 import { userInfo } from '../api/backend/requestApi';
 import ProductsFromUser from './ProductsFromUser';
-=======
- import { useEffect } from 'react';
- import { userInfo } from '../api/backend/requestApi';
->>>>>>> 0de64b78bf659082cd5b6b207b629577621b645e
 
 const ShopUsers = () => {
     // const [shop, setShop] = useState([]);
@@ -17,11 +13,7 @@ const ShopUsers = () => {
 
     const { id } = useParams();
 
-<<<<<<< HEAD
     useEffect(() => {
-=======
-     useEffect(() => {
->>>>>>> 0de64b78bf659082cd5b6b207b629577621b645e
         userInfo(id).then(function (res) {
             if (res.status === 200) {
                 //setShop(res.data.message.shop);
