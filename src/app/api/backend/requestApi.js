@@ -1,5 +1,7 @@
 import apiBackEnd from './api.Backend';
 
+//REQUETES UTILISATEURS
+
 export const register = (values) => {
     return apiBackEnd.post('user/register', values);
 };
@@ -32,11 +34,20 @@ export const userDelete = (values) => {
     return apiBackEnd.post('user/delete', values);
 };
 
-export const userDeleteInfo = (values) => {
-    return apiBackEnd.post('deleteUser/create', values);
+export const forgottenPassword = (values) => {
+    return apiBackEnd.post('user/forgotten-password', values);
 };
 
-// requete d'admin uniquement
+export const passwordChange = (values) => {
+    return apiBackEnd.post('user/password-change', values);
+};
+
+// export const userDeleteInfo = (values) => {
+//     return apiBackEnd.post('deleteUser/create', values);
+// };
+
+// REQUETE D'ADMIN
+
 export const getAllUser = () => {
     return apiBackEnd.get('user');
 };
@@ -57,18 +68,16 @@ export function uploadUserImageById(values) {
     return apiBackEnd.post('admin/upload-image', values);
 }
 
-export const forgottenPassword = (values) => {
-    return apiBackEnd.post('user/forgotten-password', values);
-};
 
-export const passwordChange = (values) => {
-    return apiBackEnd.post('user/password-change', values);
-};
 
-//requete produit
+//REQUETE PRODUIT
 
 export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
+};
+
+export const modifyProduct = (values) => {
+    return apiBackEnd.put('product/modify', values);
 };
 
 export const getAllProduct = () => {
@@ -89,7 +98,7 @@ export const searchCount = (search) => {
     return apiBackEnd.get('product/searchCount/' + search["search"] + "/" + search["superCategory"] + "/" + search["category"]);
 };
 
-//requete categorie & SuperCategory
+//REQUETE CATEGORIES
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
@@ -103,4 +112,7 @@ export const getbySuperCategory = (label) => {
     return apiBackEnd.get('super-category/' + label);
 }
 
+
+
+//REQUETE DEMANDES
 
