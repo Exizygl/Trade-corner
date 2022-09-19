@@ -76,7 +76,6 @@ export const getAllProduct = () => {
 };
 
 export const getNewProduct = () => {
-    
     return apiBackEnd.get('product/new');
 };
 
@@ -84,18 +83,32 @@ export const getProduct = (id) => {
     return apiBackEnd.get('product/' + id);
 };
 export const search = (search) => {
-    console.log(search)
-    return apiBackEnd.get('product/search/' + search);
+    return apiBackEnd.get('product/search/' + search["search"] + "/" + search["page"] + "/" + search["superCategory"] + "/" + search["category"]);
+};
+export const searchCount = (search) => {
+    return apiBackEnd.get('product/searchCount/' + search["search"] + "/" + search["superCategory"] + "/" + search["category"]);
 };
 
+<<<<<<< HEAD
 export const getProductsFrom = (id) => {
     return apiBackEnd.get('product/user/' + id);
 };
 
 //requete categorie
+=======
+//requete categorie & SuperCategory
+>>>>>>> 0de64b78bf659082cd5b6b207b629577621b645e
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
+}
+
+export const getAllSuperCategory = () => {
+    return apiBackEnd.get('super-category');
+}
+
+export const getbySuperCategory = (label) => {
+    return apiBackEnd.get('super-category/' + label);
 }
 
 

@@ -19,5 +19,11 @@
 .anim-delay-600 {
     animation-delay: 0.6s;
 }
-
-
+.line-white {
+    border-top: 1px solid white;
+    width: 1400px;
+    margin-left: 50px;
+}
+.line-height {
+    line-height: 60px;
+}

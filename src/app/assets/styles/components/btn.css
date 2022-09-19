@@ -9,6 +9,11 @@
 
 }
 
+.btn-page-primary {
+    @apply bg-gradient-to-b from-purplecorner to-magentacorner h-[35px]  mx-[6px] p-[13px] rounded-full text-white inline-flex items-center justify-center;
+
+}
+
 .btn-red{
     @apply bg-gradient-to-b from-redcorner to-pinkcorner h-[50px] px-5 mb-5 text-white !uppercase hover:text-white active:ring-red-500 ;
 }
