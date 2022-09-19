@@ -1,5 +1,7 @@
 import apiBackEnd from './api.Backend';
 
+//REQUETES UTILISATEURS
+
 export const register = (values) => {
     return apiBackEnd.post('user/register', values);
 };
@@ -32,11 +34,20 @@ export const userDelete = (values) => {
     return apiBackEnd.post('user/delete', values);
 };
 
-export const userDeleteInfo = (values) => {
-    return apiBackEnd.post('deleteUser/create', values);
+export const forgottenPassword = (values) => {
+    return apiBackEnd.post('user/forgotten-password', values);
 };
 
-// requete d'admin uniquement
+export const passwordChange = (values) => {
+    return apiBackEnd.post('user/password-change', values);
+};
+
+// export const userDeleteInfo = (values) => {
+//     return apiBackEnd.post('deleteUser/create', values);
+// };
+
+// REQUETE D'ADMIN
+
 export const getAllUser = () => {
     return apiBackEnd.get('user');
 };
@@ -57,15 +68,9 @@ export function uploadUserImageById(values) {
     return apiBackEnd.post('admin/upload-image', values);
 }
 
-export const forgottenPassword = (values) => {
-    return apiBackEnd.post('user/forgotten-password', values);
-};
 
-export const passwordChange = (values) => {
-    return apiBackEnd.post('user/password-change', values);
-};
 
-//requete produit
+//REQUETE PRODUIT
 
 export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
@@ -91,10 +96,11 @@ export const search = (search) => {
     return apiBackEnd.get('product/search/' + search);
 };
 
-//requete categorie
+//REQUETE CATEGORIES
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
 }
 
+//REQUETE DEMANDES
 
