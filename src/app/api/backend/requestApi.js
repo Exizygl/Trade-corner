@@ -88,6 +88,10 @@ export const search = (search) => {
     return apiBackEnd.get('product/search/' + search);
 };
 
+export const getProductsFrom = (id) => {
+    return apiBackEnd.get('product/user/' + id);
+};
+
 //requete categorie
 
 export const getAllCategory = () => {
