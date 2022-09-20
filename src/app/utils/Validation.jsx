@@ -162,6 +162,33 @@ const validationModifyProduct = Yup.object().shape(
 );
 
 
+const validationBecomeSeller = Yup.object().shape(
+    {
+        idFile : Yup.mixed()
+            .required("Une copie de votre pièce d'identité est requise")
+            .test('FileTypes','Le document doit être en jpg, jpeg, png ou pdf', function (value) {
+                    if (!value) return false;
+                    const SUPPORTED_FORMATS = ['file/jpg', 'file/jpeg', 'file/png', 'file/pdf'];
+                    const validFormats = [];
+                    for(let i=0; i<value.length; i++){
+                        validFormats.push(SUPPORTED_FORMATS.includes(value[i].type));
+                    }
 
-export {validationAddProduct, validationRegister, validationModifyProduct}
+                    return validFormats.every((value) => value === true);
+                }
+            )
+            .test('PhotoSize', 'les photos doivent faire 1Mo maximum chacune', function(value){
+                const validSize = [];
+                for(let i=0;i<value.length; i++){
+                    if (value[i].size <= 1000000)//1mo
+                        validSize.push(true);
+                    else validSize.push(false);
+                }
+                return validSize.every((value) => value === true);
+            })
+        ,
+    }
+);
+
+export {validationAddProduct, validationRegister, validationModifyProduct, validationBecomeSeller}
 

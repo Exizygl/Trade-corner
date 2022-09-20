@@ -1,11 +1,12 @@
 import React from 'react';
-import Home from '../components/layouts/Home';
 
+import Home from '../components/layouts/Home';
 
 const HomeView = () => {
     return (
         <div>
             <Home />
+          
         </div>
     );
 };

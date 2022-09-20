@@ -7,9 +7,9 @@ const Search = () => {
 
     const [searchEntry, setSearchEntry] = useState("");
     const history = useHistory();
-    
+    const params = new URLSearchParams(location.search)
     const initialValues = {
-        search: '',
+        search: params.get("search"),
     };
 
     const formik = useFormik({
