@@ -6,7 +6,7 @@ import { getProduct, getAllCategory, modifyProduct } from '../../../api/backend/
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, FormikConsumer, useFormik } from 'formik';
-import { validationAddProduct } from '../../../utils/Validation';
+import { validationModifyProduct } from '../../../utils/Validation';
 import { URL_SELLER } from '../../../shared/constants/urls/urlConstants';
 import Modal from '../modal/Modal';
 
@@ -19,8 +19,9 @@ const ModifyProduct = () => {
     const [category, setCategory] = useState([]);
     const [tagList, setTagList] = useState([]);
     const [tagString, setTagString] = useState([]);
+    const [totalPhotos, setTotalPhotos]= useState([]);
     const { id } = useParams();
-  
+   
     useEffect(() => {
     getProduct(id).then(
       function (res) {
@@ -33,6 +34,7 @@ const ModifyProduct = () => {
             tagString = tagString.concat(res.data.message.product.tagIdList[i].tag + ", ");
           }
           setTagString(tagString)
+          setTotalPhotos(res.data.message.product.imageProductUrl.length)
           setLoad(true)
         }
       }
@@ -122,15 +124,16 @@ const msgModal = "Un administrateur va lire et valider vos modifications rapidem
         description: product.description,
         category: category.label,
         tags: '',
-        price: product.price,
+        price: product.price/100,
         quantity: product.quantity,
-        photos: product.imageProductUrl,
+        photos: [],
+        photosNumber:totalPhotos,
   };
 
   const { handleSubmit, values, touched, isValid, handleChange, handleBlur, setFieldValue, errors } =
   useFormik({
     initialValues,
-    // validationSchema : validationModifyProduct,
+    validationSchema : validationModifyProduct,
     onSubmit,
     enableReinitialize: true, //pour permettre à formik de recharger les initialValues aprés le useEffect
   });
@@ -139,6 +142,8 @@ const msgModal = "Un administrateur va lire et valider vos modifications rapidem
     const newFiles = imagesFiles.filter((photo,index) => index!== e);
     setImagesFiles(newFiles);
     setFieldValue("photos", newFiles, true);
+    const photoNumber = newFiles.length + product.imageProductUrl.length;
+    setFieldValue("photosNumber", photoNumber);
     const newPreview = previewImages.filter((photo,index)=> index!==e);
     setPreviewImages(newPreview);
     setRefreshPreview(!refreshPreview);
@@ -146,7 +151,9 @@ const msgModal = "Un administrateur va lire et valider vos modifications rapidem
 
 const deleteImageUrl = (e) => {//supprimer l'url de ImageProductUrl et supprime la preview
   const newImageProductUrl = product.imageProductUrl.filter((photo,index) => index!==e);
-  console.log(newImageProductUrl);
+  setProduct({...product, imageProductUrl: newImageProductUrl});
+  const photoNumber = imagesFiles.length + newImageProductUrl.length;
+    setFieldValue("photosNumber", photoNumber);
 }
 
   const deleteTag = (e) => {//supprime le tag du tableau tagList et update tagString
@@ -179,6 +186,9 @@ const deleteImageUrl = (e) => {//supprimer l'url de ImageProductUrl et supprime 
       newTruc.push(e.target.files[j]);
     }
   setFieldValue("photos",values.photos.concat(newTruc),true);
+
+  const photosNumber = imagesFiles.length+newFiles.length+product.imageProductUrl.length;
+  setFieldValue("photosNumber", photosNumber);
   }
 
   function onSubmit(formValues) {
@@ -187,26 +197,28 @@ const deleteImageUrl = (e) => {//supprimer l'url de ImageProductUrl et supprime 
         for (let i=0; i <formValues.photos.length; i++){
             formData.append('photos', formValues.photos[i]); //on envoie chaque file avec la key "photos"
         };
+       
         formData.append('title', formValues.title);
         formData.append('description', formValues.description);
         formData.append('category', formValues.category);
         formData.append('tags', tagString.concat(formValues.tags));
         formData.append('price', formValues.price*100);
         formData.append('quantity', formValues.quantity);
-
-       console.log(formData.tags);
-       console.log(category.label);
-        
+        formData.append('imageProductUrl', product.imageProductUrl);
+     
         modifyProduct(formData)
         .then ((res)=> {
           if(res.status === 200)
            {          
-          setShowModal(true);
+          // setShowModal(true);
+          console.log("envoie au back")
           }
           else {alert("error")}
         })
   }
 
+  // AJOUTER UNE CONDITION POUR QUE SEULS LES UTILISATEURS VOULU VOIENT LA PAGE
+  // {return <div><h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>Vous n'avez pas les autorisations pour accéder à cette page</h1></div>}
 
   if(!load){return <div><h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>Téléchargement</h1></div>}
    return (   
@@ -257,6 +269,11 @@ const deleteImageUrl = (e) => {//supprimer l'url de ImageProductUrl et supprime 
                 <div className="text-xs p-1"> Importez jusqu'à 5 photos maximum</div>
                 {touched.photos && errors.photos ? (
                 <small>{errors.photos}</small>
+                    ) : (
+                    ''
+                    )}
+                  {touched.photos && errors.photosNumber ? (
+                <small>{errors.photosNumber}</small>
                     ) : (
                     ''
                     )}
