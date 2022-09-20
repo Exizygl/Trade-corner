@@ -92,21 +92,10 @@ const ProductList = () => {
             function (res) {
 
                 if (res.status === 200) {
-
-                    setProducts(res.data.message.productList)
-
-                    searchCount(searchEntry).then(
-
-                        function (res) {
-
-                            if (res.status === 200) {
-
-                                setNumberPage(res.data.message.number)
+                    console.log(res.data)
+                    setProducts(res.data.list.list)
+                    setNumberPage(res.data.number.number)
                                 
-
-                            }
-                        }
-                    );
                 }
             }
         );
