@@ -35,8 +35,15 @@ const ProductList = () => {
     const [order, setOrder] = useState("new")
     const [minimunPrice, setMinimunPrice] = useState()
     const [maximunPrice, setMaximunPrice] = useState()
-    const [tagList, setTagList] = useState([params])
+    var initialTag
+    if(params.get("search") == "" || params.get("search") == null){
+        initialTag = []
+    }else{
+        initialTag = [params.get("search")]
+    }
+    const [tagList, setTagList] = useState(initialTag)
     const [tagEntry, setTagEntry] = useState("")
+    const [tagReload, setTagReload] = useState(0)
 
 
 
@@ -51,7 +58,7 @@ const ProductList = () => {
         getAllSuperCategory().then(
 
             function (res) {
-                console.log(res.data.message.superCategoryList)
+                
                 if (res.status === 200) {
                     SetsuperCategoryList(res.data.message.superCategoryList);
                     setLoading(1)
@@ -60,16 +67,14 @@ const ProductList = () => {
             })
 
         var searchEntry = []
-        searchEntry["search"] = tagList
-        console.log(searchEntry["search"])
-        console.log(params)
+        searchEntry["search"] = tagList.toString()
         searchEntry["page"] = page
         searchEntry["superCategory"] = superCategory
         searchEntry["category"] = category
         searchEntry["order"] = order
         searchEntry["minimun"] = minimunPrice
         searchEntry["maximun"] = maximunPrice
-        console.log(searchEntry["superCategory"])
+        
         if (page < 1 || page > numberPage) setPage(1)
 
 
@@ -97,7 +102,7 @@ const ProductList = () => {
                             if (res.status === 200) {
 
                                 setNumberPage(res.data.message.number)
-                                console.log(res.data.message.number)
+                                
 
                             }
                         }
@@ -106,7 +111,7 @@ const ProductList = () => {
             }
         );
 
-    }, [page, superCategory, category, order, minimunPrice, maximunPrice, tagList]);
+    }, [page, superCategory, category, order, minimunPrice, maximunPrice, tagList, tagReload]);
 
 
     const displayProducts = () => {
@@ -134,17 +139,26 @@ const ProductList = () => {
 
     }
     const displayTags = () => {
+        const selectTag = (e) => {
+    
+           removeTag(e)
+            
+        }
         const list = tagList.map(item => {
+           
+            if(item != null && item != ""){
+                
             return (
-                <div>{item}</div>
+                <div className='border border-2 border-magentacorner bg-white mr-[25px] py-[5px] px-[10px] text-black' onClick={(value) => selectTag(value.target.textContent)}>{item}</div>
             );
+            }
         });
 
         return (
-            <div>
-
-                <div className="flex flex-wrap">{list}</div>
-            </div>
+            
+            
+                <div className="flex flex-wrap mt-[50px] ml-[29px]">{list}</div>
+            
         )
 
 
@@ -154,6 +168,7 @@ const ProductList = () => {
 
         return (
             <PaginationList
+                key={page}
                 page={page}
                 max={numberPage}
                 changePage={changePage}
@@ -176,17 +191,13 @@ const ProductList = () => {
                 return (
                     <Dropdown
                         key={item._id}
-
                         label={item.label}
-
                         Category={ChangeCategory}
-
-
                     />
                 );
             })
             return (
-                <ul>
+                <ul className='absolute z-50 bg-black w-[100px]'>
                     {list}
                 </ul>
             );
@@ -225,11 +236,31 @@ const ProductList = () => {
     const AddTag = (e) => {
         if (tagEntry != "" && e.key === 'Enter') {
             setPage(1);
+
             setTagList(current => [...current, tagEntry])
+            console.log(tagList)
             setTagEntry("")
         }
+    
     };
+    const removeTag = (e) => {
+        var reloadNumber = tagReload
+        setPage(1);
+        console.log("value: " + e)
+        console.log("array: " + tagList)
+        var list = tagList
+        console.log("arrayCopy: " + list)
+        var index = list.indexOf(e)
+        console.log("index: " + index)
+        tagList.splice(index, 1)
+        console.log(list)
 
+        setTagList(list)
+        setTagReload(reloadNumber + 1)
+
+        console.log(tagList)
+        
+    }
 
     return (
 
@@ -272,39 +303,48 @@ const ProductList = () => {
             </div>
 
             <div className='mt-20 flex ml-14'>
-                <div className='w-[18.75rem] h-full bg-[grey]'>
+                <div className='w-[18.75rem] h-full bg-black'>
 
-                    <label for="order">Trier par:</label>
+                    <div className='mt-[24px] ml-[29px]'>Trier par:</div>
 
-                    <select onChange={(value) => { ChangeOrder(value) }} name="order" id="order">
+                    <select className='mt-[24px] ml-[29px] text-black border border-2 border-magentacorner' onChange={(value) => { ChangeOrder(value) }}>
                         <option value="new">Les plus récents</option>
-                        <option value="old">Les plus anciants</option>
-                        <option value="cheap">Les moins chères</option>
-                        <option value="expensive">Les plus chères</option>
+                        <option value="old">Les plus anciens</option>
+                        <option value="cheap">Les moins chers</option>
+                        <option value="expensive">Les plus chers</option>
                     </select>
-                    <div>
+
+                    <div className='mt-[50px] ml-[29px]'>Filtre:</div>
+                    
+                    <div className='mt-[20px] ml-[29px]'>
+                        de
                         <input
                             type="text"
-                            className=" border border-2 border-magentacorner mr-4 text-black"
+                            className=" border border-2 border-magentacorner mr-4 text-black w-[40px] ml-[10px] mr-[5px]"
                             name="minimumPrice"
 
                             onChange={(value) => ChangeMinimun(value)}
 
                         />
-                        € a
+                        € à
                         <input
                             type="text"
-                            className=" border border-2 border-magentacorner mr-4 text-black"
+                            className=" border border-2 border-magentacorner mr-4 text-black w-[40px] ml-[10px] mr-[5px]"
                             name="minimumPrice"
 
                             onChange={(value) => ChangeMaximun(value)}
 
                         />
+                        €
                     </div>
+                    <div className='mt-[50px] ml-[29px]'>Tags:</div>
+
+                    {displayTags()}
+
                     <div>
                         <input
                             type="text"
-                            className=" border border-2 border-magentacorner mr-4 text-black"
+                            className=" border border-2 border-magentacorner mr-4 text-black ml-[29px] mt-[50px] mb-[195px]"
                             name="tag"
                             value={tagEntry}
                             onChange={(value) => setTagEntry(value.target.value)}
@@ -312,7 +352,8 @@ const ProductList = () => {
 
                         />
                     </div>
-                    {displayTags()}
+                   
+                    
 
                 </div>
                 <div>
