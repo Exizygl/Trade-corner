@@ -8,12 +8,12 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 
 function Footer() {
     return (
-        <footer>
-            <div className="bg-[black] mt-[60px] text-white h-400 w-auto flex justify-around leading-10">
-                <div className="m-10 h-[300px] w-[300px]">
-                    <img src={logo} alt="logo"></img>
+        <footer className="bg-black mt-[60px]">
+            <div className="text-white h-400 w-auto flex flex-wrap flex-col md:flex-row justify-around leading-10">
+                <div className="m-10 md:h-[300px] max-w-[200px] w-1/4 flex items-center">
+                    <img src={logo} alt="logo" className="min-h-[150px] min-w-[150px]"></img>
                 </div>
-                <div className="m-10 text-[20px] line-height">
+                <div className="m-10 text-[20px] leading-[60px]">
                     <h4 className="font-bold">A PROPOS</h4>
                     <ul>
                         <li>
@@ -50,7 +50,7 @@ function Footer() {
                         </li>
                     </ul>
                 </div>
-                <div className="m-10 text-[20px] line-height">
+                <div className="m-10 text-[20px] leading-[60px]">
                     <h4 className="font-bold">INFORMATIONS</h4>
                     <ul>
                         <li>
@@ -87,7 +87,7 @@ function Footer() {
                         </li>
                     </ul>
                 </div>
-                <div className="m-10 text-[20px] line-height">
+                <div className="m-10 text-[20px] leading-[60px]">
                     <h4 className="font-bold">DES QUESTIONS ?</h4>
                     <ul>
                         <li>
@@ -117,8 +117,10 @@ function Footer() {
                     </ul>
                 </div>
             </div>
+
             <div className="line-white"></div>
-            <div className="bg-[black] text-white overline flex justify-center">
+
+            <div className="text-white overline flex justify-center">
                 <a href="#" className="cursor-pointer m-10 ">
                     <TwitterIcon className="" />
                 </a>
@@ -134,7 +136,7 @@ function Footer() {
                 </a>
             </div>
             <div>
-                <span className="bg-[black] text-white mr-20 flex justify-center pb-10  w-full">
+                <span className="text-white mr-20 flex justify-center pb-10  w-full">
                     <CopyrightIcon className="" />
                     2022 - Tous droits réservés TRADE CORNER
                 </span>
