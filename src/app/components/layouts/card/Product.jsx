@@ -1,17 +1,23 @@
 import React from 'react';
+
+
 import { Link } from 'react-router-dom';
 import { URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
+
 import './CardUser.css';
 
 
 
-const Product = ({id, title, price, image}) => {
 
+
+
+const Product = ({id, title, price, image, addProduct}) => {
+    
     const truePrice = price / 100 ;
     return (
       
         <div className=" cardUser w-[18.75rem] h-[26.875rem] ml-[2.8125rem] mb-12">
-          <Link to={URL_PRODUCT + id}>
+          {/* <Link to={URL_PRODUCT + id}> */}
           <div className="h-[17.625rem]">
             {image ?
               <img src={`http://localhost:8080/static/` + image} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto w-[18.75rem] h-[17.625rem]' alt="preview" width={200} height={200} />
@@ -24,10 +30,10 @@ const Product = ({id, title, price, image}) => {
             
             <div className='flex justify-between'>
             <p className='text-2xl ml-4 pt-4'> {truePrice}€</p>
-            <div className='h-[3.125rem] w-[3.125rem] bg-purplecorner rounded-[0.188rem] mr-4'></div>
+            <div onClick={() => {addProduct(id)}} className='h-[3.125rem] w-[3.125rem] bg-purplecorner rounded-[0.188rem] mr-4'><img src="/src/app/assets/images/cart.png" alt="" srcset="" /></div>
             </div>
           </div>
-          </Link>
+          {/* </Link> */}
         </div>
       )
     }

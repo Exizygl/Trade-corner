@@ -1,14 +1,28 @@
 
 import React, { useState , useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getNewProduct } from '../../api/backend/requestApi';
 import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
-
+import { addProduct } from '../../shared/redux-store/panierSlice';
 
 const Home = () => {
 
     const [products, setProducts] = useState([]);
+    const dispactch = useDispatch()
+
+    const addProductPanier = (e) => {
+        console.log("(O-O)")
+        
+            const product = {
+              id : e,
+              number : 1
+            }
+      
+            dispactch(addProduct(product))
+            
+        }
 
     useEffect(() => {
         getNewProduct().then(
@@ -25,7 +39,9 @@ const Home = () => {
 
 
     const displayProducts = () => {
+        
         const list = products.map(item => {
+            
             return (
                 <Product
                     key={item._id}
@@ -34,6 +50,7 @@ const Home = () => {
                     price={item.price}
                     category={item.category}
                     image={item.imageProductUrl[0]}
+                    addProduct={addProductPanier}
                 />
             );
         });
