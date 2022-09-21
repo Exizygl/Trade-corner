@@ -10,7 +10,7 @@
 
     /* TYPOGRAPHIE */
     h1 {
-        @apply text-6xl text-white;
+        @apply text-4xl text-white !uppercase mb-6;
     }
     h2 {
         @apply text-5xl text-white;
