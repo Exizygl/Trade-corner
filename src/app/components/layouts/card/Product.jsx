@@ -24,7 +24,7 @@ const Product = ({id, title, price, image}) => {
             
             <div className='flex justify-between'>
             <p className='text-2xl ml-4 pt-4'> {truePrice}€</p>
-            <div className='h-[3.125rem] w-[3.125rem] bg-purplecorner rounded-[0.188rem] mr-4'></div>
+            <div onClick={() => {addProduct(id)}} className='h-[3.125rem] w-[3.125rem] bg-purplecorner rounded-[0.188rem] mr-4'><img className='w-[24px] h-[28px]' src="/src/app/assets/images/cart.png" alt="" srcset="" /></div>
             </div>
           </div>
           </Link>
