@@ -3,6 +3,7 @@
     border border-2 border-magentacorner rounded-none
     placeholder-magentacorner text-darkgray bg-white
     focus:outline-none focus:ring-purplecorner focus:border-purplecorner focus:z-20 sm:text-sm
+    
 }
 
 .input-error {
@@ -26,5 +27,5 @@
 }
 
 .select-corner{
-    @apply bg-white border border-2 border-magentacorner text-darkgray text-sm  focus:ring-pinkcorner focus:border-purplecorner block w-full p-2.5
+    @apply bg-white border border-2 border-magentacorner text-magentacorner text-sm  focus:ring-pinkcorner focus:border-purplecorner block w-full p-2.5
 }

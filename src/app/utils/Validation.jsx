@@ -112,6 +112,55 @@ const validationRegister = Yup.object().shape({
         .max(11, 'Le numéro de téléphone doit comporter au maximum 11 numéros'),
 });
 
+const validationModifyProduct = Yup.object().shape(
+    {
+    title : Yup.string()
+        .required ('Il manque un titre à votre produit')
+        .min (4).max(30),
+
+    description : Yup.string()
+        .required('Il manque une description à votre produit')
+        .min(20).max(800),
+
+    category : Yup.string()
+        .required('Veuillez selectionner une catégorie'),
+
+    tags: Yup.string(),
+
+    price : Yup.number()
+        .required('Veuillez indiquer un prix pour votre produit')
+        .min(1).max(1000),
+
+
+    quantity: Yup.number()
+        .required('veuillez indiquer le nombre de produit en stock')
+        .min(1).max(40),
+        
+    photos : Yup.mixed()
+        .test('PhotoTypes','Les photos doivent etre en jpg, jpeg ou png', function (value) {
+            if (!value) return true;
+            const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+            const validFormats = [];
+            for(let i=0; i<value.length; i++){
+                validFormats.push(SUPPORTED_FORMATS.includes(value[i].type));//push true si le format est compris dans les SUPPORTED_FORMAT
+            }
+            return validFormats.every((value) => value === true);//renvoie true si toutes les valeurs de validFormats sont à true
+        })
+        .test('PhotoSize', 'les photos doivent faire 1Mo maximum chacune', function(value){
+            const validSize = [];
+            for(let i=0;i<value.length; i++){
+                if (value[i].size <= 1000000)//1mo
+                validSize.push(true);
+                else validSize.push(false);    
+            }
+            return validSize.every((value) => value === true);
+        }),
+    
+    photosNumber : Yup.number()
+        .min(1, "Une photo de produit est obligatoire").max(5, "Vous ne pouvez importer que 5 photos maximum"),
+    }
+);
+
 
 const validationBecomeSeller = Yup.object().shape(
     {
@@ -141,5 +190,5 @@ const validationBecomeSeller = Yup.object().shape(
     }
 );
 
-export {validationAddProduct, validationRegister, validationBecomeSeller}
+export {validationAddProduct, validationRegister, validationModifyProduct, validationBecomeSeller}
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
- import { useEffect } from 'react';
- import { userInfo } from '../api/backend/requestApi';
+import { useEffect } from 'react';
+import { userInfo } from '../api/backend/requestApi';
+import ProductsFromUser from './ProductsFromUser';
 
 const ShopUsers = () => {
     // const [shop, setShop] = useState([]);
@@ -11,7 +12,7 @@ const ShopUsers = () => {
 
     const { id } = useParams();
 
-     useEffect(() => {
+    useEffect(() => {
         userInfo(id).then(function (res) {
             if (res.status === 200) {
                 //setShop(res.data.message.shop);
@@ -25,6 +26,9 @@ const ShopUsers = () => {
             <h1 className="m-[50px] text-white">BOUTIQUE DE {seller}</h1>
 
             <div className="m-[106px] p-1 w-[200px] h-[200px] rounded-full ring-2 ring-gray-300 dark:ring-gray-500"></div>
+            <div className="ml-[500px] flex flex-wrap">
+                <ProductsFromUser />
+            </div>
             <div className="m-[50px] w-[297px] h-[506px] text-sm font-medium text-white bg-black">
                 <button
                     aria-current="true"

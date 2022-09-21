@@ -1,31 +1,24 @@
-
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getNewProduct } from '../../api/backend/requestApi';
 import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 
-
 const Home = () => {
-
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getNewProduct().then(
-            function (res) {
-                console.log("la")
-                if (res.status === 200) {
-                    console.log(res.data.message.productList)
-                    setProducts(res.data.message.productList)
-                }
+        getNewProduct().then(function (res) {
+            console.log('la');
+            if (res.status === 200) {
+                console.log(res.data.message.productList);
+                setProducts(res.data.message.productList);
             }
-        );
-
+        });
     }, []);
 
-
     const displayProducts = () => {
-        const list = products.map(item => {
+        const list = products.map((item) => {
             return (
                 <Product
                     key={item._id}
@@ -42,19 +35,18 @@ const Home = () => {
             <div>
                 <div className="flex">{list}</div>
             </div>
-        )
-    }
+        );
+    };
 
     return (
-
         <div>
-            <h1 className=''>LES NOUVEAUTÉS </h1>
+            <h1 className="">LES NOUVEAUTÉS </h1>
             <div className="text-center">
                 {displayProducts()}
                 <Link to={URL_PRODUCTLIST}>
-                    <button className='btn-primary w-[300px]'>Voir plus</button>
+                    <button className="btn-primary w-[300px]">Voir plus</button>
                 </Link>
-            </div>   
+            </div>
         </div>
     );
 };
