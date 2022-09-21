@@ -6,8 +6,6 @@ import { Link, useParams } from 'react-router-dom';
 import { getAllSuperCategory, search } from '../../../api/backend/requestApi';
 import Dropdown from '../../../shared/components/DropDown';
 
-
-import { } from '../../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../../shared/redux-store/authenticationSlice';
 import PaginationList from '../card/PaginationList';
 import Product from '../card/Product';
@@ -339,7 +337,6 @@ const ProductList = () => {
 
                         />
                     </div>
-                   
                     
 
                 </div>
