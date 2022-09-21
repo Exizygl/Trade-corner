@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getProduct, getProductsFrom } from '../api/backend/requestApi';
+import { getProduct, getProductsFrom } from '../../../api/backend/requestApi';
 import { useParams } from 'react-router-dom';
-import Product from './layouts/card/Product';
+import Product from '../card/Product';
 
 const ProductsFromUser = () => {
     const [products, setProduct] = useState([]);
@@ -32,16 +32,12 @@ const ProductsFromUser = () => {
         });
 
         return (
-            <div>
-                <div className="flex flex-wrap">{list}</div>
-            </div>
+                <div className="flex flex-wrap justify-around">{list}</div>   
         );
     };
 
     return (
-        <div>
-            <div className="text-center">{displayProducts()}</div>
-        </div>
+            displayProducts()  
     );
 };
 export default ProductsFromUser;

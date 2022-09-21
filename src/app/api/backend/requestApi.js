@@ -95,11 +95,21 @@ export const search = (search) => {
     return apiBackEnd.get('product/search/' + search["search"] + "/" + search["page"] + "/" + search["superCategory"] + "/" + search["category"] + "/" + search["order"] + "/" + search["minimun"] + "/" + search["maximun"]);
 };
 
+<<<<<<< HEAD
+//REQUETE CATEGORIES
+
+
+=======
+>>>>>>> 9d3eef3948875a60bbaca73501c4993976d27f51
 export const getProductsFrom = (id) => {
     return apiBackEnd.get('product/user/' + id);
 };
 
 //requete categorie
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9d3eef3948875a60bbaca73501c4993976d27f51
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
@@ -111,8 +121,16 @@ export const getAllSuperCategory = () => {
 
 export const getbySuperCategory = (label) => {
     return apiBackEnd.get('super-category/' + label);
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9d3eef3948875a60bbaca73501c4993976d27f51
 }
 
 
 //REQUETE DEMANDES
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9d3eef3948875a60bbaca73501c4993976d27f51

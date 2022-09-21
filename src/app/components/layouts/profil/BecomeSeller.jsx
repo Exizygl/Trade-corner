@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import Navigation from '../layouts/administration/Navigation';
 import { Link, useHistory } from 'react-router-dom';
-import { URL_BECOMESELLER } from '../../shared/constants/urls/urlConstants';
-import { validationBecomeSeller } from '../../utils/Validation';
+import { URL_BECOMESELLER } from '../../../shared/constants/urls/urlConstants';
+import { validationBecomeSeller } from '../../../utils/Validation';
 
 
 const BecomeSeller = () => {

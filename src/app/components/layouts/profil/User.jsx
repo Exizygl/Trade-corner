@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userInfo } from '../../api/backend/requestApi';
+import { userInfo } from '../../../api/backend/requestApi';
 
-import { URL_DELETE, URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
-import { updateUser } from '../../shared/redux-store/authenticationSlice';
+import { URL_DELETE, URL_MODIFYACCOUNT } from '../../../shared/constants/urls/urlConstants';
+import { updateUser } from '../../../shared/redux-store/authenticationSlice';
 import NavigationUser from './NavigationUser';
 
 

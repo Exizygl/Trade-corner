@@ -19,4 +19,9 @@
     .line{
         @apply h-[2px] bg-magentacorner my-5;
     }
+
+    .line-white {
+        @apply h-[2px] bg-white my-5 mx-auto;
+        
+    }
 }

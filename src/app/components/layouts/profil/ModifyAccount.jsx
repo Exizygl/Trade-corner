@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, Link } from 'react-router-dom';
 
-import { userInfo, userInfoUpdate, uploadUserImage } from '../../api/backend/requestApi';
+import { userInfo, userInfoUpdate, uploadUserImage } from '../../../api/backend/requestApi';
 
-import PreviewUserImage from '../layouts/PreviewUserImage';
-import { signOut, updateUser } from '../../shared/redux-store/authenticationSlice';
-import { URL_LOGIN, URL_USER } from '../../shared/constants/urls/urlConstants';
-import { findImageExtension, validImageSize } from '../../shared/components/utils-components/FormData';
-import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
+import PreviewUserImage from './PreviewUserImage';
+import { signOut, updateUser } from '../../../shared/redux-store/authenticationSlice';
+import { URL_LOGIN, URL_USER } from '../../../shared/constants/urls/urlConstants';
+import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
+import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 

@@ -6,63 +6,43 @@ const CarouselImage = ({ imageList , changeImage, mainImage }) => {
     
     const precedent = () => {
         var prec = ""
-        console.log("toya")
         for(var i = 0; i < imageList.length; i++){
-          
             if(mainImage == imageList[i]){
-                console.log(i)
                 if(i == 0){
                     console.log(imageList[imageList.length - 1])
                     prec = imageList[imageList.length - 1]
                 }
-
                 if (i > 0)
                 prec = imageList[i - 1]
-
             }
-
-           
         }
-       
-            return (
-                <img src={fleche1} className="w-[40px] h-[35px] mt-[3.813rem]" onClick={() => {
-                    changeImage(prec)
-                }}/>
-            )
-        }
+        return (
+            <img src={fleche1} className="w-[40px] h-[35px] " onClick={() => {changeImage(prec)}}/>
+        )
+    }
     
-    const suivent = () => {
+    const suivant = () => {
         var suiv = ""
         for(var i = 0; i < imageList.length; i++){
             if(mainImage == imageList[i]){
-               
-
                 if(i == imageList.length - 1){
                     suiv = imageList[0]
                 }
-
                 if (i < imageList.length-1)
                 suiv = imageList[i + 1]
-
-            }
-
-            
+            }     
         }
-            return (
-                <img src={fleche2} className=" w-[40px] h-[35px] ml-[3.125rem] mt-[3.813rem]" onClick={() => {
-                    changeImage(suiv)
-                }}/> 
-            )
-        }
+        return (
+            <img src={fleche2} className=" w-[40px] h-[35px] " onClick={() => {changeImage(suiv)}}/> 
+        )
+    }
     
     const list = imageList.map(item => {
-
-
         return (
             <img src={`http://localhost:8080/static/` + item}
                 onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)}
-                className='ml-[3.125rem] mt-[2.813rem] w-[5.52rem] h-[5.46rem]'
-                alt="preview"
+                className='w-[100px] h-[100px] object-cover'
+                alt="Photo du produit"
                 onClick={() => {
                     changeImage(item)
                 }}
@@ -72,10 +52,10 @@ const CarouselImage = ({ imageList , changeImage, mainImage }) => {
 
     return (
 
-        <div className="flex">
+        <div className="flex justify-around items-center ">
             {precedent()}
             {list}
-            {suivent()}
+            {suivant()}
         </div>
     )
 

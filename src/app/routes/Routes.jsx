@@ -9,9 +9,11 @@ import RegisterView from '../views/RegisterView';
 import ConfirmRegisterView from '../views/ConfirmRegisterView';
 
 //import utilisateur
-import UserView from '../views/UserView';
-import ModifyAccountView from '../views/ModifyAccountView';
-import UserDeleteView from '../views/UserDeleteView';
+import UserView from '../views/profil/UserView';
+import ModifyAccountView from '../views/profil/ModifyAccountView';
+import UserDeleteView from '../views/profil/UserDeleteView';
+import BecomeSeller from '../views/profil/BecomeSellerView';
+
 import ForgottenPasswordView from '../views/forgottenPasswordView';
 import PasswordChangeView from '../views/PasswordChangeView';
 
@@ -31,14 +33,15 @@ import AddProductView from '../views/maBoutique/AddProductView';
 import CommandesView from '../views/maBoutique/CommandesView';
 import RetoursView from '../views/maBoutique/RetoursView';
 import HistoryView from '../views/maBoutique/HistoryView';
-import ShopUsersView from '../views/maBoutique/ShopUsersView';
+import ShopUsersView from '../views/products/ShopUsersView';
 
 
 //import produit
-import ProductDetailView from '../views/ProductDetailView';
-import ProductListView from '../views/ProductListView';
-import ModifyProductView from '../views/produits/ModifyProductView';
-import BecomeSeller from '../components/layouts/BecomeSeller';
+import ProductDetailView from '../views/products/ProductDetailView';
+import ProductListView from '../views/products/ProductListView';
+import ModifyProductView from '../views/products/ModifyProductView';
+
+
 
 
 /**
