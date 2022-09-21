@@ -24,10 +24,10 @@ const ShopUsers = () => {
     return (
         <div className="px-3 md:px-10 text-white">
             <h1>BOUTIQUE DE {seller}</h1>
-            <div id="contenuPrincipal" className="flex flex-col md:flex-row gap-10">
-                <div id="navigation basis-3/12">
+            <div id="contenuPrincipal" className="flex flex-col md:flex-row">
+                <div id="navigation" className="basis-3/12 md:max-w-[316px] mb-[25px] md:mb-0">
                     <div className=" mx-auto mb-[30px] w-[200px] h-[200px] rounded-full ring-2 ring-gray-300 dark:ring-gray-500"></div>
-                    <div className=" w-11/12 md:w-[297px] m-auto md:m-0 h-min md:h-[506px] text-sm font-medium text-white bg-black">
+                    <div className="w-full m-auto md:m-0 h-min md:h-[506px] text-sm font-medium text-white bg-black">
                         <button
                             aria-current="true"
                             type="button"

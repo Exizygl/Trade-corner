@@ -118,7 +118,7 @@ function Footer() {
                 </div>
             </div>
 
-            <div className="line-white"></div>
+            <div className="line-white w-10/12"></div>
 
             <div className="text-white overline flex justify-center">
                 <a href="#" className="cursor-pointer m-10 ">
