@@ -92,23 +92,57 @@ export const getProduct = (id) => {
     return apiBackEnd.get('product/' + id);
 };
 export const search = (search) => {
+<<<<<<< HEAD
     return apiBackEnd.get('product/search/' + search["search"] + "/" + search["page"] + "/" + search["superCategory"] + "/" + search["category"] + "/" + search["order"] + "/" + search["minimun"] + "/" + search["maximun"]);
 };
 
 //REQUETE CATEGORIES
+=======
+    return apiBackEnd.get(
+        'product/search/' +
+            search['search'] +
+            '/' +
+            search['page'] +
+            '/' +
+            search['superCategory'] +
+            '/' +
+            search['category'],
+    );
+};
+export const searchCount = (search) => {
+    return apiBackEnd.get(
+        'product/searchCount/' +
+            search['search'] +
+            '/' +
+            search['superCategory'] +
+            '/' +
+            search['category'],
+    );
+};
+
+export const getProductsFrom = (id) => {
+    return apiBackEnd.get('product/user/' + id);
+};
+
+//requete categorie
+>>>>>>> origin/ProductFromUser
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
-}
+};
 
 export const getAllSuperCategory = () => {
     return apiBackEnd.get('super-category');
-}
+};
 
 export const getbySuperCategory = (label) => {
     return apiBackEnd.get('super-category/' + label);
+<<<<<<< HEAD
 }
 
 
 //REQUETE DEMANDES
 
+=======
+};
+>>>>>>> origin/ProductFromUser
