@@ -1,6 +1,6 @@
 import React from 'react';
 
-import User from '../components/layouts/User';
+import User from '../../components/layouts/profil/User';
 
 const UserView = () => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { URL_BECOMESELLER } from '../../shared/constants/urls/urlConstants';
+import { URL_BECOMESELLER } from '../../../shared/constants/urls/urlConstants';
 
 export default function NavigationUser() {
   return (

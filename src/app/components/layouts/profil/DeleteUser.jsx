@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { userDelete } from '../../api/backend/requestApi';
+import { userDelete } from '../../../api/backend/requestApi';
 import { useHistory, Link } from 'react-router-dom';
-import { URL_HOME } from '../../shared/constants/urls/urlConstants';
+import { URL_HOME } from '../../../shared/constants/urls/urlConstants';
 
 
-import { signOut } from '../../shared/redux-store/authenticationSlice';
-import ErrorMessSmall from '../../shared/components/form-and-error-components/ErrorMessSmall';
+import { signOut } from '../../../shared/redux-store/authenticationSlice';
+import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
 
 
 

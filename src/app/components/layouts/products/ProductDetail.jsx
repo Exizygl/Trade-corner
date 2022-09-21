@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Carousel } from 'reactstrap';
-import { getProduct } from '../../api/backend/requestApi';
-import { URL_SHOP } from '../../shared/constants/urls/urlConstants'
+import { getProduct } from '../../../api/backend/requestApi';
+import { URL_SHOP } from '../../../shared/constants/urls/urlConstants'
 
-import CarouselImage from '../../shared/components/CarouselImage';
+import CarouselImage from '../../../shared/components/CarouselImage';
 import { Link, useHistory } from 'react-router-dom';
-import { URL_MODIFYPRODUCT} from '../../shared/constants/urls/urlConstants';
+import { URL_MODIFYPRODUCT} from '../../../shared/constants/urls/urlConstants';
 
 
 

@@ -3,17 +3,14 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Component } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Pagination } from 'reactstrap';
-import { getAllSuperCategory, search } from '../../api/backend/requestApi';
-import Dropdown from '../../shared/components/DropDown';
+import { getAllSuperCategory, search } from '../../../api/backend/requestApi';
+import Dropdown from '../../../shared/components/DropDown';
 
 
-import { } from '../../shared/constants/urls/urlConstants';
-import { updateUser } from '../../shared/redux-store/authenticationSlice';
-import PaginationList from './card/PaginationList';
-import Product from './card/Product';
-
-
+import { } from '../../../shared/constants/urls/urlConstants';
+import { updateUser } from '../../../shared/redux-store/authenticationSlice';
+import PaginationList from '../card/PaginationList';
+import Product from '../card/Product';
 
 
 

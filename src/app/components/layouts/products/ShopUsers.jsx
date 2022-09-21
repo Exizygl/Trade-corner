@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { userInfo } from '../api/backend/requestApi';
-import ProductsFromUser from './ProductsFromUser';
+import { userInfo } from '../../../api/backend/requestApi';
+import ProductsFromUser from '../products/ProductsFromUser';
 
 const ShopUsers = () => {
     // const [shop, setShop] = useState([]);

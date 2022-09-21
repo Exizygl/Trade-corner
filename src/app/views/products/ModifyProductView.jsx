@@ -1,5 +1,5 @@
 import React from 'react';
-import ModifyProduct from '../../components/layouts/produits/ModifyProduct';
+import ModifyProduct from '../../components/layouts/products/ModifyProduct';
 
 
 const ModifyProductView = () => {

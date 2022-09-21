@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductList from '../components/layouts/ProductList';
+import ProductList from '../../components/layouts/products/ProductList';
 
 
 const ProductListView = () => {

@@ -5,7 +5,7 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 
 import { userInfo, updateUserById, uploadUserImageById } from '../../../api/backend/requestApi';
 
-import PreviewUserImage from '../../layouts/PreviewUserImage';
+import PreviewUserImage from '../../layouts/profil/PreviewUserImage';
 import { URL_USER_BYID } from '../../../shared/constants/urls/urlConstants';
 import { findImageExtension, validImageSize } from '../../../shared/components/utils-components/FormData';
 import ErrorMessSmall from '../../../shared/components/form-and-error-components/ErrorMessSmall';
