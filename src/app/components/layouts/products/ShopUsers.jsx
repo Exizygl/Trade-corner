@@ -22,46 +22,54 @@ const ShopUsers = () => {
     }, []);
 
     return (
-        <div>
-            <h1 className="m-[50px] text-white">BOUTIQUE DE {seller}</h1>
+        <div className="px-3 md:px-10 text-white">
+            <h1>BOUTIQUE DE {seller}</h1>
+            <div id="contenuPrincipal" className="flex flex-col md:flex-row gap-10">
+                <div id="navigation basis-3/12">
+                    <div className=" mx-auto mb-[30px] w-[200px] h-[200px] rounded-full ring-2 ring-gray-300 dark:ring-gray-500"></div>
+                    <div className=" w-11/12 md:w-[297px] m-auto md:m-0 h-min md:h-[506px] text-sm font-medium text-white bg-black">
+                        <button
+                            aria-current="true"
+                            type="button"
+                            className="py-2 px-4 w-full font-medium text-left text-white  cursor-pointer "
+                        >
+                            Tous les articles:
+                        </button>
 
-            <div className="m-[106px] p-1 w-[200px] h-[200px] rounded-full ring-2 ring-gray-300 dark:ring-gray-500"></div>
-            <div className="ml-[500px] flex flex-wrap">
-                <ProductsFromUser />
-            </div>
-            <div className="m-[50px] w-[297px] h-[506px] text-sm font-medium text-white bg-black">
-                <button
-                    aria-current="true"
-                    type="button"
-                    className="py-2 px-4 w-full font-medium text-left text-white  cursor-pointer "
-                >
-                    Tous les articles:
-                </button>
-                <button
-                    type="button"
-                    className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF]"
-                >
-                    Jeux Video
-                </button>
-                <button
-                    type="button"
-                    className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF] "
-                >
-                    Goodies
-                </button>
-                <button
-                    type="button"
-                    className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF]"
-                >
-                    Comics/Manga
-                </button>
-                <button
-                    type="button"
-                    className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF]"
-                >
-                    DVD/Blue-ray
-                </button>
-            </div>
+                        <button
+                            type="button"
+                            className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF]"
+                        >
+                            Jeux Video
+                        </button>
+
+                        <button
+                            type="button"
+                            className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF] "
+                        >
+                            Goodies
+                        </button>
+
+                        <button
+                            type="button"
+                            className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF]"
+                        >
+                            Comics/Manga
+                        </button>
+
+                        <button
+                            type="button"
+                            className="py-2 px-4 w-full font-medium text-left cursor-pointer hover:bg-[#AD09FF]"
+                        >
+                            DVD/Blue-ray
+                        </button>
+                    </div>
+                </div>
+                <div id="products" className="w-11/12 md:w-full m-auto md:m-0 md:basis-9/12 ">
+                <ProductsFromUser /> 
+                </div>
+                
+            </div>         
         </div>
     );
 };

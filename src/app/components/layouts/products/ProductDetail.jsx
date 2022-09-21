@@ -35,8 +35,6 @@ const ProductDetail = () => {
           setDate(dateFormat(res.data.message.product.createdAt))
           setMainImage((res.data.message.product.imageProductUrl[0]))
           setLoading(1)
-
-
         }
       }
     );
@@ -44,13 +42,11 @@ const ProductDetail = () => {
   }, []);
 
   const dateFormat = (date) => {
-
     return (date.slice(8, -14) + "/" + date.slice(5, -17) + "/" + date.slice(0, -20));
   }
 
 
   const changeImage = (number) => {
-
     setMainImage(number);
   };
   const displayCarousel = (imageList) => {
@@ -61,99 +57,73 @@ const ProductDetail = () => {
 
     return (
       <CarouselImage
-
         imageList={imageList}
         changeImage={changeImage}
         mainImage={mainImage}
-
-
       />
     );
 
   }
   return (
-    <div>
-      <div className='flex text-white'>
-        <div>
-
-
-          {productDetail.imageProductUrl ?
-            <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
-            :
-            <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
-          }
-
-
-          <div>
+    <div className='flex flex-wrap justify-around text-white'>
+      <div id="images" className="w-11/12 mx-auto lg:w-5/12 ">
+        {productDetail.imageProductUrl ?
+        <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className=' object-contain object-top mx-auto mb-[25px] w-11/12 h-[525px]' alt="preview" width={200} height={200} />
+        :
+        <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
+        }
             {console.log(productDetail.imageProductUrl)}
             {displayCarousel(productDetail.imageProductUrl)}
-          </div>
-        </div>
+      </div>
 
-        <div className='mt-10 w-[47.875rem]'>
-          <h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>{productDetail.title}</h1>
+      <div id ="informationProduit" className='w-11/12 lg:w-5/12 mt-[20px] lg:mt-0 mx-auto flex flex-col justify-between'>
+          <div id="part1">
+          <h1 className='mb-4'>{productDetail.title}</h1>
           <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>
           <p className='w-[47.75rem] font-normal leading-[1.75rem] text-[1rem]'>{productDetail.description}</p>
+          </div>
 
-          <div className='mt-16 flex'>
-            <div className='flex items-end justify-between w-full mb-6'>
+          <div id="part2">
+          <div className='flex items-end justify-between w-full mb-6'>
               <div className='font-bold text-[1rem] mr-4'>
-                Prix :
-
-                <span className='font-normal text-[1.5rem]'>
-                  {productDetail.price / 100}€
-
-                </span>
+                <p>Prix : <span className='font-normal text-[1.5rem] ml-[5px]'>{productDetail.price / 100}€</span></p>
               </div>
               <div className='font-bold text-[1rem] '>
-                Stock :
-
-                <span className='font-normal text-[1.5rem] ml-4'>
-                  {productDetail.quantity}
-
-                </span>
+                <p>Stock : <span className='font-normal text-[1.5rem] ml-[5px]'>{productDetail.quantity}</span></p>
               </div>
-            </div>
-
           </div>
-          <div className='flex'>
-            <div className='flex items-end justify-between w-full mb-6'>
-              <div className='font-bold text-[1rem] mr-4'>
-                Vendu par :
 
+          <div className='flex items-end justify-between w-full mb-6 font-bold'>
+            <p>Vendu par :
                 <Link to={URL_SHOP+sellerId}>
-                    <span className="font-normal text-[1.5rem] ml-4  cursor-pointer hover:underline">
-                        {seller.pseudo}
-                    </span>
+                  <span className="font-normal cursor-pointer hover:underline ml-[5px]">
+                    {seller.pseudo}
+                  </span>
                 </Link>
-              </div>
-            </div>
-
+              </p>
           </div>
 
-          <div className='flex'>
-            <div className='flex items-end justify-between w-full mb-6'>
-              <div className='font-bold text-[1rem] mr-4'>
-                En ligne depuis le :
+          <div className='flex items-end justify-between w-full mb-6'>
+            <div className='font-bold'>
+            En ligne depuis le :<span className='font-normal text-[1.5rem] ml-[5px]'>{date}</span>
+            </div>
 
-                <span className='font-normal text-[1.5rem] ml-4'>
-                  {date}
-                </span>
-              </div>
+            <button className=' m-auto btn-primary'>
+            Ajouter au panier
+            </button>
 
-              <button className=' m-auto btn-primary'>
-                Ajouter au panier
+            <Link to={URL_MODIFYPRODUCT + id}>
+              <button className='btn-primary mb-0'>
+              Modifier
               </button>
-              <Link to={URL_MODIFYPRODUCT + id}><button className=' ml-3 mr-auto btn-primary'>
-                Modifier
-              </button></Link>
-
-
-            </div>
-
+            </Link>
           </div>
-        </div>
+          </div>
+          
+
+          
       </div>
+
     </div >
   )
 }

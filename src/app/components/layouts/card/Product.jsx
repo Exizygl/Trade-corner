@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
-import './CardUser.css';
+// import './CardUser.css';
 
 
 
@@ -10,13 +10,13 @@ const Product = ({id, title, price, image}) => {
     const truePrice = price / 100 ;
     return (
       
-        <div className=" cardUser w-[18.75rem] h-[26.875rem] ml-[2.8125rem] mb-12">
+        <div className="  w-[18.75rem] h-[26.875rem] ml-[2.8125rem] mb-12">
           <Link to={URL_PRODUCT + id}>
           <div className="h-[17.625rem]">
             {image ?
-              <img src={`http://localhost:8080/static/` + image} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto w-[18.75rem] h-[17.625rem]' alt="preview" width={200} height={200} />
+              <img src={`http://localhost:8080/static/` + image} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto w-[18.75rem] h-[17.625rem] object-cover' alt="preview" width={200} height={200} />
               :
-              <img src={`http://localhost:8080/static/default.jpg`} className='m-auto w-[18.75rem] h-[17.625rem]' alt="preview" width={200} height={200} />
+              <img src={`http://localhost:8080/static/default.jpg`} className='m-auto w-[18.75rem] h-[17.625rem] object-cover' alt="preview" width={200} height={200} />
             }
           </div>
           <div className='bg-[#0F1219] h-[9.375rem] text-white font-bold' >
@@ -24,7 +24,7 @@ const Product = ({id, title, price, image}) => {
             
             <div className='flex justify-between'>
             <p className='text-2xl ml-4 pt-4'> {truePrice}€</p>
-            <div onClick={() => {addProduct(id)}} className='h-[3.125rem] w-[3.125rem] bg-purplecorner rounded-[0.188rem] mr-4'><img className='w-[24px] h-[28px]' src="/src/app/assets/images/cart.png" alt="" srcset="" /></div>
+            <div onClick={() => {addProduct(id)}} className='h-[40px] w-[40px] bg-purplecorner mr-4'><img className='object-contain mx-auto' src="/src/app/assets/images/cart.png" alt="Panier" /></div>
             </div>
           </div>
           </Link>

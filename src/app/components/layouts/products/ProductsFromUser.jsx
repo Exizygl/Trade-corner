@@ -32,16 +32,12 @@ const ProductsFromUser = () => {
         });
 
         return (
-            <div>
-                <div className="flex flex-wrap">{list}</div>
-            </div>
+                <div className="flex flex-wrap justify-around">{list}</div>   
         );
     };
 
     return (
-        <div>
-            <div className="text-center">{displayProducts()}</div>
-        </div>
+            displayProducts()  
     );
 };
 export default ProductsFromUser;

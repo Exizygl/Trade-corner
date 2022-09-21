@@ -30,7 +30,7 @@ const RoutesWithNavigation = () => {
 
                 <Navbar />
 
-                <main className="grow mt-[125px]">
+                <main className="grow mt-[125px] mx-[25px]">
 
                     <Routes />
                 </main>
