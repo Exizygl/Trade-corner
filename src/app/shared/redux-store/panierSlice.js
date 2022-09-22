@@ -13,8 +13,9 @@ export const panierSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
-            state.product = [...state.product, action.payload]
-           
+            // state.product = [...state.product, action.payload]
+            // state.product = [...state.product, action.payload]
+            
         },
     },
 });
