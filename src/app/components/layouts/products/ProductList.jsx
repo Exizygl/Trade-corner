@@ -19,7 +19,6 @@ const ProductList = () => {
     const [page, setPage] = useState(1);
     const [numberPage, setNumberPage] = useState(0);
     const params = new URLSearchParams(location.search)
-
     const [superCategoryList, SetsuperCategoryList] = useState([])
     const [superCategory, setSuperCategory] = useState('')
     const [category, setCategory] = useState('')
@@ -31,12 +30,14 @@ const ProductList = () => {
     const [order, setOrder] = useState("new")
     const [minimunPrice, setMinimunPrice] = useState()
     const [maximunPrice, setMaximunPrice] = useState()
+
     var initialTag
-    if(params.get("search") == "" || params.get("search") == null){
+    if (params.get("search") == "" || params.get("search") == null) {
         initialTag = []
-    }else{
+    } else {
         initialTag = [params.get("search")]
     }
+    
     const [tagList, setTagList] = useState(initialTag)
     const [tagEntry, setTagEntry] = useState("")
     const [tagReload, setTagReload] = useState(0)
@@ -44,7 +45,7 @@ const ProductList = () => {
 
 
 
-////
+
 
 
 
@@ -54,7 +55,7 @@ const ProductList = () => {
         getAllSuperCategory().then(
 
             function (res) {
-                
+
                 if (res.status === 200) {
                     SetsuperCategoryList(res.data.message.superCategoryList);
                     setLoading(1)
@@ -70,11 +71,9 @@ const ProductList = () => {
         searchEntry["order"] = order
         searchEntry["minimun"] = minimunPrice
         searchEntry["maximun"] = maximunPrice
+
         
-        if (page < 1 || page > numberPage) setPage(1)
-
-
-
+        // if (page < 1 || page > numberPage) setPage(1)
         if (searchEntry["search"] == "" || searchEntry["search"] == null) searchEntry["search"] = "all"
         if (searchEntry["page"] == "" || searchEntry["page"] == null) searchEntry["page"] = 1
         if (searchEntry["superCategory"] == "" || searchEntry["superCategory"] == null) searchEntry["superCategory"] = "all"
@@ -88,10 +87,10 @@ const ProductList = () => {
             function (res) {
 
                 if (res.status === 200) {
-                    console.log(res.data)
+                 
                     setProducts(res.data.list.list)
                     setNumberPage(res.data.number.number)
-                                
+
                 }
             }
         );
@@ -124,26 +123,27 @@ const ProductList = () => {
 
     }
     const displayTags = () => {
+        
         const selectTag = (e) => {
-    
-           removeTag(e)
-            
+
+            removeTag(e)
+
         }
         const list = tagList.map(item => {
-           
-            if(item != null && item != ""){
-                
-            return (
-                <div className='border border-2 border-magentacorner bg-white mr-[25px] py-[5px] px-[10px] text-black' onClick={(value) => selectTag(value.target.textContent)}>{item}</div>
-            );
+
+            if (item != null && item != "") {
+
+                return (
+                    <div className='border border-2 border-magentacorner bg-white mr-[25px] py-[5px] px-[10px] text-black' onClick={(value) => selectTag(value.target.textContent)}>{item}</div>
+                );
             }
         });
 
         return (
-            
-            
-                <div className="flex flex-wrap mt-[50px] ml-[29px]">{list}</div>
-            
+
+
+            <div className="flex flex-wrap mt-[50px] ml-[29px]">{list}</div>
+
         )
 
 
@@ -192,25 +192,21 @@ const ProductList = () => {
         setPage(number);
     };
     const SuperCategory = (value) => {
-        console.log(value)
         setPage(1);
         setSuperCategory(value);
         setCategory('')
     };
     const ChangeCategory = (value) => {
-        console.log(value)
         setPage(1);
         setSuperCategory('');
         setCategory(value)
     };
     const ChangeOrder = (value) => {
-        console.log(value.target.value)
         setPage(1);
         setOrder(value.target.value)
     };
 
     const ChangeMinimun = (value) => {
-        console.log(value.target.value)
         setPage(1);
         setMinimunPrice(value.target.value)
     };
@@ -221,37 +217,29 @@ const ProductList = () => {
     const AddTag = (e) => {
         if (tagEntry != "" && e.key === 'Enter') {
             setPage(1);
-
             setTagList(current => [...current, tagEntry])
-            console.log(tagList)
             setTagEntry("")
         }
-    
+
     };
     const removeTag = (e) => {
         var reloadNumber = tagReload
         setPage(1);
-        console.log("value: " + e)
-        console.log("array: " + tagList)
         var list = tagList
-        console.log("arrayCopy: " + list)
         var index = list.indexOf(e)
-        console.log("index: " + index)
-        tagList.splice(index, 1)
-        console.log(list)
-
+        list.splice(index, 1)
         setTagList(list)
         setTagReload(reloadNumber + 1)
 
-        console.log(tagList)
         
+
     }
 
     return (
 
         <div className='text-white'>
 
-            <h1 className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem]'>Nos Articles </h1>
+            <h1 onClick={() => { SuperCategory("") }} className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem]'>Nos Articles </h1>
             <div className='flex justify-around mt-8'>
                 <div>
                     <div onMouseEnter={() => { setDropDownJV(true) }} onMouseLeave={() => { setDropDownJV(false) }} onClick={() => { SuperCategory("jeux video") }}>
@@ -300,7 +288,7 @@ const ProductList = () => {
                     </select>
 
                     <div className='mt-[50px] ml-[29px]'>Filtre:</div>
-                    
+
                     <div className='mt-[20px] ml-[29px]'>
                         de
                         <input
@@ -337,7 +325,7 @@ const ProductList = () => {
 
                         />
                     </div>
-                    
+
 
                 </div>
                 <div>
