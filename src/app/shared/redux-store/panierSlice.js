@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addProductState } from '../services/addProductServices';
 
 
 
 
 
 const initialState = {
-    product:[]
+    panier: []
 };
 
 export const panierSlice = createSlice({
@@ -13,9 +14,18 @@ export const panierSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
-            // state.product = [...state.product, action.payload]
-            // state.product = [...state.product, action.payload]
-            
+
+                // state.product = action.payload
+            console.log("(-_^)")
+            const copyPanier = [...state.panier];
+            position = copyPanier.panier.indexOf(action.payload.id);
+            if (position) {
+                state.product = [...state.product]
+                console.log("(^o^)")
+            } else {
+                state.product = [...state.product, action.payload]
+                console.log("(-_-)")
+            }
         },
     },
 });

@@ -1,6 +1,6 @@
 
 import React, { useState , useEffect} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getNewProduct } from '../../api/backend/requestApi';
 import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
@@ -8,19 +8,26 @@ import Product from './card/Product';
 import { addProduct } from '../../shared/redux-store/panierSlice';
 
 const Home = () => {
-
+    const panier = useSelector((state) => state.panier);
     const [products, setProducts] = useState([]);
     const dispactch = useDispatch()
+    
 
     const addProductPanier = (e) => {
-        console.log("(O-O)")
         
+            var copyPanier = panier
+            console.log(copyPanier.product)
+            for(var i= 0; i<copyPanier.length; i++){
+                if(panier[i].id == e)return true
+            }
+            
+            
             const product = {
               id : e,
               number : 1
             }
-      
-            dispactch(addProduct(product))
+            copyPanier.push(product)
+            dispactch(addProduct(panier))
             
         }
 

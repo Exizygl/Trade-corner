@@ -1,5 +1,15 @@
-export function addProductState(state, action) {
-    console.log
-    if(state == null) return action.payload
-    return [...state, action.payload]
+import { useSelector, useDispatch } from 'react-redux';
+
+
+export function addProductState(action) {
+
+    list = useSelector((state) => state.auth.product)
+    console.log(list)
+    if(panier == null) return action.payload
+    for(var i= 0; i<panier.length; i++){
+        console.log(panier)
+        console.log(action.payload)
+        if(panier[i][0] == action.payload[0])return panier
+    }
+    return [...panier, action.payload]
 }
