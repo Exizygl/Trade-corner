@@ -6,7 +6,7 @@ import { addProductState } from '../services/addProductServices';
 
 
 const initialState = {
-    panier: []
+    products: []
 };
 
 export const panierSlice = createSlice({
@@ -18,7 +18,7 @@ export const panierSlice = createSlice({
                 // state.product = action.payload
             console.log("(-_^)")
             const copyPanier = [...state.panier];
-            position = copyPanier.panier.indexOf(action.payload.id);
+            position = copyPanier.panier.indexOf(action.payload.panier.id);
             if (position) {
                 state.product = [...state.product]
                 console.log("(^o^)")

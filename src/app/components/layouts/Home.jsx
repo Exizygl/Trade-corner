@@ -15,19 +15,19 @@ const Home = () => {
 
     const addProductPanier = (e) => {
         
-            var copyPanier = panier
-            console.log(copyPanier.product)
-            for(var i= 0; i<copyPanier.length; i++){
-                if(panier[i].id == e)return true
-            }
+            // var copyPanier = panier
+            // console.log(copyPanier.product)
+            // for(var i= 0; i<copyPanier.length; i++){
+            //     if(panier[i].id == e)return true
+            // }
             
             
             const product = {
               id : e,
               number : 1
             }
-            copyPanier.push(product)
-            dispactch(addProduct(panier))
+            // copyPanier.push(product)
+            dispactch(addProduct(product))
             
         }
 
