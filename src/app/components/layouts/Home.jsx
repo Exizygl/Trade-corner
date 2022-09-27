@@ -15,7 +15,7 @@ const Home = () => {
 
     const addProductPanier = (e) => {
 
-        var copyPanier = panier
+        var copyPanier = [...panier]
         console.log(copyPanier)
         const product = {
             id: e,
