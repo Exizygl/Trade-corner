@@ -13,6 +13,7 @@ const User = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        
         userInfo(user._id).then(
             function (res) {
                 if (res.status === 200) {

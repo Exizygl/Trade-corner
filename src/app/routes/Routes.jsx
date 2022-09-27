@@ -39,6 +39,7 @@ import ProductDetailView from '../views/ProductDetailView';
 import ProductListView from '../views/ProductListView';
 import ModifyProductView from '../views/produits/ModifyProductView';
 import BecomeSeller from '../components/layouts/BecomeSeller';
+import PanierView from '../views/PanierView';
 
 
 /**
@@ -51,6 +52,7 @@ const Routes = () => {
     return (
         <Switch history={customHistory}>
             <Route exact path={URL.URL_HOME} component={HomeView} />
+            <Route exact path={URL.URL_PANIER} component={PanierView} />
             <Route exact path={URL.URL_LOGIN} component={LoginView} />
             <Route exact path={URL.URL_REGISTER} component={RegisterView} />
             <Route path={URL.URL_CONFIRM_REGISTER} component={ConfirmRegisterView} />

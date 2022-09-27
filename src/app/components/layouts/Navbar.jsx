@@ -3,7 +3,7 @@ import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { URL_HOME, URL_LOGIN, URL_REGISTER,URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
+import { URL_HOME, URL_LOGIN, URL_REGISTER,URL_LOGOUT, URL_PANIER } from './../../shared/constants/urls/urlConstants';
 import { URL_USER, URL_ADMIN, URL_SELLER } from './../../shared/constants/urls/urlConstants';
 import logo from '../../assets/images/logo-trade-corner-white.jpg';
 
@@ -48,6 +48,9 @@ const Navbar = () => {
                             </Link>
                             <Link to={URL_USER} className="ml-5">
                                 Profil
+                            </Link>
+                            <Link to={URL_PANIER} className="ml-5">
+                                Panier
                             </Link>
                             <Link to={URL_SELLER} className="ml-5">
                                 Ma boutique

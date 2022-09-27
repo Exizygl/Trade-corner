@@ -8,26 +8,29 @@ import Product from './card/Product';
 import { addProduct } from '../../shared/redux-store/panierSlice';
 
 const Home = () => {
-    const panier = useSelector((state) => state.panier);
+    const panier = useSelector((state) => state.panier.products);
     const [products, setProducts] = useState([]);
     const dispactch = useDispatch()
     
 
     const addProductPanier = (e) => {
         
-            // var copyPanier = panier
-            // console.log(copyPanier.product)
-            // for(var i= 0; i<copyPanier.length; i++){
-            //     if(panier[i].id == e)return true
-            // }
+            var copyPanier = panier
+            console.log(copyPanier)
+            console.log(copyPanier[0])
+            for(var i= 0; i<copyPanier.length; i++){
+                console.log(panier[i].id + " //// " + e)
+                if(panier[i].id == e)return true
+            }
             
             
             const product = {
               id : e,
               number : 1
             }
-            // copyPanier.push(product)
-            dispactch(addProduct(product))
+            console.log("here")
+            const newPanier = [...copyPanier, product]
+            dispactch(addProduct(newPanier))
             
         }
 

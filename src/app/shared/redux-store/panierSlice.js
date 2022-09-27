@@ -14,18 +14,20 @@ export const panierSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
-
-                // state.product = action.payload
-            console.log("(-_^)")
-            const copyPanier = [...state.panier];
-            position = copyPanier.panier.indexOf(action.payload.panier.id);
-            if (position) {
-                state.product = [...state.product]
-                console.log("(^o^)")
-            } else {
-                state.product = [...state.product, action.payload]
-                console.log("(-_-)")
-            }
+            state.products = [action.payload]
+            
+            
+            // console.log(state.panier.products)
+            // const copyPanier = state.panier.products;
+            // console.log(copyPanier)
+            // position = copyPanier.panier.indexOf(action.payload.panier.id);
+            // if (position) {
+            //     state.product = [...state.product]
+            //     console.log("(^o^)")
+            // } else {
+            //     state.product = [...state.product, action.payload]
+            //     console.log("(-_-)")
+            // }
         },
     },
 });
