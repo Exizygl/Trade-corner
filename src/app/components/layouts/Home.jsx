@@ -1,5 +1,5 @@
 
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getNewProduct } from '../../api/backend/requestApi';
@@ -11,28 +11,31 @@ const Home = () => {
     const panier = useSelector((state) => state.panier.products);
     const [products, setProducts] = useState([]);
     const dispactch = useDispatch()
-    
+
 
     const addProductPanier = (e) => {
-        
-            var copyPanier = panier
-            console.log(copyPanier)
-            console.log(copyPanier[0])
-            for(var i= 0; i<copyPanier.length; i++){
-                console.log(panier[i].id + " //// " + e)
-                if(panier[i].id == e)return true
-            }
-            
-            
-            const product = {
-              id : e,
-              number : 1
-            }
-            console.log("here")
-            const newPanier = [...copyPanier, product]
-            dispactch(addProduct(newPanier))
-            
+
+        var copyPanier = panier
+        console.log(copyPanier)
+        const product = {
+            id: e,
+            number: 1
         }
+        
+        if (copyPanier){
+            for (var i = 0; i < copyPanier.length; i++) {
+                console.log(panier[i].id + " //// " + e)
+                if (panier[i].id == e) return true
+            }
+        
+
+        const newPanier = [...copyPanier, product]
+        dispactch(addProduct(newPanier))
+    }else{
+        dispactch(addProduct(product))
+    }
+
+    }
 
     useEffect(() => {
         getNewProduct().then(
@@ -49,9 +52,9 @@ const Home = () => {
 
 
     const displayProducts = () => {
-        
+
         const list = products.map(item => {
-            
+
             return (
                 <Product
                     key={item._id}
@@ -81,7 +84,7 @@ const Home = () => {
                 <Link to={URL_PRODUCTLIST}>
                     <button className='btn-primary w-[300px]'>Voir plus</button>
                 </Link>
-            </div>   
+            </div>
         </div>
     );
 };
