@@ -68,7 +68,6 @@ const ShopUsers = () => {
                 <div id="products" className="w-11/12 md:w-full m-auto md:m-0 md:basis-9/12 ">
                 <ProductsFromUser /> 
                 </div>
-                
             </div>         
         </div>
     );

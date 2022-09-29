@@ -22,16 +22,34 @@ const Login = () => {
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
-
-
             authenticate(values).then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }
                
                 if (res.status === 200 && res.data.message.user.id_token) {
-                    dispatch(signIn(res.data.message.user));
+          const userBack = res.data.message.user;
+            console.log(userBack);
+                //    console.log(userBack.user.role);
+                const user = {...userBack.user, 
+                    roleId : userBack.user.role._id, 
+                    roleLabel : userBack.user.role.label, 
+                    adressId : userBack.user.adress._id,
+                    adressCity: userBack.user.adress.city,
+                    adressStreet : userBack.user.adress.street,
+                    adressZipcode : userBack.user.adress.zipcode};
+                    // delete user.role;
+                    // delete user.adress;
+                const userForDispatch = {
+                    id_token: userBack.id_token,
+                    user : user,
+                }
+                 console.log(userForDispatch);
+
+                    // dispatch(signIn(res.data.message.user));
+                    dispatch(signIn(userForDispatch));
+                    
                     
                     if (isAuthenticated()) {
                        

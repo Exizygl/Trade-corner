@@ -11,14 +11,15 @@ export default function PreviewListUsers() {
     useEffect(() => {
         getAllUser() //j'appelle l'api
             .then(function (res) {
+                // console.log(res.status);
+                console.log("truc");
                 if (res.status === 200) {
                     let usersTemp = [];
-
                     if (res.data.length === 0) {
                         alert("Il n'y a pas d'utilisateurs dans la base de donnée !");
                     } else {
-                        if (res.data.length <= 3) {
-                            //Si il y a 1,2 ou 3 utilisateurs dans la BDD
+                        if (res.data.length <= 2) {
+                            //Si il y a 1 ou 2 utilisateurs dans la BDD
                             for (let i = 0; i < res.data.length; i++) {
                                 //pour la preview on récupére tous les utilisateurs
                                 let name = res.data[i].name;
@@ -34,8 +35,8 @@ export default function PreviewListUsers() {
                                 usersTemp.push(user);
                             }
                         } else {
-                            for (let i = 0; i < 4; i++) {
-                                //pour la preview on récupére les 4 premiers utilisateurs
+                            for (let i = 0; i < 3; i++) {
+                                //pour la preview on récupére les 3 premiers utilisateurs
                                 let name = res.data[i].name;
                                 let id = res.data[i]._id;
                                 let role = res.data[i].role.label;
@@ -58,11 +59,16 @@ export default function PreviewListUsers() {
             });
     }, []);
 
+    if(state.usersPreview.length === 0) {
+        return (<p>
+            Il n'y a pas d'utilisateurs dans la base de donnée.
+        </p>)
+    } 
     return (
         <div>
-            <div className="flex  flex-row ml-12 flex-wrap">
+            <div className="flex flex-row flex-wrap gap-[10px] justify-between">
                 {state.usersPreview.map((user) => (
-                    <Link to={`/administration/user/${user.id}`} key={user.id}>
+                    <Link className=""to={`/administration/user/${user.id}`} key={user.id}>
                         <CardUser
                             key={user.id}
                             name={user.name}
@@ -72,11 +78,14 @@ export default function PreviewListUsers() {
                     </Link>
                 ))}
             </div>
-            <p>
-                <Link to={URL_ADMIN_LISTUSERS} className="underline">
-                    voir plus
+
+            <div className="text-right">
+                <Link to={URL_ADMIN_LISTUSERS}>
+                    <button className="btn-primary">
+                        voir plus
+                    </button>
                 </Link>
-            </p>
+            </div>
         </div>
     );
 }

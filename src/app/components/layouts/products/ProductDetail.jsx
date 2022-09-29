@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../../api/backend/requestApi';
 import { URL_SHOP } from '../../../shared/constants/urls/urlConstants'
@@ -12,22 +13,29 @@ import { URL_MODIFYPRODUCT} from '../../../shared/constants/urls/urlConstants';
 
 const ProductDetail = () => {
 
+  // const userRole = useSelector((state) => state.auth.user.role);
+  const user = useSelector((state) => state.auth.user);
+ console.log(user);
+  // console.log(userRole.label);
+  // console.log({user.role}.label);
+
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [seller, setSeller] = useState([]);
   const [date, setDate] = useState([]);
   const [mainImage, setMainImage] = useState([]);
   const [loading, setLoading] = useState(0);
+  const [userState, setUserState] = useState([]);
   const productDetail = product;
 
   const { id } = useParams();
   const sellerId = seller._id;
+  
 
   useEffect(() => {
 
     getProduct(id).then(
       function (res) {
-
         if (res.status === 200) {
           setProduct(res.data.message.product)
           setCategory(res.data.message.product.categoryId)
@@ -35,6 +43,7 @@ const ProductDetail = () => {
           setDate(dateFormat(res.data.message.product.createdAt))
           setMainImage((res.data.message.product.imageProductUrl[0]))
           setLoading(1)
+          setUserState(user)
         }
       }
     );
@@ -64,15 +73,26 @@ const ProductDetail = () => {
     );
 
   }
+
+  const displayButtonModify = () => {
+       if (user.roleLabel === "admin" | user._id === sellerId) {
+        return (<Link to={URL_MODIFYPRODUCT + id}>
+          <button className='btn-primary mb-0 ml-5'>
+          Modifier
+          </button>
+        </Link>)
+       }
+  }
+
+
   return (
     <div className='flex flex-wrap justify-around text-white'>
-      <div id="images" className="w-11/12 mx-auto lg:w-5/12 ">
+      <div id="images" className="w-11/12 mx-auto lg:w-5/12  ">
         {productDetail.imageProductUrl ?
         <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className=' object-contain object-top mx-auto mb-[25px] w-11/12 h-[525px]' alt="preview" width={200} height={200} />
         :
         <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
         }
-            {console.log(productDetail.imageProductUrl)}
             {displayCarousel(productDetail.imageProductUrl)}
       </div>
 
@@ -103,20 +123,20 @@ const ProductDetail = () => {
               </p>
           </div>
 
-          <div className='flex items-end justify-between w-full mb-6'>
-            <div className='font-bold'>
-            En ligne depuis le :<span className='font-normal text-[1.5rem] ml-[5px]'>{date}</span>
+          <div className='flex flex-wrap items-end justify-between w-full mb-6'>
+
+            <div className='font-bold '>
+            En ligne depuis le :<span className='font-normal text-[1.5rem] ml-[5px] '>{date}</span>
             </div>
 
-            <button className=' m-auto btn-primary'>
-            Ajouter au panier
-            </button>
-
-            <Link to={URL_MODIFYPRODUCT + id}>
-              <button className='btn-primary mb-0'>
-              Modifier
+            <div id="boutons">
+              <button className=' mx-auto btn-primary mb-0'>
+                Ajouter au panier
               </button>
-            </Link>
+              {displayButtonModify()}
+            </div>
+            
+            
           </div>
           </div>
           
