@@ -27,12 +27,13 @@ export default function Navigation() {
             </Link>
         </div>
 
-        <div className="flex flex-col">
-            <Link to='' className="py-2 hover:bg-magentacorner w-full text-left p-5">
-            Fermer ma boutique
+        <div className="flex flex-col px-5">
+            <Link to=''> 
+            <button className="btn-red w-full mt-10">Fermer ma boutique</button>            
             </Link>
-            <Link to='' className="py-2 hover:bg-magentacorner w-full text-left p-5">
-            Supprimer mon compte
+
+            <Link to=''>
+            <button className="btn-red w-full">Supprimer mon compte</button>
             </Link>
         </div>
 

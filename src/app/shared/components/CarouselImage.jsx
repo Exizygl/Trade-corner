@@ -41,7 +41,7 @@ const CarouselImage = ({ imageList , changeImage, mainImage }) => {
         return (
             <img src={`http://localhost:8080/static/` + item}
                 onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)}
-                className='w-[100px] h-[100px] object-cover'
+                className='w-[100px] aspect-square shrink object-cover'
                 alt="Photo du produit"
                 onClick={() => {
                     changeImage(item)
@@ -52,7 +52,7 @@ const CarouselImage = ({ imageList , changeImage, mainImage }) => {
 
     return (
 
-        <div className="flex justify-around items-center ">
+        <div className="flex justify-around items-center h-[100px]">
             {precedent()}
             {list}
             {suivant()}

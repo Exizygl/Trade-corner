@@ -27,4 +27,10 @@
     h6 {
         @apply text-xl;
     }
+
+    /* CUSTOM */
+    .half-screen {
+        height : 50vh;
+    }
+
 }

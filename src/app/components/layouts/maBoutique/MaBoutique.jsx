@@ -15,19 +15,22 @@ const commandes = useSelector (state => state.store.commandes);
 const dispatch = useDispatch();
 
   return (
-    <div className="flex flex-row mx-12 gap-6 bg-darkgray text-white">
-        <div className = "basis-3/12">
-            <Navigation/>
-        </div> 
-        <div className= "basis-9/12"> 
-            <h2>Ma Boutique</h2>
+    <div className="">
+    <h1>Ma boutique</h1>
+    <div className="flex flex-row flex-wrap lg:flex-nowrap  gap-10 bg-darkgray text-white">
+      <div className = "basis-11/12 lg:basis-3/12">
+        <Navigation/>
+      </div> 
 
-            <h3> Notifications </h3>
+
+        <div className= "basis-11/12 lg:basis-9/12"> 
+            <h2> Notifications </h2>
             { commandes.length ===0  && <p>Vous n'avez pas de commandes en cours</p>}
-            <h3> Mes produits en ventes </h3>
+            <h2> Mes produits en ventes </h2>
             { products.length ===0 && <p>Vous n'avez pas encore de produits en vente</p>}
             {/* componant list preview */}
         </div> 
+    </div>
     </div>
   )
 }

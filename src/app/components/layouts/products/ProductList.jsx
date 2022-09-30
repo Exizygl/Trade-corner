@@ -11,7 +11,6 @@ import PaginationList from '../card/PaginationList';
 import Product from '../card/Product';
 
 
-
 const ProductList = () => {
 
 
@@ -37,7 +36,7 @@ const ProductList = () => {
     } else {
         initialTag = [params.get("search")]
     }
-    
+
     const [tagList, setTagList] = useState(initialTag)
     const [tagEntry, setTagEntry] = useState("")
     const [tagReload, setTagReload] = useState(0)
@@ -45,21 +44,12 @@ const ProductList = () => {
 
 
 
-
-
-
-
-
     useEffect(() => {
-
         getAllSuperCategory().then(
-
             function (res) {
-
                 if (res.status === 200) {
                     SetsuperCategoryList(res.data.message.superCategoryList);
                     setLoading(1)
-
                 }
             })
 
@@ -72,7 +62,7 @@ const ProductList = () => {
         searchEntry["minimun"] = minimunPrice
         searchEntry["maximun"] = maximunPrice
 
-        
+
         // if (page < 1 || page > numberPage) setPage(1)
         if (searchEntry["search"] == "" || searchEntry["search"] == null) searchEntry["search"] = "all"
         if (searchEntry["page"] == "" || searchEntry["page"] == null) searchEntry["page"] = 1
@@ -87,10 +77,9 @@ const ProductList = () => {
             function (res) {
 
                 if (res.status === 200) {
-                 
+
                     setProducts(res.data.list.list)
                     setNumberPage(res.data.number.number)
-
                 }
             }
         );
@@ -108,22 +97,18 @@ const ProductList = () => {
                     price={item.price}
                     category={item.category}
                     image={item.imageProductUrl[0]}
-
+                    sellerId={item.sellerId._id}
                 />
             );
         });
-
         return (
-            <div>
-
-                <div className="flex flex-wrap">{list}</div>
-            </div>
+            <div className="flex flex-wrap gap-[20px] justify-between">{list}</div>
         )
 
 
     }
     const displayTags = () => {
-        
+
         const selectTag = (e) => {
 
             removeTag(e)
@@ -140,15 +125,11 @@ const ProductList = () => {
         });
 
         return (
-
-
             <div className="flex flex-wrap mt-[50px] ml-[29px]">{list}</div>
-
         )
 
 
     }
-
     const displayPagination = () => {
 
         return (
@@ -231,12 +212,11 @@ const ProductList = () => {
         setTagList(list)
         setTagReload(reloadNumber + 1)
 
-        
+
 
     }
 
     return (
-
         <div className='text-white'>
 
             <h1 onClick={() => { SuperCategory("") }} className='font-bold text-2xl h-14 ml-[3.125rem] mb-[2.125rem]'>Nos Articles </h1>
@@ -275,68 +255,69 @@ const ProductList = () => {
                 </div>
             </div>
 
-            <div className='mt-20 flex ml-14'>
-                <div className='w-[18.75rem] h-full bg-black'>
+            {/* PAGE PRINCIPALE */}
+            <div className='flex flex-row flex-wrap lg:flex-nowrap mt-8 gap-10 bg-darkgray text-white'>
 
-                    <div className='mt-[24px] ml-[29px]'>Trier par:</div>
+                {/* NAVIGATION */}
+                <div className='flex flex-col basis-11/12 lg:basis-3/12 h-full bg-black p-5'>
 
-                    <select className='mt-[24px] ml-[29px] text-black border border-2 border-magentacorner' onChange={(value) => { ChangeOrder(value) }}>
+                    {/* Trier par */}
+                    <div className='mt-[24px]'>Trier par :</div>
+                    <select className='mt-[24px] text-black border border-2 border-magentacorner' onChange={(value) => { ChangeOrder(value) }}>
                         <option value="new">Les plus récents</option>
                         <option value="old">Les plus anciens</option>
                         <option value="cheap">Les moins chers</option>
                         <option value="expensive">Les plus chers</option>
                     </select>
 
-                    <div className='mt-[50px] ml-[29px]'>Filtre:</div>
-
-                    <div className='mt-[20px] ml-[29px]'>
+                    {/* filtres */}
+                    <div className='mt-[50px]'>Filtre :</div>
+                    <div className='mt-[20px]'>
                         de
                         <input
                             type="text"
                             className=" border border-2 border-magentacorner mr-4 text-black w-[40px] ml-[10px] mr-[5px]"
                             name="minimumPrice"
-
                             onChange={(value) => ChangeMinimun(value)}
-
                         />
                         € à
                         <input
                             type="text"
                             className=" border border-2 border-magentacorner mr-4 text-black w-[40px] ml-[10px] mr-[5px]"
                             name="minimumPrice"
-
                             onChange={(value) => ChangeMaximun(value)}
-
                         />
                         €
                     </div>
-                    <div className='mt-[50px] ml-[29px]'>Tags:</div>
 
+                    {/* Tags */}
+
+                    <div className='mt-[50px]'>Tags :</div>
                     {displayTags()}
-
                     <div>
                         <input
                             type="text"
-                            className=" border border-2 border-magentacorner mr-4 text-black ml-[29px] mt-[50px] mb-[195px]"
+                            className=" border border-2 border-magentacorner mr-4 text-black mt-[50px] mb-[195px]"
                             name="tag"
                             value={tagEntry}
                             onChange={(value) => setTagEntry(value.target.value)}
                             onKeyDown={AddTag}
-
                         />
                     </div>
-
-
                 </div>
-                <div>
+
+                {/* LISTE DES PRODUITS */}
+                <div className="flex flex-col basis-11/12 lg:basis-9/12">
                     {displayProducts()}
                     <div className='flex justify-end mr-14 mb-16'>
                         {displayPagination()}
                     </div>
                 </div>
+
             </div>
 
         </div>
+        
 
 
 

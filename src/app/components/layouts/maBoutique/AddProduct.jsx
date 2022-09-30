@@ -146,14 +146,42 @@ export default function AddProduct() {
 
 
   return (
-    <div className="flex flex-row flex-wrap lg:flex-nowrap  mx-12 gap-10 bg-darkgray text-white">
+    <div className="">
+    <h1>Ajouter un produit</h1>
+    <div className="flex flex-row flex-wrap lg:flex-nowrap gap-10 bg-darkgray text-white">
+      
       <div className = "basis-11/12 lg:basis-3/12">
         <Navigation/>
       </div> 
 
       <div className= "basis-11/12 lg:basis-9/12"> 
         <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
-          <h2>Ajouter un produit</h2>
+
+          {/*photos*/}
+          <div className="flex flex-row gap-3 content-center">
+            <label htmlFor="photos : " className="basis-1/6 flex content-center">Photos</label>
+            <div className="basis-5/6">
+              <input
+                  id="photos"
+                  type="file"
+                  name="photos"
+                  className="input"
+                  accept='image/*'
+                  multiple = "multiple"
+                  onChange={(e) =>{handleChangeImage(e)}}
+              />
+              <div className="text-xs p-1"> Importez jusqu'à 5 photos maximum</div>
+              {touched.photos && errors.photos ? (
+                <small>{errors.photos}</small>
+                  ) : (
+                    ''
+                  )}
+              <div id="rendePreview" className="my-6">
+                {renderPreview(previewImages)}
+              </div> 
+            </div>
+          </div>
+          
 
 {/* titre du produit */}
                 
@@ -180,30 +208,7 @@ export default function AddProduct() {
             </div>
           </div>
                     
-{/*photos*/}
-          <div className="flex flex-row gap-3 content-center">
-            <label htmlFor="photos" className="basis-1/6 flex content-center">Photos</label>
-            <div className="basis-5/6 ">
-              <input
-                  id="photos"
-                  type="file"
-                  name="photos"
-                  className="input"
-                  accept='image/*'
-                  multiple = "multiple"
-                  onChange={(e) =>{handleChangeImage(e)}}
-              />
-              <div className="text-xs p-1"> Importez jusqu'à 5 photos maximum</div>
-              {touched.photos && errors.photos ? (
-                <small>{errors.photos}</small>
-                  ) : (
-                    ''
-                  )}
-              <div id="rendePreview" className="my-6">
-                {renderPreview(previewImages)}
-              </div> 
-            </div>
-          </div>
+
 
           
 {/* catégorie du produit */}
@@ -261,7 +266,7 @@ export default function AddProduct() {
               <textarea
                 name="description"
                 id="description"
-                className="input"
+                className="input h-[200px]"
                 value={values.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -335,6 +340,7 @@ export default function AddProduct() {
         {/* {successSubmitModal} */}
         <Modal message={msgModal} title={titleModal} showModal={showModal} closeModal={()=> closeModal}/>
       </div>
+    </div>
     </div>
   );
 };
