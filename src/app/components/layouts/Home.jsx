@@ -40,7 +40,7 @@ const Home = () => {
 
     return (
         <div>
-            <img src={photoAccueil} className="w-full mb-[40px]"/>
+            <img src={photoAccueil} className="half-screen max-h-[580px] w-full object-cover object-top mb-[40px]"/>
             <h1 className="">LES NOUVEAUTÉS </h1>
             <div className="text-center text-white">
                 {products.length != 0 && displayProducts()}
