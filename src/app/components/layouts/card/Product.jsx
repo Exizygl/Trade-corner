@@ -1,16 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
-// import './CardUser.css';
 
 
 
-const Product = ({id, title, price, image}) => {
+const Product = ({id, title, price, image, sellerId}) => {
 
     const truePrice = price / 100 ;
+    const user = useSelector((state) => state.auth.user);
+
+    const displayButtonPanier = () => {
+      if (user!== false & user.roleLabel === "admin" | user!== false & user._id === sellerId) {
+        return (
+          <div className='h-[50px] w-[50px] bg-grey mr-4 flex items-center'>
+            <img className='object-contain object-center mx-auto' src="/src/app/assets/images/cart.png" alt="ajout au panier impossible" />
+          </div>
+        )
+      }else {
+        return(
+          <div onClick={() => {addProduct(id)}} className='h-[50px] w-[50px] bg-purplecorner mr-4 flex items-center'>
+            <img className='object-contain object-center mx-auto' src="/src/app/assets/images/cart.png" alt="ajouter au panier" />
+          </div>
+        )
+      }
+    }
+
     return (
-      
-        <div className="  w-[18.75rem] h-[26.875rem] ml-[2.8125rem] mb-12">
+        <div className="  w-[18.75rem] h-[26.875rem] mb-12 mx-auto">
           <Link to={URL_PRODUCT + id}>
           <div className="h-[17.625rem]">
             {image ?
@@ -24,7 +41,10 @@ const Product = ({id, title, price, image}) => {
             
             <div className='flex justify-between'>
             <p className='text-2xl ml-4 pt-4'> {truePrice}€</p>
-            <div onClick={() => {addProduct(id)}} className='h-[50px] w-[50px] bg-purplecorner mr-4 flex items-center'><img className='object-contain object-center mx-auto' src="/src/app/assets/images/cart.png" alt="Panier" /></div>
+            {displayButtonPanier()}
+            {/* <div onClick={() => {addProduct(id)}} className='h-[50px] w-[50px] bg-purplecorner mr-4 flex items-center'>
+              <img className='object-contain object-center mx-auto' src="/src/app/assets/images/cart.png" alt="ajouter au panier" />
+            </div> */}
             </div>
           </div>
           </Link>

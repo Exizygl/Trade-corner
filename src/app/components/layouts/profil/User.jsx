@@ -16,125 +16,113 @@ const User = () => {
         userInfo(user._id).then(
             function (res) {
                 if (res.status === 200) {
-                    dispatch(updateUser(res.data));
+                    console.log("data");
+                    console.log(res.data);
+                    const updatedUser = {...res.data, 
+                        roleId : res.data.role._id, 
+                        roleLabel : res.data.role.label, 
+                        adressId : res.data.adress._id,
+                        adressCity: res.data.adress.city,
+                        adressStreet : res.data.adress.street,
+                        adressZipcode :res.data.adress.zipcode};
+                        console.log(updatedUser);
+                    // dispatch(updateUser(res.data));
+                    dispatch(updateUser(updatedUser));
+
                 }
             });
     }, []);
 
 
     return (
-        <div className="flex gap-10 mx-12 bg-darkgray text-white">
-            <div className='basis-3/12'>
+        <div className=" mx-12">
+        <h1>Mon Profil</h1>
+        <div className="flex flex-row flex-wrap lg:flex-nowrap  gap-10 bg-darkgray text-white">
+
+            <div className='basis-11/12 lg:basis-3/12'>
                 <NavigationUser/>
             </div>  
 
-            <div className="flex flex-col basis-9/12">
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Pseudonyme</div>
-                        <div>{user.pseudo}</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'pseudo'}>
-                            <button className="btn-primary">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Email</div>
-                        <div>{user.email}</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'email'}>
-                            <button className="btn-primary">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Avatar</div>
-                        {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200}/></div> :
-                            <p> Aucune image </p>}
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'avatar'}>
-                            <button className="btn-primary">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Nom</div>
-                        <div>{user.name}</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'name'}>
-                            <button className="btn-primary">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Adresse</div>
-                        <div>{user.adress.street} {user.adress.zipcode} {user.adress.city}</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'adress'}>
-                            <button className="btn-primary">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
+            <div className="basis-11/12 lg:basis-9/12">
+                <h2>Mes coordonées</h2>
+
+                <div id="pseudonyme" className="flex flex-col md:flex-row pb-2 pt-5 justify-between border-b-2 border-magentacorner">
+                    <p className="">Pseudonyme : <span className="pl-5">{user.pseudo}</span></p>
+                    <Link to={URL_MODIFYACCOUNT + 'pseudo'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                            Modifier
+                        </button>
+                    </Link>
                 </div>
 
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Téléphone</div>
-                        <div>{user.phoneNumber}</div>
-                    </div>
-                    <div className="pr-4 py-2">
+                <div id="nom" className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
+                    <p className="">Nom : <span className="pl-5">{user.name}</span></p>
+                    <Link to={URL_MODIFYACCOUNT + 'name'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                             Modifier
+                        </button>
+                    </Link>   
+                </div>
+
+                <div id="email" className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
+                    <p className="">Email : <span className="pl-5">{user.email}</span></p>
+                    <Link to={URL_MODIFYACCOUNT + 'email'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                            Modifier
+                        </button>
+                    </Link>
+                </div>
+
+                <div className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
+                    <p className="">Téléphone : <span className="pl-5">{user.phoneNumber}</span></p>
                         <Link to={URL_MODIFYACCOUNT + 'phone'}>
-                            <button className="btn-primary">
+                            <button className="btn-primary px-10 mt-5 md:mt-0">
                                 Modifier
                             </button>
                         </Link>
-                    </div>
                 </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Mot de passe</div>
-                        <div>**********</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_MODIFYACCOUNT + 'password'}>
-                            <button className="btn-primary">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div>
+
+                <div id="adresse" className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
+                    <p className="">Adresse : <span className="pl-5">{user.adressStreet} {user.adressZipcode} {user.adressCity}</span></p>
+                    <Link to={URL_MODIFYACCOUNT + 'adress'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                            Modifier
+                        </button>
+                    </Link>
                 </div>
-                <div className="flex pl-4 py-2 justify-between border-b-4">
-                    <div className="flex flex-col space-y-2">
-                        <div className="font-semibold">Supprimer le compte</div>
-                    </div>
-                    <div className="pr-4 py-2">
-                        <Link to={URL_DELETE}>
-                            <button className="btn-red">
-                                Supprimer
-                            </button>
-                        </Link>
-                    </div>
+
+                <div id="avatar" className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
+                    <div className="">Avatar : </div>
+                    {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200}/></div> :
+                    <p> Aucune image </p>}
+                    <Link to={URL_MODIFYACCOUNT + 'avatar'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                            Modifier
+                        </button>
+                    </Link>
                 </div>
+
+                <div id="password" className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
+                    <p className="">Mot de passe : <span className="pl-5">**********</span></p>
+                    <Link to={URL_MODIFYACCOUNT + 'password'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                            Modifier
+                        </button>
+                    </Link>
+                </div>
+
+                <div className="flex flex-col md:flex-row pb-2 pt-8 justify-between">
+                    <p className="">Supprimer le compte</p>
+                    <Link to={URL_DELETE}>
+                        <button className="btn-red px-10 mt-5 md:mt-0">
+                            Supprimer
+                        </button>
+                    </Link>
+                </div>
+
             </div>
+
+        </div>
         </div>
     );
 };

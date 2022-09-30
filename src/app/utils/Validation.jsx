@@ -15,7 +15,7 @@ const validationAddProduct = Yup.object().shape(
     {
     title : Yup.string()
         .required ('Il manque un titre à votre produit')
-        .min (4).max(30),
+        .min(4).max(30),
 
     description : Yup.string()
         .required('Il manque une description à votre produit')
@@ -160,7 +160,6 @@ const validationModifyProduct = Yup.object().shape(
         .min(1, "Une photo de produit est obligatoire").max(5, "Vous ne pouvez importer que 5 photos maximum"),
     }
 );
-
 
 const validationBecomeSeller = Yup.object().shape(
     {
