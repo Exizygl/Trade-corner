@@ -28,10 +28,12 @@ export const panierSlice = createSlice({
             console.log(product)
             const stateCopy = state.products
             const itemExist = state.products.find((item) => item.id == product.id);
+            console.log(current(itemExist))
             const index= state.products.indexOf(itemExist);
             console.log(index)
-            if(index){
+            if(index >= 0){
                 stateCopy[index].number = product.number
+                console.log(current(stateCopy[index]))
 
                 state.products = stateCopy
             }

@@ -6,7 +6,8 @@ import { getListProduct, getNewProduct } from '../../api/backend/requestApi';
 import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
-import ProductSellers from './card/ProductSellers';
+import ProductSellers from './panier/ProductSellers';
+import PriceRecap from './panier/PriceRecap';
 
 const Panier = () => {
     var panier = useSelector((state) => state.panier.products);
@@ -29,7 +30,7 @@ const Panier = () => {
             });
             var idString = idList.toString().toString()
 
-            
+
             getListProduct(idString).then(
                 function (res) {
                     if (res.status === 200) {
@@ -90,15 +91,15 @@ const Panier = () => {
 
     const updateNumber = (id, number, max) => {
         console.log(number)
-       
-        if(number <= 0 || number == null) number = ""
-        
+
+        if (number <= 0 || number == null) number = ""
+
         console.log(number)
         var checkNumber
         if (number < max + 1) {
             console.log("here")
             checkNumber = number
-         }else{
+        } else {
             console.log("there")
 
             checkNumber = max
@@ -115,12 +116,12 @@ const Panier = () => {
 
     }
     const deleteArticle = (id) => {
-       
-        
+
+
         dispactch(deleteProduct(id))
         var toogle = !loading
         setLoading(toogle)
-        
+
 
 
     }
@@ -134,7 +135,7 @@ const Panier = () => {
             return (
 
                 <div>
-                    <h1>Vendeur : {seller}</h1>
+                    <h2>Vendeur: {seller}</h2>
                     <ProductSellers
                         key={seller.seller}
                         listProduct={listProduct}
@@ -154,12 +155,64 @@ const Panier = () => {
         )
     };
 
+
+    const Recap = () => {
+
+        const uniqueSellers = sellers
+
+        var listResult = uniqueSellers.map(seller => {
+
+            var listProduct = products.filter(item => item.sellerId.pseudo == seller)
+            return (
+
+                <div>
+                    <div>Vendeur jkj : {seller}</div>
+                    <PriceRecap
+                        key={seller.seller}
+                        listProduct={listProduct}
+                        panier={panier}
+                        updateNumber={updateNumber}
+                        deleteArticle={deleteArticle}
+                    />
+                </div>
+            );
+        });
+
+        const number = products.length
+
+        var sum = products.reduce((price, product) => {
+            var article = panier.filter(item => item.id == product._id)
+            console.log(article)
+
+            return price + product.price * article.number;
+        }, 0);
+
+        sum = sum / 100
+        
+        const total =
+            <div>
+                <div>Total</div>
+                <div className='flex'>
+                    <div>{number} Article : </div>
+                    <div>{sum} </div>
+                </div>
+            </div>
+
+        return (
+            <div>
+                {listResult}
+                {total}
+            </div>
+        )
+    };
+
     return (
 
         <div>
             <h1 className=''>Panier </h1>
-            <div>
+            <div className='flex'>
                 {displayProducts()}
+                {Recap()}
             </div>
         </div>
     );
