@@ -18,6 +18,7 @@ export const authenticationSlice = createSlice({
     initialState,
     reducers: {
         signIn: (state, action) => {
+            
             setToken(action.payload.id_token);
             state.isLogged = true;
             state.userId = isUserId();

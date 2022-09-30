@@ -84,6 +84,7 @@ export const getProduct = (id) => {
 };
 
 export const getListProduct = (id) => {
+
     return apiBackEnd.get('product/list/' + id);
 };
 export const search = (search) => {

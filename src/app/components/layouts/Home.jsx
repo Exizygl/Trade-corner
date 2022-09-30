@@ -15,27 +15,16 @@ const Home = () => {
 
     const addProductPanier = (e) => {
 
-        var copyPanier = [...panier]
-        console.log(copyPanier)
+
         const product = {
             id: e,
             number: 1
         }
         
-        if (copyPanier){
-            for (var i = 0; i < copyPanier.length; i++) {
-                console.log(panier[i].id + " //// " + e)
-                if (panier[i].id == e) return true
-            }
-        
-
-        const newPanier = [...copyPanier, product]
-        dispactch(addProduct(newPanier))
-    }else{
         dispactch(addProduct(product))
     }
 
-    }
+    
 
     useEffect(() => {
         getNewProduct().then(

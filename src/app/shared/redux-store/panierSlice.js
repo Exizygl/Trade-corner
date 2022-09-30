@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { addProductState } from '../services/addProductServices';
 
 
@@ -6,7 +6,7 @@ import { addProductState } from '../services/addProductServices';
 
 
 const initialState = {
-    products: []
+    products: {}
 };
 
 export const panierSlice = createSlice({
@@ -14,25 +14,45 @@ export const panierSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
-            state.products = [action.payload]
+            const product = action.payload;
+            const itemExist = state.products.find((item) => item.id == product.id);
+            
+            if(!itemExist){
+                state.products = [...state.products, product]
+            }
             
             
-            // console.log(state.panier.products)
-            // const copyPanier = state.panier.products;
-            // console.log(copyPanier)
-            // position = copyPanier.panier.indexOf(action.payload.panier.id);
-            // if (position) {
-            //     state.product = [...state.product]
-            //     console.log("(^o^)")
-            // } else {
-            //     state.product = [...state.product, action.payload]
-            //     console.log("(-_-)")
-            // }
+        },updateProduct: (state, action) => {
+            
+            const product = action.payload;
+            console.log(product)
+            const stateCopy = state.products
+            const itemExist = state.products.find((item) => item.id == product.id);
+            const index= state.products.indexOf(itemExist);
+            console.log(index)
+            if(index){
+                stateCopy[index].number = product.number
+
+                state.products = stateCopy
+            }
+            
+            
+        },deleteProduct: (state, action) => {
+            const product = action.payload;
+            const stateCopy = state.products
+            const itemExist = state.products.find((item) => item.id == product.id);
+            const index= state.products.indexOf(itemExist);
+            if(index){
+                stateCopy.splice(index, 1)
+
+                state.products = stateCopy
+            }
+            
         },
     },
 });
 
-export const { addProduct } = panierSlice.actions;
+export const { addProduct, updateProduct, deleteProduct} = panierSlice.actions;
 
 
 

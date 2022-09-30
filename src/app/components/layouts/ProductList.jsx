@@ -10,6 +10,7 @@ import Dropdown from '../../shared/components/DropDown';
 
 import { } from '../../shared/constants/urls/urlConstants';
 import { updateUser } from '../../shared/redux-store/authenticationSlice';
+import { addProduct } from '../../shared/redux-store/panierSlice';
 import PaginationList from './card/PaginationList';
 import Product from './card/Product';
 
@@ -113,6 +114,7 @@ const ProductList = () => {
                     price={item.price}
                     category={item.category}
                     image={item.imageProductUrl[0]}
+                    addProduct={addProductPanier}
 
                 />
             );
@@ -251,6 +253,18 @@ const ProductList = () => {
         
     }
 
+    const addProductPanier = (e) => {
+
+
+        const product = {
+            id: e,
+            number: 1
+        }
+        
+        dispactch(addProduct(product))
+    }
+
+    
     return (
 
         <div className='text-white'>

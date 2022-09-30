@@ -31,6 +31,8 @@ const Login = () => {
                 }
                
                 if (res.status === 200 && res.data.message.user.id_token) {
+
+                    
                     dispatch(signIn(res.data.message.user));
                     
                     if (isAuthenticated()) {
