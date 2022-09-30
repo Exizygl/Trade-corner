@@ -6,19 +6,13 @@ import { getProduct } from '../../../api/backend/requestApi';
 import { URL_SHOP } from '../../../shared/constants/urls/urlConstants'
 
 import CarouselImage from '../../../shared/components/CarouselImage';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { URL_MODIFYPRODUCT} from '../../../shared/constants/urls/urlConstants';
-
-
 
 const ProductDetail = () => {
 
-  // const userRole = useSelector((state) => state.auth.user.role);
   const user = useSelector((state) => state.auth.user);
- console.log(user);
-  // console.log(userRole.label);
-  // console.log({user.role}.label);
-
+ 
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [seller, setSeller] = useState([]);
@@ -75,32 +69,42 @@ const ProductDetail = () => {
   }
 
   const displayButtonModify = () => {
-       if (user.roleLabel === "admin" | user._id === sellerId) {
-        return (<Link to={URL_MODIFYPRODUCT + id}>
-          <button className='btn-primary mb-0 ml-5'>
+    if (user.roleLabel === "admin" | user._id === sellerId) {
+      return (<Link to={URL_MODIFYPRODUCT + id}>
+        <button className='btn-primary mb-0 ml-5'>
           Modifier
-          </button>
-        </Link>)
-       }
+        </button>
+      </Link>)
+    }
+  }
+
+  const displayButtonPanier = () => {
+    if (user.roleLabel !== "admin" | user._id !== sellerId) {
+      return (<Link to={URL_MODIFYPRODUCT + id}>
+        <button className='btn-primary mb-0 ml-5'>
+          Ajouter au panier
+        </button>
+      </Link>)
+    }
   }
 
 
   return (
-    <div className='flex flex-wrap justify-around text-white'>
-      <div id="images" className="w-11/12 mx-auto lg:w-5/12  ">
+    <div className='flex flex-wrap justify-around text-white gap-10'>
+      <div id="images" className="min-w-11/12 mx-auto md:min-w-5/12 grow">
         {productDetail.imageProductUrl ?
-        <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className=' object-contain object-top mx-auto mb-[25px] w-11/12 h-[525px]' alt="preview" width={200} height={200} />
+        <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className=' object-contain object-top mx-auto mb-[25px] w-11/12 h-[400px] grow' alt="preview"  />
         :
-        <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-[32.813rem]' alt="preview" width={200} height={200} />
+        <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-2/3' alt="preview" />
         }
             {displayCarousel(productDetail.imageProductUrl)}
       </div>
 
-      <div id ="informationProduit" className='w-11/12 lg:w-5/12 mt-[20px] lg:mt-0 mx-auto flex flex-col justify-between'>
+      <div id ="informationProduit" className='w-11/12 lg:w-7/12 mt-[20px] lg:mt-0 mx-auto flex flex-col justify-between'>
           <div id="part1">
           <h1 className='mb-4'>{productDetail.title}</h1>
           <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>
-          <p className='w-[47.75rem] font-normal leading-[1.75rem] text-[1rem]'>{productDetail.description}</p>
+          <p className='mb-6'>{productDetail.description}</p>
           </div>
 
           <div id="part2">
@@ -109,7 +113,7 @@ const ProductDetail = () => {
                 <p>Prix : <span className='font-normal text-[1.5rem] ml-[5px]'>{productDetail.price / 100}€</span></p>
               </div>
               <div className='font-bold text-[1rem] '>
-                <p>Stock : <span className='font-normal text-[1.5rem] ml-[5px]'>{productDetail.quantity}</span></p>
+                <p>Stock : <span className='font-normal ml-[5px]'>{productDetail.quantity}</span></p>
               </div>
           </div>
 
@@ -126,14 +130,15 @@ const ProductDetail = () => {
           <div className='flex flex-wrap items-end justify-between w-full mb-6'>
 
             <div className='font-bold '>
-            En ligne depuis le :<span className='font-normal text-[1.5rem] ml-[5px] '>{date}</span>
+            En ligne depuis le :<span className='ml-[5px] font-normal'>{date}</span>
             </div>
 
             <div id="boutons">
-              <button className=' mx-auto btn-primary mb-0'>
+              {/* <button className=' mx-auto btn-primary mb-0'>
                 Ajouter au panier
-              </button>
+              </button> */}
               {displayButtonModify()}
+              {displayButtonPanier()}
             </div>
             
             
