@@ -90,17 +90,17 @@ const ProductDetail = () => {
 
 
   return (
-    <div className='flex flex-wrap justify-around text-white gap-10'>
-      <div id="images" className="min-w-11/12 mx-auto md:min-w-5/12 grow">
+    <div className='flex flex-wrap justify-around text-white '>
+      <div id="images" className="w-11/12 mx-auto md:w-5/12">
         {productDetail.imageProductUrl ?
-        <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className=' object-contain object-top mx-auto mb-[25px] w-11/12 h-[400px] grow' alt="preview"  />
+        <img src={`http://localhost:8080/static/` + mainImage} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className=' object-contain object-top mx-auto mb-[25px] w-11/12 h-[400px]' alt="preview"  />
         :
-        <img src={`http://localhost:8080/static/default.jpg`} className='ml-[3.125rem] mt-[2.813rem] m-12 w-[33.125rem] h-2/3' alt="preview" />
+        <img src={`http://localhost:8080/static/default.jpg`} className='object-contain object-top mx-auto mb-[25px] w-11/12 h-[400px]' alt="preview" />
         }
             {displayCarousel(productDetail.imageProductUrl)}
       </div>
 
-      <div id ="informationProduit" className='w-11/12 lg:w-7/12 mt-[20px] lg:mt-0 mx-auto flex flex-col justify-between'>
+      <div id ="informationProduit" className='pl-5 w-11/12 md:w-7/12 mt-[20px] lg:mt-0 mx-auto flex flex-col justify-between'>
           <div id="part1">
           <h1 className='mb-4'>{productDetail.title}</h1>
           <div className='font-normal text-[1.125rem] mb-8'>{category.label}</div>
