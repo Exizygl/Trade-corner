@@ -15,7 +15,7 @@ const commandes = useSelector (state => state.store.commandes);
 const dispatch = useDispatch();
 
   return (
-    <div className="mx-12">
+    <div className="">
     <h1>Ma boutique</h1>
     <div className="flex flex-row flex-wrap lg:flex-nowrap  gap-10 bg-darkgray text-white">
       <div className = "basis-11/12 lg:basis-3/12">

@@ -64,7 +64,7 @@ useEffect( () => {
 
 
   return (
-    <div className="mx-12">
+    <div className="">
     <h1>Panneau d'administration</h1>
     <div className="flex flex-row flex-wrap lg:flex-nowrap gap-10 bg-darkgray text-white">
 

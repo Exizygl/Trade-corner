@@ -66,7 +66,7 @@ export default function PreviewListUsers() {
     } 
     return (
         <div>
-            <div className="flex flex-row flex-wrap gap-[10px] justify-between">
+            <div className="flex flex-row flex-wrap gap-3 justify-between">
                 {state.usersPreview.map((user) => (
                     <Link className=""to={`/administration/user/${user.id}`} key={user.id}>
                         <CardUser

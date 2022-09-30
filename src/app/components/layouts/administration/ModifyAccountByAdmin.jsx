@@ -280,7 +280,7 @@ const ModifyAccountByAdmin = () => {
 
                             </div>
                             <div>
-                                <button className="btn-primary" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
+                                <button className="btn-primary mr-6" type="submit" disabled={(errorSizeImage || errorExtensionImage) ? true : false}>Modifier</button>
                                 <Link to={`/administration/user/${id}`}><button className="btn-red">Annuler</button></Link>
                             </div>
                     </form>
