@@ -73,11 +73,8 @@ const ProductList = () => {
 
 
         search(searchEntry).then(
-
             function (res) {
-
                 if (res.status === 200) {
-
                     setProducts(res.data.list.list)
                     setNumberPage(res.data.number.number)
                 }
@@ -104,20 +101,14 @@ const ProductList = () => {
         return (
             <div className="flex flex-wrap gap-[20px] justify-between">{list}</div>
         )
-
-
     }
+
     const displayTags = () => {
-
         const selectTag = (e) => {
-
             removeTag(e)
-
         }
         const list = tagList.map(item => {
-
             if (item != null && item != "") {
-
                 return (
                     <div className='border border-2 border-magentacorner bg-white mr-[25px] py-[5px] px-[10px] text-black' onClick={(value) => selectTag(value.target.textContent)}>{item}</div>
                 );
@@ -127,32 +118,21 @@ const ProductList = () => {
         return (
             <div className="flex flex-wrap mt-[50px] ml-[29px]">{list}</div>
         )
-
-
     }
-    const displayPagination = () => {
 
+    const displayPagination = () => {
         return (
             <PaginationList
                 key={page}
                 page={page}
                 max={numberPage}
                 changePage={changePage}
-
-
             />
         );
-
-
-
-
-
     }
 
     const DropdownCategories = (number) => {
-
         if (loading != 0) {
-
             const list = superCategoryList[number].categoryIdList.map(item => {
                 return (
                     <Dropdown
@@ -172,16 +152,19 @@ const ProductList = () => {
     const changePage = (number) => {
         setPage(number);
     };
+
     const SuperCategory = (value) => {
         setPage(1);
         setSuperCategory(value);
         setCategory('')
     };
+
     const ChangeCategory = (value) => {
         setPage(1);
         setSuperCategory('');
         setCategory(value)
     };
+
     const ChangeOrder = (value) => {
         setPage(1);
         setOrder(value.target.value)
@@ -191,18 +174,20 @@ const ProductList = () => {
         setPage(1);
         setMinimunPrice(value.target.value)
     };
+
     const ChangeMaximun = (value) => {
         setPage(1);
         setMaximunPrice(value.target.value)
     };
+
     const AddTag = (e) => {
         if (tagEntry != "" && e.key === 'Enter') {
             setPage(1);
             setTagList(current => [...current, tagEntry])
             setTagEntry("")
         }
-
     };
+
     const removeTag = (e) => {
         var reloadNumber = tagReload
         setPage(1);
@@ -211,9 +196,6 @@ const ProductList = () => {
         list.splice(index, 1)
         setTagList(list)
         setTagReload(reloadNumber + 1)
-
-
-
     }
 
     return (
@@ -313,15 +295,8 @@ const ProductList = () => {
                         {displayPagination()}
                     </div>
                 </div>
-
             </div>
-
         </div>
-        
-
-
-
-
     );
 };
 

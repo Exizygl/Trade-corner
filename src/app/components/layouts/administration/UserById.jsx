@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { URL_MODIFYACCOUNT_BYID } from '../../../shared/constants/urls/urlConstants';
+import { URL_MODIFYACCOUNT_BYID, URL_SHOP} from '../../../shared/constants/urls/urlConstants';
 import { userInfo } from '../../../api/backend/requestApi';
 import Navigation from './Navigation';
 
@@ -56,7 +56,7 @@ export default function UserById() {
                     <div id="top_part"className="flex flex-col md:flex-row pb-2 justify-between">
                         <div id="left"> 
                             <h2>{userState.pseudo}</h2>
-                            {userState.role == "seller" && <Link to={URL_MODIFYACCOUNT_BYID + 'role'+`/${userState.id}`}>
+                            {userState.role == "seller" && <Link to={URL_SHOP+userState.id}>
                                 <button className="btn-primary w-[250px] mt-10">
                                 Voir la Boutique
                                 </button>
@@ -144,20 +144,6 @@ export default function UserById() {
                             </button>
                         </Link>
                     </div>
-
-                    {/* <div id="avatar" className="flex flex-col md:flex-row pb-2 pt-5 justify-between border-b-2 border-magentacorner">
-                        <div className="">Avatar</div>
-                        {userState.imageProfilUrl ? <div>
-                            <img src={`http://localhost:8080/static/` + userState.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200} />
-                            </div> :
-                        <p> Aucune image </p>}
-                       
-                        <Link to={URL_MODIFYACCOUNT_BYID + 'avatar'+`/${userState.id}`}>
-                            <button className="btn-primary w-[250px] mt-5 md:mt-0">
-                                Modifier
-                            </button>
-                        </Link>
-                    </div> */}
                 
                     <div className="flex flex-col md:flex-row pb-2 pt-5 justify-between">
                         <p className="">Supprimer le compte de cet utilisateur</p>

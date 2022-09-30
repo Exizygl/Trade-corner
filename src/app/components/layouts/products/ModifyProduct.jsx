@@ -220,10 +220,6 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
         })
   }
 
-  // AJOUTER UNE CONDITION POUR QUE SEULS LES UTILISATEURS VOULU VOIENT LA PAGE
-  // if()
-  // {return <div><h1 className='font-bold leading-[2.25rem] text-[1.5rem] mb-4'>Vous n'avez pas les autorisations pour accéder à cette page</h1></div>}
-
   if(!load)
   {return <div><h1>Téléchargement</h1></div>}
 
@@ -287,7 +283,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
                 {renderPreview(previewImages)}
                 {renderPreviewImageUrl(product.imageProductUrl)} 
                 </div> 
-            </div>
+              </div>
             </div>
             
     {/* catégorie du produit */}
@@ -311,7 +307,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
                     ''
                 )}
                 </div>
-            </div>
+              </div>
             </div>
 
     {/* Tags du produit */}
@@ -361,7 +357,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
                     ''
                     )}
                 </div>
-            </div>
+              </div>
             </div>
 
     {/* Prix du produit */}
@@ -384,7 +380,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
                     ''
                 )}
                 </div>
-            </div>
+              </div>
             </div>
 
     {/* Stock du produit */}
@@ -407,7 +403,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
                     ''
                 )}
                 </div>
-            </div>
+              </div>
             </div>
 
     {/* BOutons */}

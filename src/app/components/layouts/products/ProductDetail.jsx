@@ -12,7 +12,6 @@ import { URL_MODIFYPRODUCT} from '../../../shared/constants/urls/urlConstants';
 const ProductDetail = () => {
 
   const user = useSelector((state) => state.auth.user);
- 
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [seller, setSeller] = useState([]);
@@ -55,7 +54,6 @@ const ProductDetail = () => {
   const displayCarousel = (imageList) => {
     if (loading == 0 || imageList.length < 2) return <div></div>
     // if (productDetail.imageProductUrl.length > 1) {
-
     //   var objectImage = productDetail.imageProductUrl.map((imageUrl, index) => ({ id: index + 1, value: str }))
 
     return (
@@ -79,7 +77,7 @@ const ProductDetail = () => {
   }
 
   const displayButtonPanier = () => {
-    if (user.roleLabel !== "admin" | user._id !== sellerId) {
+    if (user.roleLabel !== "admin" & user._id !== sellerId) {
       return (<Link to={URL_MODIFYPRODUCT + id}>
         <button className='btn-primary mb-0 ml-5'>
           Ajouter au panier
@@ -97,7 +95,7 @@ const ProductDetail = () => {
         :
         <img src={`http://localhost:8080/static/default.jpg`} className='object-contain object-top mx-auto mb-[25px] w-11/12 h-[400px]' alt="preview" />
         }
-            {displayCarousel(productDetail.imageProductUrl)}
+        {displayCarousel(productDetail.imageProductUrl)}
       </div>
 
       <div id ="informationProduit" className='pl-5 w-11/12 md:w-7/12 mt-[20px] lg:mt-0 mx-auto flex flex-col justify-between'>
@@ -134,21 +132,14 @@ const ProductDetail = () => {
             </div>
 
             <div id="boutons">
-              {/* <button className=' mx-auto btn-primary mb-0'>
-                Ajouter au panier
-              </button> */}
               {displayButtonModify()}
               {displayButtonPanier()}
-            </div>
-            
-            
-          </div>
-          </div>
-          
+            </div>  
 
+          </div>
           
+        </div>   
       </div>
-
     </div >
   )
 }

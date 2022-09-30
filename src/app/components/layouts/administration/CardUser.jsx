@@ -3,7 +3,6 @@ import React from 'react';
 export default function CardUser(props) {
 
   return (
-    
     <div className="bg-black h-[250px] lg:h-[392px] w-[200px] lg:w-[300px] mb-5">
       <div className="">
         {props.imageProfilUrl ?

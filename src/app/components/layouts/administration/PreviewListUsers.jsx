@@ -11,8 +11,6 @@ export default function PreviewListUsers() {
     useEffect(() => {
         getAllUser() //j'appelle l'api
             .then(function (res) {
-                // console.log(res.status);
-                console.log("truc");
                 if (res.status === 200) {
                     let usersTemp = [];
                     if (res.data.length === 0) {

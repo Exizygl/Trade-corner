@@ -11,9 +11,8 @@ export default function Administration() {
   
   return (
     <div className="">
-    <h1>Panneau d'administration</h1>
-    <div className="flex flex-row flex-wrap lg:flex-nowrap gap-10 bg-darkgray text-white">
-
+      <h1>Panneau d'administration</h1>
+      <div className="flex flex-row flex-wrap lg:flex-nowrap gap-10 bg-darkgray text-white">
         <div className = "basis-11/12 lg:basis-3/12">
             <Navigation/>
         </div> 
@@ -28,7 +27,7 @@ export default function Administration() {
             )}
           </div>
         </div>
-    </div>
+      </div>
     </div>
   )
 }

@@ -69,7 +69,6 @@ export function uploadUserImageById(values) {
 }
 
 
-
 //REQUETE PRODUIT
 
 export const addProduct = (values) => {
@@ -98,11 +97,6 @@ export const search = (search) => {
 export const getProductsFrom = (id) => {
     return apiBackEnd.get('product/user/' + id);
 };
-
-<<<<<<< HEAD
-//requete categorie
-=======
->>>>>>> 84f79fe0e3fc52317fd8d059797e9ae2d378320d
 
 export const getAllCategory = () => {
     return apiBackEnd.get('category');
