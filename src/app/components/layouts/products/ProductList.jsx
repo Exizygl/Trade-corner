@@ -2,27 +2,16 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Component } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-<<<<<<< HEAD:src/app/components/layouts/products/ProductList.jsx
 import { getAllSuperCategory, search } from '../../../api/backend/requestApi';
 import Dropdown from '../../../shared/components/DropDown';
-=======
-import { Pagination } from 'reactstrap';
-import { getAllSuperCategory, search, searchCount } from '../../api/backend/requestApi';
-import Dropdown from '../../shared/components/DropDown';
-
-
-import { } from '../../shared/constants/urls/urlConstants';
-import { updateUser } from '../../shared/redux-store/authenticationSlice';
-import { addProduct } from '../../shared/redux-store/panierSlice';
-import PaginationList from './card/PaginationList';
-import Product from './card/Product';
-
->>>>>>> panier:src/app/components/layouts/ProductList.jsx
 
 import { updateUser } from '../../../shared/redux-store/authenticationSlice';
+import { addProduct } from '../../../shared/redux-store/panierSlice';
 import PaginationList from '../card/PaginationList';
 import Product from '../card/Product';
+
 
 
 const ProductList = () => {
@@ -55,7 +44,7 @@ const ProductList = () => {
     const [tagEntry, setTagEntry] = useState("")
     const [tagReload, setTagReload] = useState(0)
 
-
+    const  dispactch = useDispatch()
 
 
     useEffect(() => {
@@ -108,12 +97,8 @@ const ProductList = () => {
                     price={item.price}
                     category={item.category}
                     image={item.imageProductUrl[0]}
-<<<<<<< HEAD:src/app/components/layouts/products/ProductList.jsx
-                    sellerId={item.sellerId._id}
-=======
                     addProduct={addProductPanier}
 
->>>>>>> panier:src/app/components/layouts/ProductList.jsx
                 />
             );
         });

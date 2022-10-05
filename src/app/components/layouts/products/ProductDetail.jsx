@@ -17,11 +17,8 @@ const ProductDetail = () => {
   const [seller, setSeller] = useState([]);
   const [date, setDate] = useState([]);
   const [mainImage, setMainImage] = useState([]);
-<<<<<<< HEAD
   const [loading, setLoading] = useState(0);
-=======
-  const [loadgiting, setLoading] = useState(0);
->>>>>>> panier
+  // const [loadgiting, setLoading] = useState(0);
   const [userState, setUserState] = useState([]);
   const productDetail = product;
 

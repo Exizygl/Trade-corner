@@ -37,19 +37,12 @@ import ShopUsersView from '../views/products/ShopUsersView';
 
 
 //import produit
-<<<<<<< HEAD
 import ProductDetailView from '../views/products/ProductDetailView';
 import ProductListView from '../views/products/ProductListView';
 import ModifyProductView from '../views/products/ModifyProductView';
-
-
-=======
-import ProductDetailView from '../views/ProductDetailView';
-import ProductListView from '../views/ProductListView';
-import ModifyProductView from '../views/produits/ModifyProductView';
-import BecomeSeller from '../components/layouts/BecomeSeller';
 import PanierView from '../views/PanierView';
->>>>>>> panier
+
+
 
 
 /**

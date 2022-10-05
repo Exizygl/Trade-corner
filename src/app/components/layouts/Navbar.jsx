@@ -2,13 +2,8 @@ import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
-import { URL_HOME, URL_LOGIN, URL_REGISTER,URL_LOGOUT } from './../../shared/constants/urls/urlConstants';
-=======
-import { useDispatch } from 'react-redux';
 import { URL_HOME, URL_LOGIN, URL_REGISTER,URL_LOGOUT, URL_PANIER } from './../../shared/constants/urls/urlConstants';
->>>>>>> panier
 import { URL_USER, URL_ADMIN, URL_SELLER } from './../../shared/constants/urls/urlConstants';
 import logo from '../../assets/images/logo-trade-corner-white.jpg';
 
@@ -48,6 +43,10 @@ const Navbar = () => {
                             {role === "seller" && <Link to={URL_SELLER} className="ml-5">
                                 Ma boutique
                             </Link>}
+                            
+                            {isLogged===true && <Link to={URL_PANIER} className="ml-5">
+                                Panier
+                            </Link>}
 
                             {role === "admin" && <Link to={URL_ADMIN} className="ml-5">
                                 Administration
@@ -64,27 +63,7 @@ const Navbar = () => {
                                 >
                                     Se déconnecter
                                 </button>
-<<<<<<< HEAD
                             </Link> : <Link to={URL_LOGIN} className=" btn-nav-primary ml-5">
-=======
-                            </Link>
-                            <Link to={URL_USER} className="ml-5">
-                                Profil
-                            </Link>
-                            <Link to={URL_PANIER} className="ml-5">
-                                Panier
-                            </Link>
-                            <Link to={URL_SELLER} className="ml-5">
-                                Ma boutique
-                            </Link>
-                            <Link to={URL_ADMIN} className="ml-5">
-                                Administration
-                            </Link>
-                            <Link to={URL_REGISTER} className="btn-nav-primary ml-5">
-                                S'enregistrer
-                            </Link>
-                            <Link to={URL_LOGIN} className=" btn-nav-primary ml-5">
->>>>>>> panier
                                 Se connecter
                             </Link> }
                             

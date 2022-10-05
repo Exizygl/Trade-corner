@@ -28,7 +28,6 @@ const Login = () => {
                 }
                
                 if (res.status === 200 && res.data.message.user.id_token) {
-<<<<<<< HEAD
           const userBack = res.data.message.user;
             console.log(userBack);
                 const user = {...userBack.user, 
@@ -47,11 +46,6 @@ const Login = () => {
 
                     dispatch(signIn(userForDispatch));
                     
-=======
-
-                    
-                    dispatch(signIn(res.data.message.user));
->>>>>>> panier
                     
                     if (isAuthenticated()) {
                        
