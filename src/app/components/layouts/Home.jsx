@@ -1,12 +1,40 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+>>>>>>> panier
 import { Link } from 'react-router-dom';
 import { getNewProduct } from '../../api/backend/requestApi';
 import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
+<<<<<<< HEAD
 import photoAccueil from "../../assets/images/photoAccueil.jpg";
 
 const Home = () => {
+=======
+import { addProduct } from '../../shared/redux-store/panierSlice';
+
+const Home = () => {
+    const panier = useSelector((state) => state.panier.products);
+>>>>>>> panier
     const [products, setProducts] = useState([]);
+    const dispactch = useDispatch()
+
+
+    const addProductPanier = (e) => {
+
+
+        const product = {
+            id: e,
+            number: 1
+        }
+        
+        dispactch(addProduct(product))
+    }
+
+    
 
     useEffect(() => {
         getNewProduct().then(function (res) {
@@ -19,7 +47,13 @@ const Home = () => {
     }, []);
 
     const displayProducts = () => {
+<<<<<<< HEAD
         const list = products.map((item) => {
+=======
+
+        const list = products.map(item => {
+
+>>>>>>> panier
             return (
                 <Product
                     key={item._id}
@@ -28,7 +62,11 @@ const Home = () => {
                     price={item.price}
                     category={item.category}
                     image={item.imageProductUrl[0]}
+<<<<<<< HEAD
                     sellerId={item.sellerId}
+=======
+                    addProduct={addProductPanier}
+>>>>>>> panier
                 />
             );
         });

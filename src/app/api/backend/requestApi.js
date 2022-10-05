@@ -90,9 +90,15 @@ export const getNewProduct = () => {
 export const getProduct = (id) => {
     return apiBackEnd.get('product/' + id);
 };
+
+export const getListProduct = (id) => {
+
+    return apiBackEnd.get('product/list/' + id);
+};
 export const search = (search) => {
     return apiBackEnd.get('product/search/' + search["search"] + "/" + search["page"] + "/" + search["superCategory"] + "/" + search["category"] + "/" + search["order"] + "/" + search["minimun"] + "/" + search["maximun"]);
 };
+
 
 export const getProductsFrom = (id) => {
     return apiBackEnd.get('product/user/' + id);
