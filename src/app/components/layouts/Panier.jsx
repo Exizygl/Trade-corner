@@ -166,34 +166,48 @@ const Panier = () => {
             return (
 
                 <div>
-                    <div>Vendeur jkj : {seller}</div>
+                    <div>Vendeur: {seller}</div>
                     <PriceRecap
                         key={seller.seller}
                         listProduct={listProduct}
                         panier={panier}
-                        updateNumber={updateNumber}
-                        deleteArticle={deleteArticle}
                     />
                 </div>
             );
         });
 
-        const number = products.length
+        var sum = 0
+        var number = products.length
+        var numberBought = 0
 
-        var sum = products.reduce((price, product) => {
+        for (let i = 0; i < number; i++) {
+          
+            var product = products[i];
+      
             var article = panier.filter(item => item.id == product._id)
-            console.log(article)
-
-            return price + product.price * article.number;
-        }, 0);
+            
+            var numberProduct = parseInt(article[0].number)
+            console.log(numberBought)
+            numberBought = numberBought + numberProduct
+            console.log(numberBought)
+            
+            var price = parseInt(product.price)
+            numberBought
+            console.log("price " +price)
+            sum = sum + price * numberProduct;
+            console.log("sum " +sum)
+            
+        }
+      
 
         sum = sum / 100
+        
         
         const total =
             <div>
                 <div>Total</div>
                 <div className='flex'>
-                    <div>{number} Article : </div>
+                    <div>{numberBought} Article : </div>
                     <div>{sum} </div>
                 </div>
             </div>
