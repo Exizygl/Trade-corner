@@ -14,6 +14,7 @@ const Panier = () => {
     const [products, setProducts] = useState([]);
     const [sellers, setSellers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [firstLoad, setFirstLoad] = useState(false);
     const [error, setError] = useState(false);
     const dispactch = useDispatch()
 
@@ -54,6 +55,7 @@ const Panier = () => {
         } else {
             setSellers([])
             setProducts([])
+            setFirstLoad(true)
         }
     }, [loading]);
 
@@ -135,7 +137,7 @@ const Panier = () => {
             return (
 
                 <div>
-                    <h2>Vendeur: {seller}</h2>
+                    <div className='mt-[50px] text-white'>Vendeur: {seller}</div>
                     <ProductSellers
                         key={seller.seller}
                         listProduct={listProduct}
@@ -165,13 +167,14 @@ const Panier = () => {
             var listProduct = products.filter(item => item.sellerId.pseudo == seller)
             return (
 
-                <div>
-                    <div>Vendeur: {seller}</div>
+                <div className='mt-[20px] ml-[50px] mr-[50px]'>
+                    <div className='mb-[25px]'>Vendeur: {seller}</div>
                     <PriceRecap
                         key={seller.seller}
                         listProduct={listProduct}
                         panier={panier}
                     />
+                    <div className="line w-[325px] mx-auto text-center"></div>
                 </div>
             );
         });
@@ -181,41 +184,48 @@ const Panier = () => {
         var numberBought = 0
 
         for (let i = 0; i < number; i++) {
-          
+
             var product = products[i];
-      
+
             var article = panier.filter(item => item.id == product._id)
-            
-            var numberProduct = parseInt(article[0].number)
-            console.log(numberBought)
-            numberBought = numberBought + numberProduct
-            console.log(numberBought)
-            
-            var price = parseInt(product.price)
-            numberBought
-            console.log("price " +price)
-            sum = sum + price * numberProduct;
-            console.log("sum " +sum)
-            
+            console.log(article)
+            if (article.length > 0) {
+                var numberProduct = parseInt(article[0].number)
+                console.log(numberBought)
+                numberBought = numberBought + numberProduct
+                console.log(numberBought)
+
+                var price = parseInt(product.price)
+                numberBought
+                console.log("price " + price)
+                sum = sum + price * numberProduct;
+                console.log("sum " + sum)
+            }
+
         }
-      
+
 
         sum = sum / 100
-        
-        
+
+
         const total =
-            <div>
+            <div className='mt-[20px] ml-[50px] mr-[50px]'>
                 <div>Total</div>
-                <div className='flex'>
+                <div className='flex justify-between'>
                     <div>{numberBought} Article : </div>
-                    <div>{sum} </div>
+                    <div>{sum} €</div>
                 </div>
             </div>
 
         return (
-            <div>
+            <div className='w-[430px] ml-[30px] mt-[40px] bg-black text-white'>
+                <div className='mt-[20px] text-center text-white'>Récapitulatif</div>
+                <div className="line w-[325px] mx-auto text-center"></div>
                 {listResult}
                 {total}
+                <div className='text-center mt-[50px]'>
+                    <button className='btn-primary w-[300px] my-auto'>VALIDER MA COMMANDE</button>
+                </div>
             </div>
         )
     };
@@ -223,8 +233,8 @@ const Panier = () => {
     return (
 
         <div>
-            <h1 className=''>Panier </h1>
-            <div className='flex'>
+            <h1 className='ml-[50px]'>Panier </h1>
+            <div className='flex ml-[50px]'>
                 {displayProducts()}
                 {Recap()}
             </div>
