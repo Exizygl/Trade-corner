@@ -15,7 +15,7 @@ const ProductSellers = ({ listProduct, panier, updateNumber, deleteArticle }) =>
     const displayProducts = () => {
 
         const list = listProduct.map(product => {
-
+            console.log(product)
             var paniersearch = panier.find((item) => item.id == product._id)
 
             if (paniersearch) {
@@ -37,7 +37,7 @@ const ProductSellers = ({ listProduct, panier, updateNumber, deleteArticle }) =>
                                 {product.title}
                             </div>
                             <div className='mt-[20px]'>
-                                categorie : {product.category}
+                                categorie : {product.categoryId.label}
                             </div>
                             <div className='mt-[50px]'>
                                 {product.price / 100}€
