@@ -79,6 +79,15 @@ export const modifyProduct = (values) => {
     return apiBackEnd.put('product/modify', values);
 };
 
+export const deleteProduct = (values) => {
+    console.log(values)
+    var req = {};
+    req['productId'] = values
+    console.log(req)
+    
+    return apiBackEnd.put('product/delete', req);
+};
+
 export const getAllProduct = () => {
     return apiBackEnd.get('product');
 };
@@ -100,8 +109,8 @@ export const search = (search) => {
 };
 
 
-export const getProductsFrom = (id) => {
-    return apiBackEnd.get('product/user/' + id);
+export const getProductsFrom = (id, page) => {
+    return apiBackEnd.get('product/user/' + id + '/' + page);
 };
 
 export const getAllCategory = () => {

@@ -46,15 +46,20 @@ export const panierSlice = createSlice({
 
 
         }, deleteProduct: (state, action) => {
+
             const product = action.payload;
             const stateCopy = state.products
-            const itemExist = state.products.find((item) => item.id == product.id);
+            const itemExist = state.products.find((item) => item.id == product);
+            console.log(current(itemExist))
+
             const index = state.products.indexOf(itemExist);
-            if (index) {
+            
+            
+            
                 stateCopy.splice(index, 1)
 
                 state.products = stateCopy
-            }
+            
 
         },
     },

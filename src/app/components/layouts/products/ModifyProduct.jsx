@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProduct, getAllCategory, modifyProduct } from '../../../api/backend/requestApi';
+import { getProduct, getAllCategory, modifyProduct, deleteProduct } from '../../../api/backend/requestApi';
 
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import { validationModifyProduct } from '../../../utils/Validation';
 import { URL_SELLER, URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
 import Modal from '../modal/Modal';
 import ModalAction from '../modal/ModalAction';
+
 
 
 const ModifyProduct = () => {
@@ -64,8 +65,9 @@ const ModifyProduct = () => {
   const closeModalDelete= () => {
     setShowModalDelete(false);
   };
-  const deleteProduct=() => {
-    alert("produit supprimé");
+  const deletionProduct=() => {
+
+    deleteProduct(id);
     history.push(URL_SELLER);
   }
 
@@ -129,6 +131,7 @@ const ModifyProduct = () => {
 // ----- FORMIK ------------
 
   const initialValues = {
+        id: id,
         title: product.title,
         description: product.description,
         category: category.label,
@@ -201,6 +204,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
             formData.append('photos', formValues.photos[i]); //on envoie chaque file avec la key "photos"
         };
        
+        formData.append('id', formValues.id);
         formData.append('title', formValues.title);
         formData.append('description', formValues.description);
         formData.append('category', formValues.category);
@@ -232,7 +236,13 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
                 <p>Date de création du produit : {dateFormat(product.createdAt)}</p>
             </div> 
         <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
-            
+        <input
+              type="hidden"
+              name="id"
+              id="id"
+              className="input"
+              value={values.id}
+              />
     {/* titre du produit */}   
           <div className="flex flex-row flex-wrap md:flex-nowrap gap-3 content-center mt-5">
             <label htmlFor="title" className="basis-1/6 flex content-center"> Titre : </label>
@@ -419,7 +429,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
 
         </form>
         <Modal message={msgModal} title={titleModal} showModal={showModal} closeModal={()=> closeModal}/>
-        <ModalAction message={msgModalDelete} title={titleModalDelete} showModal={showModalDelete} closeModal={()=>closeModalDelete} action="Supprimer" doAction={()=>deleteProduct}/>
+        <ModalAction message={msgModalDelete} title={titleModalDelete} showModal={showModalDelete} closeModal={()=>closeModalDelete} action="Supprimer" doAction={()=>deletionProduct}/>
       </div>
     </div>
   )

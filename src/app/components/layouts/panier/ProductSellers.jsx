@@ -15,7 +15,7 @@ const ProductSellers = ({ listProduct, panier, updateNumber, deleteArticle }) =>
     const displayProducts = () => {
 
         const list = listProduct.map(product => {
-            console.log(product)
+          
             var paniersearch = panier.find((item) => item.id == product._id)
 
             if (paniersearch) {
@@ -47,14 +47,16 @@ const ProductSellers = ({ listProduct, panier, updateNumber, deleteArticle }) =>
                             <div className='mt-[10px] ml-[10px]' onClick={(value) => { deleteArticle(product._id, value.target.value, product.quantity) }}>
                                 <img src="/src/app/assets/images/cross.png" alt="" srcset="" />
                             </div>
-                            <div>
+                            <div  className="mr-4 w-[40px] text-black mt-[100px] mr-[10px]">
+                                <button onClick={() => { updateNumber(product._id, numberProduct - 1, product.quantity) }}>-</button>
                                 <input
                                     type="number"
-                                    className=" border border-2 border-magentacorner mr-4 w-[40px] text-black mt-[100px] mr-[10px]"
+                                    className=" border border-2 border-magentacorner w-[40px] text-black"
                                     name="number"
                                     value={numberProduct}
                                     onChange={(value) => { updateNumber(product._id, value.target.value, product.quantity) }}
                                 />
+                                <button onClick={() => { updateNumber(product._id, numberProduct + 1, product.quantity) }}>+</button>
                             </div>
                         </div>
                     </div>

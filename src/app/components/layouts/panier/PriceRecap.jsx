@@ -55,7 +55,7 @@ const PriceRecap = ({ listProduct, panier}) => {
     return (
 
         <div className='flex justify-between'>
-            <div>{numberBought} Article : </div>
+            <div>{numberBought} Articles : </div>
             <div>{sum / 100} €</div>
         </div>
     )

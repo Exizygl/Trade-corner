@@ -9,6 +9,7 @@ const ShopUsers = () => {
     // const [shop, setShop] = useState([]);
     const [seller, setSeller] = useState([]);
     // const shopUsers = shop;
+   
 
     const { id } = useParams();
 

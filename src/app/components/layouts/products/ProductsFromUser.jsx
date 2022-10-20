@@ -3,16 +3,21 @@ import { useState, useEffect } from 'react';
 import { getProduct, getProductsFrom } from '../../../api/backend/requestApi';
 import { useParams } from 'react-router-dom';
 import Product from '../card/Product';
+import PaginationList from '../card/PaginationList';
 
 const ProductsFromUser = () => {
-    const [products, setProduct] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [numberPage, setNumberPage] = useState(0);
 
     const { id } = useParams();
 
     useEffect(() => {
-        getProductsFrom(id).then(function (res) {
+        getProductsFrom(id, page).then(function (res) {
             if (res.status === 200) {
-                setProduct(res.data.message.productList);
+                console.log(res.data.list.list)
+                setProducts(res.data.list.list)
+                setNumberPage(res.data.number.number)
             }
         });
     }, []);
@@ -31,13 +36,35 @@ const ProductsFromUser = () => {
             );
         });
 
+        const displayPagination = () => {
+            return (
+                <PaginationList
+                    key={page}
+                    page={page}
+                    max={numberPage}
+                    changePage={changePage}
+                />
+            );
+        }
+        const changePage = (number) => {
+            setPage(number);
+        };
+
         return (
-                <div className="flex flex-wrap justify-around">{list}</div>   
+            <div>
+                <div className="flex flex-wrap justify-around">
+                    {list}
+                </div>
+                <div className='flex justify-end mr-14 mb-16'>
+                    {displayPagination()}
+                </div>
+            </div>
+
         );
     };
 
     return (
-            displayProducts()  
+        displayProducts()
     );
 };
 export default ProductsFromUser;
