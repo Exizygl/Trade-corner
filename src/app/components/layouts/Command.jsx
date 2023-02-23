@@ -9,18 +9,19 @@ import ProductSellers from './panier/ProductSellers';
 import PriceRecap from './panier/PriceRecap';
 
 const Command = () => {
+    const user = useSelector((state) => state.auth.user);
     var panier = useSelector((state) => state.panier.products);
     const [products, setProducts] = useState([]);
     const [sellers, setSellers] = useState([]);
     const [loading, setLoading] = useState(false);
-   
+
     const [error, setError] = useState(false);
     const dispatch = useDispatch()
 
 
 
     useEffect(() => {
-       
+
         if (panier.length > 0) {
 
             const idList = panier.map(item => {
@@ -37,7 +38,7 @@ const Command = () => {
                         var result = res.data.message.productList
                         var listProduct = listProductCheck(result, panier)
                         var getSellers = result.map((item) => { return item.sellerId.pseudo })
-                      
+
                         var uniqueSellers = [];
                         getSellers.forEach((e) => {
                             if (!uniqueSellers.includes(e)) {
@@ -45,13 +46,13 @@ const Command = () => {
                             }
                         });
                         setSellers(uniqueSellers)
-                        
+
                         setProducts(listProduct)
                     }
                 }
             );
         } else {
-            
+
             setSellers([])
             setProducts([])
         }
@@ -60,29 +61,29 @@ const Command = () => {
 
     const listProductCheck = (listProduct, listPanier) => {
 
-      
+
 
         const checkList = listPanier.map(Product => {
-        
+
             var checkProduct = listProduct.find((item) => item._id == Product.id)
-           
-            
+
+
             if (checkProduct) {
-                if(checkProduct.quantity == 0 || !checkProduct){
-                   
+                if (checkProduct.quantity == 0 || !checkProduct) {
+
                     setError(true)
                     dispatch(deleteProduct(Product.id))
-    
-                }else if (checkProduct.quantity < Product.number) {
+
+                } else if (checkProduct.quantity < Product.number) {
 
                     const updateProducts = {
                         id: checkProduct._id,
                         number: checkProduct.quantity
                     }
-            
+
 
                     dispatch(updateProduct(updateProducts))
-                    
+
                 }
                 return checkProduct
 
@@ -92,16 +93,16 @@ const Command = () => {
     }
 
     const updateNumber = (id, number, max) => {
-       
+
 
         if (number <= 0 || number == null) number = ""
 
         var checkNumber
         if (number < max + 1) {
-          
+
             checkNumber = number
         } else {
-           
+
 
             checkNumber = max
         }
@@ -111,8 +112,8 @@ const Command = () => {
             number: checkNumber
         }
 
-        
-        
+
+
         dispatch(updateProduct(newProduct))
 
 
@@ -127,35 +128,6 @@ const Command = () => {
 
 
     }
-    const displayProducts = () => {
-
-        const uniqueSellers = sellers
-
-        const list = uniqueSellers.map(seller => {
-
-            var listProduct = products.filter(item => item.sellerId.pseudo == seller)
-            return (
-
-                <div>
-                    <div className='mt-[50px] text-white'>Vendeur: {seller}</div>
-                    <ProductSellers
-                        key={seller.seller}
-                        listProduct={listProduct}
-                        panier={panier}
-                        updateNumber={updateNumber}
-                        deleteArticle={deleteArticle}
-
-                    />
-                </div>
-            );
-        });
-
-        return (
-            <div>
-                {list}
-            </div>
-        )
-    };
 
 
     const Recap = () => {
@@ -188,7 +160,7 @@ const Command = () => {
             var product = products[i];
 
             var article = panier.filter(item => item.id == product._id)
-            
+
             if (article.length > 0) {
                 var numberProduct = parseInt(article[0].number)
 
@@ -196,10 +168,10 @@ const Command = () => {
 
 
                 var price = parseInt(product.price)
-                
-            
+
+
                 sum = sum + price * numberProduct;
-            
+
             }
 
         }
@@ -232,18 +204,48 @@ const Command = () => {
 
     return (
 
-        
+
 
         <div>
-            
-            <h1 className='ml-[50px]'>Panier </h1>
+
+            <h1 className='ml-[50px]'>Payer ma commande </h1>
             <div className='flex ml-[50px]'>
-                {displayProducts()}
+                <div>
+
+                    <div className='bg-black w-[885px] h-[250px] flex text-white mt-[25px]'>
+                        <div className='mt-[50px] text-white'>Adresse de livraison {seller}</div>
+
+                        <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                            <div>
+                                Nom
+                            </div>
+                        </div>
+                        <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                            <div>
+                                {user.name}
+                            </div>
+                        </div>
+                        <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                            <div>
+                                adresse
+                            </div>
+                            <div className='mt-[20px]'>
+                                {user.adressStreet} {user.adressZipcode} {user.adressCity}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <Link to={URL_MODIFYACCOUNT + 'adress'}>
+                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                            Modifier mon adresse
+                        </button>
+                    </Link>
                 {Recap()}
             </div>
-            
+
         </div>
-        
+
     );
 
 }
