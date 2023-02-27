@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getListProduct, getNewProduct } from '../../api/backend/requestApi';
-import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
+import { URL_COMMAND, URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
 import ProductSellers from './panier/ProductSellers';
@@ -14,14 +14,14 @@ const Panier = () => {
     const [products, setProducts] = useState([]);
     const [sellers, setSellers] = useState([]);
     const [loading, setLoading] = useState(false);
-   
+
     const [error, setError] = useState(false);
     const dispatch = useDispatch()
 
 
 
     useEffect(() => {
-       
+
         if (panier.length > 0) {
 
             const idList = panier.map(item => {
@@ -38,7 +38,7 @@ const Panier = () => {
                         var result = res.data.message.productList
                         var listProduct = listProductCheck(result, panier)
                         var getSellers = result.map((item) => { return item.sellerId.pseudo })
-                      
+
                         var uniqueSellers = [];
                         getSellers.forEach((e) => {
                             if (!uniqueSellers.includes(e)) {
@@ -46,13 +46,13 @@ const Panier = () => {
                             }
                         });
                         setSellers(uniqueSellers)
-                        
+
                         setProducts(listProduct)
                     }
                 }
             );
         } else {
-            
+
             setSellers([])
             setProducts([])
         }
@@ -61,29 +61,29 @@ const Panier = () => {
 
     const listProductCheck = (listProduct, listPanier) => {
 
-      
+
 
         const checkList = listPanier.map(Product => {
-        
+
             var checkProduct = listProduct.find((item) => item._id == Product.id)
-           
-            
+
+
             if (checkProduct) {
-                if(checkProduct.quantity == 0 || !checkProduct){
-                   
+                if (checkProduct.quantity == 0 || !checkProduct) {
+
                     setError(true)
                     dispatch(deleteProduct(Product.id))
-    
-                }else if (checkProduct.quantity < Product.number) {
+
+                } else if (checkProduct.quantity < Product.number) {
 
                     const updateProducts = {
                         id: checkProduct._id,
                         number: checkProduct.quantity
                     }
-            
+
 
                     dispatch(updateProduct(updateProducts))
-                    
+
                 }
                 return checkProduct
 
@@ -93,16 +93,16 @@ const Panier = () => {
     }
 
     const updateNumber = (id, number, max) => {
-       
+
 
         if (number <= 0 || number == null) number = ""
 
         var checkNumber
         if (number < max + 1) {
-          
+
             checkNumber = number
         } else {
-           
+
 
             checkNumber = max
         }
@@ -112,8 +112,8 @@ const Panier = () => {
             number: checkNumber
         }
 
-        
-        
+
+
         dispatch(updateProduct(newProduct))
 
 
@@ -189,7 +189,7 @@ const Panier = () => {
             var product = products[i];
 
             var article = panier.filter(item => item.id == product._id)
-            
+
             if (article.length > 0) {
                 var numberProduct = parseInt(article[0].number)
 
@@ -197,10 +197,10 @@ const Panier = () => {
 
 
                 var price = parseInt(product.price)
-                
-            
+
+
                 sum = sum + price * numberProduct;
-            
+
             }
 
         }
@@ -225,7 +225,9 @@ const Panier = () => {
                 {listResult}
                 {total}
                 <div className='text-center mt-[50px]'>
-                    <button className='btn-primary w-[300px] my-auto'>VALIDER MA COMMANDE</button>
+                    <Link to={URL_COMMAND}>
+                        <button className='btn-primary w-[300px] my-auto'>VALIDER MA COMMANDE</button>
+                    </Link>
                 </div>
             </div>
         )
@@ -233,18 +235,18 @@ const Panier = () => {
 
     return (
 
-        
+
 
         <div>
-            
+
             <h1 className='ml-[50px]'>Panier </h1>
             <div className='flex ml-[50px]'>
                 {displayProducts()}
                 {Recap()}
             </div>
-            
+
         </div>
-        
+
     );
 
 }

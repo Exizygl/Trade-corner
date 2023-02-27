@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getListProduct, getNewProduct } from '../../api/backend/requestApi';
-import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
+import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
 import ProductSellers from './panier/ProductSellers';
 import PriceRecap from './panier/PriceRecap';
 
-const Command = () => {
+const Commands = () => {
     const user = useSelector((state) => state.auth.user);
     var panier = useSelector((state) => state.panier.products);
     const [products, setProducts] = useState([]);
@@ -209,39 +209,45 @@ const Command = () => {
         <div>
 
             <h1 className='ml-[50px]'>Payer ma commande </h1>
-            <div className='flex ml-[50px]'>
-                <div>
 
-                    <div className='bg-black w-[885px] h-[250px] flex text-white mt-[25px]'>
-                        <div className='mt-[50px] text-white'>Adresse de livraison {seller}</div>
+            <div className='flex'>
+                <div className='flex flex-col ml-[50px]'>
+                    <div>
 
-                        <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
-                            <div>
-                                Nom
+                        <div className='bg-black w-[885px] h-[250px] text-white mt-[25px]'>
+                            <div className='ml-[50px] mt-[50px] text-white'>Adresse de livraison</div>
+
+                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                <div>
+                                    Nom
+                                </div>
                             </div>
-                        </div>
-                        <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
-                            <div>
-                                {user.name}
+                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                <div>
+                                    {user.name}
+                                </div>
                             </div>
-                        </div>
-                        <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
-                            <div>
-                                adresse
-                            </div>
-                            <div className='mt-[20px]'>
-                                {user.adressStreet} {user.adressZipcode} {user.adressCity}
+                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                <div>
+                                    adresse
+                                </div>
+                                <div className='mt-[20px]'>
+                                    {user.adressStreet} {user.adressZipcode} {user.adressCity}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <Link to={URL_MODIFYACCOUNT + 'adress'}>
+                    <Link to={URL_MODIFYACCOUNT + 'adress'}>
+
                         <button className="btn-primary px-10 mt-5 md:mt-0">
                             Modifier mon adresse
                         </button>
                     </Link>
+
+                </div>
                 {Recap()}
+
             </div>
 
         </div>
@@ -249,4 +255,4 @@ const Command = () => {
     );
 
 }
-export default Command;
+export default Commands;
