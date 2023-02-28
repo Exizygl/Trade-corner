@@ -125,6 +125,11 @@ export const getbySuperCategory = (label) => {
     return apiBackEnd.get('super-category/' + label);
 }
 
+//REQUETE TRANSPORTEUR 
+export const getTransporteur = () => {
+    return apiBackEnd.get('transporteur/');
+};
+
 
 //REQUETE DEMANDES
 

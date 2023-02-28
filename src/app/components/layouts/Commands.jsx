@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getListProduct, getNewProduct } from '../../api/backend/requestApi';
+import { getListProduct, getTransporteur } from '../../api/backend/requestApi';
 import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
@@ -13,6 +13,7 @@ const Commands = () => {
     var panier = useSelector((state) => state.panier.products);
     const [products, setProducts] = useState([]);
     const [sellers, setSellers] = useState([]);
+    const [transporteurs, setTransporteurs] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState(false);
@@ -23,6 +24,15 @@ const Commands = () => {
     useEffect(() => {
 
         if (panier.length > 0) {
+
+            getTransporteur().then(
+                function (res){
+                    if (res.status === 200) {
+                        setTransporteurs(res.data.message.TransporteurList);
+                    }
+
+                }
+            )
 
             const idList = panier.map(item => {
                 return (
@@ -125,6 +135,69 @@ const Commands = () => {
         var toogle = !loading
         setLoading(toogle)
 
+
+
+    }
+    const SellerTransporteur = (id) => {
+
+
+        const uniqueSellers = sellers
+
+        var listResult = uniqueSellers.map(seller => {
+
+            
+            return (
+
+                <div className='mt-[20px] ml-[50px] mr-[50px]'>
+                    <div className='mb-[25px]'>Mode de Livraison: {seller}</div>
+                    <TransporteurChoice
+                        key={seller.seller}
+                        seller={seller.seller}
+                        transporteurs={transporteurs}
+                       
+                    />
+                    <div className="line w-[325px] mx-auto text-center"></div>
+                </div>
+            );
+        });
+
+        var sum = 0
+        var number = products.length
+        var numberBought = 0
+
+        for (let i = 0; i < number; i++) {
+
+            var product = products[i];
+
+            var article = panier.filter(item => item.id == product._id)
+
+            if (article.length > 0) {
+                var numberProduct = parseInt(article[0].number)
+
+                numberBought = numberBought + numberProduct
+
+
+                var price = parseInt(product.price)
+
+
+                sum = sum + price * numberProduct;
+
+            }
+
+        }
+
+
+        sum = sum / 100
+
+
+        const total =
+            <div className='mt-[20px] ml-[50px] mr-[50px]'>
+                <div>Total</div>
+                <div className='flex justify-between'>
+                    <div>{numberBought} Article : </div>
+                    <div>{sum} €</div>
+                </div>
+            </div>
 
 
     }
@@ -244,7 +317,7 @@ const Commands = () => {
                             Modifier mon adresse
                         </button>
                     </Link>
-
+                    {}
                 </div>
                 {Recap()}
 
