@@ -7,6 +7,7 @@ import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
 import ProductSellers from './panier/ProductSellers';
 import PriceRecap from './panier/PriceRecap';
+import TransporteurChoice from './commande/TransporteurChoice';
 
 const Commands = () => {
     const user = useSelector((state) => state.auth.user);
@@ -26,7 +27,7 @@ const Commands = () => {
         if (panier.length > 0) {
 
             getTransporteur().then(
-                function (res){
+                function (res) {
                     if (res.status === 200) {
                         setTransporteurs(res.data.message.TransporteurList);
                     }
@@ -138,70 +139,34 @@ const Commands = () => {
 
 
     }
-    const SellerTransporteur = (id) => {
+    const SellerTransporteur = () => {
+
 
 
         const uniqueSellers = sellers
 
         var listResult = uniqueSellers.map(seller => {
 
-            
+
             return (
 
                 <div className='mt-[20px] ml-[50px] mr-[50px]'>
                     <div className='mb-[25px]'>Mode de Livraison: {seller}</div>
                     <TransporteurChoice
-                        key={seller.seller}
-                        seller={seller.seller}
+                        key={seller}
+                        seller={seller}
                         transporteurs={transporteurs}
-                       
+
                     />
                     <div className="line w-[325px] mx-auto text-center"></div>
                 </div>
             );
         });
 
-        var sum = 0
-        var number = products.length
-        var numberBought = 0
-
-        for (let i = 0; i < number; i++) {
-
-            var product = products[i];
-
-            var article = panier.filter(item => item.id == product._id)
-
-            if (article.length > 0) {
-                var numberProduct = parseInt(article[0].number)
-
-                numberBought = numberBought + numberProduct
-
-
-                var price = parseInt(product.price)
-
-
-                sum = sum + price * numberProduct;
-
-            }
-
-        }
-
-
-        sum = sum / 100
-
-
-        const total =
-            <div className='mt-[20px] ml-[50px] mr-[50px]'>
-                <div>Total</div>
-                <div className='flex justify-between'>
-                    <div>{numberBought} Article : </div>
-                    <div>{sum} €</div>
-                </div>
-            </div>
-
-
+        return (
+            listResult
+        )
     }
-
 
     const Recap = () => {
 
@@ -317,9 +282,34 @@ const Commands = () => {
                             Modifier mon adresse
                         </button>
                     </Link>
-                    {}
+                    {SellerTransporteur()}
+                    <div>
+                        <div>Moyen de payement</div>
+                        <div>
+                            <input type="radio" id="carteBancaire" name="payement" value="carteBancaire" />
+                            <label for="carteBancaire">Carte Bancaire</label>
+
+                        </div>
+                        <div>
+                            <input type="radio" id="Visa" name="payement" value="Visa" />
+                            <label for="Visa">Paypal</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="Paypal" name="payement" value="Paypal" />
+                            <label for="Paypal">Paypal</label>
+
+                        </div>
+                        <div>
+                            <input type="radio" id="carteCredit" name="payement" value="carteCredit" />
+                            <label for="carteCredit">Carte de credit</label>
+
+                        </div>
+
+
+                    </div>
                 </div>
                 {Recap()}
+
 
             </div>
 
