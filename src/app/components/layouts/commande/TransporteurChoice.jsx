@@ -19,8 +19,9 @@ const TransporteurChoice = ({ seller, transporteurs }) => {
             
             return (
                 <div>
-                    <input type="radio" id={transporteur.transporteur} name={seller} value={transporteur.transporteur}/>
+                    <input type="radio" id={transporteur.transporteur} name={seller} value={transporteur.transporteur} onChange={handleChange}/>
                         <label for={transporteur.transporteur}>{transporteur.transporteur}</label>
+                        
                   
                 </div>
 

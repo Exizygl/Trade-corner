@@ -56,7 +56,14 @@ const Commands = () => {
                                 uniqueSellers.push(e);
                             }
                         });
-                        setSellers(uniqueSellers)
+                        var SellersTransportation = [];
+
+                        uniqueSellers.forEach((e) => {
+                            var s = { name: e, transporteurPrice: 0 }
+                            SellersTransportation.push(s);
+
+                        });
+                        setSellers(SellersTransportation)
 
                         setProducts(listProduct)
                     }
@@ -147,14 +154,14 @@ const Commands = () => {
 
         var listResult = uniqueSellers.map(seller => {
 
-
+            console.log(seller)
             return (
 
                 <div className='mt-[20px] ml-[50px] mr-[50px]'>
-                    <div className='mb-[25px]'>Mode de Livraison: {seller}</div>
+                    <div className='mb-[25px]'>Mode de Livraison: {seller.name}</div>
                     <TransporteurChoice
                         key={seller}
-                        seller={seller}
+                        seller={seller.name}
                         transporteurs={transporteurs}
 
                     />
@@ -174,13 +181,13 @@ const Commands = () => {
 
         var listResult = uniqueSellers.map(seller => {
 
-            var listProduct = products.filter(item => item.sellerId.pseudo == seller)
+            var listProduct = products.filter(item => item.sellerId.pseudo == seller.name)
             return (
 
                 <div className='mt-[20px] ml-[50px] mr-[50px]'>
-                    <div className='mb-[25px]'>Vendeur: {seller}</div>
+                    <div className='mb-[25px]'>Vendeur: {seller.name}</div>
                     <PriceRecap
-                        key={seller.seller}
+                        key={seller.name}
                         listProduct={listProduct}
                         panier={panier}
                     />
@@ -239,6 +246,19 @@ const Commands = () => {
             </div>
         )
     };
+//formik
+    const initialValues = {
+       
+        Transporteur: [],
+        Payement:""
+  };
+
+  const { handleSubmit, values, handleChange, handleBlur} =
+  useFormik({
+    initialValues,
+    validationSchema : verificationCommand,
+    onSubmit,
+  });
 
     return (
 
@@ -282,6 +302,7 @@ const Commands = () => {
                             Modifier mon adresse
                         </button>
                     </Link>
+                    <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
                     {SellerTransporteur()}
                     <div>
                         <div>Moyen de payement</div>
@@ -307,9 +328,10 @@ const Commands = () => {
 
 
                     </div>
+                    </form>
                 </div>
                 {Recap()}
-
+            
 
             </div>
 
