@@ -189,5 +189,14 @@ const validationBecomeSeller = Yup.object().shape(
     }
 );
 
-export {validationAddProduct, validationRegister, validationModifyProduct, validationBecomeSeller}
+const validationCommand = Yup.object().shape(
+    {
+    title : Yup.string()
+        .required ('Il manque un transporteur')
+        .min (4).max(30),
+
+    }
+);
+
+export {validationAddProduct, validationRegister, validationModifyProduct, validationBecomeSeller, validationCommand}
 

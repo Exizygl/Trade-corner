@@ -8,6 +8,10 @@ import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSli
 import ProductSellers from './panier/ProductSellers';
 import PriceRecap from './panier/PriceRecap';
 import TransporteurChoice from './commande/TransporteurChoice';
+import { Formik, Form, FormikConsumer, useFormik } from 'formik';
+import { validationCommand } from '../../utils/Validation';
+
+
 
 const Commands = () => {
     const user = useSelector((state) => state.auth.user);
@@ -150,30 +154,22 @@ const Commands = () => {
 
 
 
-        const uniqueSellers = sellers
-
-        var listResult = uniqueSellers.map(seller => {
-
-            console.log(seller)
             return (
 
                 <div className='mt-[20px] ml-[50px] mr-[50px]'>
-                    <div className='mb-[25px]'>Mode de Livraison: {seller.name}</div>
+                    <div className='mb-[25px]'>Mode de Livraison:</div>
                     <TransporteurChoice
-                        key={seller}
-                        seller={seller.name}
                         transporteurs={transporteurs}
+                        // handleChange={handleChange}
 
                     />
                     <div className="line w-[325px] mx-auto text-center"></div>
                 </div>
             );
-        });
+        };
 
-        return (
-            listResult
-        )
-    }
+       
+    
 
     const Recap = () => {
 
@@ -253,12 +249,21 @@ const Commands = () => {
         Payement:""
   };
 
-  const { handleSubmit, values, handleChange, handleBlur} =
+  const { handleSubmit, values, handleChange} =
   useFormik({
     initialValues,
-    validationSchema : verificationCommand,
+    validationSchema : validationCommand,
     onSubmit,
   });
+
+  function onSubmit(formValues) {
+  
+    const formData = new FormData();
+    formData.append('title', formValues.transporteur);
+    formData.append('payement', formValues.payement);
+    
+}
+
 
     return (
 
@@ -307,21 +312,21 @@ const Commands = () => {
                     <div>
                         <div>Moyen de payement</div>
                         <div>
-                            <input type="radio" id="carteBancaire" name="payement" value="carteBancaire" />
+                            <input type="radio" id="carteBancaire" name="payement" value="carteBancaire" onChange={handleChange} />
                             <label for="carteBancaire">Carte Bancaire</label>
 
                         </div>
                         <div>
-                            <input type="radio" id="Visa" name="payement" value="Visa" />
+                            <input type="radio" id="Visa" name="payement" value="Visa" onChange={handleChange} />
                             <label for="Visa">Paypal</label>
                         </div>
                         <div>
-                            <input type="radio" id="Paypal" name="payement" value="Paypal" />
+                            <input type="radio" id="Paypal" name="payement" value="Paypal" onChange={handleChange} />
                             <label for="Paypal">Paypal</label>
 
                         </div>
                         <div>
-                            <input type="radio" id="carteCredit" name="payement" value="carteCredit" />
+                            <input type="radio" id="carteCredit" name="payement" value="carteCredit" onChange={handleChange} />
                             <label for="carteCredit">Carte de credit</label>
 
                         </div>

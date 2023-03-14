@@ -10,19 +10,18 @@ import React from 'react';
 
 
 
-const TransporteurChoice = ({ seller, transporteurs }) => {
+const TransporteurChoice = ({transporteurs }) => {
     
-    console.log(seller)
+    
     const List = () => {
 
         var choice = transporteurs.map(transporteur => {
             
             return (
                 <div>
-                    <input type="radio" id={transporteur.transporteur} name={seller} value={transporteur.transporteur} onChange={handleChange}/>
+                    <input type="radio" id={transporteur.transporteur} name="transporteur" value={transporteur.transporteur}/>
                         <label for={transporteur.transporteur}>{transporteur.transporteur}</label>
                         
-                  
                 </div>
 
             )
