@@ -140,16 +140,6 @@ const Commands = () => {
 
 
     }
-    const deleteArticle = (id) => {
-
-
-        dispatch(deleteProduct(id))
-        var toogle = !loading
-        setLoading(toogle)
-
-
-
-    }
     const SellerTransporteur = () => {
 
 
@@ -159,8 +149,9 @@ const Commands = () => {
                 <div className='mt-[20px] ml-[50px] mr-[50px]'>
                     <div className='mb-[25px]'>Mode de Livraison:</div>
                     <TransporteurChoice
+                        
                         transporteurs={transporteurs}
-                        // handleChange={handleChange}
+                      
 
                     />
                     <div className="line w-[325px] mx-auto text-center"></div>
@@ -174,6 +165,7 @@ const Commands = () => {
     const Recap = () => {
 
         const uniqueSellers = sellers
+        const numberSellers = uniqueSellers.length
 
         var listResult = uniqueSellers.map(seller => {
 
@@ -218,12 +210,28 @@ const Commands = () => {
         }
 
 
+
         sum = sum / 100
+        var priceTransport
+        var findTransporteur = transporteurs.filter(item => item.sellerId.pseudo == TransporteurSelection)
+
+        if(!findTransporteur){
+            priceTransport = 0
+        }else{
+            priceTransport = findTransporteur.price
+        }
+
+
+        const sumPort = numberSellers * priceTransport
 
 
         const total =
             <div className='mt-[20px] ml-[50px] mr-[50px]'>
                 <div>Total</div>
+                <div className='flex justify-between'>
+                    <div>{numberBought} Frais de port : </div>
+                    <div>{sum} €</div>
+                </div>
                 <div className='flex justify-between'>
                     <div>{numberBought} Article : </div>
                     <div>{sum} €</div>
@@ -245,11 +253,11 @@ const Commands = () => {
 //formik
     const initialValues = {
        
-        Transporteur: [],
+        TransporteurSelection: "",
         Payement:""
   };
 
-  const { handleSubmit, values, handleChange} =
+  const { handleSubmit, values} =
   useFormik({
     initialValues,
     validationSchema : validationCommand,
@@ -312,21 +320,21 @@ const Commands = () => {
                     <div>
                         <div>Moyen de payement</div>
                         <div>
-                            <input type="radio" id="carteBancaire" name="payement" value="carteBancaire" onChange={handleChange} />
+                            <input type="radio" id="carteBancaire" name="payement" value="carteBancaire" />
                             <label for="carteBancaire">Carte Bancaire</label>
 
                         </div>
                         <div>
-                            <input type="radio" id="Visa" name="payement" value="Visa" onChange={handleChange} />
+                            <input type="radio" id="Visa" name="payement" value="Visa" />
                             <label for="Visa">Paypal</label>
                         </div>
                         <div>
-                            <input type="radio" id="Paypal" name="payement" value="Paypal" onChange={handleChange} />
+                            <input type="radio" id="Paypal" name="payement" value="Paypal" />
                             <label for="Paypal">Paypal</label>
 
                         </div>
                         <div>
-                            <input type="radio" id="carteCredit" name="payement" value="carteCredit" onChange={handleChange} />
+                            <input type="radio" id="carteCredit" name="payement" value="carteCredit" />
                             <label for="carteCredit">Carte de credit</label>
 
                         </div>

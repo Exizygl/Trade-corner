@@ -335,7 +335,7 @@ export default function AddProduct() {
               <Link to={URL_SELLER}><button className="btn-red w-[400px] ml-3 lg-ml-0">Annuler</button></Link>
             </div>
           </div>
-
+          
         </form>
         {/* {successSubmitModal} */}
         <Modal message={msgModal} title={titleModal} showModal={showModal} closeModal={()=> closeModal}/>
