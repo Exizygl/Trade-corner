@@ -19,7 +19,7 @@ const TransporteurChoice = ({transporteurs}) => {
             
             return (
                 <div>
-                    <input type="radio" id={transporteur.transporteur} name="transporteur" value={transporteur.transporteur}/>
+                    <input type="radio" id={transporteur.transporteur}  name="transporteur" value={transporteur.transporteur}/>
                         <label for={transporteur.transporteur}>{transporteur.transporteur}</label>
                         
                 </div>
