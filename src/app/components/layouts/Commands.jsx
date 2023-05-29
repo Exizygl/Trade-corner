@@ -221,15 +221,16 @@ const Commands = () => {
         console.log(transporteurs);
         console.log(TransporteurSelection);
         var findTransporteur = transporteurs.filter(item => item.transporteur == TransporteurSelection)
-
-        if (!findTransporteur) {
+        var transporteur = findTransporteur[0]
+        if (!transporteur) {
+            console.log("toya")
             priceTransport = 0
         } else {
-            priceTransport = findTransporteur.price
+            priceTransport = transporteur.price
         }
 
-
-        const sumPort = numberSellers * priceTransport
+        console.log(priceTransport)
+        const sumPort = numberSellers * priceTransport/100
 
 
         const total =
@@ -237,7 +238,7 @@ const Commands = () => {
                 <div>Total</div>
                 <div className='flex justify-between'>
                     <div>{numberBought} Frais de port : </div>
-                    <div>{sum} €</div>
+                    <div>{sumPort} €</div>
                 </div>
                 <div className='flex justify-between'>
                     <div>{numberBought} Article : </div>

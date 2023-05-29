@@ -10,7 +10,7 @@ import React from 'react';
 
 
 
-const TransporteurChoice = ({transporteurs}) => {
+const TransporteurChoice = ({transporteurs, updateTransporteur}) => {
     
     
     const List = () => {
@@ -19,7 +19,7 @@ const TransporteurChoice = ({transporteurs}) => {
             
             return (
                 <div>
-                    <input type="radio" id={transporteur.transporteur}  name="transporteur" value={transporteur.transporteur}/>
+                    <input type="radio" id={transporteur.transporteur}  name="transporteur" value={transporteur.transporteur} onClick={() => { updateTransporteur(transporteur.transporteur) }}/>
                         <label for={transporteur.transporteur}>{transporteur.transporteur}</label>
                         
                 </div>
