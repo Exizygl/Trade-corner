@@ -8,7 +8,7 @@ import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSli
 import ProductSellers from './panier/ProductSellers';
 import PriceRecap from './panier/PriceRecap';
 import TransporteurChoice from './commande/TransporteurChoice';
-import { Formik, Form, FormikConsumer, useFormik, Field} from 'formik';
+import { Formik, Form, FormikConsumer, useFormik, Field } from 'formik';
 
 import { validationCommand } from '../../utils/Validation';
 
@@ -230,7 +230,7 @@ const Commands = () => {
         }
 
         console.log(priceTransport)
-        const sumPort = numberSellers * priceTransport/100
+        const sumPort = numberSellers * priceTransport / 100
 
 
         const total =
@@ -297,19 +297,22 @@ const Commands = () => {
                     <div>
 
                         <div className='bg-black w-[885px] h-[250px] text-white mt-[25px]'>
-                            <div className='ml-[50px] mt-[50px] text-white'>Adresse de livraison</div>
-
-                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
-                                <div>
-                                    Nom
+                            <div className='mt-[20px] text-center text-white'>Adresse de livraison</div>
+                            <div className="line w-[325px] mx-auto text-center"></div>
+                            <div className='flex'>
+                                <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                    <div>
+                                        Nom
+                                    </div>
+                                </div>
+                                <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                    <div>
+                                        {user.name}
+                                    </div>
                                 </div>
                             </div>
-                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
-                                <div>
-                                    {user.name}
-                                </div>
-                            </div>
-                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                            <div className="line w-[325px] mx-auto text-center"></div>
+                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12 flex'>
                                 <div>
                                     adresse
                                 </div>
@@ -327,31 +330,31 @@ const Commands = () => {
                         </button>
                     </Link>
                     <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
-                    <div>
+                        <div>
                             {SellerTransporteur()}
                         </div>
                         <div>
                             <div>Moyen de payement</div>
                             <div>
-                            <div>
-                                <input type="radio" id="carteBancaire"  defaultChecked={values.Payement === "carteBancaire"} name="payement" value="carteBancaire" />
-                                <label for="carteBancaire">Carte Bancaire</label>
+                                <div>
+                                    <input type="radio" id="carteBancaire" defaultChecked={values.Payement === "carteBancaire"} name="payement" value="carteBancaire" />
+                                    <label for="carteBancaire">Carte Bancaire</label>
 
-                            </div>
-                            <div>
-                                <input type="radio" id="Visa" defaultChecked={values.Payement === "Visa"} name="payement" value="Visa" />
-                                <label for="Visa">Paypal</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="Paypal" defaultChecked={values.Payement === "Paypal"} name="payement" value="Paypal" />
-                                <label for="Paypal">Paypal</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="Visa" defaultChecked={values.Payement === "Visa"} name="payement" value="Visa" />
+                                    <label for="Visa">Paypal</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="Paypal" defaultChecked={values.Payement === "Paypal"} name="payement" value="Paypal" />
+                                    <label for="Paypal">Paypal</label>
 
-                            </div>
-                            <div>
-                                <input type="radio" id="carteCredit" defaultChecked={values.Payement === "carteCredit"} name="payement" value="carteCredit" />
-                                <label for="carteCredit">Carte de credit</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="carteCredit" defaultChecked={values.Payement === "carteCredit"} name="payement" value="carteCredit" />
+                                    <label for="carteCredit">Carte de credit</label>
 
-                            </div>
+                                </div>
                             </div>
 
                         </div>
