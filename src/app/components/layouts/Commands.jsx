@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getListProduct, getTransporteur } from '../../api/backend/requestApi';
+import { getListProduct, getTransporteur, createCommand } from '../../api/backend/requestApi';
 import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
@@ -22,6 +22,8 @@ const Commands = () => {
     const [transporteurs, setTransporteurs] = useState([]);
     const [TransporteurSelection, setTransporteurSelection] = useState("");
     const [loading, setLoading] = useState(false);
+    const [payement, setPayement] = useState("");
+    
 
     const [error, setError] = useState(false);
     const dispatch = useDispatch()
@@ -143,7 +145,8 @@ const Commands = () => {
 
     }
     const SellerTransporteur = () => {
-
+        
+        
 
 
         return (
@@ -154,8 +157,6 @@ const Commands = () => {
 
                     transporteurs={transporteurs}
                     updateTransporteur={updateTransporteur}
-
-
                 />
                 <div className="line w-[325px] mx-auto text-center"></div>
             </div>
@@ -165,6 +166,19 @@ const Commands = () => {
 
     const updateTransporteur = (transporteur) => {
         setTransporteurSelection(transporteur)
+    }
+  
+
+    const updatePayement = (payement) => {
+        setPayement(payement)
+    }
+  
+    const sendCommand = () => {
+        if(TransporteurSelection != "" && payement != ""){
+            createCommand
+        }else{
+            alert("remplir le transporteur et choix de payement")
+        }
     }
 
     const Recap = () => {
@@ -253,37 +267,12 @@ const Commands = () => {
                 {listResult}
                 {total}
                 <div className='text-center mt-[50px]'>
-                    <button className='btn-primary w-[300px] my-auto'>VALIDER MA COMMANDE</button>
+                    <button className='btn-primary w-[300px] my-auto' onClick={() =>{sendCommand()}}>VALIDER MA COMMANDE</button>
                 </div>
             </div>
         )
     };
-    //formik
-    const initialValues = {
-
-        TransporteurSelection: "",
-        Payement: ""
-    };
-
-    const { handleSubmit, values, handleChange, errors } =
-        useFormik({
-            initialValues,
-            validationSchema: validationCommand,
-            onSubmit,
-        });
-
-    function onSubmit(formValues) {
-
-        const formData = new FormData();
-        formData.append('title', formValues.transporteur);
-        formData.append('payement', formValues.payement);
-
-
-        console.log("yeah")
-
-    }
-
-
+    
     return (
 
 
@@ -329,7 +318,7 @@ const Commands = () => {
                             Modifier mon adresse
                         </button>
                     </Link>
-                    <form onSubmit={handleSubmit} encType="multipart/form-data" method="POST">
+                    
                         <div>
                             {SellerTransporteur()}
                         </div>
@@ -337,28 +326,28 @@ const Commands = () => {
                             <div>Moyen de payement</div>
                             <div>
                                 <div>
-                                    <input type="radio" id="carteBancaire" defaultChecked={values.Payement === "carteBancaire"} name="payement" value="carteBancaire" />
+                                    <input type="radio" id="carteBancaire" defaultChecked={payement === "CB"} name="payement" value="carteBancaire" onClick={() => { updatePayement("CB") }}/>
                                     <label for="carteBancaire">Carte Bancaire</label>
 
                                 </div>
                                 <div>
-                                    <input type="radio" id="Visa" defaultChecked={values.Payement === "Visa"} name="payement" value="Visa" />
+                                    <input type="radio" id="Visa" defaultChecked={payement === "Visa"} name="payement" value="Visa" onClick={() => { updatePayement("Visa") }}/>
                                     <label for="Visa">Paypal</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="Paypal" defaultChecked={values.Payement === "Paypal"} name="payement" value="Paypal" />
+                                    <input type="radio" id="Paypal" defaultChecked={payement === "Paypal"} name="payement" value="Paypal" onClick={() => { updatePayement("Paypal") }}/>
                                     <label for="Paypal">Paypal</label>
 
                                 </div>
                                 <div>
-                                    <input type="radio" id="carteCredit" defaultChecked={values.Payement === "carteCredit"} name="payement" value="carteCredit" />
+                                    <input type="radio" id="carteCredit" defaultChecked={payement === "CC"} name="payement" value="carteCredit" onClick={() => { updatePayement("CC") }}/>
                                     <label for="carteCredit">Carte de credit</label>
 
                                 </div>
                             </div>
 
                         </div>
-                    </form>
+                    
                 </div>
                 {Recap()}
 
