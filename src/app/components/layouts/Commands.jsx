@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getListProduct, getTransporteur, createCommand } from '../../api/backend/requestApi';
+import { getListProduct, getTransporteur, addCommand } from '../../api/backend/requestApi';
 import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
@@ -23,6 +23,7 @@ const Commands = () => {
     const [TransporteurSelection, setTransporteurSelection] = useState("");
     const [loading, setLoading] = useState(false);
     const [payement, setPayement] = useState("");
+    const [listId, setListId] = useState([]);
     
 
     const [error, setError] = useState(false);
@@ -57,7 +58,9 @@ const Commands = () => {
                         var result = res.data.message.productList
                         var listProduct = listProductCheck(result, panier)
                         var getSellers = result.map((item) => { return item.sellerId.pseudo })
-
+                        var getProductId = result.map((item) => { return item._id })
+                        
+                        setListId(getProductId);
                         var uniqueSellers = [];
                         getSellers.forEach((e) => {
                             if (!uniqueSellers.includes(e)) {
@@ -175,7 +178,25 @@ const Commands = () => {
   
     const sendCommand = () => {
         if(TransporteurSelection != "" && payement != ""){
-            createCommand
+            
+            const formData = new FormData();
+            
+            for (let i=0; i <listId.length; i++){
+                formData.append('id', listId[i]); 
+            };
+            formData.append('user', user);
+            formData.append('transporteur', TransporteurSelection);
+            formData.append('payement', payement);
+            
+            
+            addCommand(formData)
+            .then ((res)=> {
+              if(res.status === 200)
+               {          
+              setShowModal(true);
+              }
+              else {alert("error")}
+            })
         }else{
             alert("remplir le transporteur et choix de payement")
         }

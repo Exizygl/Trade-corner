@@ -74,6 +74,10 @@ export function uploadUserImageById(values) {
 export const addProduct = (values) => {
     return apiBackEnd.post('product/add', values);
 };
+export const addCommand = (values) => {
+    console.log("lk")
+    return apiBackEnd.post('command/add', values);
+};
 
 export const modifyProduct = (values) => {
     return apiBackEnd.put('product/modify', values);
