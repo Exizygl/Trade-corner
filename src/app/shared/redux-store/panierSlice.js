@@ -61,11 +61,16 @@ export const panierSlice = createSlice({
                 state.products = stateCopy
             
 
+        }, deletePanier: (state) => {
+
+                state.products = []
+            
+
         },
     },
 });
 
-export const { addProduct, updateProduct, deleteProduct } = panierSlice.actions;
+export const { addProduct, updateProduct, deleteProduct, deletePanier } = panierSlice.actions;
 
 
 

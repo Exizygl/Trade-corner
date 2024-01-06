@@ -133,7 +133,7 @@ export default function AddProduct() {
         formData.append('tags', formValues.tags);
         formData.append('price', formValues.price*100);
         formData.append('quantity', formValues.quantity);
-        
+       
         addProduct(formData)
         .then ((res)=> {
           if(res.status === 200)

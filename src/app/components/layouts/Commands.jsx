@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getListProduct, getTransporteur, addCommand } from '../../api/backend/requestApi';
 import { URL_MODIFYACCOUNT } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
-import { updateProduct, deleteProduct } from '../../shared/redux-store/panierSlice';
+import { updateProduct, deleteProduct, deletePanier } from '../../shared/redux-store/panierSlice';
 import ProductSellers from './panier/ProductSellers';
 import PriceRecap from './panier/PriceRecap';
 import TransporteurChoice from './commande/TransporteurChoice';
@@ -177,23 +177,30 @@ const Commands = () => {
     }
   
     const sendCommand = () => {
+
         if(TransporteurSelection != "" && payement != ""){
             
             const formData = new FormData();
             
             for (let i=0; i <listId.length; i++){
-                formData.append('id', listId[i]); 
+              
+                formData.append('ids', listId[i]); 
+                console.log(formData)
             };
-            formData.append('user', user);
+            
             formData.append('transporteur', TransporteurSelection);
+         
             formData.append('payement', payement);
             
+        
             
             addCommand(formData)
             .then ((res)=> {
               if(res.status === 200)
                {          
-              setShowModal(true);
+              dispatch(deletePanier())
+              history.push(URL_HOME)
+
               }
               else {alert("error")}
             })
