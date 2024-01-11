@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getListProduct, getTransporteur, addCommand } from '../../api/backend/requestApi';
@@ -24,7 +24,7 @@ const Commands = () => {
     const [loading, setLoading] = useState(false);
     const [payement, setPayement] = useState("");
     const [listId, setListId] = useState([]);
-    
+
 
     const [error, setError] = useState(false);
     const dispatch = useDispatch()
@@ -59,7 +59,7 @@ const Commands = () => {
                         var listProduct = listProductCheck(result, panier)
                         var getSellers = result.map((item) => { return item.sellerId.pseudo })
                         var getProductId = result.map((item) => { return item._id })
-                        
+
                         setListId(getProductId);
                         var uniqueSellers = [];
                         getSellers.forEach((e) => {
@@ -148,8 +148,8 @@ const Commands = () => {
 
     }
     const SellerTransporteur = () => {
-        
-        
+
+
 
 
         return (
@@ -170,41 +170,40 @@ const Commands = () => {
     const updateTransporteur = (transporteur) => {
         setTransporteurSelection(transporteur)
     }
-  
+
 
     const updatePayement = (payement) => {
         setPayement(payement)
     }
-  
+
     const sendCommand = () => {
 
-        if(TransporteurSelection != "" && payement != ""){
-            
+        if (TransporteurSelection != "" && payement != "") {
+
             const formData = new FormData();
-            
-            for (let i=0; i <listId.length; i++){
-              
-                formData.append('ids', listId[i]); 
+
+            for (let i = 0; i < listId.length; i++) {
+
+                formData.append('ids', listId[i]);
                 console.log(formData)
             };
-            
-            formData.append('transporteur', TransporteurSelection);
-         
-            formData.append('payement', payement);
-            
-        
-            
-            addCommand(formData)
-            .then ((res)=> {
-              if(res.status === 200)
-               {          
-              dispatch(deletePanier())
-              history.push(URL_HOME)
 
-              }
-              else {alert("error")}
-            })
-        }else{
+            formData.append('transporteur', TransporteurSelection);
+
+            formData.append('payement', payement);
+
+
+
+            addCommand(formData)
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(deletePanier())
+                        history.push(URL_HOME)
+
+                    }
+                    else { alert("error") }
+                })
+        } else {
             alert("remplir le transporteur et choix de payement")
         }
     }
@@ -295,12 +294,12 @@ const Commands = () => {
                 {listResult}
                 {total}
                 <div className='text-center mt-[50px]'>
-                    <button className='btn-primary w-[300px] my-auto' onClick={() =>{sendCommand()}}>VALIDER MA COMMANDE</button>
+                    <button className='btn-primary w-[300px] my-auto' onClick={() => { sendCommand() }}>VALIDER MA COMMANDE</button>
                 </div>
             </div>
         )
     };
-    
+
     return (
 
 
@@ -313,69 +312,72 @@ const Commands = () => {
                 <div className='flex flex-col ml-[50px]'>
                     <div>
 
-                        <div className='bg-black w-[885px] h-[250px] text-white mt-[25px]'>
+                        <div className='bg-black w-[885px] h-[300px] text-white mt-[25px] mb-[25px]  pt-[25px]'>
                             <div className='mt-[20px] text-center text-white'>Adresse de livraison</div>
                             <div className="line w-[325px] mx-auto text-center"></div>
                             <div className='flex'>
-                                <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                <div className='ml-[50px] mt-[20px] w-[450px] basis-1/12'>
                                     <div>
-                                        Nom
+                                        Nom:
                                     </div>
                                 </div>
-                                <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>
+                                <div className='ml-[50px] mt-[20px] w-[450px] basis-1/12'>
                                     <div>
                                         {user.name}
                                     </div>
                                 </div>
                             </div>
                             <div className="line w-[325px] mx-auto text-center"></div>
-                            <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12 flex'>
-                                <div>
-                                    adresse
+                            <div className='ml-[50px] mt-[20px] w-[450px] flex'>
+                                <div className='basis-1/12'>
+                                    Adresse:
                                 </div>
-                                <div className='mt-[20px]'>
+                                <div className='basis-11/12 ml-[50px]'>
                                     {user.adressStreet} {user.adressZipcode} {user.adressCity}
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    
                     <Link to={URL_MODIFYACCOUNT + 'adress'}>
 
-                        <button className="btn-primary px-10 mt-5 md:mt-0">
+                        <button className="btn-primary mx-12 px-10 mt-7 md:mt-0">
                             Modifier mon adresse
                         </button>
                     </Link>
-                    
-                        <div>
-                            {SellerTransporteur()}
-                        </div>
-                        <div>
-                            <div>Moyen de payement</div>
+
+                    <div className='bg-black text-white'>
+                        {SellerTransporteur()}
+                    </div>
+                    <div className='bg-black text-white'>
+
+                        <div className='mt-[20px] ml-[50px] mr-[50px] mb-[20px]'>
+                            <div className='mb-[25px]'>Moyen de payement</div>
                             <div>
                                 <div>
-                                    <input type="radio" id="carteBancaire" defaultChecked={payement === "CB"} name="payement" value="carteBancaire" onClick={() => { updatePayement("CB") }}/>
+                                    <input type="radio" id="carteBancaire" defaultChecked={payement === "CB"} name="payement" value="carteBancaire" onClick={() => { updatePayement("CB") }} />
                                     <label for="carteBancaire">Carte Bancaire</label>
 
                                 </div>
                                 <div>
-                                    <input type="radio" id="Visa" defaultChecked={payement === "Visa"} name="payement" value="Visa" onClick={() => { updatePayement("Visa") }}/>
+                                    <input type="radio" id="Visa" defaultChecked={payement === "Visa"} name="payement" value="Visa" onClick={() => { updatePayement("Visa") }} />
                                     <label for="Visa">Paypal</label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="Paypal" defaultChecked={payement === "Paypal"} name="payement" value="Paypal" onClick={() => { updatePayement("Paypal") }}/>
+                                    <input type="radio" id="Paypal" defaultChecked={payement === "Paypal"} name="payement" value="Paypal" onClick={() => { updatePayement("Paypal") }} />
                                     <label for="Paypal">Paypal</label>
 
                                 </div>
                                 <div>
-                                    <input type="radio" id="carteCredit" defaultChecked={payement === "CC"} name="payement" value="carteCredit" onClick={() => { updatePayement("CC") }}/>
+                                    <input type="radio" id="carteCredit" defaultChecked={payement === "CC"} name="payement" value="carteCredit" onClick={() => { updatePayement("CC") }} />
                                     <label for="carteCredit">Carte de credit</label>
 
                                 </div>
                             </div>
-
                         </div>
-                    
+
+                    </div>
+
                 </div>
                 {Recap()}
 
