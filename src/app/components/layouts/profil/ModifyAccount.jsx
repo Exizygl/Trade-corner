@@ -159,7 +159,7 @@ const ModifyAccount = () => {
         uploadUserImage(formData)
             .then((res) => {
                 callGetUser(userId)
-                console.log(res)
+               
             })
     }
 

@@ -23,7 +23,7 @@ const ConfirmRegisterView = () => {
         confirmRegistration({ emailCrypt: emailCrypt })
             .then((res) => {
                 if (res.status === 200 && res.data.message) {
-                    console.log(res.data.message)
+                  
                 }
             })
             .catch((e) => console.log("error confirm =>", e));

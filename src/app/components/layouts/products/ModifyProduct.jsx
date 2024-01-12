@@ -218,7 +218,7 @@ const deleteImageUrl = (e) => {//supprime l'url de ImageProductUrl, update photo
           if(res.status === 200)
            {          
           setShowModal(true);
-          console.log("envoie au back")
+        
           }
           else {alert("error")}
         })

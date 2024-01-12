@@ -25,7 +25,7 @@ const errorToastMessage = (error) => (
  * @author Mohamed Nechab
  */
 const handleHttpError = (error) => {
-    console.log(error);
+   
     if (!error.response) return;
     else toast.error(errorToastMessage(error));
 };

@@ -46,19 +46,17 @@ export function isUserId() {
 export function isAuthenticated() {
     try {
         const token = getToken();
-        //  console.log('token', token);
+      
         const payload = getPayloadToken();
 
-        // console.log('payload', payload);
+   
         const roles = payload.role;
 
-        // console.log('roles', roles);
         const expirationDate = payload.exp;
 
-        // console.log('expiration', expirationDate);
+       
         const login = payload.pseudo;
 
-        //console.log('login', login);
         const dateNow = new Date();
         return token && (roles === "user" || roles === "seller" || roles === "admin") && login && expirationDate < dateNow.getTime();
     } catch {

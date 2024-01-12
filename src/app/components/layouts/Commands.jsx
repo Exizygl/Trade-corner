@@ -185,7 +185,7 @@ const Commands = () => {
             for (let i = 0; i < listId.length; i++) {
 
                 formData.append('ids', listId[i]);
-                console.log(formData)
+              
             };
 
             formData.append('transporteur', TransporteurSelection);
@@ -259,18 +259,17 @@ const Commands = () => {
 
         sum = sum / 100
         var priceTransport
-        console.log(transporteurs);
-        console.log(TransporteurSelection);
+       
         var findTransporteur = transporteurs.filter(item => item.transporteur == TransporteurSelection)
         var transporteur = findTransporteur[0]
         if (!transporteur) {
-            console.log("toya")
+            
             priceTransport = 0
         } else {
             priceTransport = transporteur.price
         }
 
-        console.log(priceTransport)
+        
         const sumPort = numberSellers * priceTransport / 100
 
 

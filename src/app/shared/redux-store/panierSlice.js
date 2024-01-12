@@ -25,12 +25,12 @@ export const panierSlice = createSlice({
         }, updateProduct: (state, action) => {
 
             const product = action.payload;
-            console.log(product)
+          
             const stateCopy = state.products
             const itemExist = state.products.find((item) => item.id == product.id);
-            console.log(current(itemExist))
+          
             const index = state.products.indexOf(itemExist);
-            console.log(index)
+          
             if (index >= 0) {
                 var number = product.number
                 if (number == "") number = 1
@@ -39,7 +39,7 @@ export const panierSlice = createSlice({
                     if ("0" == firstNumber) number = number.substring(1);
                 }
                 stateCopy[index].number = parseInt(number)
-                console.log(current(stateCopy[index]))
+            
 
                 state.products = stateCopy
             }
@@ -50,7 +50,7 @@ export const panierSlice = createSlice({
             const product = action.payload;
             const stateCopy = state.products
             const itemExist = state.products.find((item) => item.id == product);
-            console.log(current(itemExist))
+        
 
             const index = state.products.indexOf(itemExist);
             

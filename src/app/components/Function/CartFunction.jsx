@@ -7,7 +7,7 @@ import { addProduct } from "../../shared/redux-store/panierSlice"
 
 
 export const addProductCart = (e) => {
-    console.log("(O-O)")
+  
   
 
    

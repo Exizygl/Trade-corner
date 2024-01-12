@@ -32,7 +32,7 @@ const Home = () => {
             if (res.status === 200) {
                 setProducts(res.data.message.productList);
             }else {
-                console.log("products");
+             
             }
         });
     }, []);

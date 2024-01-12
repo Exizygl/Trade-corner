@@ -15,7 +15,7 @@ const ProductsFromUser = () => {
     useEffect(() => {
         getProductsFrom(id, page).then(function (res) {
             if (res.status === 200) {
-                console.log(res.data.list.list)
+               
                 setProducts(res.data.list.list)
                 setNumberPage(res.data.number.number)
             }

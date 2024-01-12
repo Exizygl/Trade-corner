@@ -16,8 +16,7 @@ const User = () => {
         userInfo(user._id).then(
             function (res) {
                 if (res.status === 200) {
-                    console.log("data");
-                    console.log(res.data);
+                   
                     const updatedUser = {...res.data, 
                         roleId : res.data.role._id, 
                         roleLabel : res.data.role.label, 
@@ -25,7 +24,7 @@ const User = () => {
                         adressCity: res.data.adress.city,
                         adressStreet : res.data.adress.street,
                         adressZipcode :res.data.adress.zipcode};
-                        console.log(updatedUser);
+                        
                     // dispatch(updateUser(res.data));
                     dispatch(updateUser(updatedUser));
 

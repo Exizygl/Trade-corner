@@ -25,7 +25,7 @@ const ForgottenPassword = () => {
         initialValues,
         onSubmit: (values) => {
             forgottenPassword(values).then((res) => {
-                console.log(res);
+               
                 if (res.data.errors) {
                     setMsgError(res.data.errors)
                 }

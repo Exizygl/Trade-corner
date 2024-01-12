@@ -29,7 +29,7 @@ const DeleteUser = () => {
     //  useEffect( ()=> {
     //     const users = useSelector(state => state.adm.users);
     //     const userFound = users.find( user => user.id === {id}.id );
-    //     console.log("userFound : " + JSON.stringify(userFound));
+   
     //     setUserState(userFound);
     //  }, []) 
          

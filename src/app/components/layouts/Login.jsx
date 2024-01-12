@@ -29,7 +29,7 @@ const Login = () => {
                
                 if (res.status === 200 && res.data.message.user.id_token) {
           const userBack = res.data.message.user;
-            console.log(userBack);
+            
                 const user = {...userBack.user, 
                     roleId : userBack.user.role._id, 
                     roleLabel : userBack.user.role.label, 
@@ -54,7 +54,7 @@ const Login = () => {
                 }
             })
                 .catch((e) => {
-                    console.log("e", e)
+                   
                     setErrorLog(true)
                 });
         },

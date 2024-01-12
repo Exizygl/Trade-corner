@@ -170,7 +170,7 @@ const ModifyAccountByAdmin = () => {
         uploadUserImageById(formData)
             .then((res) => {
                 callGetUser(id);
-                console.log(res)
+               
             })
     }
 

@@ -47,7 +47,7 @@ const Register = () => {
         });
 
     function onSubmit(formValues) {
-        console.log(formValues);
+        
         register(values)
             .then( (res) => {
                 if (res.data.message.user) {
@@ -57,7 +57,7 @@ const Register = () => {
                 }
             })
             .catch((error) => {
-                console.log(error.response.data);
+                
                 if (error.response.data) {
                     setMsgError(error.response.data.errors);
                 }

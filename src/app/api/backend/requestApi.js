@@ -83,10 +83,10 @@ export const modifyProduct = (values) => {
 };
 
 export const deleteProduct = (values) => {
-    console.log(values)
+    
     var req = {};
     req['productId'] = values
-    console.log(req)
+    
     
     return apiBackEnd.put('product/delete', req);
 };
