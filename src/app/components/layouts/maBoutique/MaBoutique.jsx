@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import Navigation from './Navigation';
+import Navigation from './navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import { store } from '../../../shared/redux-store/store';
