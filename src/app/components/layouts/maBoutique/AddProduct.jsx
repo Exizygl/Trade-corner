@@ -1,6 +1,6 @@
 import React from 'react';
 import {useEffect,useState} from 'react';
-import Navigation from './Navigation';
+import Navigation from './navigation';
 import Modal from '../modal/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, FormikConsumer, useFormik } from 'formik';
