@@ -14,7 +14,7 @@ import ModifyAccountView from '../views/profil/ModifyAccountView';
 import UserDeleteView from '../views/profil/UserDeleteView';
 import BecomeSeller from '../views/profil/BecomeSellerView';
 
-import ForgottenPasswordView from '../views/forgottenPasswordView';
+import ForgottenPasswordView from '../views/ForgottenPasswordView';
 import PasswordChangeView from '../views/PasswordChangeView';
 
 //import administration
