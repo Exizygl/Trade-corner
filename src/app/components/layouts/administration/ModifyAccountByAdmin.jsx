@@ -256,7 +256,7 @@ const ModifyAccountByAdmin = () => {
             <div className="bg-black text-white text-center w-2/3 m-auto py-6 px-10">
 
                 {typeModification === "avatar" && <form id="formImage" className="flex text-align-center flex-col" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
-                            {userToModify.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + userToModify.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                            {userToModify.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`https://trade-corner-back.onrender.com/static/` + userToModify.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
                                 <p> Aucune image </p>}
                             <legend className="">
                                 Modifier le champ  {typeModification}

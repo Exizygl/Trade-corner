@@ -298,7 +298,7 @@ const ModifyAccount = () => {
 
                 {
                     typeModification === "avatar" && <form id="formImage" className="login" onSubmit={formikImage.handleSubmit} encType="multipart/form-data" method="POST">
-                        {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`http://localhost:8080/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
+                        {user.imageProfilUrl ? <div> <p>Image actuelle</p><img src={`https://trade-corner-back.onrender.com/static/` + user.imageProfilUrl} className='m-auto' alt="preview" width={200} height={200} /></div> :
                             <p> Aucune image </p>}
                         <legend className="mb-6">
                             <h2>Modifier votre {typeModification}</h2>

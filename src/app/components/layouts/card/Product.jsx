@@ -33,9 +33,9 @@ const Product = ({ id, title, price, image, sellerId, addProduct }) => {
       <Link to={URL_PRODUCT + id}>
         <div className="h-[17.625rem]">
           {image ?
-            <img src={`http://localhost:8080/static/` + image} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto w-[18.75rem] h-[17.625rem] object-cover' alt="preview" width={200} height={200} />
+            <img src={`https://trade-corner-back.onrender.com/static/` + image} onError={(e) => (e.currentTarget.src = `https://trade-corner-back.onrender.com/static/default.jpg`)} className='m-auto w-[18.75rem] h-[17.625rem] object-cover' alt="preview" width={200} height={200} />
             :
-            <img src={`http://localhost:8080/static/default.jpg`} className='m-auto w-[18.75rem] h-[17.625rem] object-cover' alt="preview" width={200} height={200} />
+            <img src={`https://trade-corner-back.onrender.com/static/default.jpg`} className='m-auto w-[18.75rem] h-[17.625rem] object-cover' alt="preview" width={200} height={200} />
           }
         </div>
       </Link>

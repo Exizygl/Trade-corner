@@ -92,7 +92,7 @@ const User = () => {
 
                 <div id="avatar" className="flex flex-col md:flex-row pb-2 pt-8 justify-between border-b-2 border-magentacorner">
                     <div className="">Avatar : </div>
-                    {user.imageProfilUrl ? <div><img src={`http://localhost:8080/static/` + user.imageProfilUrl} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200}/></div> :
+                    {user.imageProfilUrl ? <div><img src={`https://trade-corner-back.onrender.com/static/` + user.imageProfilUrl} onError={(e) => (e.currentTarget.src = `https://trade-corner-back.onrender.com/static/default.jpg`)} className='m-auto' alt="preview" width={200} height={200}/></div> :
                     <p> Aucune image </p>}
                     <Link to={URL_MODIFYACCOUNT + 'avatar'}>
                         <button className="btn-primary px-10 mt-5 md:mt-0">

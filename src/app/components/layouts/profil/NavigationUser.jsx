@@ -12,8 +12,8 @@ export default function NavigationUser() {
   return (
     <nav className="flex flex-col justify-between ">
 
-{user.imageProfilUrl ? <img src={`http://localhost:8080/static/` + user.imageProfilUrl} 
-                        onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} 
+{user.imageProfilUrl ? <img src={`https://trade-corner-back.onrender.com/static/` + user.imageProfilUrl} 
+                        onError={(e) => (e.currentTarget.src = `https://trade-corner-back.onrender.com/default.jpg`)} 
                         className='m-auto rounded-full object-cover w-[200px] h-[200px] shadow-lg shadow-black' alt="Photo de profil" /> :
                         <p> Aucune image </p>}
 
