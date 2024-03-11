@@ -66,7 +66,7 @@ const Home = () => {
             <h1 className="">LES NOUVEAUTÉS </h1>
             <div className="text-center text-white">
                 {products.length != 0 && displayProducts()}
-                {products.length === 0 && <p className="mb-10"> Il n'y a pas de produits dans la BDD </p>}
+                {products.length === 0 && <p className="mb-10"> Il n'y a pas de produits dans la Base de données </p>}
 
                 <Link to={URL_PRODUCTLIST}>
                     <button className="btn-primary w-[300px]">Voir plus</button>

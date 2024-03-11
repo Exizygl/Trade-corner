@@ -27,9 +27,9 @@ const ProductSellers = ({ listProduct, panier, updateNumber, deleteArticle }) =>
                     <div className='bg-black w-[885px] h-[250px] flex text-white mt-[25px]'>
                         <div className="h-[150px] w-[150px] ml-[25px] mt-[25px] basis-3/12">
                             {product.imageProductUrl[0] ?
-                                <img src={`http://localhost:8080/static/` + product.imageProductUrl[0]} onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)} className='m-auto h-[150px] w-[150px]' alt="preview" width={150} height={2150} />
+                                <img src={`https://trade-corner-back.onrender.com/static/` + product.imageProductUrl[0]} onError={(e) => (e.currentTarget.src = `https://trade-corner-back.onrender.com/static/default.jpg`)} className='m-auto h-[150px] w-[150px]' alt="preview" width={150} height={2150} />
                                 :
-                                <img src={`http://localhost:8080/static/default.jpg`} className='m-auto h-[150px] w-[150px]' alt="preview" width={150} height={150} />
+                                <img src={`https://trade-corner-back.onrender.com/static/default.jpg`} className='m-auto h-[150px] w-[150px]' alt="preview" width={150} height={150} />
                             }
                         </div>
                         <div className='ml-[50px] mt-[20px] w-[450px] basis-8/12'>

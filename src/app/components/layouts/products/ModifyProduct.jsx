@@ -113,7 +113,7 @@ const ModifyProduct = () => {
   const renderPreviewImageUrl = (source)=> {
     return source.map((url, index)=> {
       return <div key={url} className="relative mr-6 inline-block border border-solid border-2 border-magentacorner">
-      <img src={`http://localhost:8080/static/` + url} className="object-contain  w-[100px] h-[100px]"/>
+      <img src={`https://trade-corner-back.onrender.com/static/` + url} className="object-contain  w-[100px] h-[100px]"/>
       <button type="button" className=" absolute -top-2 right-0 h-5 w-5  rounded-full bg-redcorner text-white text-center" onClick={()=> deleteImageUrl(index)}> X </button>
       </div>
     })

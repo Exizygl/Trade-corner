@@ -39,8 +39,8 @@ const CarouselImage = ({ imageList , changeImage, mainImage }) => {
     
     const list = imageList.map(item => {
         return (
-            <img src={`http://localhost:8080/static/` + item}
-                onError={(e) => (e.currentTarget.src = `http://localhost:8080/static/default.jpg`)}
+            <img src={`https://trade-corner-back.onrender.com/static/` + item}
+                onError={(e) => (e.currentTarget.src = `https://trade-corner-back.onrender.com/static/default.jpg`)}
                 className='w-[100px] aspect-square shrink object-cover'
                 alt="Photo du produit"
                 onClick={() => {
