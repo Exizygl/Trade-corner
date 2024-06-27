@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
-
+import imageCart from "../../assets/images/cart.png";
 
 
 const Product = ({ id, title, price, image, sellerId, addProduct }) => {
@@ -16,7 +16,7 @@ const Product = ({ id, title, price, image, sellerId, addProduct }) => {
     if (user !== false & user.roleLabel === "admin" | user !== false & user._id === sellerId) {
       return (
         <div className='h-[50px] w-[50px] bg-grey mr-4 flex items-center'>
-          <img className='object-contain object-center mx-auto' src="/src/app/assets/images/cart.png" alt="ajout au panier impossible" />
+          <img className='object-contain object-center mx-auto' src={`https://trade-corner-back.onrender.com/static/` + imageCart} alt="ajout au panier impossible" />
         </div>
       )
     } else {
