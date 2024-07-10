@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { URL_PRODUCT } from '../../../shared/constants/urls/urlConstants';
-import imageCart from "../../assets/images/cart.png";
+import imageCart from '../../../assets/images/cart.png';
 
 
 const Product = ({ id, title, price, image, sellerId, addProduct }) => {
