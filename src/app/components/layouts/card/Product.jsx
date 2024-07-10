@@ -22,7 +22,7 @@ const Product = ({ id, title, price, image, sellerId, addProduct }) => {
     } else {
       return (
         <div onClick={() => { addProduct(id) }} className='h-[50px] w-[50px] bg-purplecorner mr-4 flex items-center'>
-          <img className='object-contain object-center mx-auto' src="/src/app/assets/images/cart.png" alt="ajouter au panier" />
+          <img className='object-contain object-center mx-auto' src={imageCart} alt="ajouter au panier" />
         </div>
       )
     }
