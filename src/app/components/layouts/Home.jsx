@@ -7,7 +7,7 @@ import { URL_PRODUCTLIST } from '../../shared/constants/urls/urlConstants';
 import Product from './card/Product';
 import photoAccueil from "../../assets/images/photoAccueil.jpg";
 import { addProduct } from '../../shared/redux-store/panierSlice';
-import { loading } from "../../assets/images/loading.gif"
+import loading from "../../assets/images/loading.gif"
 
 const Home = () => {
     const panier = useSelector((state) => state.panier.products);
@@ -67,7 +67,7 @@ const Home = () => {
             <h1 className="">LES NOUVEAUTÉS </h1>
             <div className="text-center text-white">
                 {products.length != 0 && displayProducts()}
-                {products.length === 0 && <img className='object-contain object-center mx-auto' src={`https://trade-corner-back.onrender.com/static/` + loading} alt="ajout au panier impossible" />}
+                {products.length === 0 && <img className='object-contain object-center mx-auto' src={loading} alt="ajout au panier impossible" />}
 
                 <Link to={URL_PRODUCTLIST}>
                     <button className="btn-primary w-[300px]">Voir plus</button>
