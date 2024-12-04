@@ -96,6 +96,7 @@ export const getAllProduct = () => {
 };
 
 export const getNewProduct = () => {
+    console.log("here")
     return apiBackEnd.get('product/new');
 };
 
