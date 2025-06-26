@@ -27,4 +27,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: exiygl/trade-corner:test
+        tags: exizygl/trade-corner:test
