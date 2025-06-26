@@ -22,9 +22,9 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push Docker image
+    - name: trade-corner
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: test-automatisation-CI-CD
+        tags: test-automatisation-ci-cd
