@@ -27,4 +27,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: test-automatisation-ci-cd
+        tags: exiygl/trade-corner:test
