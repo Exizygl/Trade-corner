@@ -3,6 +3,7 @@ name: Build and Push Vite React Docker Image
 on:
   push:
     branches: [ develop ]
+  workflow_dispatch:
 
 jobs:
   build:
