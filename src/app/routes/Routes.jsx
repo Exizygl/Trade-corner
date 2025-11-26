@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-
+import ProtectedRoute from '../components/ProtectedRoute';
+import RoleProtectedRoute from '../components/RoleProtectedRoute';
 import * as URL from '../shared/constants/urls/urlConstants';
 import { customHistory } from '../shared/services/historyServices';
 import HomeView from '../views/HomeView';
@@ -96,34 +97,21 @@ const Routes = () => {
             />
             <Route path={URL.URL_BECOMESELLER} component={BecomeSeller} />
             {/* routes administrateur */}
-            <Route exact path={URL.URL_ADMIN} component={AdministrationView} />
-            <Route exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} />
-            <Route exact path={URL.URL_USER_BYID + ':id'} component={UserByIdView} />
-            <Route
-                exact
-                path={URL.URL_MODIFYACCOUNT_BYID + ':typeModification' + '/' + ':id'}
-                component={ModifyAccountByAdminView}
-            />
-            <Route
-                exact
-                path={URL.URL_DELETE_USER_BYID + ':id'}
-                component={DeleteUserByIdView}
-            />
-            <Route exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} />
+           <RoleProtectedRoute exact path={URL.URL_ADMIN} component={AdministrationView} requiredRole="admin" />
+<RoleProtectedRoute exact path={URL.URL_ADMIN_LISTUSERS} component={ListUsersView} requiredRole="admin" />
+<RoleProtectedRoute exact path={URL.URL_USER_BYID + ':id'} component={UserByIdView} requiredRole="admin" />
+<RoleProtectedRoute exact path={URL.URL_MODIFYACCOUNT_BYID + ':typeModification' + '/' + ':id'} component={ModifyAccountByAdminView} requiredRole="admin" />
+<RoleProtectedRoute exact path={URL.URL_DELETE_USER_BYID + ':id'} component={DeleteUserByIdView} requiredRole="admin" />
+<RoleProtectedRoute exact path={URL.URL_ADMIN_DEMANDESCOM} component={DemandesComView} requiredRole="admin" />
 
             {/* routes vendeurs */}
-            <Route exact path={URL.URL_SELLER} component={MaBoutiqueView} />
-            <Route
-                exact
-                path={URL.URL_SELLER_LISTPRODUCTS}
-                component={ListProductsView}
-            />
-            <Route exact path={URL.URL_SELLER_ADDPRODUCT} component={AddProductView} />
-            <Route exact path={URL.URL_SELLER_COMMANDES} component={CommandesView} />
-            <Route exact path={URL.URL_SELLER_RETOURS} component={RetoursView} />
-            <Route exact path={URL.URL_SELLER_HISTORY} component={HistoryView} />
-
-            <Route exact path={URL.URL_SHOP + ':id'} component={ShopUsersView} />
+<RoleProtectedRoute exact path={URL.URL_SELLER} component={MaBoutiqueView} requiredRole="seller" />
+<RoleProtectedRoute exact path={URL.URL_SELLER_LISTPRODUCTS} component={ListProductsView} requiredRole="seller" />
+<RoleProtectedRoute exact path={URL.URL_SELLER_ADDPRODUCT} component={AddProductView} requiredRole="seller" />
+<RoleProtectedRoute exact path={URL.URL_SELLER_COMMANDES} component={CommandesView} requiredRole="seller" />
+<RoleProtectedRoute exact path={URL.URL_SELLER_RETOURS} component={RetoursView} requiredRole="seller" />
+<RoleProtectedRoute exact path={URL.URL_SELLER_HISTORY} component={HistoryView} requiredRole="seller" />
+<RoleProtectedRoute exact path={URL.URL_MODIFYPRODUCT + ':id'} component={ModifyProductView} requiredRole="seller" />
         </Switch>
     );
 };
