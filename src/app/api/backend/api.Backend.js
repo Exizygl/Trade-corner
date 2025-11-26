@@ -12,7 +12,7 @@ import { customHistory } from '../../shared/services/historyServices';
  */
 const apiBackEnd = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
-    timeout: 10000, // Timeout de 10 secondes pour éviter les requêtes infinies
+    timeout: 10000, 
     headers: {
         'Content-Type': 'application/json',
     }
